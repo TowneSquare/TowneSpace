@@ -10,4 +10,3 @@ A marketplace for trading NFTs leveraging Aptos and Token V2.
     - [ ] Integrate with the marketplace contracts
     - [ ] Add a theme/design
 3. [ ] Create a marketplace UI (mobile version)
-
