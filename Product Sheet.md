@@ -28,7 +28,7 @@ These are the functionalities that will be implemented off-chain.
 #### Studio
 
 (using move-examples/object-token/hero.move as a reference)
-- Un/equip NFT to another NFTs.
+- Combine NFTs: Un/equip NFT to another NFTs.
 > Class Diagrams will be implemented upon discussing the structure explictly.
 
 ## Schedule
