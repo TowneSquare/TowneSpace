@@ -1,4 +1,3 @@
-address marketplace {
 /// Defines a single listing or an item for sale or auction. This is an escrow service that
 /// enables two parties to exchange one asset for another.
 /// Each listing has the following properties:
@@ -8,7 +7,7 @@ address marketplace {
 /// * Ending time at which point it can be claimed by the highest bidder or left in escrow.
 /// * For auctions, the minimum bid rate and optional increase in duration of the auction if bids
 ///   are made toward the end of the auction.
-module coin_listing {
+module marketplace::coin_listing {
     use std::error;
     use std::option::{Self, Option};
     use std::signer;
@@ -1168,5 +1167,4 @@ module listing_tests {
         );
         (token_id, fee_schedule, listing)
     }
-}
 }
