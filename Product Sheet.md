@@ -28,16 +28,22 @@ These are the functionalities that will be implemented off-chain.
 #### Studio
 
 (using move-examples/object-token/hero.move as a reference)
-- Un/equip NFT to another NFTs.
+- compose NFTs: Un/equip NFT to another NFTs.
 > Class Diagrams will be implemented upon discussing the structure explictly.
 
 ## Schedule
 
-- Tweaking existing contracts: 17.07 -> 19.07
-- Adding new contracts for combining NFTs: 04.08 -> 10.08
-- Developing UI: 11.08 to 02.09
-- Deploy on devnet: first week of September
-- Audit contracts. After the hackathon
-- Deploy on mainnet. To be discussed.
-
-![Alt text](image-1.png)
+```mermaid
+gantt
+    title Schedule Plan
+    dateFormat  DD-MM-YYYY
+    section Contracts
+    marketplaceV2  :17-07-2023, 3d
+    studio   :04-08-2023  , 7d
+    audit   :14-09-2023 , 14d
+    section UI 
+    develop UI  :11-08-2023 , 21d
+    section Deploy 
+    testnet      :01-09-2023  , 27d
+    mainnet      :01-10-2023 ,
+```
