@@ -117,6 +117,18 @@ module marketplace::fee_schedule {
             numerator: commission_numerator,
         };
         move_to(&fee_schedule_signer, commission_rate);
+
+        let creator_address = signer::address_of(creator);
+
+        events::emit_create_fee_schedule(
+            creator_address,
+            fee_address,
+            bidding_fee,
+            listing_fee,
+            commission_denominator,
+            commission_numerator,
+        );
+
         object::object_from_constructor_ref(&constructor_ref)
     }
 

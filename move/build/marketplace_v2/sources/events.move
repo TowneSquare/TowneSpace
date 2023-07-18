@@ -35,6 +35,7 @@ module marketplace::events {
         token_offer_placed_events: EventHandle<TokenOfferPlacedEvent>,
         token_offer_canceled_events: EventHandle<TokenOfferCanceledEvent>,
         token_offer_filled_events: EventHandle<TokenOfferFilledEvent>,
+
     }
 
     // Initializers
@@ -409,6 +410,35 @@ module marketplace::events {
             token_metadata,
         });
     }
+
+    // Fee schedule events
+    struct CreateFeeScheduleEvent has drop, store {
+        creator: address,
+        fee_address: address,
+        bidding_fee: u64,
+        listing_fee: u64,
+        denominator: u64,
+        numerator: u64,
+    }
+
+    public(friend) fun emit_create_fee_schedule(
+        creator: address,
+        fee_address: address,
+        bidding_fee: u64,
+        listing_fee: u64,
+        denominator: u64,
+        numerator: u64,
+    ) : CreateFeeScheduleEvent {
+        CreateFeeScheduleEvent {
+            creator,
+            fee_address,
+            bidding_fee,
+            listing_fee,
+            denominator,
+            numerator,
+        }
+    }
+
 
     inline fun get_events_v1<T: key>(marketplace: Object<T>): &mut EventsV1 acquires EventsV1 {
         let addr = object::object_address(&marketplace);
