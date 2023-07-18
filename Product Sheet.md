@@ -42,7 +42,7 @@ gantt
     studio   :04-08-2023  , 7d
     audit   :14-09-2023 , 14d
     section UI 
-    develop UI  :11-08-2023 , 21d
+    web  :11-08-2023 , 21d
     section Deploy 
     testnet      :01-09-2023  , 27d
     mainnet      :01-10-2023 ,
