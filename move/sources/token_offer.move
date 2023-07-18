@@ -1,10 +1,11 @@
+address marketplace {
 /// Provides the ability to make token offers to both Tokenv1 and Tokenv2 tokens.
 /// A token offer allows an entity to place a bid on a token at any time. The amount
 /// offered is extracted from their account and stored at an escrow. A seller can then
 /// exchange the token for the escrowed payment. If it is a tokenv2 or the recipient
 /// has enabled direct deposit, the token is immediately transferred. If it is tokenv1
 /// without direct deposit, it is stored in a container until the recipient extracts it.
-module marketplace::token_offer {
+module token_offer {
     use std::error;
     use std::option::{Self, Option};
     use std::signer;
@@ -784,4 +785,5 @@ module token_offer_tests {
             property_version_2,
         );
     }
+}
 }
