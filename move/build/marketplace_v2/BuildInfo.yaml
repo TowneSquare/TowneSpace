@@ -12,10 +12,10 @@ compiled_package_info:
     marketplace: 07ff0308d16a5041ace8e7e306a60b2946b6a4aee0e7e923b8f20e49bf3508ce
     std: "0000000000000000000000000000000000000000000000000000000000000001"
     vm_reserved: "0000000000000000000000000000000000000000000000000000000000000000"
-  source_digest: 56145FFEE2AF46102D34F7DAEE50FF08EE407FD964625C1E81FDEF414DEDF8F8
+  source_digest: 0DD9328BE0CF1EE23E491493B89D27461629B9076D0A477BD47661E47D995515
   build_flags:
-    dev_mode: false
-    test_mode: false
+    dev_mode: true
+    test_mode: true
     generate_docs: false
     generate_abis: false
     install_dir: ~

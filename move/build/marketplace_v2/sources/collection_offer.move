@@ -1,4 +1,4 @@
-
+address marketplace {
 /// Provides the ability to make collection offers to both Tokenv1 and Tokenv2 collections.
 /// A collection offer allows an entity to buy up to N assets within a collection at their
 /// specified amount. The amount offered is extracted from their account and stored at an
@@ -6,7 +6,7 @@
 /// a tokenv2 or the recipient has enabled direct deposit, the token is immediately
 /// transferred. If it is tokenv1 without direct deposit, it is stored in a container
 /// until the recipient extracts it.
-module marketplace::collection_offer {
+module collection_offer {
     use std::error;
     use std::option::{Self, Option};
     use std::signer;
@@ -827,4 +827,5 @@ module collection_offer_tests {
             property_version,
         );
     }
+}
 }
