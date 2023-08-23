@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom"
-import { MenuType } from "."
 import { useEffect, useState } from "react"
+import MenuType from "../../type/menu_type";
 
 interface Props {
    data: MenuType
