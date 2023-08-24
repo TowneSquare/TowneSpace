@@ -21,7 +21,6 @@ const Tab: React.FC<Props> = ({ data }) => {
    const location = useLocation();
 
    useEffect(() => {
-      console.log(location)
       if (location.pathname.includes(data.href))
          setActive(true);
       else
