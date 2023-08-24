@@ -15,7 +15,7 @@ const Content = () => {
                Create
             </button>
             <button className="w-[100px] md:w-[205px] px-1 h-[57px] bg-gray-dark-1 text-gray-light-1 font-bold">
-               Batch migrate
+               Migrate NFTs
             </button>
          </div>
       </div>

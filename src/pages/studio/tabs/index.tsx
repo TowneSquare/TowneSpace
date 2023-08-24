@@ -44,7 +44,7 @@ const tabs = [
    },
    {
       href: "/studio/mycollect",
-      label: "My Colletions"
+      label: "My Collections"
    }
 ]
 export default Tabs;
