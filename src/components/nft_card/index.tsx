@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { NftMetadataType, NftType } from "../../type/nft_type";
 import { isUriEmpty } from "../../util";
 
@@ -5,7 +6,10 @@ interface Props {
    data: NftMetadataType
 }
 const NftCard: React.FC<Props> = ({ data }) => {
-
+   const navigation = useNavigate();
+   const onCustomize = () => {
+      navigation(`/customize/${data.address}`);
+   }
    return (
       <div className="group w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer">
          <div className="relative h-[156px] bg-gray-light-2 rounded-t-lg">
@@ -21,7 +25,7 @@ const NftCard: React.FC<Props> = ({ data }) => {
                         See on TowneSpace
                      </p>
                      <div className="h-px bg-gray-dark-2" />
-                     <p className="px-2 text-[13px] text-gray-dark-2  hover:bg-gray-light-2">
+                     <p className="px-2 text-[13px] text-gray-dark-2  hover:bg-gray-light-2" onClick={() => onCustomize()}>
                         Customize
                      </p>
                   </div>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
    const navigation = useNavigate();
+
    useEffect(() => {
       navigation("/studio");
    })
