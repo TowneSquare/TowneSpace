@@ -1,8 +1,10 @@
 import getCollections from "../../../../state/collections";
+import { useAppSelector } from "../../../../state/hooks";
 import Search from "./search";
 
 const CollectionPanel = () => {
-   const COLLECTIONS = getCollections();
+   const COLLECTIONS = useAppSelector(state => state.collectionsState.collections);
+   
    return (
       <div className="w-auto md:w-[300px] flex flex-col gap-4">
          <Search />

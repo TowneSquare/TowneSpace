@@ -1,40 +1,42 @@
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import FilterType from "../type/filter_type";
 import { NftType, NftMetadataType } from "../type/nft_type";
+import { COLLECTIONS } from './constants';
 
-const getCollections = (filter?: string) => {
-   if(filter != undefined)   
-      return COLLECTIONS.filter((e) => e.collection.includes(filter))
-   return COLLECTIONS;
+interface CollectionStates {
+   collections: NftMetadataType[]
 };
-export default getCollections;
 
-const COLLECTIONS: NftMetadataType[] = [
-   {
-      collection: "SIOthians",
-      description: "",
-      name: "",
-      uri: "/mytokens/collections/siothians.png",
-      type: NftType.nft
-   },
-   {
-      collection: "AptosMonekys",
-      description: "",
-      name: "",
-      uri: "/mytokens/collections/aptosmonekys.png",
-      type: NftType.nft
-   }, 
-   {
-      collection: "Aptoads",
-      description: "",
-      name: "",
-      uri: "/mytokens/collections/aptoads.png",
-      type: NftType.nft
-   }, 
-   {
-      collection: "METAPIXEL Early Adopter ...",
-      description: "",
-      name: "",
-      uri: "/mytokens/collections/metapixel.png",
-      type: NftType.nft
+const initialState: CollectionStates = {
+   collections: []
+}
+
+export const fetchCollections = createAsyncThunk(
+   'collection/fetch',
+   async (arg, thunkAPI) => {
+      try {
+         return COLLECTIONS;
+       } catch (error: any) {
+         return thunkAPI.rejectWithValue(error.response.data);
+       }
    }
-]
+);
+
+export const collectionsSlice = createSlice({
+   name: 'collections',
+   initialState,
+   reducers: {
+
+   },
+   extraReducers: (builder) => {
+      builder.addCase(fetchCollections.fulfilled, (state, action) => {
+         state.collections = action.payload;
+      });
+   },
+});
+
+export const {
+} = collectionsSlice.actions;
+export default collectionsSlice.reducer;
+
+
