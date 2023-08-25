@@ -1,12 +1,12 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="ShoppingCart" clip-path="url(#clip0_343_6171)">
-<path id="Vector" d="M22.5 23H10.3962C9.92788 22.9999 9.47438 22.8355 9.11483 22.5353C8.75527 22.2352 8.51247 21.8183 8.42875 21.3575L5.24 3.82125C5.19814 3.59083 5.07674 3.38242 4.89696 3.23234C4.71718 3.08226 4.49044 3.00003 4.25625 3H2" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_2" d="M10.5 28C11.8807 28 13 26.8807 13 25.5C13 24.1193 11.8807 23 10.5 23C9.11929 23 8 24.1193 8 25.5C8 26.8807 9.11929 28 10.5 28Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_3" d="M22.5 28C23.8807 28 25 26.8807 25 25.5C25 24.1193 23.8807 23 22.5 23C21.1193 23 20 24.1193 20 25.5C20 26.8807 21.1193 28 22.5 28Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_4" d="M7.81875 18H23.5125C23.9809 17.9999 24.4344 17.8355 24.7939 17.5353C25.1535 17.2352 25.3963 16.8183 25.48 16.3575L27 8H6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="ShoppingCart" clip-path="url(#clip0_441_18147)">
+<path id="Vector" d="M22.5 23H10.3962C9.92788 22.9999 9.47438 22.8355 9.11483 22.5353C8.75527 22.2352 8.51247 21.8183 8.42875 21.3575L5.24 3.82125C5.19814 3.59083 5.07674 3.38242 4.89696 3.23234C4.71718 3.08226 4.49044 3.00003 4.25625 3H2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M10.5 28C11.8807 28 13 26.8807 13 25.5C13 24.1193 11.8807 23 10.5 23C9.11929 23 8 24.1193 8 25.5C8 26.8807 9.11929 28 10.5 28Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M22.5 28C23.8807 28 25 26.8807 25 25.5C25 24.1193 23.8807 23 22.5 23C21.1193 23 20 24.1193 20 25.5C20 26.8807 21.1193 28 22.5 28Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M7.81875 18H23.5125C23.9809 17.9999 24.4344 17.8355 24.7939 17.5353C25.1535 17.2352 25.3963 16.8183 25.48 16.3575L27 8H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <defs>
-<clipPath id="clip0_343_6171">
+<clipPath id="clip0_441_18147">
 <rect width="32" height="32" fill="white"/>
 </clipPath>
 </defs>

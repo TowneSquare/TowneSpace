@@ -1,6 +1,6 @@
 export enum NftType{
-   nft,
-   nftv2
+   nft = 0x01,
+   nftv2 = 0x02
 }
 export interface NftMetadataType{
    creator?: any,
