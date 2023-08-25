@@ -1,9 +1,5 @@
-<svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Group 73">
-<g id="Group 74">
-<circle id="Ellipse 9" cx="1" cy="1" r="1" fill="black"/>
-<circle id="Ellipse 10" cx="6" cy="1" r="1" fill="black"/>
-<circle id="Ellipse 11" cx="11" cy="1" r="1" fill="black"/>
-</g>
-</g>
+<svg width="17" height="4" viewBox="0 0 17 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.25 4C9.2165 4 10 3.2165 10 2.25C10 1.2835 9.2165 0.5 8.25 0.5C7.2835 0.5 6.5 1.2835 6.5 2.25C6.5 3.2165 7.2835 4 8.25 4Z" fill="white"/>
+<path d="M1.875 4C2.8415 4 3.625 3.2165 3.625 2.25C3.625 1.2835 2.8415 0.5 1.875 0.5C0.908502 0.5 0.125 1.2835 0.125 2.25C0.125 3.2165 0.908502 4 1.875 4Z" fill="white"/>
+<path d="M14.625 4C15.5915 4 16.375 3.2165 16.375 2.25C16.375 1.2835 15.5915 0.5 14.625 0.5C13.6585 0.5 12.875 1.2835 12.875 2.25C12.875 3.2165 13.6585 4 14.625 4Z" fill="white"/>
 </svg>
