@@ -17,8 +17,8 @@ const Filter: React.FC<Props> = ({ filter, setFilter }) => {
             <PrimaryButton type={filter == FilterType.nft ? ButtonStatus.active : ButtonStatus.inactive} onClick={() => setFilter(FilterType.nft)} className="w-[120px]">
                NFTs
             </PrimaryButton>
-            <PrimaryButton type={filter == FilterType.nftv2 ? ButtonStatus.active : ButtonStatus.inactive} onClick={() => setFilter(FilterType.nftv2)} className="w-[120px]">
-               NFTs v2
+            <PrimaryButton type={filter == FilterType.nftv2 ? ButtonStatus.active : ButtonStatus.inactive} onClick={() => setFilter(FilterType.nftv2)}>
+               Composable NFTs (V2)
             </PrimaryButton>
          </div>
       </div>
