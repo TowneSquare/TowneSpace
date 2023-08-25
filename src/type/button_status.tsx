@@ -1,7 +1,7 @@
-enum ButtonType{
+enum ButtonStatus{
    active,
    inactive,
    disabled
 };
 
-export default ButtonType;
+export default ButtonStatus;

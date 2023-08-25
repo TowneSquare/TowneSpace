@@ -13,46 +13,46 @@ export default getNfts;
 
 const NFTS: NftMetadataType[] = [
    {
-      collection: "CryptoBananas",
+      collection: "SIOthians",
       description: "",
-      name: "cBanana #9898",
-      uri: "",
+      name: "SIothian #9898",
+      uri: "/nft-card/queen.png",
       type: NftType.nft,
-      price: 8990
+      price: 13.0245
    },
    {
-      collection: "CryptoBananas",
+      collection: "SIOthians",
       description: "",
-      name: "cBanana #9898",
-      uri: "",
+      name: "SIothian #9898",
+      uri: "/nft-card/queen.png",
       type: NftType.nftv2,
-      price: 8990
+      price: 13.0245
    },
    {
-      collection: "CryptoBananas",
+      collection: "SIOthians",
       description: "",
-      name: "cBanana #9898",
-      uri: "",
+      name: "SIothian #9898",
+      uri: "/nft-card/queen.png",
       object_tokens: [1, 2],
       type: NftType.nftv2,
-      price: 8990
+      price: 13.0245
    },
    {
-      collection: "CryptoBananas",
+      collection: "SIOthians",
       description: "",
-      name: "cBanana #9898",
-      uri: "",
+      name: "SIothian #9898",
+      uri: "/nft-card/queen.png",
       object_tokens: [1, 2],
       type: NftType.nftv2,
-      price: 8990
+      price: 13.0245
    },
    {
-      collection: "CryptoBananas",
+      collection: "SIOthians",
       description: "",
-      name: "cBanana #9898",
-      uri: "",
+      name: "SIothian #9898",
+      uri: "/nft-card/queen.png",
       object_tokens: [1, 2],
       type: NftType.nftv2,
-      price: 8990
+      price: 13.0245
    },
 ]

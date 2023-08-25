@@ -1,11 +1,11 @@
 const Welcome = () => {
    return (
       <div>
-         <h1 className="text-3xl font-bold">
-            Welcome to TowneStudio
+         <h1 className="text-[32px] font-bold">
+            Welcome to TowneSpace Studio!
          </h1>
-         <p className="mt-3">
-            Join the revolution! Create and customize V2 Tokens!
+         <p className="text-xl">
+            Join the revolution! Create and customize Composable NFTs!
          </p>
       </div>
    )
