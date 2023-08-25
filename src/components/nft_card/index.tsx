@@ -5,14 +5,27 @@ interface Props {
    data: NftMetadataType
 }
 const NftCard: React.FC<Props> = ({ data }) => {
+
    return (
-      <div className="w-[167px] bg-gray-dark-2 rounded-lg">
-         <div className="relative h-[156px] bg-gray-light-2 rounded-t-lg overflow-hidden">
+      <div className="group w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer">
+         <div className="relative h-[156px] bg-gray-light-2 rounded-t-lg">
             {!isUriEmpty(data.uri) &&
                <img src={data.uri} className="w-full h-full" alt="nft" />
             }
-            <div className="absolute top-2 right-2">
+            <div className="group/3dots hidden group-hover:flex flex-col absolute w-6 h-6 justify-center items-center top-2 right-2 hover:bg-black rounded-full z-10">
                <img src="/nft-card/3dots.svg" alt="3dots" />
+               <div className="hidden group-hover/3dots:block absolute top-6 right-0 ">
+                  <div className="w-full h-2" />
+                  <div className="py-2 rounded-lg bg-white">
+                     <p className="px-2 text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap ">
+                        See on TowneSpace
+                     </p>
+                     <div className="h-px bg-gray-dark-2" />
+                     <p className="px-2 text-[13px] text-gray-dark-2  hover:bg-gray-light-2">
+                        Customize
+                     </p>
+                  </div>
+               </div>
             </div>
             <div className="absolute flex left-1 bottom-1">
                {data.type == NftType.nftv2 &&
@@ -22,6 +35,8 @@ const NftCard: React.FC<Props> = ({ data }) => {
                   <img src="/nft-card/composed.svg" alt="composed" />
                }
             </div>
+            <div className="hidden group-hover:block absolute inset-0 bg-black opacity-50" />
+
          </div>
          <div className="mx-2 my-2">
             <div className="flex items-center gap-2 text-[14px] font-semibold text-gray-light-1">
