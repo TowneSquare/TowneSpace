@@ -17,7 +17,7 @@ const PrimaryButton: React.FC<Props> = ({ children, type, className, onClick }) 
                {children}
             </button>
             :
-            <button className={`${className} px-6 py-2 rounded-full font-semibold bg-transparent`}
+            <button className={`${className} px-6 py-2 rounded-full font-semibold bg-transparent hover:bg-gray-dark-1`}
                onClick={onClick}
             >
                {children}

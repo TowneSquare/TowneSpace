@@ -10,7 +10,7 @@ interface Props {
 const Filter: React.FC<Props> = ({ filter, setFilter }) => {
    return (
       <div className="flex justify-center">
-         <div className="flex gap-3 bg-gray-dark-1 rounded-full">
+         <div className="flex bg-gray-dark-2 rounded-full">
             <PrimaryButton type={filter == FilterType.all ? ButtonStatus.active : ButtonStatus.inactive} onClick={() => setFilter(FilterType.all)} className="w-[120px]">
                All
             </PrimaryButton>
