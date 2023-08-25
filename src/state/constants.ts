@@ -2,6 +2,7 @@ import { NftMetadataType, NftType } from "../type/nft_type";
 
 export const NFTS: NftMetadataType[] = [
    {
+      address: "0x01",
       collection: "SIOthians",
       description: "",
       name: "SIothian #9898",
@@ -10,6 +11,7 @@ export const NFTS: NftMetadataType[] = [
       price: 13.0245
    },
    {
+      address: "0x02",
       collection: "SIOthians",
       description: "",
       name: "SIothian #9898",
@@ -18,15 +20,7 @@ export const NFTS: NftMetadataType[] = [
       price: 13.0245
    },
    {
-      collection: "SIOthians",
-      description: "",
-      name: "SIothian #9898",
-      uri: "/nft-card/queen.png",
-      object_tokens: [1, 2],
-      type: NftType.nftv2,
-      price: 13.0245
-   },
-   {
+      address: "0x03",
       collection: "SIOthians",
       description: "",
       name: "SIothian #9898",
@@ -36,6 +30,17 @@ export const NFTS: NftMetadataType[] = [
       price: 13.0245
    },
    {
+      address: "0x04",
+      collection: "SIOthians",
+      description: "",
+      name: "SIothian #9898",
+      uri: "/nft-card/queen.png",
+      object_tokens: [1, 2],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x05",
       collection: "SIOthians",
       description: "",
       name: "SIothian #9898",
@@ -49,6 +54,7 @@ export const NFTS: NftMetadataType[] = [
 
 export const COLLECTIONS: NftMetadataType[] = [
    {
+      address: "0x01",
       collection: "SIOthians",
       description: "",
       name: "",
@@ -56,20 +62,23 @@ export const COLLECTIONS: NftMetadataType[] = [
       type: NftType.nft
    },
    {
+      address: "0x02",
       collection: "AptosMonekys",
       description: "",
       name: "",
       uri: "/mytokens/collections/aptosmonekys.png",
       type: NftType.nft
-   }, 
+   },
    {
+      address: "0x03",
       collection: "Aptoads",
       description: "",
       name: "",
       uri: "/mytokens/collections/aptoads.png",
       type: NftType.nft
-   }, 
+   },
    {
+      address: "0x04",
       collection: "METAPIXEL Early Adopter ...",
       description: "",
       name: "",

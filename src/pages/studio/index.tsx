@@ -1,3 +1,4 @@
+import Header from "../../components/header";
 import Collections from "./collections";
 import Commands from "./commands";
 import Home from "./home";
@@ -10,6 +11,7 @@ import { Route, Routes } from "react-router-dom";
 const Studio = () => {
    return (
       <div className="">
+         <Header />
          <div className="pt-9 px-2 md:px-12 border-b-2 border-b-gray-dark-1">
             <div className="flex flex-col md:flex-row justify-between">
                <Welcome />

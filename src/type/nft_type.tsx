@@ -3,6 +3,7 @@ export enum NftType{
    nftv2 = 0x02
 }
 export interface NftMetadataType{
+   address: string,
    creator?: any,
    collection: string,
    description: string,
