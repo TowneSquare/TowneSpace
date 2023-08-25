@@ -8,18 +8,10 @@ interface Props {
    filter: FilterType,
 }
 const Board: React.FC<Props> = ({ filter }) => {
-   const [nfts, setNfts] = useState<NftMetadataType[]>([]);
-
-   useEffect(() => {
-      const fetch = async () => {
-         setNfts(await getNfts(filter));
-      }
-      fetch();
-   }, [filter]);
-
+   const NFTS = getNfts(filter);
    return (
-      <div className="flex flex-wrap gap-10 pt-16">
-         {nfts.map((nft, index) => (
+      <div className="flex flex-wrap gap-10">
+         {NFTS.map((nft, index) => (
             <NftCard data={nft} key={index} />
          ))}
       </div>

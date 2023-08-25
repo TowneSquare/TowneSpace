@@ -1,7 +1,7 @@
 import FilterType from "../type/filter_type";
 import { NftType, NftMetadataType } from "../type/nft_type";
 
-const getNfts = async (filter: FilterType) => {
+const getNfts = (filter: FilterType) => {
    if (filter == FilterType.nft)
       return NFTS.filter((e) => e.type == NftType.nft)
    else if (filter == FilterType.nftv2)
