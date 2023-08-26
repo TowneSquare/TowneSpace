@@ -63,7 +63,7 @@ export const COLLECTIONS: NftMetadataType[] = [
    },
    {
       address: "0x02",
-      collection: "AptosMonekys",
+      collection: "AptosMonkeys",
       description: "",
       name: "",
       uri: "/mytokens/collections/aptosmonekys.png",

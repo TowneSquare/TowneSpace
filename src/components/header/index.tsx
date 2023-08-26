@@ -8,7 +8,7 @@ const Header = () => {
    return (
       <div className="w-full h-auto md:h-[92px] flex flex-col md:flex-row justify-normal md:justify-between items-center bg-gray-dark-2 px-2 md:px-12 py-4 md:py-0 gap-4">
          <div className="flex items-center gap-4 md:gap-12">
-            <img src="/logo.svg" className="w-12" />
+            <img src="/logo.svg" className="w-154.42 h-16.65" />
             <Search />
          </div>
          <div className="h-full flex items-center justify-between md:justify-normal md:gap-12">
