@@ -8,13 +8,15 @@ interface tokensStates {
    collectionIndex: number,
    nfts: NftMetadataType[],
    nftIndex: number;
+   traitAddress: string | undefined,
 };
 
 const initialState: tokensStates = {
    collections: [],
    collectionIndex: 0,
    nfts: [],
-   nftIndex: 0
+   nftIndex: 0,
+   traitAddress: undefined
 }
 
 export const fetchCollections = createAsyncThunk(
@@ -32,7 +34,6 @@ export const fetchNfts = createAsyncThunk(
    'nft/fetch',
    async (name: string, thunkAPI) => {
       try {
-         console.log("here", name)
          return NFTS.filter(nft => nft.collection == name);
       } catch (error: any) {
          return thunkAPI.rejectWithValue(error.response.data);
@@ -50,6 +51,9 @@ export const tokensSlice = createSlice({
       },
       chooseNft: (state, action: PayloadAction<number>) => {
          state.nftIndex = action.payload;
+      },
+      chooseTrait: (state, action: PayloadAction<string>) => {
+         state.traitAddress = action.payload;
       }
    },
    extraReducers: (builder) => {
@@ -70,7 +74,8 @@ export const tokensSlice = createSlice({
 
 export const {
    chooseCollection,
-   chooseNft
+   chooseNft,
+   chooseTrait
 } = tokensSlice.actions;
 export default tokensSlice.reducer;
 

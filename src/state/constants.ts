@@ -25,7 +25,7 @@ export const NFTS: NftMetadataType[] = [
       description: "",
       name: "SIothian #9898",
       uri: "/nft-card/queen.png",
-      object_tokens: [1, 2],
+      object_tokens: ["0x09", "0x0f", "0x10", "0x11"],
       type: NftType.nftv2,
       price: 13.0245
    },
@@ -35,7 +35,7 @@ export const NFTS: NftMetadataType[] = [
       description: "",
       name: "SIothian #9898",
       uri: "/nft-card/queen.png",
-      object_tokens: [1, 2],
+      object_tokens: ["0x09", "0x0f", "0x10", "0x11"],
       type: NftType.nftv2,
       price: 13.0245
    },
@@ -45,7 +45,7 @@ export const NFTS: NftMetadataType[] = [
       description: "",
       name: "SIothian #9898",
       uri: "/nft-card/queen.png",
-      object_tokens: [1, 2],
+      object_tokens: ["0x09", "0x0f", "0x10", "0x11"],
       type: NftType.nftv2,
       price: 13.0245
    },
@@ -55,7 +55,7 @@ export const NFTS: NftMetadataType[] = [
       description: "",
       name: "AptosMonkeys #1000",
       uri: "/mytokens/collections/aptosmonekys.png",
-      object_tokens: [1, 2],
+      object_tokens: ["0x09", "0x0f", "0x10", "0x11"],
       type: NftType.nftv2,
       price: 13.0245
    },
@@ -65,7 +65,7 @@ export const NFTS: NftMetadataType[] = [
       description: "",
       name: "Aptoads #9898",
       uri: "/mytokens/collections/aptoads.png",
-      object_tokens: [1, 2],
+      object_tokens: ["0x09", "0x0f", "0x10", "0x11"],
       type: NftType.nftv2,
       price: 13.0245
    },
@@ -75,7 +75,97 @@ export const NFTS: NftMetadataType[] = [
       description: "",
       name: "METAPIXEL #9898",
       uri: "/mytokens/collections/metapixel.png",
-      object_tokens: [1, 2],
+      object_tokens: ["0x09", "0x0f", "0x10", "0x11"],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x09",
+      collection: "hair",
+      description: "",
+      name: "Crown #7821",
+      uri: "/traits/hair/hair1.png",
+      object_tokens: [],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x0a",
+      collection: "hair",
+      description: "",
+      name: "Crown #7821",
+      uri: "/traits/hair/hair2.png",
+      object_tokens: [],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x0b",
+      collection: "hair",
+      description: "",
+      name: "Crown #7821",
+      uri: "/traits/hair/hair3.png",
+      object_tokens: [],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x0c",
+      collection: "hair",
+      description: "",
+      name: "Crown #7821",
+      uri: "/traits/hair/hair4.png",
+      object_tokens: [],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x0d",
+      collection: "hair",
+      description: "",
+      name: "Crown #7821",
+      uri: "/traits/hair/hair5.png",
+      object_tokens: [],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x0e",
+      collection: "hair",
+      description: "",
+      name: "Crown #7821",
+      uri: "/traits/hair/hair6.png",
+      object_tokens: [],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x0f",
+      collection: "eye",
+      description: "",
+      name: "Crown #7821",
+      uri: "/traits/eye/eye1.png",
+      object_tokens: [],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x10",
+      collection: "mouth",
+      description: "",
+      name: "Crown #7821",
+      uri: "/traits/mouth/mouth1.png",
+      object_tokens: [],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x11",
+      collection: "background",
+      description: "",
+      name: "Crown #7821",
+      uri: "/traits/background/background1.png",
+      object_tokens: [],
       type: NftType.nftv2,
       price: 13.0245
    },
@@ -115,4 +205,38 @@ export const COLLECTIONS: NftMetadataType[] = [
       uri: "/mytokens/collections/metapixel.png",
       type: NftType.nft
    }
+]
+export const TRAITS: NftMetadataType[] = [
+   {
+      address: "0x01",
+      collection: "hair",
+      description: "",
+      name: "Hair",
+      uri: "/traits/hair/hair1.png",
+      type: NftType.nft
+   },
+   {
+      address: "0x02",
+      collection: "eye",
+      description: "",
+      name: "Eye",
+      uri: "/traits/eye/eye1.png",
+      type: NftType.nft
+   },
+   {
+      address: "0x03",
+      collection: "mouth",
+      description: "",
+      name: "Mouth",
+      uri: "/traits/mouth/mouth1.png",
+      type: NftType.nft
+   },
+   {
+      address: "0x03",
+      collection: "background",
+      description: "",
+      name: "Background",
+      uri: "/traits/background/background1.png",
+      type: NftType.nft
+   },
 ]

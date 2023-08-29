@@ -12,15 +12,18 @@ function App() {
   const dispatch = useAppDispatch();
   const collections = useAppSelector(state => state.tokensState.collections)
   const collectionIndex = useAppSelector(state => state.tokensState.collectionIndex)
+  
   useEffect(() => {
     dispatch(fetchCollections());
   }, []);
+
   useEffect(() => {
     if(collections.length > 0){
       const name = collections[collectionIndex].collection;
       dispatch(fetchNfts(name));
     }
   }, [collections, collectionIndex])
+
   return (
     <div>
       <Routes>
