@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import nftSlice from "./nfts";
-import collectionsSlice from "./collections";
+import tokensSlice from "./tokens";
 
 export const store = configureStore({
   reducer: {
-   nftsState: nftSlice,
-   collectionsState: collectionsSlice
+   tokensState: tokensSlice
   },
 });
 

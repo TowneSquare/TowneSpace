@@ -4,19 +4,23 @@ import Home from './pages/home';
 import Studio from './pages/studio';
 import Collections from './pages/collections';
 import Customize from './pages/customize';
-import { useAppDispatch } from './state/hooks';
-import { fetchNfts } from './state/nfts';
-import { fetchCollections } from './state/collections';
+import { useAppDispatch, useAppSelector } from './state/hooks';
+import { fetchNfts, fetchCollections } from './state/tokens';
 import { useEffect } from 'react';
 
 function App() {
   const dispatch = useAppDispatch();
-
+  const collections = useAppSelector(state => state.tokensState.collections)
+  const collectionIndex = useAppSelector(state => state.tokensState.collectionIndex)
   useEffect(() => {
-     dispatch(fetchNfts());
-     dispatch(fetchCollections());
+    dispatch(fetchCollections());
   }, []);
-
+  useEffect(() => {
+    if(collections.length > 0){
+      const name = collections[collectionIndex].collection;
+      dispatch(fetchNfts(name));
+    }
+  }, [collections, collectionIndex])
   return (
     <div>
       <Routes>

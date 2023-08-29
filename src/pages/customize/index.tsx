@@ -6,7 +6,7 @@ import Preview from "./preview";
 const Customize = () => {
    const { address } = useParams();
    const data = useAppSelector(state => {
-      let result = state.nftsState.nfts.filter(nft => nft.address == address)
+      let result = state.tokensState.nfts.filter(nft => nft.address == address)
       return result.length > 0 ? result[0] : undefined;
    });
 

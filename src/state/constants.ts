@@ -49,6 +49,36 @@ export const NFTS: NftMetadataType[] = [
       type: NftType.nftv2,
       price: 13.0245
    },
+   {
+      address: "0x06",
+      collection: "AptosMonkeys",
+      description: "",
+      name: "AptosMonkeys #1000",
+      uri: "/mytokens/collections/aptosmonekys.png",
+      object_tokens: [1, 2],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x07",
+      collection: "Aptoads",
+      description: "",
+      name: "Aptoads #9898",
+      uri: "/mytokens/collections/aptoads.png",
+      object_tokens: [1, 2],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
+   {
+      address: "0x08",
+      collection: "metapixel",
+      description: "",
+      name: "METAPIXEL #9898",
+      uri: "/mytokens/collections/metapixel.png",
+      object_tokens: [1, 2],
+      type: NftType.nftv2,
+      price: 13.0245
+   },
 ]
 
 
@@ -57,7 +87,7 @@ export const COLLECTIONS: NftMetadataType[] = [
       address: "0x01",
       collection: "SIOthians",
       description: "",
-      name: "",
+      name: "SIOthians",
       uri: "/mytokens/collections/siothians.png",
       type: NftType.nft
    },
@@ -65,7 +95,7 @@ export const COLLECTIONS: NftMetadataType[] = [
       address: "0x02",
       collection: "AptosMonkeys",
       description: "",
-      name: "",
+      name: "AptosMonkeys",
       uri: "/mytokens/collections/aptosmonekys.png",
       type: NftType.nft
    },
@@ -73,15 +103,15 @@ export const COLLECTIONS: NftMetadataType[] = [
       address: "0x03",
       collection: "Aptoads",
       description: "",
-      name: "",
+      name: "Aptoads",
       uri: "/mytokens/collections/aptoads.png",
       type: NftType.nft
    },
    {
       address: "0x04",
-      collection: "METAPIXEL Early Adopter ...",
+      collection: "metapixel",
       description: "",
-      name: "",
+      name: "METAPIXEL Early Adopter ...",
       uri: "/mytokens/collections/metapixel.png",
       type: NftType.nft
    }
