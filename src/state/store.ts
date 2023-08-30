@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import tokensSlice from "./tokens";
+import dialogSlice from "./dialog";
 
 export const store = configureStore({
   reducer: {
-   tokensState: tokensSlice
+   tokensState: tokensSlice,
+   dialogState: dialogSlice
   },
 });
 

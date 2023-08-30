@@ -5,18 +5,20 @@ import { COLLECTIONS, NFTS } from './constants';
 
 interface tokensStates {
    collections: NftMetadataType[],
-   collectionIndex: number,
+   currentCollection: NftMetadataType | undefined,
    nfts: NftMetadataType[],
-   nftIndex: number;
-   traitAddress: string | undefined,
+   currentNft: NftMetadataType | undefined;
+   currentTrait: NftMetadataType | undefined,
+   newTrait: NftMetadataType | undefined
 };
 
 const initialState: tokensStates = {
    collections: [],
-   collectionIndex: 0,
+   currentCollection: undefined,
    nfts: [],
-   nftIndex: 0,
-   traitAddress: undefined
+   currentNft: undefined,
+   currentTrait: undefined,
+   newTrait: undefined
 }
 
 export const fetchCollections = createAsyncThunk(
@@ -45,29 +47,33 @@ export const tokensSlice = createSlice({
    name: 'collections',
    initialState,
    reducers: {
-      chooseCollection: (state, action: PayloadAction<number>) => {
-         state.collectionIndex = action.payload;
-         state.nftIndex = 0;
+      chooseCollection: (state, action: PayloadAction<NftMetadataType>) => {
+         state.currentCollection = action.payload;
       },
-      chooseNft: (state, action: PayloadAction<number>) => {
-         state.nftIndex = action.payload;
+      chooseNft: (state, action: PayloadAction<NftMetadataType>) => {
+         state.currentNft = action.payload;
       },
-      chooseTrait: (state, action: PayloadAction<string>) => {
-         state.traitAddress = action.payload;
+      chooseTrait: (state, action: PayloadAction<NftMetadataType>) => {
+         state.currentTrait = action.payload;
+      },
+      chooseNewTrait: (state, action: PayloadAction<NftMetadataType>) => {
+         state.newTrait = action.payload;
       }
    },
    extraReducers: (builder) => {
       builder.addCase(fetchCollections.fulfilled, (state, action) => {
          state.collections = action.payload;
-         if (action.payload.length > 0) {
-            state.nftIndex = 0;
-         } else {
-            state.nftIndex = -1;
+         if(action.payload.length > 0){
+            state.currentCollection = action.payload[0];
+         }else {
+            state.currentNft = undefined;
             state.nfts = [];
          }
       });
       builder.addCase(fetchNfts.fulfilled, (state, action) => {
          state.nfts = action.payload;
+         if (action.payload.length > 0)
+            state.currentNft = action.payload[0];
       });
    },
 });
@@ -75,7 +81,8 @@ export const tokensSlice = createSlice({
 export const {
    chooseCollection,
    chooseNft,
-   chooseTrait
+   chooseTrait,
+   chooseNewTrait
 } = tokensSlice.actions;
 export default tokensSlice.reducer;
 

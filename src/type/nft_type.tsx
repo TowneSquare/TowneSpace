@@ -18,4 +18,3 @@ export interface NftMetadataType{
    type: NftType,
    price?: number
 }
-

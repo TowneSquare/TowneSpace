@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { NftMetadataType, NftType } from "../../type/nft_type";
 import { isUriEmpty } from "../../util";
+import { useAppDispatch } from "../../state/hooks";
+import { chooseNft } from "../../state/tokens";
 
 interface Props {
    data: NftMetadataType
 }
 const NftCard: React.FC<Props> = ({ data }) => {
    const navigation = useNavigate();
+   const dispatch = useAppDispatch();
    const onCustomize = () => {
+      dispatch(chooseNft(data))
       navigation(`/customize/${data.address}`);
    }
    return (
