@@ -1,26 +1,27 @@
 import { useAppDispatch, useAppSelector } from "../../../../state/hooks";
 import { chooseCollection, fetchNfts } from "../../../../state/tokens";
+import { NftMetadataType } from "../../../../type/nft_type";
 import Search from "./search";
 
 const CollectionPanel = () => {
-   const COLLECTIONS = useAppSelector(state => state.tokensState.collections);
-   const collectionIndex = useAppSelector(state => state.tokensState.collectionIndex);
+   const collections = useAppSelector(state => state.tokensState.collections);
+   const currentCollection = useAppSelector(state => state.tokensState.currentCollection);
    const dispatch = useAppDispatch();
 
-   const onChooseCollection = (index: number) => {
-      dispatch(chooseCollection(index));
+   const onChooseCollection = (collection: NftMetadataType) => {
+      dispatch(chooseCollection(collection));
    }
    return (
       <div className="w-auto md:w-[300px] flex flex-col gap-4">
          <Search />
-         {COLLECTIONS.map((data, index) => (
+         {collections.map((collection, index) => (
             <div
-               className={`px-2 py-2 flex items-center gap-2 rounded-md hover:bg-gray-dark-1 cursor-pointer ${index == collectionIndex ? "bg-gray-dark-2" : ""}`}
+               className={`px-2 py-2 flex items-center gap-2 rounded-md hover:bg-gray-dark-1 cursor-pointer ${collection.address == currentCollection?.address ? "bg-gray-dark-2" : ""}`}
                key={index}
-               onClick= {() => onChooseCollection(index)}
+               onClick= {() => onChooseCollection(collection)}
             >
-               <img src={data.uri} className="" alt="uri" />
-               <span className="font-medium">{data.name}</span>
+               <img src={collection.uri} className="" alt="uri" />
+               <span className="font-medium">{collection.name}</span>
                <img src="/nft-card/polygon-check.svg" alt="check" />
             </div>
          ))}

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../state/hooks";
+import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import Header from "./header";
 import Preview from "./preview";
 import Tokens from "./tokens";
@@ -7,27 +7,39 @@ import PrimaryButton from "../../components/primary_button";
 import ButtonStatus from "../../type/button_status";
 import SecondaryButton from "../../components/secondary_button";
 import Trait from "./trait";
+import ReplacePanel from "./replace_panel";
+import { useEffect } from "react";
+import { NFTS } from "../../state/constants";
+import { chooseNft } from "../../state/tokens";
+import RemovePanel from "./remove_panel";
 
 const Customize = () => {
    const { address } = useParams();
-   const data = useAppSelector(state => {
-      let result = state.tokensState.nfts.filter(nft => nft.address == address)
-      return result.length > 0 ? result[0] : undefined;
-   });
+   const currentNft = useAppSelector(state => state.tokensState.currentNft)
+   const dispatch = useAppDispatch();
 
+   useEffect(() => {
+      if (!currentNft) {
+         let res = NFTS.filter(nft => nft.address == address)
+         if (res.length > 0)
+            dispatch(chooseNft(res[0]))
+      }
+   }, [address])
    return (
-      <div>
-         <Header data={data} />
+      <div className="relative">
+         <Header />
          <div className="px-2 md:px-[150px] flex gap-6">
-            <Preview data={data} />
+            <Preview />
             <div className="flex flex-col gap-4 items-center">
-               <Tokens data={data} />
+               <Tokens />
                <SecondaryButton type={ButtonStatus.active} className="w-40">
                   + Add Trait
                </SecondaryButton>
             </div>
-            <Trait data={data}/>
+            <Trait />
          </div>
+         <ReplacePanel />
+         <RemovePanel />
       </div>
    )
 }
