@@ -1,17 +1,15 @@
 /* used aptos-tontine as a reference*/
-import { AptosClient } from "aptos";
-import { U64 } from "aptos/src/generated";
-import { STUDIO_MODULE_ADDRESS } from "../../constants";
-import { Object, ComposableToken, ObjectToken } from "../../types";
+import { AptosClient, MaybeHexString } from "aptos";
+import { NODE_URL, STUDIO_ADDRESS } from "../../constants";
 
 async function submitTransaction(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    fullnodeUrl: string,
+    
     payload: any,
   ) {
     console.log("Submitting transaction", JSON.stringify(payload));
     const pendingTransaction = await signAndSubmitTransaction(payload);
-    const client = new AptosClient(fullnodeUrl);
+    const client = new AptosClient(NODE_URL);    // hardcoded to devnet for now
     await client.waitForTransactionWithResult(pendingTransaction.hash, {
       checkSuccess: true,
     });
@@ -19,9 +17,9 @@ async function submitTransaction(
 
 export async function createCollection(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    fullnodeUrl: string,
+    
     description: String,
-    max_supply: U64,
+    max_supply: bigint,
     name: String,
     symbol: String,
     uri: String,
@@ -34,13 +32,13 @@ export async function createCollection(
     mutable_token_uri: boolean,    // this have to be enforced to `True`
     tokens_burnable_by_creator: boolean,
     tokens_freezable_by_creator: boolean,  // sets whether a creator can freeze transfer for a token
-    royalty_numerator: U64,
-    royalty_denominator: U64,
-    seed: U64[] // vector<u8>; used when auid is disabled.
+    royalty_numerator: bigint,
+    royalty_denominator: bigint,
+    seed: bigint[] // vector<u8>; used when auid is disabled.
 ) {
     const payload = {
         type: "entry_function_payload",
-        function: `${STUDIO_MODULE_ADDRESS}::studio::create_token_collection`,
+        function: `${STUDIO_ADDRESS}::studio::create_token_collection`,
         type_arguments: [],
         arguments: [
             description,
@@ -62,27 +60,28 @@ export async function createCollection(
             seed
         ],
     };
-    await submitTransaction(signAndSubmitTransaction, fullnodeUrl, payload);
+    await submitTransaction(signAndSubmitTransaction, payload);
 }
 
 export async function mintComposableNFT(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    fullnodeUrl: string,
+    
     collection: String,
     description: String,
     name: String,
     uri: String,
-    total_supply: U64,  // objects supply must be less or equal than token supply
-    object_tokens: Object<ObjectToken>[],
+    total_supply: bigint,  // objects supply must be less or equal than token supply
+    object_tokens: MaybeHexString[],
     property_keys: String[],
     property_types: String[],
-    property_values: U64[][],
-    seed: U64[] // used when auid is disabled.
+    property_values: bigint[][],
+    seed: bigint[] // used when auid is disabled.
 ) {
     const payload = {
         type: "entry_function_payload",
-        function: `${STUDIO_MODULE_ADDRESS}::studio::mint_composable_token`,
-        type_arguments: [
+        function: `${STUDIO_ADDRESS}::studio::mint_composable_token`,
+        type_arguments: [],
+        arguments: [
             collection,
             description,
             name,
@@ -95,26 +94,27 @@ export async function mintComposableNFT(
             seed
         ],
     };
-    await submitTransaction(signAndSubmitTransaction, fullnodeUrl, payload);
+    await submitTransaction(signAndSubmitTransaction, payload);
 }
 
 export async function mintObjectNFT(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    fullnodeUrl: string,
+    
     collection: String,
     description: String,
     name: String,
     uri: String,
     property_keys: String[],  // e.g: store categories
     property_types: String[],
-    property_values: U64[][],
-    composable_token_object: Object<ComposableToken>, // needed for token supply
-    seed: U64[] // used when auid is disabled.
+    property_values: bigint[][],
+    composable_token_object: MaybeHexString, // needed for token supply
+    seed: bigint[] // used when auid is disabled.
 ) {
     const payload = {
         type: "entry_function_payload",
-        function: `${STUDIO_MODULE_ADDRESS}::studio::mint_object_token`,
-        type_arguments: [
+        function: `${STUDIO_ADDRESS}::studio::mint_object_token`,
+        type_arguments: [],
+        arguments: [
             collection,
             description,
             name,
@@ -126,58 +126,61 @@ export async function mintObjectNFT(
             seed
         ],
     }
-    await submitTransaction(signAndSubmitTransaction, fullnodeUrl, payload);
+    await submitTransaction(signAndSubmitTransaction, payload);
 }
 
 export async function composeObject(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    fullnodeUrl: string,
-    composable_token_object: Object<ComposableToken>,
-    object_token_object: Object<ObjectToken>
+    
+    composable_token_object: MaybeHexString,
+    object_token_object: MaybeHexString
 ) {
     const payload = {
         type: "entry_function_payload",
-        function: `${STUDIO_MODULE_ADDRESS}::studio::compose_object`,
-        type_arguments: [
+        function: `${STUDIO_ADDRESS}::studio::compose_object`,
+        type_arguments: [],
+        arguments: [
             composable_token_object,
             object_token_object
         ],
     }
-    await submitTransaction(signAndSubmitTransaction, fullnodeUrl, payload);
+    await submitTransaction(signAndSubmitTransaction, payload);
 }
 
 export async function decomposeObject(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    fullnodeUrl: string,
-    composable_token_object: Object<ComposableToken>,
-    object_token_object: Object<ObjectToken>,
+    
+    composable_token_object: MaybeHexString,
+    object_token_object: MaybeHexString,
     new_uri: String
 ) {
     const payload = {
         type: "entry_function_payload",
-        function: `${STUDIO_MODULE_ADDRESS}::studio::decompose_object`,
-        type_arguments: [
+        function: `${STUDIO_ADDRESS}::studio::decompose_object`,
+        type_arguments: [],
+        arguments: [
             composable_token_object,
             object_token_object,
             new_uri
         ],
     }
-    await submitTransaction(signAndSubmitTransaction, fullnodeUrl, payload);
+    await submitTransaction(signAndSubmitTransaction, payload);
 }
 
 export async function transferNFT(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    fullnodeUrl: string,
+    T: string,
     token_address: string,
     new_owner_address: string,
 ) {
     const payload = {
         type: "entry_function_payload",
-        function: `${STUDIO_MODULE_ADDRESS}::studio::raw_transfer`,
-        type_arguments: [
+        function: `${STUDIO_ADDRESS}::studio::raw_transfer`,
+        type_arguments: [T],
+        arguments: [
             token_address,
             new_owner_address
         ],
     }
-    await submitTransaction(signAndSubmitTransaction, fullnodeUrl, payload);
+    await submitTransaction(signAndSubmitTransaction, payload);
 }
