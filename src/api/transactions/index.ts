@@ -17,7 +17,6 @@ async function submitTransaction(
 
 export async function createCollection(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    
     description: String,
     max_supply: bigint,
     name: String,
@@ -29,7 +28,7 @@ export async function createCollection(
     mutable_token_description: boolean,
     mutable_token_name: boolean,
     mutable_token_properties: boolean,
-    mutable_token_uri: boolean,    // this have to be enforced to `True`
+    mutable_token_uri: boolean,    // this has to be enforced to `True`
     tokens_burnable_by_creator: boolean,
     tokens_freezable_by_creator: boolean,  // sets whether a creator can freeze transfer for a token
     royalty_numerator: bigint,
@@ -129,9 +128,9 @@ export async function mintObjectNFT(
     await submitTransaction(signAndSubmitTransaction, payload);
 }
 
+// Store trait in a composable token
 export async function composeObject(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    
     composable_token_object: MaybeHexString,
     object_token_object: MaybeHexString
 ) {
@@ -147,6 +146,7 @@ export async function composeObject(
     await submitTransaction(signAndSubmitTransaction, payload);
 }
 
+// withdraw trait from a composable tokens
 export async function decomposeObject(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
     

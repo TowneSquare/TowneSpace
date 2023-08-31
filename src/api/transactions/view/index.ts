@@ -1,4 +1,4 @@
-import { AptosClient, MaybeHexString, Types } from "aptos";
+import { AptosClient, MaybeHexString, MaybeHexString, MaybeHexString, Types } from "aptos";
 import { NODE_URL, STUDIO_ADDRESS } from "../../../constants";
 
 export async function get_collection(
@@ -78,6 +78,20 @@ export async function get_supply(
     };
     const response = await client.view(payload);
     return response[0] as bigint;
+}
+
+export async function get_uri(
+    token_object: MaybeHexString,
+    type: string
+): Promise<string> {
+    const client = new AptosClient(NODE_URL);
+    const payload: Types.ViewRequest = {
+        function: `aptos_token_objects::token::uri`,
+        type_arguments: [type],
+        arguments: [token_object]
+    };
+    const response = await client.view(payload);
+    return response[0] as string;
 }
 
 // TODO: add aptos_token view functions
