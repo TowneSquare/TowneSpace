@@ -1,0 +1,3 @@
+
+
+export const STUDIO_MODULE_ADDRESS = "0x07ff0308d16a5041ace8e7e306a60b2946b6a4aee0e7e923b8f20e49bf3508ce"
