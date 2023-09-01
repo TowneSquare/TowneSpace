@@ -1,19 +1,7 @@
 /* used aptos-tontine as a reference*/
-import { AptosClient, MaybeHexString } from "aptos";
-import { NODE_URL, STUDIO_ADDRESS } from "../../constants";
-
-async function submitTransaction(
-    signAndSubmitTransaction: (txn: any) => Promise<any>,
-    
-    payload: any,
-  ) {
-    console.log("Submitting transaction", JSON.stringify(payload));
-    const pendingTransaction = await signAndSubmitTransaction(payload);
-    const client = new AptosClient(NODE_URL);    // hardcoded to devnet for now
-    await client.waitForTransactionWithResult(pendingTransaction.hash, {
-      checkSuccess: true,
-    });
-  }
+import { HexString, MaybeHexString } from "aptos";
+import { STUDIO_ADDRESS } from "../../constants";
+import { EnsureHexStringarray, submitTransaction } from "./helpers";
 
 export async function createCollection(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
@@ -41,7 +29,7 @@ export async function createCollection(
         type_arguments: [],
         arguments: [
             description,
-            max_supply,
+            max_supply.toString(10),
             name,
             symbol,
             uri,
@@ -54,9 +42,9 @@ export async function createCollection(
             mutable_token_uri,
             tokens_burnable_by_creator,
             tokens_freezable_by_creator,
-            royalty_numerator,
-            royalty_denominator,
-            seed
+            royalty_numerator.toString(10),
+            royalty_denominator.toString(10),
+            seed.toString()
         ],
     };
     await submitTransaction(signAndSubmitTransaction, payload);
@@ -64,7 +52,6 @@ export async function createCollection(
 
 export async function mintComposableNFT(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    
     collection: String,
     description: String,
     name: String,
@@ -85,12 +72,12 @@ export async function mintComposableNFT(
             description,
             name,
             uri,
-            total_supply,
-            object_tokens,
+            total_supply.toString(10),
+            EnsureHexStringarray(object_tokens),
             property_keys,
             property_types,
-            property_values,
-            seed
+            property_values.toString(),
+            seed.toString()
         ],
     };
     await submitTransaction(signAndSubmitTransaction, payload);
@@ -120,9 +107,9 @@ export async function mintObjectNFT(
             uri,
             property_keys,
             property_types,
-            property_values,
-            composable_token_object,
-            seed
+            property_values.toString(),
+            HexString.ensure(composable_token_object).hex(),
+            seed.toString()
         ],
     }
     await submitTransaction(signAndSubmitTransaction, payload);
@@ -139,8 +126,8 @@ export async function composeObject(
         function: `${STUDIO_ADDRESS}::studio::compose_object`,
         type_arguments: [],
         arguments: [
-            composable_token_object,
-            object_token_object
+            HexString.ensure(composable_token_object).hex(),
+            HexString.ensure(object_token_object).hex()
         ],
     }
     await submitTransaction(signAndSubmitTransaction, payload);
@@ -149,7 +136,6 @@ export async function composeObject(
 // withdraw trait from a composable tokens
 export async function decomposeObject(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    
     composable_token_object: MaybeHexString,
     object_token_object: MaybeHexString,
     new_uri: String
@@ -159,8 +145,8 @@ export async function decomposeObject(
         function: `${STUDIO_ADDRESS}::studio::decompose_object`,
         type_arguments: [],
         arguments: [
-            composable_token_object,
-            object_token_object,
+            HexString.ensure(composable_token_object).hex(),
+            HexString.ensure(object_token_object).hex(),
             new_uri
         ],
     }
@@ -169,14 +155,14 @@ export async function decomposeObject(
 
 export async function transferNFT(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
-    T: string,
+    type: string,
     token_address: string,
     new_owner_address: string,
 ) {
     const payload = {
         type: "entry_function_payload",
         function: `${STUDIO_ADDRESS}::studio::raw_transfer`,
-        type_arguments: [T],
+        type_arguments: [type],
         arguments: [
             token_address,
             new_owner_address
