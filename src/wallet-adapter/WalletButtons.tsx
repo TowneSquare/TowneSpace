@@ -6,16 +6,18 @@ import {
   WalletName,
 } from "@aptos-labs/wallet-adapter-react";
 import { toast } from "react-toastify";
+import { useAppDispatch } from "../state/hooks";
+import { toggleWalletPanel } from "../state/dialog";
 
 const WalletButtons = () => {
   const { wallets } = useWallet();
 
   return (
-    <>
+    <div className="pl-20 mt-4 flex flex-col gap-4">
       {wallets.map((wallet: Wallet) => {
         return WalletView(wallet);
       })}
-    </>
+    </div>
   );
 };
 
@@ -25,10 +27,12 @@ const WalletView = (wallet: Wallet) => {
     wallet.readyState === WalletReadyState.Installed ||
     wallet.readyState === WalletReadyState.Loadable;
   const mobileSupport = wallet.deeplinkProvider;
+  const dispatch = useAppDispatch();
 
   const onWalletConnectRequest = async (walletName: WalletName) => {
     try {
       await connect(walletName);
+      dispatch(toggleWalletPanel(false));
     } catch (error: any) {
       toast(error);
     }
@@ -49,37 +53,41 @@ const WalletView = (wallet: Wallet) => {
     if (mobileSupport) {
       return (
         <button
-          className={`bg-blue-500 text-white font-bold py-2 px-4 rounded mr-4 hover:bg-blue-700`}
+          className={`flex items-center gap-4  text-white font-bold py-2 px-4 rounded mr-4 hover:bg-blue-700`}
           disabled={false}
           key={wallet.name}
           onClick={() => onWalletConnectRequest(wallet.name)}
         >
-          <>{wallet.name}</>
+          <img src={wallet.icon} alt="uri" className="w-10 h-10" />
+          {wallet.name}
         </button>
       );
     }
     // wallet does not have mobile app
     return (
       <button
-        className={`bg-blue-500 text-white font-bold py-2 px-4 rounded mr-4 opacity-50 cursor-not-allowed`}
+        className={`flex items-center  gap-4  text-white font-bold py-2 px-4 rounded mr-4 opacity-50 cursor-not-allowed`}
         disabled={true}
         key={wallet.name}
+        onClick={() => onWalletConnectRequest(wallet.name)}
+
       >
-        <>{wallet.name} - Desktop Only</>
+        <img src={wallet.icon} alt="uri" className="w-10 h-10" />
+        {wallet.name} - Desktop Only
       </button>
     );
   } else {
     // we are on desktop view
     return (
       <button
-        className={`bg-blue-500  text-white font-bold py-2 px-4 rounded mr-4 ${
-          isWalletReady ? "hover:bg-blue-700" : "opacity-50 cursor-not-allowed"
-        }`}
+        className={`flex items-center  gap-4  text-white font-bold py-2 px-4 rounded mr-4 ${isWalletReady ? "hover:bg-gray-dark-3" : "opacity-50 cursor-not-allowed"
+          }`}
         disabled={!isWalletReady}
         key={wallet.name}
         onClick={() => onWalletConnectRequest(wallet.name)}
       >
-        <>{wallet.name}</>
+        <img src={wallet.icon} alt="uri" className="w-10 h-10" />
+        {wallet.name}
       </button>
     );
   }
