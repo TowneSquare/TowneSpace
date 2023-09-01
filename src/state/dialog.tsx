@@ -6,11 +6,13 @@ import { COLLECTIONS, NFTS } from './constants';
 interface dialogStates {
    bTraitPanel: boolean;
    bRemovePanel: boolean;
+   bWalletPanel: boolean;
 };
 
 const initialState: dialogStates = {
    bTraitPanel: false,
    bRemovePanel: false,
+   bWalletPanel: false,
 }
 
 export const dialogSlice = createSlice({
@@ -22,6 +24,9 @@ export const dialogSlice = createSlice({
       },
       toggleRemovePanel: (state, action: PayloadAction<boolean>) => {
          state.bRemovePanel = action.payload;
+      },
+      toggleWalletPanel: (state, action: PayloadAction<boolean>) => {
+         state.bWalletPanel = action.payload;
       }
    },
    extraReducers: (builder) => {
@@ -32,6 +37,7 @@ export const dialogSlice = createSlice({
 export const {
    toggleTraitPanel,
    toggleRemovePanel,
+   toggleWalletPanel,
 } = dialogSlice.actions;
 export default dialogSlice.reducer;
 

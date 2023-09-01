@@ -26,24 +26,25 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const { autoConnect } = useAutoConnect();
 
   const wallets = [
-    // Blocto supports Testnet/Mainnet for now.
-    new BloctoWallet({
-      network: NetworkName.Testnet,
-      bloctoAppId: "6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46",
-    }),
-    new FaceWallet(face!),
-    new FewchaWallet(),
-    new FlipperWallet(),
-    new MartianWallet(),
-    new MSafeWalletAdapter(),
-    new NightlyWallet(),
-    new OpenBlockWallet(),
     new PetraWallet(),
     new PontemWallet(),
+    new MartianWallet(),
     new RiseWallet(),
-    new TokenPocketWallet(),
-    new TrustWallet(),
-    new WelldoneWallet(),
+    new FewchaWallet(),
+
+    // Blocto supports Testnet/Mainnet for now.
+    // new BloctoWallet({
+    //   network: NetworkName.Testnet,
+    //   bloctoAppId: "6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46",
+    // }),
+    // new FaceWallet(face!),
+    // new FlipperWallet(),
+    // new MSafeWalletAdapter(),
+    // new NightlyWallet(),
+    // new OpenBlockWallet(),
+    // new TokenPocketWallet(),
+    // new TrustWallet(),
+    // new WelldoneWallet(),
   ];
 
   return (
