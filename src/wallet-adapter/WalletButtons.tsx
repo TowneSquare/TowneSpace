@@ -6,6 +6,8 @@ import {
   WalletName,
 } from "@aptos-labs/wallet-adapter-react";
 import { toast } from "react-toastify";
+import { useAppDispatch } from "../state/hooks";
+import { toggleWalletPanel } from "../state/dialog";
 
 const WalletButtons = () => {
   const { wallets } = useWallet();
@@ -25,10 +27,12 @@ const WalletView = (wallet: Wallet) => {
     wallet.readyState === WalletReadyState.Installed ||
     wallet.readyState === WalletReadyState.Loadable;
   const mobileSupport = wallet.deeplinkProvider;
+  const dispatch = useAppDispatch();
 
   const onWalletConnectRequest = async (walletName: WalletName) => {
     try {
       await connect(walletName);
+      dispatch(toggleWalletPanel(false));
     } catch (error: any) {
       toast(error);
     }
@@ -65,6 +69,8 @@ const WalletView = (wallet: Wallet) => {
         className={`flex items-center  gap-4  text-white font-bold py-2 px-4 rounded mr-4 opacity-50 cursor-not-allowed`}
         disabled={true}
         key={wallet.name}
+        onClick={() => onWalletConnectRequest(wallet.name)}
+
       >
         <img src={wallet.icon} alt="uri" className="w-10 h-10" />
         {wallet.name} - Desktop Only

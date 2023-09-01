@@ -1,4 +1,4 @@
-import { AptosClient, MaybeHexString, MaybeHexString, MaybeHexString, Types } from "aptos";
+import { AptosClient, MaybeHexString, Types } from "aptos";
 import { NODE_URL, STUDIO_ADDRESS } from "../../../constants";
 
 export async function get_collection(
