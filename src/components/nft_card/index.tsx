@@ -11,8 +11,10 @@ const NftCard: React.FC<Props> = ({ data }) => {
    const navigation = useNavigate();
    const dispatch = useAppDispatch();
    const onCustomize = () => {
-      dispatch(chooseNft(data))
-      navigation(`/customize/${data.address}`);
+      if (data.type == NftType.nftv2) {
+         dispatch(chooseNft(data))
+         navigation(`/customize/${data.address}`);
+      }
    }
    return (
       <div className="group w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer">

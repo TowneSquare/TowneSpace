@@ -28,15 +28,34 @@ const Customize = () => {
    return (
       <div className="relative">
          <Header />
-         <div className="px-2 md:px-[150px] flex gap-6">
+         <div className="px-2 md:px-[150px] flex justify-center gap-6">
             <Preview />
-            <div className="flex flex-col gap-4 items-center">
-               <Tokens />
-               <SecondaryButton type={ButtonStatus.active} className="w-40">
-                  + Add Trait
-               </SecondaryButton>
-            </div>
-            <Trait />
+            {currentNft?.object_tokens && currentNft.object_tokens.length > 0 ?
+               <>
+                  <div className="flex flex-col gap-4 items-center">
+                     <Tokens />
+                     <SecondaryButton type={ButtonStatus.active} className="w-40">
+                        + Add Trait
+                     </SecondaryButton>
+                  </div>
+                  <Trait />
+               </>
+               :
+               <>
+                  <div className="w-[30vw] py-[100px] flex flex-col gap-10 justify-center items-center border border-gray-light-2 rounded-md">
+                     <img src="/customize/haveno-trait.svg" alt="haveno-trait" />
+                     <p className="text-xl font-semibold text-gray-light-2 text-center">
+                        {currentNft?.name} doesn't have<br /> any Trait NFTs
+                        <p className="text-lg font-semibold text-gray-light-2 text-center mt-4">
+                           When you add Trait NFTs,<br /> they will appear here
+                        </p>
+                     </p>
+                     <SecondaryButton type={ButtonStatus.active} className="w-40">
+                        + Add Trait
+                     </SecondaryButton>
+                  </div>
+               </>
+            }
          </div>
          <ReplacePanel />
          <RemovePanel />
