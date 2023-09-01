@@ -9,7 +9,7 @@ interface tokensStates {
    nfts: NftMetadataType[],
    currentNft: NftMetadataType | undefined;
    currentTrait: NftMetadataType | undefined,
-   newTrait: NftMetadataType | undefined
+   newTrait: NftMetadataType | undefined,
 };
 
 const initialState: tokensStates = {
@@ -18,7 +18,7 @@ const initialState: tokensStates = {
    nfts: [],
    currentNft: undefined,
    currentTrait: undefined,
-   newTrait: undefined
+   newTrait: undefined,
 }
 
 export const fetchCollections = createAsyncThunk(

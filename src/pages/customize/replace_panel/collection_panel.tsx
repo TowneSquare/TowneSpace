@@ -49,7 +49,9 @@ const CollectionPanel = () => {
             </div>
             <div className="flex flex-wrap gap-4">
                {traitTokens?.map((token, index) => (
-                  <div className={`w-36 p-2 rounded-md ${newTrait?.address == token.address ? "bg-gray-dark-1" : ""}`} onClick={() => setNewTrait(token)}>
+                  <div className={`w-36 p-2 rounded-md ${newTrait?.address == token.address ? "bg-gray-dark-1" : ""}`} 
+                  key={index}
+                  onClick={() => setNewTrait(token)}>
                      <div className="h-32 bg-gray-light-3 hover:bg-gray-light-2 rounded-md overflow-hidden">
                         <img src={token.uri} alt="token" className="w-32 h-32" />
                      </div>

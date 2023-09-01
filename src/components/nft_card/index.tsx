@@ -30,8 +30,8 @@ const NftCard: React.FC<Props> = ({ data }) => {
                      <p className="px-2 text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap ">
                         See on TowneSpace
                      </p>
-                     <div className="h-px bg-gray-dark-2" />
-                     <p className="px-2 text-[13px] text-gray-dark-2  hover:bg-gray-light-2" onClick={() => onCustomize()}>
+                     <div className="mt-2 h-px bg-gray-dark-2" />
+                     <p className="px-2 mt-2 text-[13px] text-gray-dark-2  hover:bg-gray-light-2" onClick={() => onCustomize()}>
                         Customize
                      </p>
                   </div>
