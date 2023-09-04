@@ -9,7 +9,7 @@ const Create = () => {
    return (
       <Routes>
          <Route path="/" element={<Home />} />
-         <Route path="/step" element={<Screen1 />} />
+         <Route path="/step1" element={<Screen1 />} />
          <Route path="/step2" element={<Screen2 />} />
          <Route path="/step3" element={<Screen3 />} />
          <Route path="/step4" element={<Screen4 />} />
