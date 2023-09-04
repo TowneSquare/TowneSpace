@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
    const navigation = useNavigate();
    useEffect(() => {
-      navigation("/create/step");
+      navigation("/create/step1");
    })
    return (
       <h1>Home</h1>

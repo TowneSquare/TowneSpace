@@ -1,16 +1,16 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import FilterType from "../type/filter_type";
-import { NftType, NftMetadataType } from "../type/nft_type";
-import { COLLECTIONS, NFTS } from './constants';
+import FolderType from '../type/folder_type';
 
 interface createStates {
    collectionName: string;
    totalMaxSupply: string;
+   traits: FolderType;
 };
 
 const initialState: createStates = {
    collectionName: "",
    totalMaxSupply: "",
+   traits: {}
 }
 
 export const createflowSlice = createSlice({
@@ -22,16 +22,17 @@ export const createflowSlice = createSlice({
       },
       updateTotalMaxSupply: (state, action: PayloadAction<string>) => {
          state.totalMaxSupply = action.payload;
+      },
+      updateTraits: (state, action: PayloadAction<FolderType>) => {
+         state.traits = action.payload;
       }
-   },
-   extraReducers: (builder) => {
-
-   },
+   }
 });
 
 export const {
    updateCollectionName,
    updateTotalMaxSupply,
+   updateTraits
 } = createflowSlice.actions;
 export default createflowSlice.reducer;
 
