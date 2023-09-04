@@ -4,6 +4,8 @@ import Home from './pages/home';
 import Studio from './pages/studio';
 import Collections from './pages/collections';
 import Customize from './pages/customize';
+import Create from './pages/create';
+
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import { fetchNfts, fetchCollections } from './state/tokens';
 import { useEffect } from 'react';
@@ -30,6 +32,7 @@ function App() {
         <Route path="/studio/*" element={<Studio />} />
         <Route path="/collections" element={<Collections />} />
         <Route path="/customize/:address" element={<Customize />} />
+        <Route path="/create/*" element={<Create />} />
       </Routes>
     </div>
   );
