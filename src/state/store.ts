@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import tokensSlice from "./tokens";
 import dialogSlice from "./dialog";
+import createflowSlice from "./create";
 
 export const store = configureStore({
   reducer: {
    tokensState: tokensSlice,
-   dialogState: dialogSlice
+   dialogState: dialogSlice,
+   createState: createflowSlice
   },
 });
 
