@@ -84,7 +84,7 @@ const Screen3 = () => {
          const paths = file.webkitRelativePath.split("/");
          if (paths.length == 3) {
             const imageUrl = URL.createObjectURL(file);
-            const obj: FileType = { name: paths[2].split(".")[0], file, imageUrl };
+            const obj: FileType = { name: paths[2].split(".")[0], folderName: paths[1], file, imageUrl };
 
             let isNew = true;
             for (let i = 0; i < traits.length; i++) {

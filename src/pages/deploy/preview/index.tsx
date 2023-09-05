@@ -1,5 +1,6 @@
 import ChooseTrait from "./choose_trait";
 import Navbar from "./navbar";
+import TokenPreview from "./token_preview";
 import Tokens from "./tokens";
 
 const Preview = () => {
@@ -9,6 +10,7 @@ const Preview = () => {
          <div className="mt-8 px-6 flex gap-4">
             <ChooseTrait />
             <Tokens />
+            <TokenPreview />
          </div>
       </div>
    )
