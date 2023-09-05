@@ -7,7 +7,7 @@ import Header from "./header"
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import Folders from "./folders";
 import FolderType from "../../../type/folder_type";
-import { updateTraits } from "../../../state/create";
+import { updatePrimaryTrait, updateTraits } from "../../../state/create";
 
 const Screen5 = () => {
    const navigate = useNavigate();
@@ -17,6 +17,7 @@ const Screen5 = () => {
 
    const onNext = () => {
       dispatch(updateTraits(folders));
+      dispatch(updatePrimaryTrait(folders[0]))
       navigate("/create/step6");
    }
    const canvasRef = useRef<any>(null);
