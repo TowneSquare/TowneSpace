@@ -1,5 +1,4 @@
-import { FC, ReactNode, useEffect, useState } from "react";
-import React, { createContext, useContext } from "react";
+import { FC, ReactNode, useEffect, useState, createContext, useContext } from "react";
 
 const AUTO_CONNECT_LOCAL_STORAGE_KEY = "AptosWalletAutoConnect";
 

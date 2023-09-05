@@ -1,8 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-import { createCanvas } from 'canvas';
-
 import Header from "./header"
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { updatePrimaryTrait } from "../../../state/create";

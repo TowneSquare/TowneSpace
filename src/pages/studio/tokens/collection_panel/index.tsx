@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../../../state/hooks";
-import { chooseCollection, fetchNfts } from "../../../../state/tokens";
+import { chooseCollection } from "../../../../state/tokens";
 import { NftMetadataType } from "../../../../type/nft_type";
 import Search from "./search";
 

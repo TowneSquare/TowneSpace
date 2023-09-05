@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { TokenType } from "../../../../type/folder_type"
-import { useAppDispatch, useAppSelector } from "../../../../state/hooks";
+import { useAppDispatch } from "../../../../state/hooks";
 import { updateCurrentToken } from "../../../../state/deploy";
 
 interface Props {

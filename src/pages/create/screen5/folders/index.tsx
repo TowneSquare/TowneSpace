@@ -1,9 +1,8 @@
 import update from 'immutability-helper'
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useCallback } from "react";
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Folder } from "./folder";
-import { useAppDispatch, useAppSelector } from '../../../../state/hooks';
 import FolderType from '../../../../type/folder_type';
 
 interface Props {
