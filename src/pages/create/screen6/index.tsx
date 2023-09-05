@@ -12,22 +12,6 @@ const Screen6 = () => {
    const traits = useAppSelector(state => state.createState.traits);
    const primaryTrait = useAppSelector(state => state.createState.primaryTrait);
    const dispatch = useAppDispatch();
-   const canvasRef = useRef<any>(null);
-
-   useEffect(() => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-
-      const ctx = canvas.getContext('2d');
-
-      for (let i = (traits.length - 1); i >= 0; i--) {
-         const image = new Image();
-         image.src = traits[i].files[0].imageUrl;
-         image.onload = () => {
-            ctx.drawImage(image, 0, 0, 340, 340);
-         }
-      }
-   }, [traits]);
 
    return (
       <div className="pb-10">
@@ -57,9 +41,12 @@ const Screen6 = () => {
                   )
                })}
             </div>
-            <div className="">
+            <div className="w-[340px] rounded-md">
                <p className="">{primaryTrait?.name} will be the Primary NFT</p>
-               <canvas ref={canvasRef} width={340} height={340} className="mt-4" />
+               <div className="w-340px bg-gray-light-3 rounded-md">
+                  <img src={primaryTrait?.files[0].imageUrl} alt="img" className="mt-4 w-full" />
+               </div>
+               <p className="mt-4">{primaryTrait?.name}</p>
             </div>
             <div className="">
                <p className="t">Other traits will be placed inside the Primary NFT</p>
