@@ -4,9 +4,9 @@ import PrimaryButton from "../../../components/primary_button";
 import ButtonStatus from "../../../type/button_status";
 
 interface Props {
-   onNext: () => void
+   
 }
-const Header: React.FC<Props> = ({ onNext }) => {
+const Header: React.FC<Props> = ({ }) => {
    const navigate = useNavigate();
    const currentNft = useAppSelector(state => state.tokensState.currentNft)
    const onClose = () => {
@@ -26,7 +26,7 @@ const Header: React.FC<Props> = ({ onNext }) => {
             </p>
          </div>
          <div className="absolute right-0">
-            <PrimaryButton type={ButtonStatus.active} className="px-10" onClick={onNext}>
+            <PrimaryButton type={ButtonStatus.active} className="px-10" onClick={() => navigate("/deploy")}>
                Finish set up
             </PrimaryButton>
          </div>

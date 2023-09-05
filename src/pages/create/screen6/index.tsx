@@ -15,7 +15,7 @@ const Screen6 = () => {
 
    return (
       <div className="pb-10">
-         <Header onNext={() => { }} />
+         <Header />
          <p className="text-xl text-center">
             Select which trait will become the Primary NFT, the NFT <br />that will hold other Trait NFTs.&nbsp;
             <span className="text-primary-light">Learn more</span>
@@ -46,7 +46,7 @@ const Screen6 = () => {
                <div className="w-340px bg-gray-light-3 rounded-md">
                   <img src={primaryTrait?.files[0].imageUrl} alt="img" className="mt-4 w-full" />
                </div>
-               <p className="mt-4">{primaryTrait?.name}</p>
+               <p className="mt-4 text-center">{primaryTrait?.name}</p>
             </div>
             <div className="">
                <p className="t">Other traits will be placed inside the Primary NFT</p>

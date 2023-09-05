@@ -5,6 +5,7 @@ import Studio from './pages/studio';
 import Collections from './pages/collections';
 import Customize from './pages/customize';
 import Create from './pages/create';
+import Deploy from './pages/deploy';
 
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import { fetchNfts, fetchCollections } from './state/tokens';
@@ -33,6 +34,7 @@ function App() {
         <Route path="/collections" element={<Collections />} />
         <Route path="/customize/:address" element={<Customize />} />
         <Route path="/create/*" element={<Create />} />
+        <Route path="/deploy/*" element={<Deploy />} />
       </Routes>
     </div>
   );
