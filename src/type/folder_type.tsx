@@ -4,5 +4,6 @@ export interface FileType{
    imageUrl: string;
 }
 export default interface FolderType {
-   [key: string]: FileType[];
+   name: string;
+   files: FileType[]
 }

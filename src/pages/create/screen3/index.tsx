@@ -51,19 +51,19 @@ const Screen3 = () => {
                   console.log(`Directory: ${handle.name}`, handle);
 
                   const reader = handle.createReader();
-                  reader.readEntries(function(entries: any) {
-                    for (let i = 0; i < entries.length; i++) {
-                      let entry = entries[i];
-            
-                      if (entry.isFile) {
-                        entry.file(function(file: any) {
-                          console.log("File", file); // Do something with the file
-                        });
-                      } else if (entry.isDirectory) {
-                        console.log("Direcotry", entry)
-                        // traverseDirectory(entry);
-                      }
-                    }
+                  reader.readEntries(function (entries: any) {
+                     for (let i = 0; i < entries.length; i++) {
+                        let entry = entries[i];
+
+                        if (entry.isFile) {
+                           entry.file(function (file: any) {
+                              console.log("File", file); // Do something with the file
+                           });
+                        } else if (entry.isDirectory) {
+                           console.log("Direcotry", entry)
+                           // traverseDirectory(entry);
+                        }
+                     }
                   });
                } else {
                   console.log(`File: ${handle.name}`);
@@ -79,18 +79,27 @@ const Screen3 = () => {
    const onChangeFolder = (e: any) => {
       toast.success("Uploading!");
       const files: File[] = [...e.target.files];
-      const traits: FolderType = {};
+      const traits: FolderType[] = [];
       files.forEach((file: File) => {
          const paths = file.webkitRelativePath.split("/");
-         if(paths.length == 3){
+         if (paths.length == 3) {
             const imageUrl = URL.createObjectURL(file);
-            const obj: FileType = {name: paths[2].split(".")[0], file, imageUrl};
-            if(traits[paths[1]])
-               traits[paths[1]].push(obj)
-            else
-               traits[paths[1]] = [obj]
+            const obj: FileType = { name: paths[2].split(".")[0], file, imageUrl };
+
+            let isNew = true;
+            for (let i = 0; i < traits.length; i++) {
+               if (traits[i].name == paths[1]) {
+                  traits[i].files.push(obj)
+                  isNew = false;
+                  break;
+               }
+            }
+            if (isNew) {
+               traits.push({ name: paths[1], files: [obj] });
+            }
          }
       });
+      
       dispatch(updateTraits(traits));
       toast.dismiss();
       toast.success('Upload done!');
