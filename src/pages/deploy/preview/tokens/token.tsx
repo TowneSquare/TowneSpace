@@ -2,28 +2,35 @@ import { useEffect, useRef } from "react";
 import { TokenType } from "../../../../type/folder_type"
 import { useAppDispatch, useAppSelector } from "../../../../state/hooks";
 import { updateCurrentToken } from "../../../../state/deploy";
+import { sleep } from "../../../../util";
 
 interface Props {
    token: TokenType,
    index: number
 }
+
 const Token: React.FC<Props> = ({ token, index }) => {
    const dispatch = useAppDispatch();
    const canvasRef = useRef<any>(null);
 
    useEffect(() => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
+      const drawImage = async () => {
+         const canvas = canvasRef.current;
+         if (!canvas) return;
 
-      const ctx = canvas.getContext('2d');
+         const ctx = canvas.getContext('2d');
 
-      for (let i = (token.files.length - 1); i >= 0; i--) {
-         const image = new Image();
-         image.src = token.files[i].imageUrl;
-         image.onload = () => {
+
+         for (let i = (token.files.length - 1); i >= 0; i--) {
+            const image = new Image();
+            image.src = token.files[i].imageUrl;
+            while (!image.complete) {
+               await sleep(100);
+            }
             ctx.drawImage(image, 0, 0, 178, 178);
          }
       }
+      drawImage();
    }, [token]);
 
    return (

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useAppSelector } from "../../../state/hooks";
+import { sleep } from "../../../util";
 
 const TokenPreview = () => {
    const currentToken = useAppSelector(state => state.deployState.currentToken);
@@ -10,17 +11,21 @@ const TokenPreview = () => {
    }
 
    useEffect(() => {
-      const canvas = canvasRef.current;
-      if (!canvas || !currentToken) return;
+      const drawImage = async () => {
+         const canvas = canvasRef.current;
+         if (!canvas || !currentToken) return;
 
-      const ctx = canvas.getContext('2d');
-      for (let i = (currentToken.files.length - 1); i >= 0; i--) {
-         const image = new Image();
-         image.src = currentToken.files[i].imageUrl;
-         image.onload = () => {
-            ctx.drawImage(image, 0, 0, 252, 252);
+         const ctx = canvas.getContext('2d');
+         for (let i = (currentToken.files.length - 1); i >= 0; i--) {
+            const image = new Image();
+            image.src = currentToken.files[i].imageUrl;
+            while (!image.complete) {
+               await sleep(10);
+            }
+            ctx.drawImage(image, 0, 0, 178, 178);
          }
       }
+      drawImage();
    }, [currentToken]);
 
    return (
