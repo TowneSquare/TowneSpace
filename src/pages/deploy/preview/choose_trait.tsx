@@ -4,7 +4,7 @@ const ChooseTrait = () => {
    const traits = useAppSelector(state => state.createState.traits);
 
    return (
-      <div className="flex flex-col gap-4">
+      <div className="min-w-[230px] flex flex-col gap-4">
          {traits.map((trait, index) => (
             <div className="" key={index}>
                <p className="font-semibold">{trait.name}</p>

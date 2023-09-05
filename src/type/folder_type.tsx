@@ -1,5 +1,10 @@
+export interface TokenType{
+   name: string;
+   files: FileType[]
+}
 export interface FileType{
    name: string;
+   folderName: string;
    file: File;
    imageUrl: string;
 }
