@@ -4,13 +4,13 @@ import FolderType from '../type/folder_type';
 interface createStates {
    collectionName: string;
    totalMaxSupply: string;
-   traits: FolderType;
+   traits: FolderType[];
 };
 
 const initialState: createStates = {
    collectionName: "",
    totalMaxSupply: "",
-   traits: {}
+   traits: []
 }
 
 export const createflowSlice = createSlice({
@@ -23,7 +23,7 @@ export const createflowSlice = createSlice({
       updateTotalMaxSupply: (state, action: PayloadAction<string>) => {
          state.totalMaxSupply = action.payload;
       },
-      updateTraits: (state, action: PayloadAction<FolderType>) => {
+      updateTraits: (state, action: PayloadAction<FolderType[]>) => {
          state.traits = action.payload;
       }
    }

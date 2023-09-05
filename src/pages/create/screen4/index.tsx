@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Header from "./header"
 import { useAppSelector } from "../../../state/hooks";
-import { FileType } from "../../../type/folder_type";
+import FolderType, { FileType } from "../../../type/folder_type";
 
 const Screen4 = () => {
    const navigate = useNavigate();
@@ -16,27 +16,29 @@ const Screen4 = () => {
             <span className="text-primary-light cursor-pointer" onClick={() => navigate("/create/step3")}>upload them again</span>
          </p>
          <div className="mt-16 flex flex-col gap-8">
-            {Object.keys(traits).map((key, index) => (
-               <Trait name={key} data={traits[key]} key={index} />
+            {traits.map((trait, index) => (
+               <Trait data={trait} key={index} />
             ))}
          </div>
       </div>
    )
 };
 
-const Trait = ({ name, data }: { name: string, data: FileType[] }) => {
+const Trait = ({ data }: { data: FolderType }) => {
    return (
       <div className="px-32">
          <div className="w-full flex justify-between">
             <p className="text-xl font-semibold">
-               {name}
+               {data.name}
             </p>
-            <p>{data.length} Traits</p>
+            <p>{data.files.length} Traits</p>
          </div>
          <div className="mt-4 flex flex-wrap gap-4">
-            {data.map((file, index) => (
+            {data.files.map((file, index) => (
                <div className="w-32 rounded-md">
-                  <img src={file.imageUrl} alt="image" className="w-32 h-32" />
+                  <div className="h-32 bg-gray-light-3 rounded-md">
+                     <img src={file.imageUrl} alt="image" className="w-32 h-32" />
+                  </div>
                   <p className="mt-2 text-center">
                      {file.name}
                   </p>
