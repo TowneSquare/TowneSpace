@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import tokensSlice from "./tokens";
 import dialogSlice from "./dialog";
 import createflowSlice from "./create";
+import deploySlice from "./deploy";
 
 export const store = configureStore({
   reducer: {
    tokensState: tokensSlice,
    dialogState: dialogSlice,
-   createState: createflowSlice
+   createState: createflowSlice,
+   deployState: deploySlice
   },
 });
 
