@@ -5,12 +5,14 @@ interface createStates {
    collectionName: string;
    totalMaxSupply: string;
    traits: FolderType[];
+   primaryTrait: FolderType | undefined;
 };
 
 const initialState: createStates = {
    collectionName: "",
    totalMaxSupply: "",
-   traits: []
+   traits: [],
+   primaryTrait: undefined
 }
 
 export const createflowSlice = createSlice({
@@ -25,6 +27,9 @@ export const createflowSlice = createSlice({
       },
       updateTraits: (state, action: PayloadAction<FolderType[]>) => {
          state.traits = action.payload;
+      },
+      updatePrimaryTrait: (state, action: PayloadAction<FolderType>) => {
+         state.primaryTrait = action.payload;
       }
    }
 });
@@ -32,7 +37,8 @@ export const createflowSlice = createSlice({
 export const {
    updateCollectionName,
    updateTotalMaxSupply,
-   updateTraits
+   updateTraits,
+   updatePrimaryTrait
 } = createflowSlice.actions;
 export default createflowSlice.reducer;
 
