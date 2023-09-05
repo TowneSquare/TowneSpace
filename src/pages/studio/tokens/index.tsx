@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Filter from "./filter";
 import FilterType from "../../../type/filter_type";
 import Board from "./board";

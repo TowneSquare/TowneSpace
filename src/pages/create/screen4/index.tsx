@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Header from "./header"
 import { useAppSelector } from "../../../state/hooks";
-import FolderType, { FileType } from "../../../type/folder_type";
+import FolderType from "../../../type/folder_type";
 
 const Screen4 = () => {
    const navigate = useNavigate();

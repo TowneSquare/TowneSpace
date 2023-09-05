@@ -1,5 +1,3 @@
-import ButtonStatus from "../../type/button_status";
-
 interface Props {
    className?: string;
    placeholder?: string;
