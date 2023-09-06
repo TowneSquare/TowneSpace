@@ -4,7 +4,6 @@ import { useAppDispatch } from "../../state/hooks";
 import { toggleWalletPanel } from "../../state/dialog";
 
 const Home = () => {
-   const navigation = useNavigate();
    const dispatch = useAppDispatch();
    return (
       <div className="w-full h-screen !bg-cover" style={{ background: "url('/home/background.webp')" }} >

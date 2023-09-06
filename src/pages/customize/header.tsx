@@ -12,15 +12,15 @@ const Header: React.FC<Props> = ({  }) => {
       navigation("/studio/mytoken")
    }
    return (
-      <div className="relative h-[124px] mx-8 flex justify-center items-center">
+      <div className="relative h-[124px] mx-2 md:mx-8 flex justify-center items-center">
          <div className="absolute left-0 w-4 h-4 cursor-pointer" onClick={() => onClose()}>
             <p className="text-2xl font-semibold">×</p>
          </div>
-         <div>
-            <p className="text-xl font-bold text-center">
+         <div className="flex flex-col items-center">
+            <p className="text-base md:text-xl font-bold text-center">
                {currentNft ? currentNft.name : "unknown"}
             </p>
-            <p className="text-center">
+            <p className="w-1/2 md:w-full text-sm md:text-base text-center">
                Select NFTs or crypto assets you want to put inside, replace or remove
             </p>
          </div>

@@ -2,7 +2,7 @@ import update from 'immutability-helper'
 import { useCallback, useEffect, useState } from "react";
 import { NftMetadataType } from "../../../type/nft_type";
 import { NFTS } from "../../../state/constants";
-import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import { useAppSelector } from "../../../state/hooks";
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Token } from "./token";
@@ -12,8 +12,6 @@ interface Props {
 const Tokens: React.FC<Props> = ({ }) => {
    const currentNft = useAppSelector(state => state.tokensState.currentNft)
    const [tokens, setTokens] = useState<NftMetadataType[]>([]);
-   const currentTrait = useAppSelector(state => state.tokensState.currentTrait)
-   const dispatch = useAppDispatch();
 
    useEffect(() => {
       if (currentNft?.object_tokens) {
@@ -26,7 +24,6 @@ const Tokens: React.FC<Props> = ({ }) => {
          setTokens(tokens);;
       }
    }, [currentNft?.object_tokens])
-
 
    const moveToken = useCallback((dragIndex: number, hoverIndex: number) => {
       setTokens((prevTokens: NftMetadataType[]) =>
@@ -56,7 +53,7 @@ const Tokens: React.FC<Props> = ({ }) => {
 
    return (
       <DndProvider backend={HTML5Backend}>
-         <div className="p-4 w-[30vw] flex flex-col gap-4 border border-gray-dark-1 rounded-md">
+         <div className="p-4 md:w-[30vw] flex flex-col gap-4 border border-gray-dark-1 rounded-md">
             {tokens.map((token, i) => renderToken(token, i))}
          </div>
       </DndProvider>

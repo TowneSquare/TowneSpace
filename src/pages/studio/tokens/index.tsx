@@ -10,7 +10,7 @@ const Tokens = () => {
    return (
       <div className="px-2 md:px-8 py-[50px]">
          <Filter filter={filter} setFilter={setFilter} />
-         <div className="flex gap-10 mt-16">
+         <div className="flex flex-col md:flex-row gap-10 mt-16">
             <CollectionPanel />
             <Board filter={filter} />
          </div>

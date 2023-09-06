@@ -11,13 +11,13 @@ const PrimaryButton: React.FC<Props> = ({ children, type, className, onClick }) 
    return (
       <>
          {type == ButtonStatus.active ?
-            <button className={`${className} px-6 py-2 rounded-full font-semibold bg-primary-default hover:bg-primary-light active:bg-primary-dark whitespace-nowrap`}
+            <button className={`${className} px-6  py-2 rounded-full text-sm md:text-base font-semibold bg-primary-default hover:bg-primary-light active:bg-primary-dark whitespace-nowrap`}
                onClick={onClick}
             >
                {children}
             </button>
             :
-            <button className={`${className} px-6 py-2 rounded-full font-semibold bg-transparent hover:bg-gray-dark- whitespace-nowrap`}
+            <button className={`${className} px-6 py-2 rounded-full text-sm md:text-base font-semibold bg-transparent hover:bg-gray-dark- whitespace-nowrap`}
                onClick={onClick}
             >
                {children}
