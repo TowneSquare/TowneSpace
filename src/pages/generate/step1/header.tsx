@@ -7,7 +7,6 @@ interface Props {
 }
 const Header: React.FC<Props> = ({ }) => {
    const navigate = useNavigate();
-   const currentNft = useAppSelector(state => state.tokensState.currentNft)
    const onClose = () => {
       navigate("/studio")
    }

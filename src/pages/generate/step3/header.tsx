@@ -20,13 +20,8 @@ const Header: React.FC<Props> = ({ }) => {
                Generate tokens
             </p>
             <p className="text-center">
-               Set up - Step 2 of  3
+               Set up - Step 3 of  3
             </p>
-         </div>
-         <div className="absolute right-0">
-            <PrimaryButton type={ButtonStatus.active} className="px-10" onClick={() => navigate("/generate/step3")}>
-               Next
-            </PrimaryButton>
          </div>
       </div>
    )
