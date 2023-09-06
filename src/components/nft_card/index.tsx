@@ -17,8 +17,8 @@ const NftCard: React.FC<Props> = ({ data }) => {
       }
    }
    return (
-      <div className="group w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer">
-         <div className="relative h-[156px] bg-gray-light-2 rounded-t-lg">
+      <div className="group w-[140px] md:w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer">
+         <div className="relative h-[132px] md:h-[156px] bg-gray-light-2 rounded-t-lg">
             {!isUriEmpty(data.uri) &&
                <img src={data.uri} className="w-full h-full" alt="nft" />
             }
@@ -27,11 +27,11 @@ const NftCard: React.FC<Props> = ({ data }) => {
                <div className="hidden group-hover/3dots:block absolute top-6 right-0 ">
                   <div className="w-full h-2" />
                   <div className="py-2 rounded-lg bg-white">
-                     <p className="px-2 text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap ">
+                     <p className="px-2 text-[10px] md:text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap ">
                         See on TowneSpace
                      </p>
                      <div className="mt-2 h-px bg-gray-dark-2" />
-                     <p className="px-2 mt-2 text-[13px] text-gray-dark-2  hover:bg-gray-light-2" onClick={() => onCustomize()}>
+                     <p className="px-2 mt-2 text-[10px] md:text-[13px] text-gray-dark-2  hover:bg-gray-light-2" onClick={() => onCustomize()}>
                         Customize
                      </p>
                   </div>
@@ -49,16 +49,16 @@ const NftCard: React.FC<Props> = ({ data }) => {
 
          </div>
          <div className="mx-2 my-2">
-            <div className="flex items-center gap-2 text-[14px] font-semibold text-gray-light-1">
+            <div className="flex items-center gap-2 text-xs md:text-[14px] font-semibold text-gray-light-1">
                {data.collection}
                <img src="/nft-card/polygon-check.svg" alt="check" />
             </div>
-            <p className="text-lg font-semibold">
+            <p className="text-base md:text-lg font-semibold">
                {data.name}
             </p>
             <div className="mt-3 flex gap-2">
                <img src="/nft-card/aptos-logo.svg" alt="logo" />
-               <p className="font-semibold">
+               <p className="text-sm md:text-base font-semibold">
                   {data.price}
                </p>
             </div>

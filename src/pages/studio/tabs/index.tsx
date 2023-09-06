@@ -32,7 +32,7 @@ const Tab: React.FC<Props> = ({ data }) => {
    return (
       <div className={`px-4 py-2 ${isActive ? "border-b-4 border-b-primary-default" : " "}`}>
          <Link to={data.href}>
-            <h1 className={`text-xl leading-[150%] ${isActive ? "font-bold" : ""}`}>
+            <h1 className={`lg:text-xl leading-[150%] ${isActive ? "font-bold" : ""}`}>
                {data.label}
             </h1>
          </Link>

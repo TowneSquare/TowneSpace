@@ -14,21 +14,26 @@ import RemovePanel from "./remove_panel";
 
 const Customize = () => {
    const { address } = useParams();
-   const currentNft = useAppSelector(state => state.tokensState.currentNft)
+   const nfts = useAppSelector(state => state.tokensState.nfts);
+   const currentNft = useAppSelector(state => state.tokensState.currentNft);
    const dispatch = useAppDispatch();
 
    useEffect(() => {
-      if (!currentNft && address) {
-         let res = NFTS.filter(nft => nft.address == address)
-         if (res.length > 0)
+      console.log(nfts, currentNft, address)
+
+      if ((!currentNft || currentNft.address != address) && address && nfts.length > 0) {
+         let res = nfts.filter(nft => nft.address == address)
+         if (res.length > 0){
+
             dispatch(chooseNft(res[0]))
+         }
       }
-   }, [address]);
+   }, [address, nfts]);
 
    return (
       <div className="relative">
          <Header />
-         <div className="px-2 md:px-[150px] flex justify-center gap-6">
+         <div className="mt-10 flex flex-col md:flex-row justify-center items-center md:items-start gap-6">
             <Preview />
             {currentNft?.object_tokens && currentNft.object_tokens.length > 0 ?
                <>
@@ -42,7 +47,7 @@ const Customize = () => {
                </>
                :
                <>
-                  <div className="w-[30vw] py-[100px] flex flex-col gap-10 justify-center items-center border border-gray-light-2 rounded-md">
+                  <div className="md:w-[30vw] py-[100px] flex flex-col gap-10 justify-center items-center border border-gray-light-2 rounded-md">
                      <img src="/customize/haveno-trait.svg" alt="haveno-trait" />
                      <p className="text-xl font-semibold text-gray-light-2 text-center">
                         {currentNft?.name} doesn't have<br /> any Trait NFTs

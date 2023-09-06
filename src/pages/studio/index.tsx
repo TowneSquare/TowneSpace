@@ -14,7 +14,7 @@ const Studio = () => {
       <div className="">
          <Header />
          <div className="pt-9 px-2 md:px-12 border-b-2 border-b-gray-dark-1">
-            <div className="flex flex-col md:flex-row justify-between">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-0 md:justify-between">
                <Welcome />
                <HelpCenter />
                <Commands />
