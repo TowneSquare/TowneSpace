@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import { NftMetadataType } from "../../../type/nft_type";
 import { NFTS } from "../../../state/constants";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
-import { chooseTrait } from "../../../state/tokens";
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Token } from "./token";

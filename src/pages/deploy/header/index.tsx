@@ -1,7 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import Menu from "./menu";
-
-import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import MenuType from "../../../type/menu_type";
 
 const Header = () => {

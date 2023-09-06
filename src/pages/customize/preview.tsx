@@ -1,5 +1,4 @@
 import { useAppSelector } from "../../state/hooks";
-import { NftMetadataType } from "../../type/nft_type";
 
 interface Props {
 }

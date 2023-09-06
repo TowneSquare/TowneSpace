@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { NftMetadataType } from "../../type/nft_type";
-import { NFTS } from "../../state/constants";
 import SecondaryButton from "../../components/secondary_button";
 import ButtonStatus from "../../type/button_status";
 import { toggleRemovePanel, toggleTraitPanel } from "../../state/dialog";

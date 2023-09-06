@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import FilterType from "../type/filter_type";
-import { NftType, NftMetadataType } from "../type/nft_type";
+import { NftMetadataType } from "../type/nft_type";
 import { COLLECTIONS, NFTS } from './constants';
 
 interface tokensStates {

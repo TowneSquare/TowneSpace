@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/primary_button";
 import { useAppSelector } from "../../state/hooks";
 import ButtonStatus from "../../type/button_status";
-import { NftMetadataType } from "../../type/nft_type";
 
 interface Props {
 }

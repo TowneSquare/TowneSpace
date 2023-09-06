@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Search from "./search";
 import Menu from "./menu";
 import Address from "./address";

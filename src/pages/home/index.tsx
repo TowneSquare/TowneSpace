@@ -1,9 +1,5 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header";
-import PrimaryButton from "../../components/primary_button";
-import ButtonStatus from "../../type/button_status";
-import SecondaryButton from "../../components/secondary_button";
 import { useAppDispatch } from "../../state/hooks";
 import { toggleWalletPanel } from "../../state/dialog";
 
