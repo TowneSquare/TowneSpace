@@ -3,6 +3,7 @@ import Collections from "./collections";
 import Commands from "./commands";
 import Home from "./home";
 import Tabs from "./tabs";
+import HelpCenter from "./tabs/links";
 import Tokens from "./tokens";
 import Welcome from "./welcome";
 
@@ -15,6 +16,7 @@ const Studio = () => {
          <div className="pt-9 px-2 md:px-12 border-b-2 border-b-gray-dark-1">
             <div className="flex flex-col md:flex-row justify-between">
                <Welcome />
+               <HelpCenter />
                <Commands />
             </div>
             <Tabs />

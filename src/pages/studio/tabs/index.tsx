@@ -10,15 +10,6 @@ const Tabs = () => {
                <Tab data={tab} key={index} />
             ))}
          </div>
-         <div className="absolute right-4 flex gap-12 items-center">
-            {Links.map((link, index) => (
-               <a href={link.href} target="blank">
-                  <span className="font-semibold text-primary-default">
-                     {link.label}
-                  </span>
-               </a>
-            ))}
-         </div>
       </div>
    )
 }
@@ -59,15 +50,4 @@ const tabs = [
    }
 ]
 
-
-const Links = [
-   {
-      href: "",
-      label: "Help Center"
-   },
-   {
-      href: "",
-      label: "Guides"
-   }
-]
 export default Tabs;

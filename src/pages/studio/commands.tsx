@@ -10,9 +10,6 @@ const Commands = () => {
             <PrimaryButton type={ButtonStatus.active} className="!px-12 py-3" onClick={() => navigate('/create')}>
                Create
             </PrimaryButton>
-            <PrimaryButton type={ButtonStatus.active} className="!px-12 py-3">
-               Migrate NFTs
-            </PrimaryButton>
          </div>
       </div>
    )

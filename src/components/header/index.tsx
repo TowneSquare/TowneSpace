@@ -33,6 +33,10 @@ const Menus: MenuType[] = [
       label: "Studio"
    },
    {
+      href: "/migrate",
+      label: "Migrate NFTs"
+   },
+   {
       href: "/collections",
       label: "Collections"
    }
