@@ -11,20 +11,20 @@ const Screen2 = () => {
 
    return (
       <div className="w-full h-screen flex justify-center items-center">
-         <div className="md:w-[512px] p-6 bg-gray-dark-1 rounded-md">
+         <div className="md:w-[512px] mx-4 p-6 bg-gray-dark-1 rounded-md">
             <div className="flex justify-between">
-               <p className="text-xl font-semibold">Create Collection</p>
+               <p className="text-base md:text-xl font-semibold">Create Collection</p>
                <div className="w-4 h-6 cursor-pointer" onClick={() => navigate("/studio")}>
                   <p className="text-2xl font-semibold">×</p>
                </div>
             </div>
-            <div className="px-8 pt-14">
-               <p>
+            <div className="px-4 md:px-8 pt-14">
+               <p className="text-sm md:text-base">
                   Insert a collection name and total supply for your Dynamic PFPs
                </p>
-               <p className="pt-4">Collection Name</p>
+               <p className="text-sm md:text-base pt-4">Collection Name</p>
                <PrimaryInput className="mt-2" onChange={(e) => dispatch(updateCollectionName(e.target.value))}/>
-               <p className="pt-4">Token max supply</p>
+               <p className="text-sm md:text-base pt-4">Token max supply</p>
                <PrimaryInput className="mt-2" onChange={(e) => dispatch(updateTotalMaxSupply(e.target.value))}/>
             </div>
             <div className="flex justify-center mt-14">

@@ -78,9 +78,13 @@ export const Folder: FC<Props> = ({ id, data, index, moveToken }) => {
   const opacity = isDragging ? 0 : 100
   drag(drop(ref))
   return (
-    <div ref={ref} data-handler-id={handlerId} className="h-14 p-2 flex items-center gap-4 bg-gray-dark-2 rounded-md">
+    <div
+      ref={ref}
+      data-handler-id={handlerId}
+      className="h-10 md:h-14 px-2 md:pr-16 py-1 md:py-2 min-w-max flex items-center gap-2 md:gap-4 bg-gray-dark-2 rounded-md"
+    >
       <img src="/create/indicator.svg" alt="indicator" />
-      <p className="font-semibold">
+      <p className="text-sm md:text-base font-semibold">
         {data.name}
       </p>
     </div>

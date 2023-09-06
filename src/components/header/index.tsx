@@ -17,7 +17,7 @@ const Header = () => {
                <img src="/logo.svg" className="w-[154.42px] h-[16.65px] cursor-pointer" onClick={() => navigate("/")} />
                <Search />
             </div>
-            <div className="h-full flex items-center justify-normal gap-12">
+            <div className="h-full flex items-center justify-normal gap-8 lg:gap-12">
                {Menus.map((menu, index) => (
                   <Menu data={menu} key={index} />
                ))}

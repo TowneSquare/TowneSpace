@@ -7,12 +7,11 @@ interface Props {
 }
 const Header: React.FC<Props> = ({ }) => {
    const navigate = useNavigate();
-   const currentNft = useAppSelector(state => state.tokensState.currentNft)
    const onClose = () => {
       navigate("/studio")
    }
    return (
-      <div className="relative h-[124px] mx-8 flex justify-center items-center">
+      <div className="relative h-[124px] mx-4 md:mx-8 flex justify-center items-center">
          <div className="absolute left-0 w-4 h-4 cursor-pointer" onClick={() => onClose()}>
             <p className="text-2xl font-semibold">×</p>
          </div>

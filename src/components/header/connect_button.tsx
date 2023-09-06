@@ -14,7 +14,7 @@ const ConnectButton = () => {
    return (
       <>
          <div className="font-semibold cursor-pointer" onClick={() => dispatch(toggleWalletPanel(true))}>
-            <p>Connect Wallet</p>
+            <p className="whitespace-nowrap">Connect Wallet</p>
          </div>
          <div className={`${isOpen ? "block" : "hidden"} absolute z-10 inset-0 flex justify-center items-center bg-[#00000050]`}>
             <div className="relative w-[400px]  bg-gray-dark-2 border-gray-light-3 rounded-md p-8">
