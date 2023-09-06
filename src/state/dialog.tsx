@@ -1,7 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import FilterType from "../type/filter_type";
-import { NftType, NftMetadataType } from "../type/nft_type";
-import { COLLECTIONS, NFTS } from './constants';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface dialogStates {
    bTraitPanel: boolean;

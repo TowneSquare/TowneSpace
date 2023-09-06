@@ -1,7 +1,6 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import PrimaryButton from "../../../components/primary_button";
 import ButtonStatus from "../../../type/button_status";
-import FilterType from "../../../type/filter_type";
 
 interface Props {
    filter: number;

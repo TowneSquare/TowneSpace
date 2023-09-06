@@ -1,6 +1,4 @@
-import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import FilterType from "../../../type/filter_type";
-import { NftMetadataType } from "../../../type/nft_type";
 import NftCard from "../../../components/nft_card";
 import { useAppSelector } from "../../../state/hooks";
 

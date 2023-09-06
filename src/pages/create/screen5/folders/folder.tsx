@@ -1,11 +1,10 @@
-import type { Identifier, XYCoord } from 'dnd-core'
-import type { FC } from 'react'
-import { useRef, useState } from 'react'
-import { useDrag, useDrop } from 'react-dnd'
-
-import { ItemTypes } from './itemTypes'
-import FolderType from '../../../../type/folder_type'
-import { useAppDispatch, useAppSelector } from '../../../../state/hooks'
+import type { Identifier, XYCoord } from 'dnd-core';
+import type { FC } from 'react';
+import { useRef } from 'react';
+import { useDrag, useDrop } from 'react-dnd';
+import { ItemTypes } from './itemTypes';
+import FolderType from '../../../../type/folder_type';
+import { useAppDispatch, useAppSelector } from '../../../../state/hooks';
 
 export interface Props {
   id: any

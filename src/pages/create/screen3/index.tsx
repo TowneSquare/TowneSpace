@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "./header";
 import FolderType, { FileType } from "../../../type/folder_type";
-import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import { useAppDispatch } from "../../../state/hooks";
 import { updateTraits } from "../../../state/create";
 import { toast } from "react-toastify";
 

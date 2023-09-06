@@ -1,8 +1,7 @@
 import type { Identifier, XYCoord } from 'dnd-core'
 import type { FC } from 'react'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-
 import { ItemTypes } from './itemTypes'
 import { NftMetadataType } from '../../../type/nft_type'
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
