@@ -39,7 +39,7 @@ const Folders: React.FC<Props> = ({folders, setFolders }) => {
 
    return (
       <DndProvider backend={HTML5Backend}>
-         <div className="p-4 w-[30vw] flex flex-col gap-4 rounded-md">
+         <div className="p-4 flex flex-col gap-4 rounded-md">
             {folders.map((folder, i) => renderFolder(folder, i))}
          </div>
       </DndProvider>

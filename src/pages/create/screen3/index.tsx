@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import Header from "./header";
 import FolderType, { FileType } from "../../../type/folder_type";
-import { useAppDispatch } from "../../../state/hooks";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { updateTraits } from "../../../state/create";
 import { toast } from "react-toastify";
 
 const Screen3 = () => {
    const dispatch = useAppDispatch();
+   const traits = useAppSelector(state => state.createState.traits);
 
    useEffect(() => {
       const supportsFileSystemAccessAPI =
@@ -99,7 +100,7 @@ const Screen3 = () => {
             }
          }
       });
-      
+
       dispatch(updateTraits(traits));
       toast.dismiss();
       toast.success('Upload done!');
@@ -108,42 +109,52 @@ const Screen3 = () => {
    return (
       <div className="pb-10">
          <Header />
-         <p className="mt-10 text-xl text-center">
-            Let’s first upload images that will serve as the traits for<br /> your new PFP collection
-         </p>
-         <div className="mx-[250px] mt-24 p-6 flex gap-10 bg-gray-dark-2 rounded-md">
-            <div className="w-1/2">
-               <p className="text-3xl">
-                  Upload Folder with assets
-               </p>
-               <p className="font-bold mt-4">
-                  Please upload a single folder that contains subfolders with traits.
-                  <br /><br />
-                  Each subfolder should include all the variants of each trait type (e.g. all the hair trait images should be inside the Hair subfolder, etc)
-                  <br /><br />
-                  Need help? Download our Example assets folder or read our Guidelines
-               </p>
-            </div>
-            <div className="">
-               <p className="font-semibold text-center">
-                  Required Upload Folder structure
-               </p>
-               <img src="/create/folder-structure.svg" className="mt-6" alt="structure" />
-            </div>
-         </div>
-         <div id="folder" className="mx-[250px] mt-16 py-[140px] flex flex-col justify-center items-center border border-dashed border-gray-light-1 rounded-md" onClick={() => onFolderSelector()}>
-            <img src="/create/folder.svg" alt="folder" />
-            <p className="text-xl font-semibold mt-5">
-               Drop your folder here
+         <div className="flex flex-col items-center">
+            <p className="mt-10 text-base md:text-xl text-center">
+               Let’s first upload images that will serve as the traits for your new PFP collection
             </p>
-            <p className="mt-1">
-               or &nbsp;<span className="text-primary-light font-semibold">choose a folder</span>&nbsp; to upload
-            </p>
-            <input directory="" webkitdirectory="" type="file" id="folder-selector" className="hidden" onChange={onChangeFolder} />
+            <div className="w-full md:w-2/3 lg:w-1/2 mt-16">
+               <div className="mx-4 p-6 flex flex-col md:flex-row gap-10 bg-gray-dark-2 rounded-md">
+                  <div className="md:w-1/2">
+                     <p className="text-2xl md:text-3xl">
+                        Upload Folder with assets
+                     </p>
+                     <p className="text-sm md:text-base font-bold mt-4">
+                        Please upload a single folder that contains subfolders with traits.
+                        <br /><br />
+                        Each subfolder should include all the variants of each trait type (e.g. all the hair trait images should be inside the Hair subfolder, etc)
+                        <br /><br />
+                        Need help? Download our Example assets folder or read our Guidelines
+                     </p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                     <p className="text-sm md:text-base font-semibold text-center">
+                        Required Upload Folder structure
+                     </p>
+                     <img src="/create/folder-structure.svg" className="mt-6" alt="structure" />
+                  </div>
+               </div>
+               <div id="folder" className="mt-16 mx-4 py-[140px] flex flex-col justify-center items-center border border-dashed border-gray-light-1 rounded-md cursor-pointer" onClick={() => onFolderSelector()}>
+                  <img src="/create/folder.svg" alt="folder" />
+                  <p className="text-base md:text-xl font-semibold mt-5">
+                     Drop your folder here
+                  </p>
+                  <p className="text-sm md:text-base mt-1">
+                     or &nbsp;<span className="text-primary-light font-semibold">choose a folder</span>&nbsp; to upload
+                  </p>
+                  <input directory="" webkitdirectory="" type="file" id="folder-selector" className="hidden" onChange={onChangeFolder} />
+                  <p className="mt-4" id="preview">
+                  </p>
+                  {traits.slice(0, 10).map((trait, index) => (
+                     <>
+                        {trait.files.slice(0,5).map((file, index) => (
+                           <p className="text-xs">{file.folderName} : {file.name}</p>
 
-            <p className="mt-4" id="preview">
-
-            </p>
+                        ))}
+                     </>
+                  ))}
+               </div>
+            </div>
          </div>
       </div>
    )

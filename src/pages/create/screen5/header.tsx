@@ -13,7 +13,7 @@ const Header: React.FC<Props> = ({ onNext }) => {
       navigate("/studio")
    }
    return (
-      <div className="relative h-[124px] mx-8 flex justify-center items-center">
+      <div className="relative h-[124px] mx-4 md:mx-8 flex justify-center items-center">
          <div className="absolute left-0 w-4 h-4 cursor-pointer" onClick={() => onClose()}>
             <p className="text-2xl font-semibold">×</p>
          </div>

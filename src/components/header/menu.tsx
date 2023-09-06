@@ -10,7 +10,7 @@ const Menu: React.FC<Props> = ({ data }) => {
 
    return (
       <Link to={data.href} className={`flex items-center ${isActive ? "text-primary-light" : ""}`}>
-         <span className="font-bold">{data.label}</span>
+         <span className="font-bold whitespace-nowrap">{data.label}</span>
       </Link>
    )
 }

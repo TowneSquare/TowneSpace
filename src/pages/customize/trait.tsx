@@ -19,7 +19,7 @@ const Trait: React.FC<Props> = ({ }) => {
    return (
       <>
          {currentTrait ?
-            <div className="md:w-[30vw] md:px-4 lg:px-10 py-10 flex flex-col rounded-md bg-gray-dark-2">
+            <div className="md:w-[30vw] mx-4 md:mx-0 px-4 lg:px-10 py-10 flex flex-col rounded-md bg-gray-dark-2">
                <div className="w-48 md:w-52 lg:w-64 h-48 md:h-52 lg:h-64 bg-gray-dark-1 rounded-md">
                   <img src={currentTrait.uri} alt="uri" className="w-full h-full" />
                </div>

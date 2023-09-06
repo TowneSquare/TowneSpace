@@ -33,7 +33,7 @@ const Customize = () => {
    return (
       <div className="relative">
          <Header />
-         <div className="mt-10 flex flex-col md:flex-row justify-center items-center md:items-start gap-6">
+         <div className="my-10 flex flex-col md:flex-row justify-center items-center md:items-start gap-6">
             <Preview />
             {currentNft?.object_tokens && currentNft.object_tokens.length > 0 ?
                <>
