@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../../components/primary_button";
 import ButtonStatus from "../../../type/button_status";
 
 const Generate = () => {
+   const navigate = useNavigate();
    return (
       <div className="flex flex-col gap-8 items-center mt-12">
          <div className="w-1/3 p-4 flex gap-8 border border-gray-light-3 rounded-md">
@@ -15,7 +17,9 @@ const Generate = () => {
                      Deploy the contract to Aptos Tesnet or Mainnet.
                   </p>
                </div>
-               <PrimaryButton type={ButtonStatus.active} className="px-1 w-[200px]">
+               <PrimaryButton type={ButtonStatus.active} className="px-1 w-[200px]"
+                  onClick={() => navigate("/generate/step1")}
+               >
                   Deploy Contract
                </PrimaryButton>
             </div>

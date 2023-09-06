@@ -29,23 +29,23 @@ const TokenPreview = () => {
    }, [currentToken]);
 
    return (
-      <div className="min-w-[315px] bg-gray-dark-3">
-         <div className="flex justify-end">
-            <div className="w-6 h-6 cursor-pointer" onClick={() => onClose()}>
-               <p className="text-2xl font-semibold">×</p>
-            </div>
-         </div>
-         <div className="w-[252px]">
-            <canvas ref={canvasRef} width={252} height={252} />
+      <div className="min-w-[312px]">
+         <div className="px-8 py-4 bg-gray-dark-2 rounded-md">
+            <p className="text-center">
+               This is how your NFTs might look like on Marketplace
+            </p>
+            <canvas ref={canvasRef} width={252} height={252} className="mt-2" />
             <p className="">{tokenName}</p>
             <p className="">{currentToken?.name}</p>
-            <div className="flex flex-col gap-2 mt-2">
+            <div className="flex flex-wrap gap-2 mt-2">
                {currentToken?.files.map((file, index) => (
-                  <p className="">{file.folderName} {file.name}</p>
+                  <div className="w-[120px] p-2 border border-gray-light-3 rounded-md">
+                     <p className="text-sm font-semibold">{file.folderName}</p>
+                     <p className="text-lg font-semibold">{file.name}</p>
+                  </div>
                ))}
             </div>
          </div>
-
       </div>
    )
 };

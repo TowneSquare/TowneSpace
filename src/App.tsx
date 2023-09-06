@@ -10,6 +10,7 @@ import Deploy from './pages/deploy';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import { fetchNfts, fetchCollections } from './state/tokens';
 import { useEffect } from 'react';
+import Generate from './pages/generate';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ function App() {
         <Route path="/customize/:address" element={<Customize />} />
         <Route path="/create/*" element={<Create />} />
         <Route path="/deploy/*" element={<Deploy />} />
+        <Route path="/generate/*" element={<Generate />} />
       </Routes>
     </div>
   );
