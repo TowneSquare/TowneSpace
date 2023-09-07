@@ -16,7 +16,7 @@ const Step2 = () => {
                <p className="text-sm md:text-base font-semibold text-primary-light">Edit</p>
             </Link>
          </div>
-         <div className="mt-8 px-4 md:px-6 flex flex-col md: gap-4">
+         <div className="mt-8 px-4 md:px-6 flex flex-col md:flex-row gap-4">
             <ChooseTrait />
             <Tokens />
             <TokenPreview />
