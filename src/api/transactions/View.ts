@@ -1,6 +1,6 @@
 import { AptosClient, HexString, MaybeHexString, Types } from "aptos";
-import { NODE_URL, STUDIO_ADDRESS } from "../../../constants";
-import { EnsureHexStringarray } from "../helpers";
+import { NODE_URL, STUDIO_ADDRESS } from "../../constants";
+import { EnsureHexStringarray } from "../Helper";
 
 export async function get_collection(
     collection_object: MaybeHexString
