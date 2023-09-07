@@ -9,14 +9,14 @@ const Step2 = () => {
       <div>
          <Header />
          <div className="flex gap-7 justify-center items-center">
-            <p className="text-2xl font-semibold">
+            <p className="text-xl md:text-2xl font-semibold">
                Collection preview
             </p>
             <Link to="/deploy/preview">
-               <p className="font-semibold text-primary-light">Edit</p>
+               <p className="text-sm md:text-base font-semibold text-primary-light">Edit</p>
             </Link>
          </div>
-         <div className="mt-8 px-6 flex gap-4">
+         <div className="mt-8 px-4 md:px-6 flex flex-col md: gap-4">
             <ChooseTrait />
             <Tokens />
             <TokenPreview />

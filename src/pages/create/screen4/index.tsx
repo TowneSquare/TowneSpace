@@ -35,7 +35,7 @@ const Trait = ({ data }: { data: FolderType }) => {
          </div>
          <div className="mt-4 flex flex-wrap gap-4">
             {data.files.map((file, index) => (
-               <div className="w-32 rounded-md">
+               <div className="w-32 rounded-md" key={index}>
                   <div className="h-32 bg-gray-light-3 rounded-md">
                      <img src={file.imageUrl} alt="image" className="w-32 h-32" />
                   </div>

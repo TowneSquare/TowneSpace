@@ -1,12 +1,13 @@
 import { useEffect, useState, lazy, Suspense } from "react";
-import { useAppSelector } from "../../../../state/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../state/hooks";
 import { FileType, TokenType } from "../../../../type/folder_type";
+import { updateTokens } from "../../../../state/deploy";
 
 const Tokens = () => {
    const traits = useAppSelector(state => state.createState.traits);
    const tokenName = useAppSelector(state => state.deployState.tokenName);
-
-   const [tokens, setTokens] = useState<TokenType[]>([]);
+   const tokens = useAppSelector(state => state.deployState.tokens);
+   const dispatch = useAppDispatch();
 
    useEffect(() => {
       const tokens: TokenType[] = [];
@@ -22,7 +23,7 @@ const Tokens = () => {
          }
       }
       generateTokens([], 0);
-      setTokens(tokens);
+      dispatch(updateTokens(tokens));
    }, [traits])
 
    return (
@@ -31,7 +32,7 @@ const Tokens = () => {
             const Token = lazy(() => import("./token"))
 
             return (
-               <Suspense fallback={<div>LOADING</div>}>
+               <Suspense fallback={<div></div>} key={index}>
                   <Token token={token} index={index} />
                </Suspense>
             )

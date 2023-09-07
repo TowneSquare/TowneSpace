@@ -58,7 +58,7 @@ const Trait: React.FC<Props> = ({ }) => {
                </div>
             </div>
             :
-            <div className="w-full md:w-[30vw] h-[100vh] flex flex-col justify-center items-center rounded-md bg-gray-dark-2">
+            <div className="w-[90vw] md:w-[30vw] px-8 h-[100vh] flex flex-col justify-center items-center rounded-md bg-gray-dark-2">
                <img src="/customize/non-trait.svg" alt="trait" />
                <p className="font-semibold text-center mt-4">
                   Select a Trait to replace it or<br />

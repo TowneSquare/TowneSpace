@@ -29,19 +29,21 @@ const TokenPreview = () => {
    }, [currentToken]);
 
    return (
-      <div className="min-w-[315px] bg-gray-dark-3">
+      <div className="min-w-[260px] md:min-w-[315px] bg-gray-dark-3">
          <div className="flex justify-end">
             <div className="w-6 h-6 cursor-pointer" onClick={() => onClose()}>
                <p className="text-2xl font-semibold">×</p>
             </div>
          </div>
-         <div className="w-[252px]">
-            <canvas ref={canvasRef} width={252} height={252} />
-            <p className="">{tokenName}</p>
-            <p className="">{currentToken?.name}</p>
+         <div className="">
+            <canvas ref={canvasRef} width={252} height={252}
+               className="w-[210px] md:w-[252px] h-[210px] md:h-[252px]"
+            />
+            <p className="text-sm md:text-base">{tokenName}</p>
+            <p className="text-sm md:text-base">{currentToken?.name}</p>
             <div className="flex flex-col gap-2 mt-2">
                {currentToken?.files.map((file, index) => (
-                  <p className="">{file.folderName} {file.name}</p>
+                  <p className="text-sm md:text-base" key={index}>{file.folderName} {file.name}</p>
                ))}
             </div>
          </div>
