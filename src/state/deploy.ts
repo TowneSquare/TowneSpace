@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FileType, TokenType } from '../type/folder_type';
+import FolderType, { FileType, TokenType } from '../type/folder_type';
 
 interface deployStates {
    orderBy: boolean;
    collectionCount: number;
    filter: string;
    tokenName: string;
-   tokens: FileType[][];
+   tokens: TokenType[];
    currentToken: TokenType | undefined;
    collectionName: string;
    collectionDescription: string;
@@ -53,7 +53,7 @@ export const deploySlice = createSlice({
       updateTokenName: (state, action: PayloadAction<string>) => {
          state.tokenName = action.payload;
       },
-      updateTokens: (state, action: PayloadAction<FileType[][]>) => {
+      updateTokens: (state, action: PayloadAction<TokenType[]>) => {
          state.tokens = action.payload;
       },
       updateCurrentToken: (state, action: PayloadAction<TokenType>) => {

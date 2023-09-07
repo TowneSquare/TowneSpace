@@ -17,7 +17,7 @@ const Header = () => {
             </div>
             <div className="">
                <Link to="">
-                  <p className="text-primary-light font-semibold">
+                  <p className="text-sm md:text-base text-primary-light font-semibold">
                      Help Center
                   </p>
                </Link>

@@ -8,27 +8,27 @@ const Step3 = () => {
    return (
       <div className="pb-10">
          <Header />
-         <div className="flex flex-col items-center">
-            <p className="text-2xl font-semibold mt-2">
+         <div className="mx-4 flex flex-col items-center">
+            <p className="textxl md:text-2xl font-semibold mt-2">
                Deploy assets
             </p>
-            <p className="mt-1 text-center">
+            <p className="mt-1 text-sm md:text-base text-center">
                Choose the network where would you like to deploy the smart contract.<br />
                We highly recommend that you first deploy smart contracts on Testnet
             </p>
-            <div className="w-1/2 flex flex-col items-center gap-4 mt-9">
+            <div className="md:w-1/2 flex flex-col items-center gap-4 mt-9">
                {Options.map((data, index) => {
                   const isActive = option == index;
                   const cn = isActive ? "border border-primary-dark bg-primary-light/30" : "border border-gray-light-3";
                   const src = isActive ? "/generate/radio-checked.svg" : "/generate/radio.svg";
 
                   return (
-                     <div className={` ${cn} p-2 w-[430px] flex items-center gap-4 rounded-md cursor-pointer`} key={index}
+                     <div className={` ${cn} p-2 md:w-[430px] flex items-center gap-4 rounded-md cursor-pointer`} key={index}
                         onClick={() => setOption(index)}
                      >
                         <img src={src} alt="raiod" />
                         <div>
-                           <p className="text-xl font-semibold">{data.title}</p>
+                           <p className="text-lg md:text-xl font-semibold">{data.title}</p>
                            <p className="text-sm">{data.content}</p>
                         </div>
                      </div>

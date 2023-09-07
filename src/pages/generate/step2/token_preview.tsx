@@ -31,17 +31,17 @@ const TokenPreview = () => {
    return (
       <div className="min-w-[312px]">
          <div className="px-8 py-4 bg-gray-dark-2 rounded-md">
-            <p className="text-center">
+            <p className="text-sm md:text-base text-center">
                This is how your NFTs might look like on Marketplace
             </p>
             <canvas ref={canvasRef} width={252} height={252} className="mt-2" />
-            <p className="">{tokenName}</p>
-            <p className="">{currentToken?.name}</p>
+            <p className="text-sm md:text-base ">{tokenName}</p>
+            <p className="text-sm md:text-base ">{currentToken?.name}</p>
             <div className="flex flex-wrap gap-2 mt-2">
                {currentToken?.files.map((file, index) => (
                   <div className="w-[120px] p-2 border border-gray-light-3 rounded-md">
                      <p className="text-sm font-semibold">{file.folderName}</p>
-                     <p className="text-lg font-semibold">{file.name}</p>
+                     <p className="text-sm md:text-lg font-semibold">{file.name}</p>
                   </div>
                ))}
             </div>

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "./header"
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { updatePrimaryTrait } from "../../../state/create";
+import { Fragment } from "react";
 
 const Screen6 = () => {
    const navigate = useNavigate();
@@ -50,7 +51,7 @@ const Screen6 = () => {
                   {traits.map((trait, index) => {
                      const isActive = trait.name == primaryTrait?.name;
                      return (
-                        <>
+                        <Fragment key={index}>
                            {!isActive &&
                               <div className="w-32 rounded-md" key={index}>
                                  <div className="h-32 bg-gray-light-3 rounded-md">
@@ -61,7 +62,7 @@ const Screen6 = () => {
                                  </p>
                               </div>
                            }
-                        </>
+                        </Fragment>
                      )
                   })}
                </div>

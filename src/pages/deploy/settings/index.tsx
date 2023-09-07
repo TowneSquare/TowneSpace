@@ -6,15 +6,15 @@ import { useAppDispatch } from "../../../state/hooks";
 const Settings = () => {
    const dispatch = useAppDispatch();
    return (
-      <div className="px-52 mt-10 flex justify-center">
-         <div className="">
-            <p className="text-3xl">Settings</p>
-            <p className="mt-1 text-xl">Set how often or rarely each trait will appear in the collection</p>
-            <p className="mt-14 text-2xl">General</p>
-            <div className="mt-12 mb-10 flex justify-center gap-10  border-b-gray-light-1">
-               <div className="w-[450px]">
+      <div className="mt-10 flex justify-center">
+         <div className="mx-4">
+            <p className="text-2xl md:text-3xl">Settings</p>
+            <p className="mt-1 text-base md:text-xl">Set how often or rarely each trait will appear in the collection</p>
+            <p className="mt-14 text-xl md:text-2xl">General</p>
+            <div className="mt-12 mb-10 flex flex-col md:flex-row justify-center gap-10 border-b-gray-light-1">
+               <div className="md:w-[450px]">
                   <ToolTip label="Collection Name">
-                     <p>Collection Name</p>
+                     <p className="text-sm md:text-base">Collection Name</p>
                   </ToolTip>
                   <div className="min-w-[48px] h-11 px-4 py-2 border border-white rounded-full mt-2">
                      <input
@@ -24,7 +24,7 @@ const Settings = () => {
                      />
                   </div>
                   <ToolTip label="Collection Description" className="mt-8">
-                     <p>Collection Description</p>
+                     <p className="text-sm md:text-base">Collection Description</p>
                   </ToolTip>
                   <div className="min-w-[48px] h-[172px] px-4 py-2 border border-white rounded-lg mt-2">
                      <textarea
