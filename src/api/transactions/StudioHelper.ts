@@ -1,6 +1,7 @@
 import { AptosAccount, AptosClient, HexString, MaybeHexString, OptionalTransactionArgs, Provider, TransactionBuilderRemoteABI } from "aptos";
 import { EntryFunctionPayload, TransactionPayload } from "aptos/src/generated";
 import { EnsureHexStringarray } from "../Helper";
+import { COLLECTIONS_QUERY, Collection, CollectionsQueryResponse, CollectionsResponse } from "../../type/indexer";
 
 export class Studio {
     readonly provider: Provider;
@@ -265,11 +266,42 @@ export class Studio {
      * @param accountAddress
      */
 
-    async getAllCreatedCollections(
+    async getAllCollections(
         accountAddress: MaybeHexString
-    ): Promise<CreatedCollectionsResponse> {
+    ): Promise<CollectionsResponse> {
+        const variables = {
+            accountAddress: HexString.ensure(accountAddress).hex()
+        };
+        let indexerResponse = await this.queryIndexer<CollectionsQueryResponse>(COLLECTIONS_QUERY, variables);
 
+        let collections: Array<Collection> = [];
+        for (const collection of indexerResponse.studio_collections) {
+            collections.push(
+                {
+                    creator_address: collection.creator_address,
+                    address: collection.address,
+                    name: collection.name,
+                    description: collection.description,
+                    uri: collection.uri,
+                    total_supply: collection.total_supply
+                }
+            )
+        }
 
+        return collections
+    }
+
+    // TODO: add more indexer queries
+
+    // Helpers
+
+    async queryIndexer<T>(query: string, variables?: {}): Promise<T> {
+        const graphqlQuery = {
+            query,
+            variables: variables
+        };
+        return this.provider.queryIndexer(graphqlQuery)
+    }
 
     async view(module: string, func: string, typeArguments: string[], args: any[], ledgerVersion?: bigint) {
         return await this.provider.view(
