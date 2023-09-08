@@ -6,7 +6,7 @@ import Collections from './pages/collections';
 import Customize from './pages/customize';
 import Create from './pages/create';
 import Deploy from './pages/deploy';
-
+import Migrate from './pages/migrate';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import { fetchNfts, fetchCollections } from './state/tokens';
 import { useEffect } from 'react';
@@ -37,6 +37,7 @@ function App() {
         <Route path="/create/*" element={<Create />} />
         <Route path="/deploy/*" element={<Deploy />} />
         <Route path="/generate/*" element={<Generate />} />
+        <Route path="/migrate/*" element={<Migrate />} />
       </Routes>
     </div>
   );
