@@ -13,7 +13,7 @@ const Deploy = () => {
          <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/preview" element={<Preview />} />
-            <Route path="/manage" element={<Manage />} />
+            <Route path="/manage/*" element={<Manage />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/generate" element={<Generate />} />
          </Routes>
