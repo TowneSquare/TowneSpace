@@ -310,7 +310,7 @@ export class Studio {
                     address: token.address,
                     name: token.name,
                     description: token.description,
-                    uri: token.uri,
+                    uri: token.uri
                 }
             )
         }
