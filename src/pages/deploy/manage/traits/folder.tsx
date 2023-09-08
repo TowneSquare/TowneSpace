@@ -5,7 +5,7 @@ interface Props {
 }
 const Folder: React.FC<Props> = ({ data }) => {
    return (
-      <div className="mx-4 px-6 py-4 bg-gray-dark-1 rounded-md">
+      <div className="px-6 py-4 bg-gray-dark-1 rounded-md">
          <div className="flex items-center justify-between">
             <p className="text-base md:text-xl font-semibold">{data.name}</p>
             <p className="text-sm md:text-base">{data.files.length} Traits</p>
