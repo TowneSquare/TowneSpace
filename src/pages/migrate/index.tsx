@@ -1,6 +1,6 @@
 import Header from "../../components/header";
 
-const Collections  = () => {
+const Migrate  = () => {
     return (
        <div className="">
           <Header />
@@ -8,4 +8,4 @@ const Collections  = () => {
     )
  }
  
- export default Collections;
+ export default Migrate;
