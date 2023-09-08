@@ -1,7 +1,7 @@
 /* used aptos-tontine as a reference*/
 import { HexString, MaybeHexString } from "aptos";
 import { STUDIO_ADDRESS } from "../../constants";
-import { EnsureHexStringarray, submitTransaction } from "./helpers";
+import { EnsureHexStringarray, submitTransaction } from "../Helper";
 
 export async function createCollection(
     signAndSubmitTransaction: (txn: any) => Promise<any>,
