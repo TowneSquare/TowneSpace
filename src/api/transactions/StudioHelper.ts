@@ -1,7 +1,7 @@
 import { AptosAccount, AptosClient, HexString, MaybeHexString, OptionalTransactionArgs, Provider, TransactionBuilderRemoteABI } from "aptos";
 import { EntryFunctionPayload, TransactionPayload } from "aptos/src/generated";
 import { EnsureHexStringarray } from "../Helper";
-import { COLLECTIONS_QUERY, Collection, CollectionsQueryResponse, CollectionsResponse } from "../../type/indexer";
+import { COLLECTIONS_QUERY, Collection, CollectionsQueryResponse, CollectionsResponse, TOKENS_QUERY, Token, TokensQueryResponse, TokensResponse } from "../../type/indexer";
 
 export class Studio {
     readonly provider: Provider;
@@ -265,7 +265,6 @@ export class Studio {
      * Gets all collections created by a given account
      * @param accountAddress
      */
-
     async getAllCollections(
         accountAddress: MaybeHexString
     ): Promise<CollectionsResponse> {
@@ -291,7 +290,33 @@ export class Studio {
         return collections
     }
 
-    // TODO: add more indexer queries
+    /**
+     * Gets all token owned by a given account
+     * @param accountAddress
+     */
+    async getAllTokens(
+        accountAddress: MaybeHexString
+    ): Promise<TokensResponse> {
+        const variables = {
+            accountAddress: HexString.ensure(accountAddress).hex()
+        };
+        let indexerResponse = await this.queryIndexer<TokensQueryResponse>(TOKENS_QUERY, variables);
+
+        let tokens: Array<Token> = [];
+        for (const token of indexerResponse.studio_tokens) {
+            tokens.push(
+                {
+                    owner_address: token.owner_address,
+                    address: token.address,
+                    name: token.name,
+                    description: token.description,
+                    uri: token.uri,
+                }
+            )
+        }
+
+        return tokens
+    }
 
     // Helpers
 
