@@ -4,7 +4,7 @@ import MenuType from "../../../type/menu_type";
 
 const Tabs = () => {
    return (
-      <div className="relative mt-9 flex w-full justify-center items-center">
+      <div className="relative mt-9 flex justify-left items-center">
          <div className="flex gap-12">
             {tabs.map((tab, index) => (
                <Tab data={tab} key={index} />
