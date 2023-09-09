@@ -5,6 +5,7 @@ import Title from "./title";
 import All from "./All";
 import V1 from "./V1";
 import V2 from "./V2";
+import Verified from "./Verified";
 
 const Collections  = () => {
     return (
@@ -13,6 +14,7 @@ const Collections  = () => {
           <div className="pt-9 px-2 md:px-12">
             <div className="flex flex-col md:flex-row gap-4 md:gap-0 md:justify-between">
                <Title />
+               <Verified />
             </div>
             <Tabs />
          </div>
