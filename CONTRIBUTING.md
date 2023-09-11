@@ -1,4 +1,4 @@
-# Contributing to TowneSquare Marketplace
+# Contributing to TowneSpace
 
 We strive to keep contributing to the TowneSquare ecosystem easy and transparent. Let us know if we are missing anything!
 
@@ -8,8 +8,8 @@ A bug report is a _demonstrable problem_ that is caused by the code in the repos
 
 Guidelines for bug reports:
 
-1. Use the [GitHub Issue Search](https://github.com/TowneSquare/marketplace/issues) and check if the issue has already been reported.
-2. Check if the issue has been fixed. Try to repoduce it using the latest [Main](https://github.com/TowneSquare/marketplace/tree/main) or [Dev](https://github.com/TowneSquare/marketplace/tree/dev) branch in the repository.
+1. Use the [GitHub Issue Search](https://github.com/TowneSquare/TowneSpace/issues) and check if the issue has already been reported.
+2. Check if the issue has been fixed. Try to repoduce it using the latest [Main](https://github.com/TowneSquare/TowneSpace/tree/main) or [Dev](https://github.com/TowneSquare/TowneSpace/tree/dev) branch in the repository.
 3. Isolate the problem - create a test case and live example.
 4. Be as detailed and thorough as possible in your report. This should include specific information regarding the environment, operating system and version, browser and version, along with steps to repoduce the issue.
 

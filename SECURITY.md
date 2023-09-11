@@ -1,6 +1,6 @@
 ### Reporting Security Issues
 
-If you believe you have found a security vulnerability in TowneSquare Marketplace, we encourage you to let us know right away. We will investigate all legitimate reports and do our best to quickly fix the problem.
+If you believe you have found a security vulnerability in TowneSpace, we encourage you to let us know right away. We will investigate all legitimate reports and do our best to quickly fix the problem.
 
 To report a problem shoot me an email at j.hughes@townesquare.xyz directly.
 
