@@ -7,6 +7,8 @@ export interface FileType{
    folderName: string;
    file: File;
    imageUrl: string;
+   rarities: number;
+   isIncluded: boolean;
 }
 export default interface FolderType {
    name: string;
