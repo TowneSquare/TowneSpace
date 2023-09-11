@@ -30,6 +30,12 @@ export const createflowSlice = createSlice({
       },
       updatePrimaryTrait: (state, action: PayloadAction<FolderType>) => {
          state.primaryTrait = action.payload;
+      },
+      updateRarities: (state, action: PayloadAction<{iFolder: number, iFile: number, value: number}>) => {
+         state.traits[action.payload.iFolder].files[action.payload.iFile].rarities = action.payload.value;
+      },
+      updateIsIncluded: (state, action: PayloadAction<{iFolder: number, iFile: number, value: boolean}>) => {
+         state.traits[action.payload.iFolder].files[action.payload.iFile].isIncluded = action.payload.value;
       }
    }
 });
@@ -38,7 +44,9 @@ export const {
    updateCollectionName,
    updateTotalMaxSupply,
    updateTraits,
-   updatePrimaryTrait
+   updatePrimaryTrait,
+   updateRarities,
+   updateIsIncluded
 } = createflowSlice.actions;
 export default createflowSlice.reducer;
 

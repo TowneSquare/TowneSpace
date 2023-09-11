@@ -13,7 +13,7 @@ const Rarities = () => {
          </div>
          <div className="mt-10 flex flex-col gap-6">
             {traits.map((folder, index) => (
-               <Folder data={folder} key={index} />
+               <Folder data={folder} iFolder={index} key={index} />
             ))}
          </div>
       </div>
