@@ -27,7 +27,7 @@ const Tokens = () => {
 
    return (
       <div className="flex flex-wrap gap-4">
-         {tokens.map((token, index) => {
+         {tokens.slice(0, 100).map((token, index) => {
             const Token = lazy(() => import("./token"))
             return (
                <Suspense fallback={<div></div>} key={index}>
