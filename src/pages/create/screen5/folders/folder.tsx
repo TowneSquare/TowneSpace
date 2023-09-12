@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from './itemTypes';
 import FolderType from '../../../../type/folder_type';
-import { useAppDispatch, useAppSelector } from '../../../../state/hooks';
 
 export interface Props {
   id: any
@@ -20,11 +19,6 @@ interface DragItem {
 }
 
 export const Folder: FC<Props> = ({ id, data, index, moveToken }) => {
-  const currentNft = useAppSelector(state => state.tokensState.currentNft)
-  const currentTrait = useAppSelector(state => state.tokensState.currentTrait)
-  const dispatch = useAppDispatch();
-
-
   const ref = useRef<HTMLDivElement>(null)
   const [{ handlerId }, drop] = useDrop<
     DragItem,
@@ -81,7 +75,7 @@ export const Folder: FC<Props> = ({ id, data, index, moveToken }) => {
     <div
       ref={ref}
       data-handler-id={handlerId}
-      className="h-10 md:h-14 px-2 md:pr-16 py-1 md:py-2 min-w-max flex items-center gap-2 md:gap-4 bg-gray-dark-2 rounded-md"
+      className="h-10 md:h-14 px-2 md:pr-16 py-1 md:py-2 min-w-max flex items-center gap-2 md:gap-4 bg-gray-dark-2 hover:bg-gray-dark-1 rounded-md cursor-pointer"
     >
       <img src="/create/indicator.svg" alt="indicator" />
       <p className="text-sm md:text-base font-semibold">
