@@ -40,14 +40,14 @@ const Screen6 = () => {
             {primaryTrait ?
                <>
                   <div className="p-4 w-[340px] rounded-md">
-                     <p className="text-sm md:text-base">{primaryTrait?.name} will be the Primary NFT</p>
+                     <p className="text-sm md:text-base">{primaryTrait?.name} will be the base trait</p>
                      <div className="w-340px bg-gray-light-3 rounded-md">
                         <img src={primaryTrait?.files[0].imageUrl} alt="img" className="mt-4 w-full" />
                      </div>
                      <p className="mt-4 text-sm md:text-base text-center">{primaryTrait?.name}</p>
                   </div>
                   <div className="p-4">
-                     <p className="text-sm md:text-base">Other traits will be placed inside the Primary NFT</p>
+                     <p className="text-sm md:text-base">These traits will be placed inside the base trait</p>
                      <div className="flex flex-wrap gap-4 mt-4">
                         {traits.map((trait, index) => {
                            const isActive = trait.name == primaryTrait?.name;
