@@ -1,9 +1,12 @@
-import { updateFilter, updateTokenName } from "../../../state/deploy";
+import { updateCollectionCount, updateFilter, updateTokenName } from "../../../state/deploy";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 
 const Navbar = () => {
    const dispatch = useAppDispatch();
+
+   const tokenName = useAppSelector(state => state.deployState.tokenName);
    const tokens = useAppSelector(state => state.deployState.tokens);
+
    return (
       <div className="mt-8 px-4 flex flex-col md:flex-row md:items-end gap-4">
          <div className="flex items-end gap-4">
@@ -35,11 +38,12 @@ const Navbar = () => {
                />
             </div>
             <div className="">
-               <p className="text-sm md:text-base">Token Name</p>
+               <p className="text-sm md:text-base">PFP name</p>
                <div className="min-w-[48px] h-11 px-4 py-2 border border-white rounded-full mt-1">
                   <input
-                     className="w-full placeholder-gray-light-3 focus-visible:outline-0" placeholder="Slothian"
+                     className="w-full placeholder-gray-light-3 focus-visible:outline-0" placeholder="Insert name"
                      style={{ background: "none" }}
+                     value={tokenName}
                      onChange={(e) => dispatch(updateTokenName(e.target.value))}
                   />
                </div>
