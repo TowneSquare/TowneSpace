@@ -20,7 +20,7 @@ const Navbar = () => {
                </div>
             </div>
          </div>
-         <div className="flex items-end gap-4">
+         <div className="w-full flex items-end gap-4">
             <div className="min-w-[64px] h-11 flex justify-center items-center border border-primary-light rounded-full cursor-pointer">
                <img src="/deploy/refresh.svg" alt="refresh" />
             </div>
