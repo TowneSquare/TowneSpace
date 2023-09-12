@@ -6,7 +6,7 @@ import Folder from "./folder";
 const Traits = () => {
    const traits = useAppSelector(state => state.createState.traits);
    return (
-      <div className="">
+      <div className="min-w-[960px] max-w-[960px]">
          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
                <p className="text-2xl md:text-3xl">Manage traits</p>
