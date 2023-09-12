@@ -4,7 +4,7 @@ import Folder from "./folder";
 const Rarities = () => {
    const traits = useAppSelector(state => state.createState.traits);
    return (
-      <div className="">
+      <div className="min-w-[960px] max-w-[960px]">
          <div className="">
             <p className="text-2xl md:text-3xl">Rarities</p>
             <p className="text-base md:text-xl">

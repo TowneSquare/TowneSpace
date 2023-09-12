@@ -26,7 +26,7 @@ const Screen4 = () => {
 
 const Trait = ({ data }: { data: FolderType }) => {
    return (
-      <div className="px-4 md:px-20 lg:px-32">
+      <div className="mx-4 md:mx-20 lg:mx-32 p-4 bg-gray-dark-2 rounded-md">
          <div className="w-full flex justify-between">
             <p className="text-base md:text-xl font-semibold">
                {data.name}
