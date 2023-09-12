@@ -14,7 +14,6 @@ const Screen5 = () => {
 
    const onNext = () => {
       dispatch(updateTraits(folders));
-      dispatch(updatePrimaryTrait(folders[0]))
       navigate("/create/step6");
    }
    const canvasRef = useRef<any>(null);
