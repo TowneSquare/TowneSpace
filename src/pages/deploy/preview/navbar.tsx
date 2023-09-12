@@ -1,8 +1,9 @@
-import { updateCollectionCount, updateFilter, updateTokenName } from "../../../state/deploy";
-import { useAppDispatch } from "../../../state/hooks";
+import { updateFilter, updateTokenName } from "../../../state/deploy";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 
 const Navbar = () => {
    const dispatch = useAppDispatch();
+   const tokens = useAppSelector(state => state.deployState.tokens);
    return (
       <div className="mt-8 px-4 flex flex-col md:flex-row md:items-end gap-4">
          <div className="flex items-end gap-4">
@@ -15,7 +16,8 @@ const Navbar = () => {
                   <input
                      className="w-full placeholder-gray-light-3 focus-visible:outline-0" placeholder="10,000"
                      style={{ background: "none" }}
-                     onChange={(e) => dispatch(updateCollectionCount(parseInt(e.target.value)))}
+                     value={tokens.length}
+                     disabled
                   />
                </div>
             </div>
