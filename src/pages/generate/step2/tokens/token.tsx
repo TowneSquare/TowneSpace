@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { TokenType } from "../../../../type/folder_type"
-import { useAppDispatch } from "../../../../state/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../state/hooks";
 import { updateCurrentToken } from "../../../../state/deploy";
 import { sleep } from "../../../../util";
 
@@ -12,6 +12,7 @@ interface Props {
 const Token: React.FC<Props> = ({ token, index }) => {
    const dispatch = useAppDispatch();
    const canvasRef = useRef<any>(null);
+   const tokenName = useAppSelector(state => state.deployState.tokenName);
 
    useEffect(() => {
       const drawImage = async () => {
@@ -42,7 +43,7 @@ const Token: React.FC<Props> = ({ token, index }) => {
             <canvas ref={canvasRef} width={178} height={178} className="w-[140px] md:w-[178px] h-[140px] md:h-[178px]" />
          </div>
          <p className="mt-2 px-2 md:px-4 text-sm md:text-base">
-            {token.name}
+            {`${tokenName} ${token.name}`}
          </p>
       </div>
    )

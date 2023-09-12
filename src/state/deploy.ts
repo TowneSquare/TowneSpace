@@ -56,7 +56,7 @@ export const deploySlice = createSlice({
       updateTokens: (state, action: PayloadAction<TokenType[]>) => {
          state.tokens = action.payload;
       },
-      updateCurrentToken: (state, action: PayloadAction<TokenType>) => {
+      updateCurrentToken: (state, action: PayloadAction<TokenType | undefined>) => {
          state.currentToken = action.payload;
       },
       updateCollectionName: (state, action: PayloadAction<string>) => {

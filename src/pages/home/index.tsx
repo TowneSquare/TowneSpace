@@ -2,9 +2,16 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../components/header";
 import { useAppDispatch } from "../../state/hooks";
 import { toggleWalletPanel } from "../../state/dialog";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 const Home = () => {
    const dispatch = useAppDispatch();
+   const navigate = useNavigate();
+   const { connected } = useWallet();
+
+   if(connected)
+      navigate("/studio");
+
    return (
       <div className="w-full h-screen !bg-cover" style={{ background: "url('/home/background.webp')" }} >
          <Header />
