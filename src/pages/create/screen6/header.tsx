@@ -4,7 +4,7 @@ import PrimaryButton from "../../../components/primary_button";
 import ButtonStatus from "../../../type/button_status";
 
 interface Props {
-   
+
 }
 const Header: React.FC<Props> = ({ }) => {
    const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Header: React.FC<Props> = ({ }) => {
          </div>
          <div>
             <p className="text-xl font-bold text-center">
-               Select the Primary NFT
+               Select the base trait
             </p>
             <p className="text-center">
                Set up - Step 4 of  4
