@@ -34,10 +34,11 @@ const TokenPreview = () => {
    }, [currentToken]);
 
    return (
-      <div>
-         <div className="min-w-[260px] md:min-w-[315px] p-6 bg-gray-dark-2 rounded-md">
-            {currentToken && (
-               <>
+      <>
+         {currentToken && (
+            <div>
+               <div className="min-w-[260px] md:min-w-[315px] p-6 bg-gray-dark-2 rounded-md">
+
                   <div className="flex justify-end">
                      <div className="w-6 h-6 cursor-pointer" onClick={() => onClose()}>
                         <p className="text-2xl font-semibold">×</p>
@@ -58,10 +59,10 @@ const TokenPreview = () => {
                         Regenerate
                      </SecondaryButton>
                   </div>
-               </>
-            )}
-         </div>
-      </div>
+               </div>
+            </div >
+         )}
+      </>
    )
 };
 
