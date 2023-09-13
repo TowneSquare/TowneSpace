@@ -39,14 +39,14 @@ const Screen6 = () => {
             </div>
             {primaryTrait ?
                <>
-                  <div className="p-4 w-[340px] rounded-md">
+                  <div className="p-4 w-[300px] rounded-md">
                      <p className="text-sm md:text-base">{primaryTrait?.name} will be the base trait</p>
-                     <div className="w-340px bg-gray-light-3 rounded-md">
+                     <div className="bg-gray-light-3 rounded-md">
                         <img src={primaryTrait?.files[0].imageUrl} alt="img" className="mt-4 w-full" />
                      </div>
                      <p className="mt-4 text-sm md:text-base text-center">{primaryTrait?.name}</p>
                   </div>
-                  <div className="p-4">
+                  <div className="p-4 w-[328px]">
                      <p className="text-sm md:text-base">These traits will be placed inside the base trait</p>
                      <div className="flex flex-wrap gap-4 mt-4">
                         {traits.map((trait, index) => {
@@ -76,7 +76,7 @@ const Screen6 = () => {
                      <p className="">Select the base trait.</p>
                      <p className="text-center text-gray-light-1">When you select the base trait it will show here</p>
                   </div>
-                  <div className="w-[300px] h-[450px] p-4 flex flex-col gap-4 justify-center items-center border border-dashed border-gray-light-1 rounded-md">
+                  <div className="w-[328px] h-[450px] p-4 flex flex-col gap-4 justify-center items-center border border-dashed border-gray-light-1 rounded-md">
                      <p className="text-center text-gray-light-1">Other traits will be placed inside the base trait</p>
                   </div>
                </>

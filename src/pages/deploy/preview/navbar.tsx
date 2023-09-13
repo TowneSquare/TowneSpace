@@ -1,4 +1,4 @@
-import { updateCollectionCount, updateFilter, updateTokenName } from "../../../state/deploy";
+import { updateFilter, updateTokenName } from "../../../state/deploy";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 
 const Navbar = () => {
