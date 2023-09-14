@@ -19,7 +19,7 @@ const Header: React.FC<Props> = ({ onNext }) => {
          </div>
          <div>
             <p className="text-xl font-bold text-center">
-               Preview assets
+               Set the traits order
             </p>
             <p className="text-center">
                Set up - Step 3 of  4
