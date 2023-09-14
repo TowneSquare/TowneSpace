@@ -4,6 +4,7 @@ import FolderType, { FileType } from "../../../type/folder_type";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { updateTraits } from "../../../state/create";
 import { toast } from "react-toastify";
+import { isSupportFile } from "../../../util";
 
 const Screen3 = () => {
    const dispatch = useAppDispatch();
@@ -83,20 +84,25 @@ const Screen3 = () => {
       const traits: FolderType[] = [];
       files.forEach((file: File) => {
          const paths = file.webkitRelativePath.split("/");
-         if (paths.length == 3) {
-            const imageUrl = URL.createObjectURL(file);
-            const obj: FileType = { name: paths[2].split(".")[0], folderName: paths[1], file, imageUrl };
 
-            let isNew = true;
-            for (let i = 0; i < traits.length; i++) {
-               if (traits[i].name == paths[1]) {
-                  traits[i].files.push(obj)
-                  isNew = false;
-                  break;
+         if (paths.length == 3) {
+            const fileName = paths[2].split(".");
+            console.log(fileName.length, fileName, isSupportFile(fileName[fileName.length - 1]));
+            if (fileName.length >= 2 && isSupportFile(fileName[fileName.length - 1])) {
+               const imageUrl = URL.createObjectURL(file);
+               const obj: FileType = { name: paths[2].split(".")[0], folderName: paths[1], file, imageUrl, rarities: 50, isIncluded: true };
+
+               let isNew = true;
+               for (let i = 0; i < traits.length; i++) {
+                  if (traits[i].name == paths[1]) {
+                     traits[i].files.push(obj)
+                     isNew = false;
+                     break;
+                  }
                }
-            }
-            if (isNew) {
-               traits.push({ name: paths[1], files: [obj] });
+               if (isNew) {
+                  traits.push({ name: paths[1], files: [obj] });
+               }
             }
          }
       });
@@ -147,7 +153,7 @@ const Screen3 = () => {
                   </p>
                   {traits.slice(0, 10).map((trait, index) => (
                      <>
-                        {trait.files.slice(0,5).map((file, index) => (
+                        {trait.files.slice(0, 5).map((file, index) => (
                            <p className="text-xs">{file.folderName} : {file.name}</p>
 
                         ))}

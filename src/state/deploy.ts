@@ -3,7 +3,6 @@ import FolderType, { FileType, TokenType } from '../type/folder_type';
 
 interface deployStates {
    orderBy: boolean;
-   collectionCount: number;
    filter: string;
    tokenName: string;
    tokens: TokenType[];
@@ -21,7 +20,6 @@ interface deployStates {
 
 const initialState: deployStates = {
    orderBy: false,
-   collectionCount: 0,
    filter: "",
    tokenName: "",
    tokens: [],
@@ -44,9 +42,6 @@ export const deploySlice = createSlice({
       updateOrderBy: (state, action: PayloadAction<boolean>) => {
          state.orderBy = action.payload;
       },
-      updateCollectionCount: (state, action: PayloadAction<number>) => {
-         state.collectionCount = action.payload;
-      },
       updateFilter: (state, action: PayloadAction<string>) => {
          state.filter = action.payload;
       },
@@ -56,7 +51,7 @@ export const deploySlice = createSlice({
       updateTokens: (state, action: PayloadAction<TokenType[]>) => {
          state.tokens = action.payload;
       },
-      updateCurrentToken: (state, action: PayloadAction<TokenType>) => {
+      updateCurrentToken: (state, action: PayloadAction<TokenType | undefined>) => {
          state.currentToken = action.payload;
       },
       updateCollectionName: (state, action: PayloadAction<string>) => {
@@ -91,7 +86,6 @@ export const deploySlice = createSlice({
 
 export const {
    updateOrderBy,
-   updateCollectionCount,
    updateFilter,
    updateTokenName,
    updateTokens,

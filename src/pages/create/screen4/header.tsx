@@ -18,7 +18,7 @@ const Header: React.FC<Props> = ({ }) => {
          </div>
          <div>
             <p className="text-xl font-bold text-center">
-               Upload assets
+               Preview assets
             </p>
             <p className="text-center">
                Set up - Step 2 of  4

@@ -1,11 +1,10 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../state/hooks";
 import { FileType, TokenType } from "../../../../type/folder_type";
 import { updateTokens } from "../../../../state/deploy";
 
 const Tokens = () => {
    const traits = useAppSelector(state => state.createState.traits);
-   const tokenName = useAppSelector(state => state.deployState.tokenName);
    const tokens = useAppSelector(state => state.deployState.tokens);
    const dispatch = useAppDispatch();
 
@@ -15,7 +14,7 @@ const Tokens = () => {
       const generateTokens = (files: FileType[], index: number) => {
          if (index >= traits.length) {
             tokenNum++;
-            tokens.push({ name: `${tokenName} #${tokenNum}`, files: files });
+            tokens.push({ name: `#${tokenNum}`, files: files });
             return;
          }
          for (let i = 0; i < traits[index].files.length; i++) {
@@ -28,9 +27,8 @@ const Tokens = () => {
 
    return (
       <div className="flex flex-wrap gap-4">
-         {tokens.map((token, index) => {
+         {tokens.slice(0, 100).map((token, index) => {
             const Token = lazy(() => import("./token"))
-
             return (
                <Suspense fallback={<div></div>} key={index}>
                   <Token token={token} index={index} />

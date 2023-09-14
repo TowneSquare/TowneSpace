@@ -7,10 +7,37 @@ import ButtonStatus from "../../type/button_status";
 import SecondaryButton from "../../components/secondary_button";
 import Trait from "./trait";
 import ReplacePanel from "./replace_panel";
-import { useEffect } from "react";
-import { NFTS } from "../../state/constants";
+import { useEffect, useState } from "react";
 import { chooseNft } from "../../state/tokens";
 import RemovePanel from "./remove_panel";
+import { STUDIO_ADDRESS } from "../../constants";
+import { ensureImageUri, getProvider } from "../../api/Helper";
+import { Token } from "../../type/indexer";
+import { TransactionContext } from "../../type/transaction";
+import {Studio as Helper} from "../../api/transactions/StudioHelper";
+
+function GetNFTs(props: {ctx: TransactionContext, address: string}) {
+   const STUDIO_HELPER = new Helper(getProvider(props.ctx.network), STUDIO_ADDRESS);
+   const [nfts, setNfts] = useState<Array<Token>>();
+   const [nftsError, setNftsError] = useState<String>();
+
+   useEffect(() => {
+      loadNfts();
+   }, [props.ctx.account]);
+
+   const loadNfts = async () => {
+      try {
+         let nfts = (await STUDIO_HELPER.getAllTokens(STUDIO_ADDRESS));
+         for (let nft of nfts) {
+            nft.uri = await ensureImageUri(nft.uri);
+         }
+         setNftsError("");
+         setNfts(nfts);
+      } catch (error: any) {
+         setNftsError(`Caanot load nft: ${error.message}`);
+      }
+   }
+}
 
 const Customize = () => {
    const { address } = useParams();
@@ -39,7 +66,9 @@ const Customize = () => {
                <>
                   <div className="flex flex-col gap-4 items-center">
                      <Tokens />
-                     <SecondaryButton type={ButtonStatus.active} className="w-40">
+                     <SecondaryButton 
+                     type={ButtonStatus.active}
+                     className="w-40">
                         + Add Trait
                      </SecondaryButton>
                   </div>
@@ -55,7 +84,10 @@ const Customize = () => {
                      <p className="text-lg font-semibold text-gray-light-2 text-center -mt-4">
                            When you add Trait NFTs,<br /> they will appear here
                         </p>
-                     <SecondaryButton type={ButtonStatus.active} className="w-40">
+                     <SecondaryButton 
+                     type={ButtonStatus.active} 
+                     className="w-40"
+                     >
                         + Add Trait
                      </SecondaryButton>
                   </div>
