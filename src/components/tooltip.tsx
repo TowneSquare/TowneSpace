@@ -7,14 +7,14 @@ interface Props {
 }
 const ToolTip: React.FC<Props> = ({ children, label, icon = true, className, onClick }) => {
    return (
-      <div className={`${className} flex gap-2 group cursor-pointer`} onClick={onClick}>
+      <div className={`${className} flex items-center gap-2 group cursor-pointer`} onClick={onClick}>
          {children}
          <div className="relative">
             {icon &&
                <img src="/deploy/tip.svg" alt="tip" className="" />
             }
-            <div className="hidden group-hover:block absolute -top-6 left-1">
-               <p className="whitespace-nowrap">{label}</p>
+            <div className="hidden p-3 group-hover:block absolute bottom-8 left-1 bg-black rounded-md">
+               <p className="w-[120px] md:w-[300px]">{label}</p>
             </div>
          </div>
       </div>

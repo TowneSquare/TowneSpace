@@ -10,6 +10,7 @@ const TokenPreview = () => {
    const dispatch = useDispatch();
    const currentToken = useAppSelector(state => state.deployState.currentToken);
    const tokenName = useAppSelector(state => state.deployState.tokenName);
+   const collectionName = useAppSelector(state => state.createState.collectionName);
    const canvasRef = useRef<any>(null);
    const onClose = () => {
       dispatch(updateCurrentToken(undefined))
@@ -48,8 +49,8 @@ const TokenPreview = () => {
                      <canvas ref={canvasRef} width={252} height={252}
                         className="w-[210px] md:w-[270px] h-[210px] md:h-[270px]"
                      />
-                     <p className="text-sm md:text-base mt-2">{tokenName}</p>
-                     <p className="text-sm md:text-base">{currentToken?.name}</p>
+                     <p className="text-sm md:text-base mt-2">{collectionName}</p>
+                     <p className="text-sm md:text-base">{tokenName} {currentToken?.name}</p>
                      <div className="flex flex-col gap-2 mt-2">
                         {currentToken?.files.map((file, index) => (
                            <p className="text-sm md:text-base" key={index}>{file.folderName} {file.name}</p>
