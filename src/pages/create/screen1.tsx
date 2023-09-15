@@ -23,14 +23,14 @@ const Screen1 = () => {
             bCreatePanel ? "flex" : "hidden"
          } inset-0 justify-center items-center bg-gray-dark-3/80`}
       >
-         <div className="relative w-full lg:max-w-[50%] mx-4 min-h-[50%] flex  bg-gray-dark-1">
+         <div className="relative w-full lg:max-w-[50%] mx-4 min-h-[50%] flex  bg-gray-dark-1 rounded-md">
             <div
                className="absolute right-3 top-3 w-10 h-10 flex justify-center items-center rounded-full bg-primary-light/50 hover:bg-primary-light/80 cursor-pointer"
                onClick={() => dispatch(toggleCreatePanel(false))}
             >
                <p className="text-2xl font-semibold">×</p>
             </div>
-            <div className="md:w-[372px] bg-gray-dark-2 px-2 md:px-6 py-10">
+            <div className="md:w-[372px] bg-gray-dark-2 px-2 md:px-6 py-10 rounded-l-md">
                <p className="text-2xl md:text-3xl text-white font-bold">
                   Create
                </p>
