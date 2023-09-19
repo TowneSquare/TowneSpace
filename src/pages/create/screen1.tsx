@@ -2,18 +2,44 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/primary_button";
 import ButtonStatus from "../../type/button_status";
+import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import { toggleCreatePanel } from "../../state/dialog";
 
 const Screen1 = () => {
    const [currentIndex, setCurrentIndex] = useState(0);
    const navigate = useNavigate();
+   const dispatch = useAppDispatch();
+   const bCreatePanel = useAppSelector(
+      (state) => state.dialogState.bCreatePanel
+   );
+
+   const onCreate = () => {
+      dispatch(toggleCreatePanel(false));
+      navigate("/create/step2");
+   }
    return (
-      <div className="w-full h-screen flex justify-center items-center">
-         <div className="w-full lg:max-w-[50%] mx-4 min-h-[50%] flex  bg-gray-dark-1">
-            <div className="md:w-1/3 bg-gray-dark-2 px-2 md:px-6 py-10">
-               <p className="text-2xl md:text-3xl text-white font-bold">Create</p>
+      <div
+         className={`absolute ${
+            bCreatePanel ? "flex" : "hidden"
+         } inset-0 justify-center items-center bg-gray-dark-3/80`}
+      >
+         <div className="relative w-full lg:max-w-[50%] mx-4 min-h-[50%] flex  bg-gray-dark-1 rounded-md">
+            <div
+               className="absolute right-3 top-3 w-10 h-10 flex justify-center items-center rounded-full bg-primary-light/50 hover:bg-primary-light/80 cursor-pointer"
+               onClick={() => dispatch(toggleCreatePanel(false))}
+            >
+               <p className="text-2xl font-semibold">×</p>
+            </div>
+            <div className="md:w-[372px] bg-gray-dark-2 px-2 md:px-6 py-10 rounded-l-md">
+               <p className="text-2xl md:text-3xl text-white font-bold">
+                  Create
+               </p>
                <div className="mt-20">
                   {Menus.map((menu, index) => (
-                     <div className={`h-24 px-2 md:px-4 flex items-center text-sm md:text-base hover:text-primary-light whitespace-nowrap ${currentIndex == index ? "bg-gray-light-3" : ""} rounded-md cursor-pointer`}
+                     <div
+                        className={`h-20 px-2 md:px-4 flex items-center text-sm md:text-base hover:text-primary-light whitespace-nowrap ${
+                           currentIndex == index ? "bg-gray-light-3" : ""
+                        } rounded-md cursor-pointer`}
                         key={index}
                         onClick={() => setCurrentIndex(index)}
                      >
@@ -29,7 +55,8 @@ const Screen1 = () => {
                      Dynamic PFP
                   </p>
                   <p className="text-base md:text-xl">
-                     Dynamic PFPs will change their appearance based on their traits and metadata changes.
+                     Dynamic PFPs will change their appearance based on their
+                     traits and metadata changes.
                   </p>
                   <div className="w-full flex items-center gap-8 justify-end">
                      <Link to="/">
@@ -37,7 +64,10 @@ const Screen1 = () => {
                            Learn More
                         </p>
                      </Link>
-                     <PrimaryButton type={ButtonStatus.active} onClick={() => navigate("/create/step2")}>
+                     <PrimaryButton
+                        type={ButtonStatus.active}
+                        onClick={() => onCreate()}
+                     >
                         Create
                      </PrimaryButton>
                   </div>
@@ -45,18 +75,18 @@ const Screen1 = () => {
             </div>
          </div>
       </div>
-   )
-}
+   );
+};
 
 export default Screen1;
 
 const Menus = [
    {
       href: "/",
-      label: "Dynamic PFP"
+      label: "Dynamic PFP",
    },
    {
       href: "/",
-      label: "Game NFTs"
+      label: "Game NFTs",
    },
-]
+];
