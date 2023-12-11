@@ -1,0 +1,51 @@
+# Node.js
+node_modules/
+
+# TypeScript
+*.js
+*.js.map
+*.d.ts
+
+# Build output
+/dist/
+
+# Environment
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Dependency directories
+/jspm_packages/
+/bower_components/
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# ESLint
+.eslintcache
+
+# Visual Studio Code
+.vscode/
+.history/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
