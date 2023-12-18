@@ -27,7 +27,7 @@ interface AccountEventsArgs {
     }>;
 }
 
-interface getAccountEventsByEventTypeRespomse {
+interface getAccountEventsByEventTypeResponse {
     account_address: string;
     creation_number: any;
     data: any;
@@ -40,7 +40,7 @@ interface getAccountEventsByEventTypeRespomse {
 }
 
 export class Events {
-    async getCollectionCreatedEvent(accountAddress: Address): Promise<getAccountEventsByEventTypeRespomse[]> {
+    async getCollectionCreatedEvent(accountAddress: Address): Promise<getAccountEventsByEventTypeResponse[]> {
         let collectionCreatedEvents = await aptos.getAccountEventsByEventType({
             accountAddress: accountAddress,
             eventType: `${EVENTS_MODULE}::CollectionCreated`,
@@ -50,7 +50,7 @@ export class Events {
         return collectionCreatedEvents; // Fix: Remove the empty square brackets
     }
 
-    async getComposableMinted(accountAddress: Address): Promise<getAccountEventsByEventTypeRespomse[]> {
+    async getComposableMinted(accountAddress: Address): Promise<getAccountEventsByEventTypeResponse[]> {
         let composableMintedEvents = await aptos.getAccountEventsByEventType({
             accountAddress: accountAddress,
             eventType: `${EVENTS_MODULE}::ComposableMinted`,
@@ -60,7 +60,7 @@ export class Events {
         return composableMintedEvents;
     }
 
-    async getTraitMinted(accountAddress: Address): Promise<getAccountEventsByEventTypeRespomse[]> {
+    async getTraitMinted(accountAddress: Address): Promise<getAccountEventsByEventTypeResponse[]> {
         let traitMintedEvents = await aptos.getAccountEventsByEventType({
             accountAddress: accountAddress,
             eventType: `${EVENTS_MODULE}::TraitMinted`,
@@ -70,7 +70,7 @@ export class Events {
         return traitMintedEvents;
     }
 
-    async getComposableBurned(accountAddress: Address): Promise<getAccountEventsByEventTypeRespomse[]> {
+    async getComposableBurned(accountAddress: Address): Promise<getAccountEventsByEventTypeResponse[]> {
         let composableBurnedEvents = await aptos.getAccountEventsByEventType({
             accountAddress: accountAddress,
             eventType: `${EVENTS_MODULE}::ComposableBurned`,
@@ -80,7 +80,7 @@ export class Events {
         return composableBurnedEvents;
     }
 
-    async getTraitBurned(accountAddress: Address): Promise<getAccountEventsByEventTypeRespomse[]> {
+    async getTraitBurned(accountAddress: Address): Promise<getAccountEventsByEventTypeResponse[]> {
         let traitBurnedEvents = await aptos.getAccountEventsByEventType({
             accountAddress: accountAddress,
             eventType: `${EVENTS_MODULE}::TraitBurned`,
@@ -90,7 +90,7 @@ export class Events {
         return traitBurnedEvents;
     }
 
-    async getCompositionEvent(accountAddress: Address): Promise<getAccountEventsByEventTypeRespomse[]> {
+    async getCompositionEvent(accountAddress: Address): Promise<getAccountEventsByEventTypeResponse[]> {
         let compositionEvents = await aptos.getAccountEventsByEventType({
             accountAddress: accountAddress,
             eventType: `${EVENTS_MODULE}::CompositionEvent`,
@@ -100,7 +100,7 @@ export class Events {
         return compositionEvents;
     }
 
-    async DecompositionEvent(accountAddress: Address): Promise<getAccountEventsByEventTypeRespomse[]> {
+    async DecompositionEvent(accountAddress: Address): Promise<getAccountEventsByEventTypeResponse[]> {
         let decompositionEvents = await aptos.getAccountEventsByEventType({
             accountAddress: accountAddress,
             eventType: `${EVENTS_MODULE}::DecompositionEvent`,
@@ -110,7 +110,7 @@ export class Events {
         return decompositionEvents;
     }
 
-    async getComposableTransferredEvent(accountAddress: Address): Promise<getAccountEventsByEventTypeRespomse[]> {
+    async getComposableTransferredEvent(accountAddress: Address): Promise<getAccountEventsByEventTypeResponse[]> {
         let composableTransferredEvents = await aptos.getAccountEventsByEventType({
             accountAddress: accountAddress,
             eventType: `${EVENTS_MODULE}::ComposableTransferredEvent`,
@@ -120,7 +120,7 @@ export class Events {
         return composableTransferredEvents;
     }
 
-    async getTraitTransferredEvent(accountAddress: Address): Promise<getAccountEventsByEventTypeRespomse[]> {
+    async getTraitTransferredEvent(accountAddress: Address): Promise<getAccountEventsByEventTypeResponse[]> {
         let traitTransferredEvents = await aptos.getAccountEventsByEventType({
             accountAddress: accountAddress,
             eventType: `${EVENTS_MODULE}::TraitTransferredEvent`,
