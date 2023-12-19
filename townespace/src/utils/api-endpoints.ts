@@ -3,7 +3,7 @@ export const NetworkToIndexerAPI: Record<string, string> = {
   testnet: "https://indexer-testnet.staging.gcp.aptosdev.com/v1/graphql",
   devnet: "https://indexer-devnet.staging.gcp.aptosdev.com/v1/graphql",
 };
-  
+
 export const NetworkToNodeAPI: Record<string, string> = {
   mainnet: "https://fullnode.mainnet.aptoslabs.com/v1",
   testnet: "https://fullnode.testnet.aptoslabs.com/v1",

@@ -59,11 +59,11 @@ npm add PATH_TO_LOCAL_SDK_PACKAGE
 
 If you found a bug or would like to request a feature, please file an [issue](link-to-issues). If, based on the discussion on an issue you would like to offer a code change, please make a [pull request](./CONTRIBUTING.md). If neither of these describes what you would like to contribute, checkout out the [contributing guide](./CONTRIBUTING.md).
 
-TODO: add links 
+TODO: add links
 
-[aip-pr-url]: <link-here>
-[npm-image-version]: <link-here>
-[npm-image-downloads]: <link-here>
-[npm-url]: <link-here>
-[discord-image]: <link-here>
-[discord-url]: <link-here>
+[aip-pr-url]: link-here
+[npm-image-version]: link-here
+[npm-image-downloads]: link-here
+[npm-url]: link-here
+[discord-image]: link-here
+[discord-url]: link-here
