@@ -1,0 +1,31 @@
+{
+  "name": "townespace-ts-sdk",
+  "version": "0.0.3",
+  "description": "TowneSpace TypeScript SDK",
+  "bugs": {
+    "url": "https://github.com/TowneSquare/TowneSpace/issues/new/choose"
+  },
+  "homepage": "https://github.com/TowneSquare/TowneSpace/",
+  "main": "dist/common/index.js",
+  "module": "dist/esm/index.mjs",
+  "scripts": {
+    "build:clean": "rm -rf dist",
+    "build": "npm run build:clean && tsc",
+    "test": "npm jest",
+    "unit-test": "npm jest tests/unit",
+    "e2e-test": "npm jest tests/e2e",
+    "doc": "scripts/generateDocs.sh"
+  },
+  "keywords": [],
+  "author": "TowneSquare",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "aptos": "^1.20.0",
+    "prettier": "3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "badge-maker": "^3.3.1"
+  }
+}

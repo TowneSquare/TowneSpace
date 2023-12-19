@@ -1,0 +1,1 @@
+# TowneSquare TypeScript SDK Changelog

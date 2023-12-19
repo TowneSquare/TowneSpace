@@ -8,12 +8,13 @@ import {
   MaybeHexString,
   OptionalTransactionArgs,
   Provider,
-  TransactionBuilderRemoteABI,
+  TransactionBuilderRemoteABI
 } from "aptos";
 import { EntryFunctionPayload } from "aptos/src/generated";
-import { STUDIO_MODULE, MINT_MODULE } from "../utils/module-endpoints";
+import { STUDIO_MODULE } from "../utils/module-endpoints";
+import { MoveAddressType } from "@aptos-labs/ts-sdk";
 
-export class Create {
+export class Studio {
   readonly provider: Provider;
   readonly code_location: HexString;
 
@@ -35,57 +36,63 @@ export class Create {
     };
   }
 
-  createFixedSupplyCollection(
-    description: string,
-    max_supply: bigint,
-    name: string,
-    symbol: string,
-    uri: string,
-    royalty_numerator: number,
-    royalty_denominator: number,
-  ): EntryFunctionPayload {
+  burnComposableToken(token_object: MaybeHexString): EntryFunctionPayload {
     return this.buildTransactionPayload(
-      MINT_MODULE,
-      "create_fixed_supply_collection",
+      STUDIO_MODULE,
+      "burn_composable_token",
       [],
-      [
-        description,
-        max_supply,
-        name,
-        symbol,
-        uri,
-        royalty_numerator,
-        royalty_denominator,
-        false,
-        false,
-      ],
+      [token_object],
     );
   }
 
-  createUnlimitedSupplyCollection(
-    description: string,
-    name: string,
-    symbol: string,
-    uri: string,
-    royalty_numerator: number,
-    royalty_denominator: number,
-  ): EntryFunctionPayload {
+  burnTraitToken(token_object: MaybeHexString): EntryFunctionPayload {
     return this.buildTransactionPayload(
-      MINT_MODULE,
-      "create_unlimited_supply_collection",
+      STUDIO_MODULE,
+      "burn_trait_token",
       [],
-      [
-        description,
-        name,
-        symbol,
-        uri,
-        royalty_numerator,
-        royalty_denominator,
-        false,
-        false,
-      ],
+      [token_object],
     );
   }
+
+  equipTrait(
+    composable_object: MaybeHexString,
+    trait_object: MaybeHexString,
+    trait_type: string,
+  ): EntryFunctionPayload {
+    return this.buildTransactionPayload(
+      STUDIO_MODULE,
+      "equip_trait",
+      [],
+      [composable_object, trait_object, trait_type],
+    );
+  }
+
+  unequipTrait(
+    composable_object: MaybeHexString,
+    trait_object: MaybeHexString,
+    trait_type: string,
+  ): EntryFunctionPayload {
+    return this.buildTransactionPayload(
+      STUDIO_MODULE,
+      "unequip_trait",
+      [],
+      [composable_object, trait_object, trait_type],
+    );
+  }
+
+  decomposeEntireToken(
+    composable_object: MaybeHexString,
+    new_uri: string,
+  ): EntryFunctionPayload {
+    return this.buildTransactionPayload(
+      STUDIO_MODULE,
+      "decompose_entire_token",
+      [],
+      [composable_object, new_uri],
+    );
+  }
+
+  
 
   // tokens are created but not ready to be minted
   CreateComposableToken(
@@ -113,31 +120,7 @@ export class Create {
     );
   }
 
-  // tokens are created and ready to be minted
-  CreateBatchOfReadyToMintComposableToken(
-    collection_name: string,
-    number_of_tokens_to_mint: bigint,
-    description: string,
-    uri: string,
-    base_mint_price: bigint,
-    royalty_numerator: number,
-    royalty_denominator: number,
-  ): EntryFunctionPayload {
-    return this.buildTransactionPayload(
-      MINT_MODULE,
-      "create_composable_tokens",
-      [],
-      [
-        collection_name,
-        number_of_tokens_to_mint,
-        description,
-        uri,
-        base_mint_price,
-        royalty_numerator,
-        royalty_denominator,
-      ],
-    );
-  }
+  
 
   // tokens are created but not ready to be minted
   createTraitToken(
@@ -165,31 +148,43 @@ export class Create {
     );
   }
 
-  // tokens are created and ready to be minted
-  createBatchOfReadyToMintTraitToken(
-    collection_name: string,
-    number_of_tokens_to_mint: bigint,
-    description: string,
-    type: string,
-    uri: string,
-    base_mint_price: bigint,
-    royalty_numerator: number,
-    royalty_denominator: number,
+  transferDigitalAsset(
+    type: string, // type of the digital asset
+    token_address: MoveAddressType,
+    recipient_address: MoveAddressType,
   ): EntryFunctionPayload {
     return this.buildTransactionPayload(
-      MINT_MODULE,
-      "create_trait_tokens",
+      STUDIO_MODULE,
+      "transfer_digital_asset",
+      [type],
+      [token_address, recipient_address],
+    );
+  }
+
+  // works with digital asset being the recipient as well
+  transferFungibleAsset(
+    fa_type: string, // type of the fungible asset
+    recipient_address: MoveAddressType,
+    fa: MaybeHexString,
+    amount: bigint,
+  ): EntryFunctionPayload {
+    return this.buildTransactionPayload(
+      STUDIO_MODULE,
+      "transfer_fungible_asset",
+      [fa_type],
+      [recipient_address, fa, amount],
+    );
+  }
+
+  setTokenName(
+    token_object_addr: MoveAddressType,
+    new_name: string,
+  ): EntryFunctionPayload {
+    return this.buildTransactionPayload(
+      STUDIO_MODULE,
+      "set_token_name",
       [],
-      [
-        collection_name,
-        number_of_tokens_to_mint,
-        description,
-        type,
-        uri,
-        base_mint_price,
-        royalty_numerator,
-        royalty_denominator,
-      ],
+      [token_object_addr, new_name],
     );
   }
 

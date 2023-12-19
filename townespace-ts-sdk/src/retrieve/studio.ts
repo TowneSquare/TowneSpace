@@ -2,36 +2,11 @@
  **/
 
 import {
+  AccountAddressInput,
   Aptos,
-  AptosConfig,
-  Network,
-  OrderByArg,
-  PaginationArgs,
+  AptosConfig
 } from "@aptos-labs/ts-sdk";
-import { Address } from "aptos/src/generated";
 import { EVENTS_MODULE } from "../utils/module-endpoints";
-
-// an optional config information for the SDK client instance.
-const config = new AptosConfig({ network: Network.LOCAL }); // default network is devnet
-const aptos = new Aptos(config);
-
-interface AccountEventsArgs {
-  accountAddress: Address;
-  eventType: string;
-  minimumLedgerVersion?: number;
-  options?: PaginationArgs &
-    OrderByArg<{
-      account_address: string;
-      creation_number: any;
-      data: any;
-      event_index: any;
-      indexed_type: string;
-      sequence_number: any;
-      transaction_block_height: any;
-      transaction_version: any;
-      type: string;
-    }>;
-}
 
 interface getAccountEventsByEventTypeResponse {
   account_address: string;
@@ -45,12 +20,18 @@ interface getAccountEventsByEventTypeResponse {
   type: string;
 }
 
-export class Events {
+export class StudioEvents {
+  readonly aptos: Aptos;
+
+  constructor(readonly config: AptosConfig) {
+    this.aptos = new Aptos(this.config);
+  }
+
   async getCollectionCreatedEvent(
-    accountAddress: Address,
+    args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let collectionCreatedEvents = await aptos.getAccountEventsByEventType({
-      accountAddress: accountAddress,
+    let collectionCreatedEvents = await this.aptos.getAccountEventsByEventType({
+      accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::CollectionCreated`,
       minimumLedgerVersion: 0,
     });
@@ -59,10 +40,10 @@ export class Events {
   }
 
   async getComposableMinted(
-    accountAddress: Address,
+    args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let composableMintedEvents = await aptos.getAccountEventsByEventType({
-      accountAddress: accountAddress,
+    let composableMintedEvents = await this.aptos.getAccountEventsByEventType({
+      accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::ComposableMinted`,
       minimumLedgerVersion: 0,
     });
@@ -71,10 +52,10 @@ export class Events {
   }
 
   async getTraitMinted(
-    accountAddress: Address,
+    args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let traitMintedEvents = await aptos.getAccountEventsByEventType({
-      accountAddress: accountAddress,
+    let traitMintedEvents = await this.aptos.getAccountEventsByEventType({
+      accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::TraitMinted`,
       minimumLedgerVersion: 0,
     });
@@ -83,10 +64,10 @@ export class Events {
   }
 
   async getComposableBurned(
-    accountAddress: Address,
+    args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let composableBurnedEvents = await aptos.getAccountEventsByEventType({
-      accountAddress: accountAddress,
+    let composableBurnedEvents = await this.aptos.getAccountEventsByEventType({
+      accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::ComposableBurned`,
       minimumLedgerVersion: 0,
     });
@@ -95,10 +76,10 @@ export class Events {
   }
 
   async getTraitBurned(
-    accountAddress: Address,
+    args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let traitBurnedEvents = await aptos.getAccountEventsByEventType({
-      accountAddress: accountAddress,
+    let traitBurnedEvents = await this.aptos.getAccountEventsByEventType({
+      accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::TraitBurned`,
       minimumLedgerVersion: 0,
     });
@@ -107,10 +88,10 @@ export class Events {
   }
 
   async getCompositionEvent(
-    accountAddress: Address,
+    args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let compositionEvents = await aptos.getAccountEventsByEventType({
-      accountAddress: accountAddress,
+    let compositionEvents = await this.aptos.getAccountEventsByEventType({
+      accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::CompositionEvent`,
       minimumLedgerVersion: 0,
     });
@@ -119,10 +100,10 @@ export class Events {
   }
 
   async DecompositionEvent(
-    accountAddress: Address,
+    args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let decompositionEvents = await aptos.getAccountEventsByEventType({
-      accountAddress: accountAddress,
+    let decompositionEvents = await this.aptos.getAccountEventsByEventType({
+      accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::DecompositionEvent`,
       minimumLedgerVersion: 0,
     });
@@ -131,10 +112,10 @@ export class Events {
   }
 
   async getComposableTransferredEvent(
-    accountAddress: Address,
+    args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let composableTransferredEvents = await aptos.getAccountEventsByEventType({
-      accountAddress: accountAddress,
+    let composableTransferredEvents = await this.aptos.getAccountEventsByEventType({
+      accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::ComposableTransferredEvent`,
       minimumLedgerVersion: 0,
     });
@@ -143,10 +124,10 @@ export class Events {
   }
 
   async getTraitTransferredEvent(
-    accountAddress: Address,
+    args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let traitTransferredEvents = await aptos.getAccountEventsByEventType({
-      accountAddress: accountAddress,
+    let traitTransferredEvents = await this.aptos.getAccountEventsByEventType({
+      accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::TraitTransferredEvent`,
       minimumLedgerVersion: 0,
     });
