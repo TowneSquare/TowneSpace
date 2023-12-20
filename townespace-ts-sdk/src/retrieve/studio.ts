@@ -30,7 +30,7 @@ export class StudioEvents {
   async getCollectionCreatedEvent(
     args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let collectionCreatedEvents = await this.aptos.getAccountEventsByEventType({
+    const collectionCreatedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::CollectionCreated`,
       minimumLedgerVersion: 0,
@@ -42,7 +42,7 @@ export class StudioEvents {
   async getComposableMinted(
     args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let composableMintedEvents = await this.aptos.getAccountEventsByEventType({
+    const composableMintedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::ComposableMinted`,
       minimumLedgerVersion: 0,
@@ -54,7 +54,7 @@ export class StudioEvents {
   async getTraitMinted(
     args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let traitMintedEvents = await this.aptos.getAccountEventsByEventType({
+    const traitMintedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::TraitMinted`,
       minimumLedgerVersion: 0,
@@ -66,7 +66,7 @@ export class StudioEvents {
   async getComposableBurned(
     args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let composableBurnedEvents = await this.aptos.getAccountEventsByEventType({
+    const composableBurnedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::ComposableBurned`,
       minimumLedgerVersion: 0,
@@ -78,7 +78,7 @@ export class StudioEvents {
   async getTraitBurned(
     args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let traitBurnedEvents = await this.aptos.getAccountEventsByEventType({
+    const traitBurnedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::TraitBurned`,
       minimumLedgerVersion: 0,
@@ -90,7 +90,7 @@ export class StudioEvents {
   async getCompositionEvent(
     args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let compositionEvents = await this.aptos.getAccountEventsByEventType({
+    const compositionEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::CompositionEvent`,
       minimumLedgerVersion: 0,
@@ -102,7 +102,7 @@ export class StudioEvents {
   async DecompositionEvent(
     args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let decompositionEvents = await this.aptos.getAccountEventsByEventType({
+    const decompositionEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::DecompositionEvent`,
       minimumLedgerVersion: 0,
@@ -114,7 +114,7 @@ export class StudioEvents {
   async getComposableTransferredEvent(
     args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let composableTransferredEvents = await this.aptos.getAccountEventsByEventType({
+    const composableTransferredEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::ComposableTransferredEvent`,
       minimumLedgerVersion: 0,
@@ -126,7 +126,7 @@ export class StudioEvents {
   async getTraitTransferredEvent(
     args: { accountAddress: AccountAddressInput }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
-    let traitTransferredEvents = await this.aptos.getAccountEventsByEventType({
+    const traitTransferredEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
       eventType: `${EVENTS_MODULE}::TraitTransferredEvent`,
       minimumLedgerVersion: 0,

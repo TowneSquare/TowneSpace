@@ -11,7 +11,7 @@ import {
   TransactionBuilderRemoteABI,
 } from "aptos";
 import { EntryFunctionPayload } from "aptos/src/generated";
-import { STUDIO_MODULE, MINT_MODULE } from "../utils/module-endpoints";
+import { MINT_MODULE } from "../utils/module-endpoints";
 import { MoveAddressType } from "@aptos-labs/ts-sdk";
 
 export class Minter {
