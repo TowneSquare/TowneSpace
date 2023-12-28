@@ -2,7 +2,7 @@
  **/
 
 import {
-  AccountAddressInput,
+  AccountAddress,
   Aptos,
   AptosConfig
 } from "@aptos-labs/ts-sdk";
@@ -10,13 +10,13 @@ import { EVENTS_MODULE } from "../utils/module-endpoints";
 
 interface getAccountEventsByEventTypeResponse {
   account_address: string;
-  creation_number: any;
-  data: any;
-  event_index: any;
+  creation_number: unknown;
+  data: unknown;
+  event_index: unknown;
   indexed_type: string;
-  sequence_number: any;
-  transaction_block_height: any;
-  transaction_version: any;
+  sequence_number: unknown;
+  transaction_block_height: unknown;
+  transaction_version: unknown;
   type: string;
 }
 
@@ -28,7 +28,7 @@ export class StudioEvents {
   }
 
   async getCollectionCreatedEvent(
-    args: { accountAddress: AccountAddressInput }
+    args: { accountAddress: AccountAddress }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
     const collectionCreatedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
@@ -40,7 +40,7 @@ export class StudioEvents {
   }
 
   async getComposableMinted(
-    args: { accountAddress: AccountAddressInput }
+    args: { accountAddress: AccountAddress }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
     const composableMintedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
@@ -52,7 +52,7 @@ export class StudioEvents {
   }
 
   async getTraitMinted(
-    args: { accountAddress: AccountAddressInput }
+    args: { accountAddress: AccountAddress }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
     const traitMintedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
@@ -64,7 +64,7 @@ export class StudioEvents {
   }
 
   async getComposableBurned(
-    args: { accountAddress: AccountAddressInput }
+    args: { accountAddress: AccountAddress }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
     const composableBurnedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
@@ -76,7 +76,7 @@ export class StudioEvents {
   }
 
   async getTraitBurned(
-    args: { accountAddress: AccountAddressInput }
+    args: { accountAddress: AccountAddress }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
     const traitBurnedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
@@ -88,7 +88,7 @@ export class StudioEvents {
   }
 
   async getCompositionEvent(
-    args: { accountAddress: AccountAddressInput }
+    args: { accountAddress: AccountAddress }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
     const compositionEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
@@ -100,7 +100,7 @@ export class StudioEvents {
   }
 
   async DecompositionEvent(
-    args: { accountAddress: AccountAddressInput }
+    args: { accountAddress: AccountAddress }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
     const decompositionEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
@@ -112,7 +112,7 @@ export class StudioEvents {
   }
 
   async getComposableTransferredEvent(
-    args: { accountAddress: AccountAddressInput }
+    args: { accountAddress: AccountAddress }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
     const composableTransferredEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
@@ -124,7 +124,7 @@ export class StudioEvents {
   }
 
   async getTraitTransferredEvent(
-    args: { accountAddress: AccountAddressInput }
+    args: { accountAddress: AccountAddress }
   ): Promise<getAccountEventsByEventTypeResponse[]> {
     const traitTransferredEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,

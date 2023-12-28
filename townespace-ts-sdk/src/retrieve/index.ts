@@ -1,1 +1,1 @@
-export * from "./studio";
+export * from "./studioEvents";

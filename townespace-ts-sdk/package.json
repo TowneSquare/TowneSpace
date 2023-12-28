@@ -1,6 +1,6 @@
 {
   "name": "townespace-ts-sdk",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "TowneSpace TypeScript SDK",
   "bugs": {
     "url": "https://github.com/TowneSquare/TowneSpace/issues/new/choose"
@@ -27,6 +27,7 @@
   "author": "TowneSquare",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/node": "^20.10.4",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
@@ -38,6 +39,8 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "badge-maker": "^3.3.1"
+    "@aptos-labs/ts-sdk": "^1.2.0",
+    "badge-maker": "^3.3.1",
+    "dotenv": "^16.3.1"
   }
 }
