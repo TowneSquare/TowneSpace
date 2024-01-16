@@ -1,211 +1,484 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /**
  */
 
 import { STUDIO_MODULE } from "../utils/module-endpoints";
-import { Account, Aptos, MoveAddressType, MoveObjectType, MoveString } from "@aptos-labs/ts-sdk";
+import { 
+	Account, 
+	Aptos, 
+	MoveAddressType, 
+	MoveObjectType, 
+	MoveString,
+	MoveUint64Type,
+	Bool,
+	MoveUint8Type
+} from "@aptos-labs/ts-sdk";
 
 export class Studio {
 
-  async burnComposableToken(aptos: Aptos, deployer: Account, token_object: MoveObjectType): Promise<string> {
-    const rawTxn = await aptos.transaction.build.simple({
-      sender: deployer.accountAddress,
-      data: {
-        function: `${STUDIO_MODULE}::burn_composable_token`,
-        functionArguments: [token_object],
-      },
-    });
-    const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
-    const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
-    console.log("Composable token burned. - ", response.hash);
-    return response.hash;
-  }
+	async create_collection_with_fixed_supply_and_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		description: MoveString,
+		max_supply: MoveUint64Type,
+		name: MoveString,
+		symbol: MoveString,
+		uri: MoveString,
+		mutable_description: Bool,
+		mutable_royalty: Bool,
+		mutable_uri: Bool,
+		mutable_token_description: Bool,
+		mutable_token_name: Bool,
+		mutable_token_properties: Bool,
+		mutable_token_uri: Bool,
+		tokens_burnable_by_creator: Bool,
+		tokens_freezable_by_creator: Bool,
+		royalty_numerator: MoveUint64Type,
+		royalty_denominator: MoveUint64Type
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: {
+				function: `${STUDIO_MODULE}::create_collection_with_fixed_supply_and_royalty`,
+				functionArguments: [
+					description,
+					max_supply,
+					name,
+					symbol,
+					uri,
+					mutable_description,
+					mutable_royalty,
+					mutable_uri,
+					mutable_token_description,
+					mutable_token_name,
+					mutable_token_properties,
+					mutable_token_uri,
+					tokens_burnable_by_creator,
+					tokens_freezable_by_creator,
+					royalty_numerator,
+					royalty_denominator
+				],
+			},
+		});
 
-  async burnTraitToken(aptos: Aptos, deployer: Account, token_object: MoveObjectType): Promise<string> {
-    const rawTxn = await aptos.transaction.build.simple({
-      sender: deployer.accountAddress,
-      data: {
-        function: `${STUDIO_MODULE}::burn_trait_token`,
-        functionArguments: [token_object],
-      },
-    });
-    const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
-    const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
-    console.log("Trait token burned. - ", response.hash);
-    return response.hash;
-  }
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
+		console.log("Collection created with fixed supply and royalty on. - ", response.hash);
+		return response.hash;
+	}
 
-  async equipTrait(
-    aptos: Aptos, 
-    deployer: Account,
-    composable_object: MoveObjectType,
-    trait_object: MoveObjectType,
-    trait_type: MoveString,
-  ): Promise<string> {
-    const rawTxn = await aptos.transaction.build.simple({
-      sender: deployer.accountAddress,
-      data: {
-        function: `${STUDIO_MODULE}::equip_trait`,
-        functionArguments: [composable_object, trait_object, trait_type],
-      },
-    });
-    const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
-    const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
-    console.log("Trait equipped. - ", response.hash);
-    return response.hash;
-  }
+	async create_collection_with_fixed_supply_and_no_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		description: MoveString,
+		max_supply: MoveUint64Type,
+		name: MoveString,
+		symbol: MoveString,
+		uri: MoveString,
+		mutable_description: Bool,
+		mutable_royalty: Bool,
+		mutable_uri: Bool,
+		mutable_token_description: Bool,
+		mutable_token_name: Bool,
+		mutable_token_properties: Bool,
+		mutable_token_uri: Bool,
+		tokens_burnable_by_creator: Bool,
+		tokens_freezable_by_creator: Bool,
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: {
+				function: `${STUDIO_MODULE}::create_collection_with_fixed_supply_and_no_royalty`,
+				functionArguments: [
+					description,
+					max_supply,
+					name,
+					symbol,
+					uri,
+					mutable_description,
+					mutable_royalty,
+					mutable_uri,
+					mutable_token_description,
+					mutable_token_name,
+					mutable_token_properties,
+					mutable_token_uri,
+					tokens_burnable_by_creator,
+					tokens_freezable_by_creator
+				],
+			},
+		});
 
-  async unequipTrait(
-    aptos: Aptos, 
-    deployer: Account,
-    composable_object: MoveObjectType,
-    trait_object: MoveObjectType,
-    trait_type: MoveString,
-  ): Promise<string> {
-    const rawTxn = await aptos.transaction.build.simple({
-      sender: deployer.accountAddress,
-      data: {
-        function: `${STUDIO_MODULE}::unequip_trait`,
-        functionArguments: [composable_object, trait_object, trait_type],
-      },
-    });
-    const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
-    const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
-    console.log("Trait unequipped. - ", response.hash);
-    return response.hash;
-  }
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
+		console.log("Collection created with fixed supply and no royalty on. - ", response.hash);
+		return response.hash;
+	}
 
-  async decomposeEntireToken(
-    aptos: Aptos, 
-    deployer: Account,
-    composable_object: MoveObjectType,
-    new_uri: MoveString,
-  ): Promise<string> {
-    const rawTxn = await aptos.transaction.build.simple({
-      sender: deployer.accountAddress,
-      data: {
-        function: `${STUDIO_MODULE}::decompose_entire_token`,
-        functionArguments: [composable_object, new_uri],
-      },
-    });
-    const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
-    const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
-    console.log("Token decomposed. - ", response.hash);
-    return response.hash;
-  }
+	async create_collection_with_unlimited_supply_and_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		description: MoveString,
+		name: MoveString,
+		symbol: MoveString,
+		uri: MoveString,
+		mutable_description: Bool,
+		mutable_royalty: Bool,
+		mutable_uri: Bool,
+		mutable_token_description: Bool,
+		mutable_token_name: Bool,
+		mutable_token_properties: Bool,
+		mutable_token_uri: Bool,
+		tokens_burnable_by_creator: Bool,
+		tokens_freezable_by_creator: Bool,
+		royalty_numerator: MoveUint64Type,
+		royalty_denominator: MoveUint64Type
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: {
+				function: `${STUDIO_MODULE}::create_collection_with_unlimited_supply_and_royalty`,
+				functionArguments: [
+					description,
+					name,
+					symbol,
+					uri,
+					mutable_description,
+					mutable_royalty,
+					mutable_uri,
+					mutable_token_description,
+					mutable_token_name,
+					mutable_token_properties,
+					mutable_token_uri,
+					tokens_burnable_by_creator,
+					tokens_freezable_by_creator,
+					royalty_numerator,
+					royalty_denominator
+				],
+			},
+		});
 
-  
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
+		console.log("Collection created with unlimited supply and royalty on. - ", response.hash);
+		return response.hash;
+	}
+	
+	async create_collection_with_unlimited_supply_and_no_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		description: MoveString,
+		name: MoveString,
+		symbol: MoveString,
+		uri: MoveString,
+		mutable_description: Bool,
+		mutable_royalty: Bool,
+		mutable_uri: Bool,
+		mutable_token_description: Bool,
+		mutable_token_name: Bool,
+		mutable_token_properties: Bool,
+		mutable_token_uri: Bool,
+		tokens_burnable_by_creator: Bool,
+		tokens_freezable_by_creator: Bool,
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: {
+				function: `${STUDIO_MODULE}::create_collection_with_unlimited_supply_and_no_royalty`,
+				functionArguments: [
+					description,
+					name,
+					symbol,
+					uri,
+					mutable_description,
+					mutable_royalty,
+					mutable_uri,
+					mutable_token_description,
+					mutable_token_name,
+					mutable_token_properties,
+					mutable_token_uri,
+					tokens_burnable_by_creator,
+					tokens_freezable_by_creator
+				],
+			},
+		});
 
-  // tokens are created but not ready to be minted
-  async CreateComposableToken(
-    aptos: Aptos, 
-    deployer: Account,
-    collection_name: MoveString,
-    description: MoveString,
-    uri: MoveString,
-    base_mint_price: bigint,
-    traits: MoveObjectType[],
-    royalty_numerator: number,
-    royalty_denominator: number,
-  ): Promise<string> {
-    const rawTxn = await aptos.transaction.build.simple({
-      sender: deployer.accountAddress,
-      data: {
-        function: `${STUDIO_MODULE}::create_composable_token`,
-        functionArguments: [collection_name, description, uri, base_mint_price, traits, royalty_numerator, royalty_denominator],
-      },
-    });
-    const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
-    const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
-    console.log("Token created. - ", response.hash);
-    return response.hash;
-  }
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
+		console.log("Collection created with unlimited supply and no royalty on. - ", response.hash);
+		return response.hash;
+	}
+	
+	async create_named_composable_token_with_no_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		collection: MoveAddressType,
+		description: MoveString,
+		name: MoveString,
+		uri: MoveString,
+		property_keys: MoveString[],
+		property_types: MoveString[],
+		property_values: MoveUint8Type[][]
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: {
+				function: `${STUDIO_MODULE}::create_named_composable_token_with_no_royalty`,
+				functionArguments: [
+					collection,
+					description,
+					name,
+					uri,
+					property_keys,
+					property_types,
+					property_values
+				],
+			},
+		});
 
-  
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
+		console.log("Named composable token with no royalty created. - ", response.hash);
+		return response.hash;
+	}
 
-  // tokens are created but not ready to be minted
-  async createTraitToken(
-    aptos: Aptos,
-    deployer: Account,
-    collection_name: MoveString,
-    description: MoveString,
-    type: MoveString,
-    uri: MoveString,
-    base_mint_price: bigint,
-    royalty_numerator: number,
-    royalty_denominator: number,
-  ): Promise<string> {
-    const rawTxn = await aptos.transaction.build.simple({
-      sender: deployer.accountAddress,
-      data: {
-        function: `${STUDIO_MODULE}::create_trait_token`,
-        functionArguments: [collection_name, description, type, uri, base_mint_price, royalty_numerator, royalty_denominator],
-      },
-    });
-    const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
-    const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
-    console.log("Token created. - ", response.hash);
-    return response.hash;
-  }
+	async create_named_composable_token_with_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		collection: MoveAddressType,
+		description: MoveString,
+		name: MoveString,
+		uri: MoveString,
+		royalty_numerator: MoveUint64Type,
+		royalty_denominator: MoveUint64Type,
+		property_keys: MoveString[],
+		property_types: MoveString[],
+		property_values: MoveUint8Type[][]
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: {
+				function: `${STUDIO_MODULE}::create_named_composable_token_with_royalty`,
+				functionArguments: [
+					collection,
+					description,
+					name,
+					uri,
+					royalty_numerator,
+					royalty_denominator,
+					property_keys,
+					property_types,
+					property_values
+				],
+			},
+		});
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
+		console.log("Named composable token with royalty created. - ", response.hash);
+		return response.hash;
+	}
 
-  async transferDigitalAsset(
-    aptos: Aptos,
-    deployer: Account,
-    type: MoveString, // type of the digital asset
-    token_address: MoveAddressType,
-    recipient_address: MoveAddressType,
-  ): Promise<string> {
-    const rawTxn = await aptos.transaction.build.simple({
-      sender: deployer.accountAddress,
-      data: {
-        function: `${STUDIO_MODULE}::transfer_digital_asset`,
-        functionArguments: [type, token_address, recipient_address],
-      },
-    });
-    const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
-    const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
-    console.log("Digital asset transferred. - ", response.hash);
-    return response.hash;
-  }
+	async create_indexed_composable_token_with_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		collection: MoveString,
+		description: MoveString,
+		name: MoveString,
+		uri: MoveString,
+		royalty_numerator: MoveUint64Type,
+		royalty_denominator: MoveUint64Type,
+		property_keys: MoveString[],
+		property_types: MoveString[],
+		property_values: MoveUint8Type[][]
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: {
+				function: `${STUDIO_MODULE}::create_indexed_composable_token_with_royalty`,
+				functionArguments: [
+					collection,
+					description,
+					name,
+					uri,
+					royalty_numerator,
+					royalty_denominator,
+					property_keys,
+					property_types,
+					property_values
+				],
+			},
+		});
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
+		console.log("Indexed composable token with royalty created. - ", response.hash);
+		return response.hash;
+	}
+	
+	async create_indexed_composable_token_with_no_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		collection: MoveString,
+		description: MoveString,
+		name: MoveString,
+		uri: MoveString,
+		property_keys: MoveString[],
+		property_types: MoveString[],
+		property_values: MoveUint8Type[][]
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: {
+				function: `${STUDIO_MODULE}::create_indexed_composable_token_with_no_royalty`,
+				functionArguments: [
+					collection,
+					description,
+					name,
+					uri,
+					property_keys,
+					property_types,
+					property_values
+				],
+			},
+		});
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
+		console.log("Indexed composable token with no royalty created. - ", response.hash);
+		return response.hash;
+	}
 
-  // works with digital asset being the recipient as well
-  async transferFungibleAsset(
-    aptos: Aptos,
-    deployer: Account,
-    fa_type: MoveString, // type of the fungible asset
-    recipient_address: MoveAddressType,
-    fa: MoveObjectType,
-    amount: bigint,
-  ): Promise<string> {
-    const rawTxn = await aptos.transaction.build.simple({
-      sender: deployer.accountAddress,
-      data: {
-        function: `${STUDIO_MODULE}::transfer_fungible_asset`,
-        functionArguments: [fa_type, recipient_address, fa, amount],
-      },
-    });
-    const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
-    const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
-    console.log("Fungible asset transferred. - ", response.hash);
-    return response.hash;
-  }
-
-  async setTokenName(
-    aptos: Aptos,
-    deployer: Account,
-    token_object_addr: MoveAddressType,
-    new_name: MoveString,
-  ): Promise<string> {
-    const rawTxn = await aptos.transaction.build.simple({
-      sender: deployer.accountAddress,
-      data: {
-        function: `${STUDIO_MODULE}::set_token_name`,
-        functionArguments: [token_object_addr, new_name],
-      },
-    });
-    const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
-    console.log("pendingTxn", pendingTxn);
-    const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
-    console.log("Token name set. - ", response.hash);
-    return response.hash;
-  }
+	async create_named_trait_token_with_no_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		collection: MoveAddressType,
+		description: MoveString,
+		name: MoveString,
+		uri: MoveString,
+		property_keys: MoveString[],
+		property_types: MoveString[],
+		property_values: MoveUint8Type[][]
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: {
+				function: `${STUDIO_MODULE}::create_named_trait_token_with_no_royalty`,
+				functionArguments: [
+					collection,
+					description,
+					name,
+					uri,
+					property_keys,
+					property_types,
+					property_values
+				],
+			},
+		});
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
+		console.log("Named trait token with no royalty created. - ", response.hash);
+		return response.hash;
+	}
+	
+	async create_named_trait_token_with_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		collection: MoveAddressType,
+		description: MoveString,
+		name: MoveString,
+		uri: MoveString,
+		royalty_numerator: MoveUint64Type,
+		royalty_denominator: MoveUint64Type,
+		property_keys: MoveString[],
+		property_types: MoveString[],
+		property_values: MoveUint8Type[][]
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: {
+				function: `${STUDIO_MODULE}::create_named_trait_token_with_royalty`,
+				functionArguments: [
+					collection,
+					description,
+					name,
+					uri,
+					royalty_numerator,
+					royalty_denominator,
+					property_keys,
+					property_types,
+					property_values
+				],
+			},
+		});
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });
+		console.log("Named trait token with royalty created. - ", response.hash);
+		return response.hash;
+	}
+	
+	async create_indexed_trait_token_with_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		collection: MoveString,
+		description: MoveString,
+		name: MoveString,
+		uri: MoveString,
+		royalty_numerator: MoveUint64Type,
+		royalty_denominator: MoveUint64Type,
+		property_keys: MoveString[],
+		property_types: MoveString[],
+		property_values: MoveUint8Type[][]
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: { 
+				function: `${STUDIO_MODULE}::create_indexed_trait_token_with_royalty`,
+				functionArguments: [
+					collection,
+					description,
+					name,
+					uri,
+					royalty_numerator,
+					royalty_denominator,
+					property_keys,
+					property_types,
+					property_values
+				],
+			},
+		});
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });	
+		console.log("Indexed trait token with royalty created. - ", response.hash);
+		return response.hash;
+	}
+	
+	async create_indexed_trait_token_with_no_royalty(
+		aptos: Aptos,
+		deployer: Account,
+		collection: MoveString,
+		description: MoveString,
+		name: MoveString,
+		uri: MoveString,
+		property_keys: MoveString[],
+		property_types: MoveString[],
+		property_values: MoveUint8Type[][]
+	): Promise<string> {
+		const rawTxn = await aptos.transaction.build.simple({
+			sender: deployer.accountAddress,
+			data: { 
+				function: `${STUDIO_MODULE}::create_indexed_trait_token_with_no_royalty`,
+				functionArguments: [
+					collection,
+					description,
+					name,
+					uri,
+					property_keys,
+					property_types,
+					property_values
+				],
+			},
+		});
+		const pendingTxn = await aptos.signAndSubmitTransaction({ signer: deployer, transaction: rawTxn});
+		const response = await aptos.waitForTransaction({ transactionHash: pendingTxn.hash });	
+		console.log("Indexed trait token with no royalty created. - ", response.hash);
+		return response.hash;
+	}
+	
 }

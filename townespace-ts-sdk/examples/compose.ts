@@ -12,7 +12,6 @@ import {
     MoveString
 } from "@aptos-labs/ts-sdk";
 import { createInterface } from "readline";
-import { Minter } from "../src/submit/minter";
 import { Studio } from "../src/submit/studio";
 import { StudioEvents } from "../src/retrieve/studioEvents";
 

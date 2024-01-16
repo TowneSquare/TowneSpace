@@ -1,2 +1,4 @@
 - [Stable - @townesquare/townespace-ts-sdk-0.0.3](@townesquare/townespace-ts-sdk-0.0.3)
 - [Stable - @townesquare/townespace-ts-sdk-0.0.1](@townesquare/townespace-ts-sdk-0.0.1)
+- [Stable - @townesquare/townespace-ts-sdk-0.0.4](@townesquare/townespace-ts-sdk-0.0.4)
+- [Stable - @townesquare/townespace-ts-sdk-0.1.0](@townesquare/townespace-ts-sdk-0.1.0)
