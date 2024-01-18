@@ -4,7 +4,7 @@
 import {
   getPropertyValueRaw,
   getSinglePropertyValueRaw,
-} from "aptos/src/utils/property_map_serde";
+} from "aptos/dist/index.mjs";
 import {
   Account,
   AnyNumber,
