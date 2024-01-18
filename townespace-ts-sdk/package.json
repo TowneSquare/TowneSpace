@@ -1,6 +1,6 @@
 {
   "name": "townespace-ts-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TowneSpace TypeScript SDK",
   "bugs": {
     "url": "https://github.com/TowneSquare/TowneSpace/issues/new/choose"
