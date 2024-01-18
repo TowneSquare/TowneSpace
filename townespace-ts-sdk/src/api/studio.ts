@@ -7,8 +7,9 @@ import {
   AptosConfig,
   GetEventsResponse,
 } from "@aptos-labs/ts-sdk";
+import { STUDIO_MODULE } from "../utils";
 
-export class StudioEvents {
+export class Studio {
   readonly aptos: Aptos;
 
   constructor(readonly config: AptosConfig) {
@@ -20,7 +21,7 @@ export class StudioEvents {
   ): Promise<GetEventsResponse> {
     const collectionCreatedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
-      eventType: `${EVENTS_MODULE}::CollectionCreated`,
+      eventType: `${STUDIO_MODULE}::CollectionCreatedEvent`,
       minimumLedgerVersion: 0,
     });
 
@@ -32,7 +33,7 @@ export class StudioEvents {
   ): Promise<GetEventsResponse> {
     const composableMintedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
-      eventType: `${EVENTS_MODULE}::ComposableMinted`,
+      eventType: `${STUDIO_MODULE}::TokenCreatedEvent<>`,
       minimumLedgerVersion: 0,
     });
 
@@ -44,7 +45,7 @@ export class StudioEvents {
   ): Promise<GetEventsResponse> {
     const traitMintedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
-      eventType: `${EVENTS_MODULE}::TraitMinted`,
+      eventType: `${STUDIO_MODULE}::TraitMinted`,
       minimumLedgerVersion: 0,
     });
 
@@ -56,7 +57,7 @@ export class StudioEvents {
   ): Promise<GetEventsResponse> {
     const composableBurnedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
-      eventType: `${EVENTS_MODULE}::ComposableBurned`,
+      eventType: `${STUDIO_MODULE}::ComposableBurned`,
       minimumLedgerVersion: 0,
     });
 
@@ -68,7 +69,7 @@ export class StudioEvents {
   ): Promise<GetEventsResponse> {
     const traitBurnedEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
-      eventType: `${EVENTS_MODULE}::TraitBurned`,
+      eventType: `${STUDIO_MODULE}::TraitBurned`,
       minimumLedgerVersion: 0,
     });
 
@@ -80,7 +81,7 @@ export class StudioEvents {
   ): Promise<GetEventsResponse> {
     const compositionEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
-      eventType: `${EVENTS_MODULE}::CompositionEvent`,
+      eventType: `${STUDIO_MODULE}::CompositionEvent`,
       minimumLedgerVersion: 0,
     });
 
@@ -92,7 +93,7 @@ export class StudioEvents {
   ): Promise<GetEventsResponse> {
     const decompositionEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
-      eventType: `${EVENTS_MODULE}::DecompositionEvent`,
+      eventType: `${STUDIO_MODULE}::DecompositionEvent`,
       minimumLedgerVersion: 0,
     });
 
@@ -104,7 +105,7 @@ export class StudioEvents {
   ): Promise<GetEventsResponse> {
     const composableTransferredEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
-      eventType: `${EVENTS_MODULE}::ComposableTransferredEvent`,
+      eventType: `${STUDIO_MODULE}::ComposableTransferredEvent`,
       minimumLedgerVersion: 0,
     });
 
@@ -116,7 +117,7 @@ export class StudioEvents {
   ): Promise<GetEventsResponse> {
     const traitTransferredEvents = await this.aptos.getAccountEventsByEventType({
       accountAddress: args.accountAddress,
-      eventType: `${EVENTS_MODULE}::TraitTransferredEvent`,
+      eventType: `${STUDIO_MODULE}::TraitTransferredEvent`,
       minimumLedgerVersion: 0,
     });
 

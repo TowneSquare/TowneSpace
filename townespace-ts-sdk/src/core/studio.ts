@@ -14,7 +14,7 @@ import {
     Aptos
 } from "@aptos-labs/ts-sdk";
 import { MAX_U64_BIG_INT } from "@aptos-labs/ts-sdk/dist/esm/bcs/consts.mjs";
-import { STUDIO_MODULE, PropertyType, PropertyTypeMap } from "../utils/";
+import { STUDIO_MODULE, PropertyType, PropertyTypeMap, ComposableType, TraitType } from "../utils";
   
 export type FungibleTokenParameters = {
 	owner: Account;
@@ -41,10 +41,6 @@ const aptos = new Aptos(config);
  * Class for managing aptos_token
  */
 export class Studio {
-
-    private readonly CollectionType: string = `${STUDIO_MODULE}::Collection`;
-    private readonly ComposableType: string = `${STUDIO_MODULE}::Composable`;
-    private readonly TraitType: string = `${STUDIO_MODULE}::Trait`;
 
     private async submitTransaction(
         account: Account,
@@ -614,7 +610,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "burn_token",
-            [tokenType || this.ComposableType || this.TraitType],
+            [tokenType || ComposableType || TraitType],
             [tokenObject],
             
         );
@@ -639,7 +635,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "freeze_transfer",
-            [tokenType || this.ComposableType || this.TraitType],
+            [tokenType || ComposableType || TraitType],
             [tokenObject],
             
         );
@@ -664,7 +660,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "unfreeze_transfer",
-            [tokenType || this.ComposableType || this.TraitType],
+            [tokenType || ComposableType || TraitType],
             [tokenObject],
             
         );
@@ -743,7 +739,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "equip_fungible_asset",
-            [fungibleAssetType, tokenType || this.ComposableType || this.TraitType],
+            [fungibleAssetType, tokenType || ComposableType || TraitType],
             [fungibleAsset, tokenObject, amount],
             
         );
@@ -770,7 +766,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "unequip_fungible_asset",
-            [fungibleAssetType, tokenType || this.ComposableType || this.TraitType],
+            [fungibleAssetType, tokenType || ComposableType || TraitType],
             [fungibleAsset, tokenObject, amount],
             
         );
@@ -795,7 +791,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "decompose_entire_composable_token",
-            [tokenType || this.ComposableType],
+            [tokenType || ComposableType],
             [composableObject, new_uri],
             
         );
@@ -820,7 +816,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "transfer_digital_asset",
-            [tokenType || this.ComposableType || this.TraitType],
+            [tokenType || ComposableType || TraitType],
             [tokenAddress, recipient],
             
         );
@@ -871,7 +867,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "set_token_name",
-            [tokenType || this.ComposableType || this.TraitType],
+            [tokenType || ComposableType || TraitType],
             [tokenObject, newTokenName],
             
         );
@@ -897,7 +893,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "set_token_description",
-            [tokenType || this.ComposableType || this.TraitType],
+            [tokenType || ComposableType || TraitType],
             [tokenObject, newTokenDescription],
             
         );
@@ -947,7 +943,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "add_property_to_token",
-            [tokenType || this.ComposableType || this.TraitType],
+            [tokenType || ComposableType || TraitType],
             [
                 tokenObject,
                 propertyKey,
@@ -979,7 +975,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "add_typed_property_to_token",
-            [tokenType || this.ComposableType || this.TraitType, PropertyTypeMap[propertyType]],
+            [tokenType || ComposableType || TraitType, PropertyTypeMap[propertyType]],
             [tokenObject, propertyKey, PropertyTypeMap[propertyType], propertyValue],
             
         );
@@ -1006,7 +1002,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "update_property_from_token",
-            [tokenType || this.ComposableType || this.TraitType],
+            [tokenType || ComposableType || TraitType],
             [
                 tokenObject, 
                 propertyKey,
@@ -1036,7 +1032,7 @@ export class Studio {
         return this.submitTransaction(
             creator,
             "remove_property_from_token",
-            [tokenType || this.ComposableType || this.TraitType],
+            [tokenType || ComposableType || TraitType],
             [tokenObject, propertyKey],
             
         );

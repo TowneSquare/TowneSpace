@@ -12,8 +12,8 @@ import {
     MoveString
 } from "@aptos-labs/ts-sdk";
 import { createInterface } from "readline";
-import { Studio } from "../src/submit/studio";
-import { StudioEvents } from "../src/retrieve/studioEvents";
+import { Studio } from "../src/core/studio";
+import { StudioEvents } from "../src/api/studio";
 
 // Default to devnet
 const APTOS_NETWORK: Network = Network.TESTNET;
