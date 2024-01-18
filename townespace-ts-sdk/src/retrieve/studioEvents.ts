@@ -7,7 +7,6 @@ import {
   AptosConfig,
   GetEventsResponse,
 } from "@aptos-labs/ts-sdk";
-import { EVENTS_MODULE } from "../utils/module-endpoints";
 
 export class StudioEvents {
   readonly aptos: Aptos;
