@@ -1,4 +1,4 @@
 export const STUDIO_MODULE =
-  "0x0c408b87f4adcbca12d2e8b9cd0a62a0886746bad66aa29eea4cbcd0fe66958a::studio";
+  "0x04d8dd898c13ab06a4897d2fdedb478cf7ac4d3e530d1daa5741c9b9d9ea15ee::studio";
 export const COMPOSABLES_MODULE =
-  "0x0c408b87f4adcbca12d2e8b9cd0a62a0886746bad66aa29eea4cbcd0fe66958a::composables";
+  "0x04d8dd898c13ab06a4897d2fdedb478cf7ac4d3e530d1daa5741c9b9d9ea15ee::composables";
