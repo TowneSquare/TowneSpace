@@ -8,6 +8,7 @@ module.exports = {
       'primary-light': '#b882ff',
       'primary-default': '#9264f8',
       'primary-dark': '#6646ae',
+      'primary-footer': '#2B2240',
       'secondary-cyan': '00eefd',
       'white': '#ffffff',
       'gray-light-1': '#cccccc',
@@ -21,7 +22,8 @@ module.exports = {
     },
     extend: {},
     fontFamily: {
-      Inter: ['Inter', 'sans-serif']
+      Inter: ['Inter', 'sans-serif'],
+      Permanent: ['Permanent Marker'],
     },
   },
   plugins: [],
