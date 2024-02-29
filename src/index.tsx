@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './state/store';
 import { AppContext } from './wallet-adapter/AppContext';
+import WalletModal from './components/header/walletModal';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +18,7 @@ root.render(
       <BrowserRouter>
         <Provider store={store} >
           <App />
+          <WalletModal />
         </Provider>
       </BrowserRouter>
     </AppContext>
