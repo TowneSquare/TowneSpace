@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { toggleWalletPanel } from "../../../state/dialog";
+import PrimaryButton from "../../../components/primary_button";
+import ButtonStatus from "../../../type/button_status";
 
 const Last = () => {
     const dispatch = useDispatch();
@@ -19,12 +21,9 @@ const Last = () => {
                 <p className="text-[36px] font-bold text-center">
                     Create your first collection of <span className=" font-Permanent font-normal text-primary-default">Composable NFTs!</span>
                 </p>
-                <button
-                    className="flex w-[213px] md:w-[191px] h-[48px] justify-center items-center mt-12 text-white font-medium bg-primary-default hover:bg-gray-light-2 active:bg-gray-light-1 rounded-full"
-                    onClick={() => { }}
-                >
-                    See documentation
-                </button>
+                <PrimaryButton type={ButtonStatus.active} className="flex mt-12 w-[191px] h-[48px] items-center justify-center" onClick={() => { }}>
+                    Launch Creator studio
+                </PrimaryButton>
             </div>
         </div>
     );

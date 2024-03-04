@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { toggleWalletPanel } from "../../../state/dialog";
+import PrimaryButton from "../../../components/primary_button";
+import ButtonStatus from "../../../type/button_status";
 
 const Third = () => {
     const dispatch = useDispatch();
@@ -14,13 +16,10 @@ const Third = () => {
                 <p className="text-[18px] m:w-[530px]">
                     TowneSpace supports premium collections on Aptos with <br className="hidden md:block" /> applications such as TowneSpace cNFT & migration studio.
                 </p>
-                <div className="flex items-center gap-4">
-                    <button
-                        className="flex w-[191px] h-[48px] justify-center items-center mt-12 text-white font-medium bg-primary-default hover:bg-gray-light-2 active:bg-gray-light-1 rounded-full"
-                        onClick={() => { }}
-                    >
+                <div className="flex items-center gap-4 mt-12">
+                    <PrimaryButton type={ButtonStatus.active} className="flex w-[191px] h-[48px] items-center justify-center" onClick={() => { }}>
                         See documentation
-                    </button>
+                    </PrimaryButton>
                 </div>
             </div>
         </div>

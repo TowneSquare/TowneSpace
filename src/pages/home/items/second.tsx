@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { toggleWalletPanel } from "../../../state/dialog";
+import PrimaryButton from "../../../components/primary_button";
+import ButtonStatus from "../../../type/button_status";
 
 const Second = () => {
     const dispatch = useDispatch();
@@ -19,15 +21,14 @@ const Second = () => {
                         The first composable NFT standard leveraging Aptos Digital Assets.
                     </p>
                 </div>
-                <div className="flex flex-col md:flex-row md:items-center gap-4">
-                    <button
-                        className="flex w-[213px] md:w-[196px] h-[48px] justify-center items-center mt-12 text-white font-medium bg-primary-default hover:bg-gray-light-2 active:bg-gray-light-1 rounded-full"
-                        onClick={() => { }}
-                    >
+                <div className="flex flex-col md:flex-row md:items-center gap-4 md:mt-12">
+
+                    <PrimaryButton type={ButtonStatus.active} className="flex w-[213px] md:w-[196px] h-[48px] items-center justify-center" onClick={() => dispatch(toggleWalletPanel(true))}>
                         Launch Creator studio
-                    </button>
+                    </PrimaryButton>
+
                     <button
-                        className="w-[213px] md:w-[196px] h-[48px] justify-center items-center md:mt-12 text-[#9264F8] font-medium active:bg-gray-light-1 rounded-full"
+                        className="w-[213px] md:w-[196px] h-[48px] justify-center items-center text-[#9264F8] font-medium active:bg-gray-light-1 rounded-full"
                     >
                         Learn more about cNFTs
                     </button>
