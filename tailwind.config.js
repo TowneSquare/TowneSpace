@@ -5,9 +5,9 @@ module.exports = {
   ],
   theme: {
     colors: {
-      'primary-light': '#b882ff',
-      'primary-default': '#9264f8',
-      'primary-dark': '#6646ae',
+      'primary-light': '#9C6EEB',
+      'primary-default': '#9264F8',
+      'primary-dark': '#7446DA',
       'primary-footer': '#2B2240',
       'secondary-cyan': '00eefd',
       'white': '#ffffff',

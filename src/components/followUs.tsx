@@ -2,7 +2,7 @@ const FollowUs = () => {
     return (
         <div className="flex gap-6 items-center">
             <a
-                href={`https://twitter.com/0xcred`}
+                href={`https://twitter.com/townespacexyz`}
                 target="_blank"
                 className="w-6"
             >

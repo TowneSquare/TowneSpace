@@ -22,7 +22,7 @@ const Footer = () => {
                                 Creator Studio
                             </p>
                             <a href="" className="text-[15px] font-bold w-[131px]">
-                                Terms and Service
+                                Terms of Service
                             </a>
                             <a href="" className="mt-8 sm:mt-0 text-[15px] font-bold w-[140px]">
                                 Dev documentation
