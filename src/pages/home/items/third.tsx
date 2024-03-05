@@ -17,9 +17,9 @@ const Third = () => {
                     TowneSpace supports premium collections on Aptos with <br className="hidden md:block" /> applications such as TowneSpace cNFT & migration studio.
                 </p>
                 <div className="flex items-center gap-4 mt-12">
-                    <PrimaryButton type={ButtonStatus.active} className="flex w-[191px] h-[48px] items-center justify-center" onClick={() => { }}>
+                    {/* <PrimaryButton type={ButtonStatus.active} className="flex w-[191px] h-[48px] items-center justify-center" onClick={() => { }}>
                         See documentation
-                    </PrimaryButton>
+                    </PrimaryButton> */}
                 </div>
             </div>
         </div>
