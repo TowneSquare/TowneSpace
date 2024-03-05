@@ -18,7 +18,7 @@ const Footer = () => {
                             <FollowUs />
                         </div>
                         <div className="flex flex-wrap w-[300px] sm:w-[411px] justify-between gap-x-[140px] gap-y-6">
-                            <p onClick={() => {  }} className="text-[15px] font-bold w-[140px]">
+                            {/* <p onClick={() => {  }} className="text-[15px] font-bold w-[140px]">
                                 Creator Studio
                             </p>
                             <a href="" className="text-[15px] font-bold w-[131px]">
@@ -29,7 +29,7 @@ const Footer = () => {
                             </a>
                             <a href="" className="text-[15px] font-bold w-[131px]">
                                 Privacy policy
-                            </a>
+                            </a> */}
                         </div>
                     </div>
                     <p className="text-[16px] font-normal">

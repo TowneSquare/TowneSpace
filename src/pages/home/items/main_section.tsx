@@ -30,19 +30,22 @@ const MainSection = () => {
                         The first composable NFT standard leveraging <br className="hidden md:block" />Aptos Digital Assets.
                     </p>
                 </div>
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:mt-12">
+                <div className="flex flex-col md:flex-row md:items-center gap-4 mt-12">
 
-                    <PrimaryButton type={ButtonStatus.active} className="hidden md:flex w-[242px] md:w-[196px] h-[48px] items-center justify-center" onClick={() => dispatch(toggleWalletPanel(true))}>
-                        Creator studio
-                    </PrimaryButton>
+                    <button className="md:flex flex-col hidden bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center" onClick={() => { }}>
+                        <p className="font-[500] text-[16px]">Creator studio</p>
+                        <p className="font-[300] text-[14px] -mt-1">Coming soon</p>
+                    </button>
 
-                    <PrimaryButton type={ButtonStatus.active} className="md:hidden flex w-[242px] md:w-[196px] h-[48px] items-center justify-center" onClick={() => dispatch(toggleWalletPanel(true))}>
-                        Creator studio
-                    </PrimaryButton>
+                    <button className="md:hidden flex flex-col bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center" onClick={() => { }}>
+                        <p className="font-[500] text-[16px]">Creator studio</p>
+                        <p className="font-[300] text-[14px] -mt-1">Coming soon</p>
+                    </button>
                     <button
-                        className="w-[242px] md:w-[196px] h-[48px] justify-center items-center text-black font-medium bg-white hover:bg-[#F6F6F6] active:bg-[#E1E1E1] rounded-full"
+                        className="w-[242px] md:w-[196px] h-[48px] justify-center items-center text-black font-medium bg-white rounded-full"
                     >
-                        Dev docs
+                        <p className="font-[500] text-[16px]">Dev docs</p>
+                        <p className="font-[300] text-[14px] -mt-1">Coming soon</p>
                     </button>
                 </div>
             </div>

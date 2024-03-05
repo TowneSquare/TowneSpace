@@ -23,7 +23,7 @@ const Second = () => {
                 </div>
                 <div className="flex flex-col md:flex-row md:items-center gap-4 md:mt-12">
 
-                    <PrimaryButton type={ButtonStatus.active} className="flex w-[213px] md:w-[196px] h-[48px] items-center justify-center" onClick={() => dispatch(toggleWalletPanel(true))}>
+                    {/* <PrimaryButton type={ButtonStatus.active} className="flex w-[213px] md:w-[196px] h-[48px] items-center justify-center" onClick={() => dispatch(toggleWalletPanel(true))}>
                         Launch Creator studio
                     </PrimaryButton>
 
@@ -31,7 +31,7 @@ const Second = () => {
                         className="w-[213px] md:w-[196px] h-[48px] justify-center items-center text-[#9264F8] font-medium active:bg-gray-light-1 rounded-full"
                     >
                         Learn more about cNFTs
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>

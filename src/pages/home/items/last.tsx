@@ -21,9 +21,10 @@ const Last = () => {
                 <p className="text-[36px] font-bold text-center">
                     Create your first collection of <span className=" font-Permanent font-normal text-primary-default">Composable NFTs!</span>
                 </p>
-                <PrimaryButton type={ButtonStatus.active} className="flex mt-12 w-[191px] h-[48px] items-center justify-center" onClick={() => { }}>
-                    Launch Creator studio
-                </PrimaryButton>
+                <button className=" mt-12 md:flex flex-col hidden bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center" onClick={() => { }}>
+                    <p className="font-[500] text-[16px]">Launch Creator studio</p>
+                    <p className="font-[300] text-[14px] -mt-1">Coming soon</p>
+                </button>
             </div>
         </div>
     );
