@@ -16,5 +16,6 @@ export interface NftMetadataType{
    property_values?: number[][],
    seed?: number[] // used when auid is disabled.
    type: NftType,
-   price?: number
+   price?: number,
+   collection_id?: string
 }

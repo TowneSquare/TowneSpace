@@ -8,6 +8,23 @@ import { Provider } from 'react-redux';
 import { store } from './state/store';
 import { AppContext } from './wallet-adapter/AppContext';
 import WalletModal from './components/header/walletModal';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: process.env.REACT_APP_INDEXER_URL,
+  headers: {
+    "apikey" : process.env.REACT_APP_API_KEY as string
+  },
+  cache: new InMemoryCache(),
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: "no-cache",
+    },
+    query: {
+      fetchPolicy: "no-cache",
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,7 +34,9 @@ root.render(
     <AppContext>
       <BrowserRouter>
         <Provider store={store} >
-          <App />
+          <ApolloProvider client={client}>
+            <App />
+          </ApolloProvider>
           <WalletModal />
         </Provider>
       </BrowserRouter>
