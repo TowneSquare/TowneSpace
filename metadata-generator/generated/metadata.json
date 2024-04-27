@@ -1,0 +1,587 @@
+[
+    {
+        "name": "Cool Sloth #1 Background",
+        "description": "",
+        "image": "1.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Background",
+                "value": "Mars"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #2 Background",
+        "description": "",
+        "image": "2.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Background",
+                "value": "Aptos"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #3 Background",
+        "description": "",
+        "image": "3.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Background",
+                "value": "Blue"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #4 Background",
+        "description": "",
+        "image": "4.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Background",
+                "value": "Green"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #5 Background",
+        "description": "",
+        "image": "5.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Background",
+                "value": "Interstellar"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #6 Background",
+        "description": "",
+        "image": "6.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Background",
+                "value": "Candyland"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #7 Clothes",
+        "description": "",
+        "image": "7.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "Bee Robot suit"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #8 Clothes",
+        "description": "",
+        "image": "8.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "Aptos Hoodie"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #9 Clothes",
+        "description": "",
+        "image": "9.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "Aptos thsirt"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #10 Clothes",
+        "description": "",
+        "image": "10.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "Latex straps"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #11 Clothes",
+        "description": "",
+        "image": "11.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "Trracotta Army"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #12 Clothes",
+        "description": "",
+        "image": "12.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "Inu hoodie"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #13 Clothes",
+        "description": "",
+        "image": "13.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "Mingo Boa Scarf"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #14 Clothes",
+        "description": "",
+        "image": "14.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "EQ tshirt"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #15 Clothes",
+        "description": "",
+        "image": "15.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "I <3 Mom"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #16 Clothes",
+        "description": "",
+        "image": "16.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "Aptos HK tshirt"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #17 Clothes",
+        "description": "",
+        "image": "17.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Clothes",
+                "value": "Aptos shirt"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #18 Body",
+        "description": "",
+        "image": "18.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Body",
+                "value": "Panda"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #19 Body",
+        "description": "",
+        "image": "19.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Body",
+                "value": "Marshmallow"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #20 Body",
+        "description": "",
+        "image": "20.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Body",
+                "value": "OG"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #21 Body",
+        "description": "",
+        "image": "21.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Body",
+                "value": "Beetroot"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #22 Body",
+        "description": "",
+        "image": "22.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Body",
+                "value": "Transparent"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #23 Body",
+        "description": "",
+        "image": "23.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Body",
+                "value": "Gold"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #24 Mouth",
+        "description": "",
+        "image": "24.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Mouth",
+                "value": "Band aid"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #25 Mouth",
+        "description": "",
+        "image": "25.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Mouth",
+                "value": "Dragon mouth"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #26 Mouth",
+        "description": "",
+        "image": "26.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Mouth",
+                "value": "Ciggy"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #27 Mouth",
+        "description": "",
+        "image": "27.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Mouth",
+                "value": "Covid cough"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #28 Mouth",
+        "description": "",
+        "image": "28.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Mouth",
+                "value": "Yelling"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #29 Mouth",
+        "description": "",
+        "image": "29.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Mouth",
+                "value": "Eating leaves"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #30 Mouth",
+        "description": "",
+        "image": "30.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Mouth",
+                "value": "Drowling"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #31 Hat",
+        "description": "",
+        "image": "31.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Hat",
+                "value": "Pencil head"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #32 Hat",
+        "description": "",
+        "image": "32.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Hat",
+                "value": "Fire"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #33 Hat",
+        "description": "",
+        "image": "33.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Hat",
+                "value": "Shrimp"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #34 Hat",
+        "description": "",
+        "image": "34.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Hat",
+                "value": "Cowboy hat"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #35 Hat",
+        "description": "",
+        "image": "35.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Hat",
+                "value": "Mingos crown"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #36 Hat",
+        "description": "",
+        "image": "36.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Hat",
+                "value": "Crown"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #37 Hat",
+        "description": "",
+        "image": "37.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Hat",
+                "value": "Doo Doo"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #38 Hat",
+        "description": "",
+        "image": "38.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Hat",
+                "value": "Trump"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #39 Eyes",
+        "description": "",
+        "image": "39.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Eyes",
+                "value": "Diving mask"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #40 Eyes",
+        "description": "",
+        "image": "40.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Eyes",
+                "value": "Pirate"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #41 Eyes",
+        "description": "",
+        "image": "41.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Eyes",
+                "value": "Doubtful"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #42 Eyes",
+        "description": "",
+        "image": "42.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Eyes",
+                "value": "Anxious"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #43 Eyes",
+        "description": "",
+        "image": "43.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Eyes",
+                "value": "Sleepy"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #44 Eyes",
+        "description": "",
+        "image": "44.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Eyes",
+                "value": "Bored"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #45 Eyes",
+        "description": "",
+        "image": "45.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Eyes",
+                "value": "Google glasses"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    }
+]
