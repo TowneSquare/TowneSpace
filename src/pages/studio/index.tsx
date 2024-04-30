@@ -11,7 +11,6 @@ import Welcome from "./welcome";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
 const Studio = () => {
-
    const navigate = useNavigate();
 
    useEffect(() => {

@@ -11,14 +11,11 @@ const Filter: React.FC<Props> = ({ filter, setFilter }) => {
    return (
       <div className="flex justify-center">
          <div className="flex bg-gray-dark-2 rounded-full">
-            <PrimaryButton type={filter == FilterType.all ? ButtonStatus.active : ButtonStatus.inactive} onClick={() => setFilter(FilterType.all)} className="md:w-[120px]">
-               All
+            <PrimaryButton type={filter == FilterType.composable ? ButtonStatus.active : ButtonStatus.inactive} onClick={() => setFilter(FilterType.composable)}>
+               Composable NFTs
             </PrimaryButton>
-            <PrimaryButton type={filter == FilterType.nft ? ButtonStatus.active : ButtonStatus.inactive} onClick={() => setFilter(FilterType.nft)} className="md:w-[120px]">
+            <PrimaryButton type={filter == FilterType.nfts ? ButtonStatus.active : ButtonStatus.inactive} onClick={() => setFilter(FilterType.nfts)} className="md:w-[120px]">
                NFTs
-            </PrimaryButton>
-            <PrimaryButton type={filter == FilterType.nftv2 ? ButtonStatus.active : ButtonStatus.inactive} onClick={() => setFilter(FilterType.nftv2)}>
-               Composable NFTs (V2)
             </PrimaryButton>
          </div>
       </div>
