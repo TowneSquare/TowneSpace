@@ -42,7 +42,7 @@ const Tab: React.FC<Props> = ({ data }) => {
 const tabs = [
    {
       href: "/studio/mytoken",
-      label: "My Tokens"
+      label: "My NFTs"
    },
    {
       href: "/studio/mycollect",
