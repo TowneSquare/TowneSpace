@@ -16,6 +16,8 @@ const Home = () => {
 
    if (connected) {
       navigate("/studio");
+   } else {
+      toggleWalletPanel(true)
    }
 
    return (

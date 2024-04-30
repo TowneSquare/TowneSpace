@@ -13,7 +13,7 @@ const WalletButtons = () => {
   const { wallets } = useWallet();
 
   return (
-    <div className="pl-20 mt-4 flex flex-col gap-4">
+    <div className="pl-10 mt-4 flex flex-col gap-4">
       {wallets.map((wallet: Wallet) => {
         return WalletView(wallet);
       })}
@@ -83,7 +83,7 @@ const WalletView = (wallet: Wallet) => {
     // we are on desktop view
     return (
       <button
-        className={`flex justify-between items-center  text-white py-2 px-6 rounded ${isWalletReady
+        className={`flex justify-between items-center  text-white py-2 rounded ${isWalletReady
           ? "hover:bg-gray-light-8"
           : "cursor-not-allowed"
           }`}

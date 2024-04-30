@@ -39,7 +39,7 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     // }),
     // new FaceWallet(face!),
     // new FlipperWallet(),
-    // new MSafeWalletAdapter(),
+    // // new MSafeWalletAdapter(),
     // new NightlyWallet(),
     // new OpenBlockWallet(),
     // new TokenPocketWallet(),
