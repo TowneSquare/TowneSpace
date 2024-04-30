@@ -12,6 +12,8 @@ import { fetchNfts, fetchCollections } from './state/tokens';
 import { useEffect } from 'react';
 import Generate from './pages/generate';
 import RedirectPage from './pages/redirectPage';
+import { NFT_COLLECTION_OWNED_ID_QUERY } from './util';
+import { useQuery } from '@apollo/client';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -19,13 +21,18 @@ function App() {
   const currentCollection = useAppSelector(state => state.tokensState.currentCollection)
 
   useEffect(() => {
-    dispatch(fetchCollections());
+    // dispatch(fetchCollections());
   }, []);
 
   useEffect(() => {
-    if (currentCollection) {
-      dispatch(fetchNfts(currentCollection.name));
-    }
+    // console.log("Collection: ", currentCollection);
+    // if (currentCollection) {
+    //   // dispatch(fetchNfts(currentCollection.name));
+    //   const { loading, error, data } = useQuery(NFT_COLLECTION_OWNED_ID_QUERY, {
+    //     variables: { wallet: "0x239589c5cfb0cc96f76fa59165a7cbb6ef99ad50d0acc34cf3a2585d861511be", offset: 0, collectionId: currentCollection.collection_id },
+    //   });
+    //   dispatch(data);
+    // }
   }, [collections, currentCollection])
 
   return (

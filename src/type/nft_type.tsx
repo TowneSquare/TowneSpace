@@ -18,4 +18,15 @@ export interface NftMetadataType{
    type: NftType,
    price?: number,
    collection_id?: string
+   current_token_data: {
+      token_name: string;
+      token_uri: string;
+      current_collection: {
+         collection_name: string;
+      }
+   },
+   token_standard: string,
+   collection_uri?: string
+   collection_name?: string
+   single_token_uri: string
 }

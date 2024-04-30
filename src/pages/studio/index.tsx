@@ -9,9 +9,6 @@ import Tokens from "./tokens";
 import Welcome from "./welcome";
 
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { NFT_COLLECTION_OWNED_QUERY } from "../../util";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 const Studio = () => {
    const navigate = useNavigate();

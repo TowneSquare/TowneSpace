@@ -71,11 +71,14 @@ export const NFT_COLLECTION_OWNED_ID_QUERY = gql`
          amount
          current_token_data {
             token_name
+            token_uri
+            current_collection {
+               collection_name
+            }
          }
          is_fungible_v2
          owner_address
          token_standard
-         table_type_v1
       }
    } 
 `;
