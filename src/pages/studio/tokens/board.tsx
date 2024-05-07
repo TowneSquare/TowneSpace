@@ -19,7 +19,7 @@ const Board: React.FC<Props> = ({ filter }) => {
    }
    
    return (
-      <div className="flex flex-wrap gap-10 items-baseline">
+      <div className="flex h-full flex-wrap gap-4 items-baseline">
          {
             data?.current_token_ownerships_v2.length > 0 ?
             data?.current_token_ownerships_v2.map((nft: NftMetadataType, index: number) => (
