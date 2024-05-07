@@ -299,9 +299,308 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #24 Mouth",
+        "name": "Cool Sloth #24 .generated",
         "description": "",
         "image": "24.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "8"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #25 .generated",
+        "description": "",
+        "image": "25.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "9"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #26 .generated",
+        "description": "",
+        "image": "26.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "14"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #27 .generated",
+        "description": "",
+        "image": "27.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "15"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #28 .generated",
+        "description": "",
+        "image": "28.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "17"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #29 .generated",
+        "description": "",
+        "image": "29.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "16"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #30 .generated",
+        "description": "",
+        "image": "30.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "12"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #31 .generated",
+        "description": "",
+        "image": "31.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "13"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #32 .generated",
+        "description": "",
+        "image": "32.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "11"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #33 .generated",
+        "description": "",
+        "image": "33.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "10"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #34 .generated",
+        "description": "",
+        "image": "34.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "21"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #35 .generated",
+        "description": "",
+        "image": "35.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "20"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #36 .generated",
+        "description": "",
+        "image": "36.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "22"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #37 .generated",
+        "description": "",
+        "image": "37.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "23"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #38 .generated",
+        "description": "",
+        "image": "38.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "18"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #39 .generated",
+        "description": "",
+        "image": "39.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "19"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #40 .generated",
+        "description": "",
+        "image": "40.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "4"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #41 .generated",
+        "description": "",
+        "image": "41.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "5"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #42 .generated",
+        "description": "",
+        "image": "42.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "7"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #43 .generated",
+        "description": "",
+        "image": "43.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "6"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #44 .generated",
+        "description": "",
+        "image": "44.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "2"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #45 .generated",
+        "description": "",
+        "image": "45.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "3"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #46 .generated",
+        "description": "",
+        "image": "46.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": ".generated",
+                "value": "1"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Cool Sloth #47 Mouth",
+        "description": "",
+        "image": "47.png",
         "edition": 1,
         "attributes": [
             {
@@ -312,9 +611,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #25 Mouth",
+        "name": "Cool Sloth #48 Mouth",
         "description": "",
-        "image": "25.png",
+        "image": "48.png",
         "edition": 1,
         "attributes": [
             {
@@ -325,9 +624,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #26 Mouth",
+        "name": "Cool Sloth #49 Mouth",
         "description": "",
-        "image": "26.png",
+        "image": "49.png",
         "edition": 1,
         "attributes": [
             {
@@ -338,9 +637,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #27 Mouth",
+        "name": "Cool Sloth #50 Mouth",
         "description": "",
-        "image": "27.png",
+        "image": "50.png",
         "edition": 1,
         "attributes": [
             {
@@ -351,9 +650,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #28 Mouth",
+        "name": "Cool Sloth #51 Mouth",
         "description": "",
-        "image": "28.png",
+        "image": "51.png",
         "edition": 1,
         "attributes": [
             {
@@ -364,9 +663,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #29 Mouth",
+        "name": "Cool Sloth #52 Mouth",
         "description": "",
-        "image": "29.png",
+        "image": "52.png",
         "edition": 1,
         "attributes": [
             {
@@ -377,9 +676,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #30 Mouth",
+        "name": "Cool Sloth #53 Mouth",
         "description": "",
-        "image": "30.png",
+        "image": "53.png",
         "edition": 1,
         "attributes": [
             {
@@ -390,9 +689,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #31 Hat",
+        "name": "Cool Sloth #54 Hat",
         "description": "",
-        "image": "31.png",
+        "image": "54.png",
         "edition": 1,
         "attributes": [
             {
@@ -403,9 +702,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #32 Hat",
+        "name": "Cool Sloth #55 Hat",
         "description": "",
-        "image": "32.png",
+        "image": "55.png",
         "edition": 1,
         "attributes": [
             {
@@ -416,9 +715,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #33 Hat",
+        "name": "Cool Sloth #56 Hat",
         "description": "",
-        "image": "33.png",
+        "image": "56.png",
         "edition": 1,
         "attributes": [
             {
@@ -429,9 +728,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #34 Hat",
+        "name": "Cool Sloth #57 Hat",
         "description": "",
-        "image": "34.png",
+        "image": "57.png",
         "edition": 1,
         "attributes": [
             {
@@ -442,9 +741,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #35 Hat",
+        "name": "Cool Sloth #58 Hat",
         "description": "",
-        "image": "35.png",
+        "image": "58.png",
         "edition": 1,
         "attributes": [
             {
@@ -455,9 +754,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #36 Hat",
+        "name": "Cool Sloth #59 Hat",
         "description": "",
-        "image": "36.png",
+        "image": "59.png",
         "edition": 1,
         "attributes": [
             {
@@ -468,9 +767,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #37 Hat",
+        "name": "Cool Sloth #60 Hat",
         "description": "",
-        "image": "37.png",
+        "image": "60.png",
         "edition": 1,
         "attributes": [
             {
@@ -481,9 +780,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #38 Hat",
+        "name": "Cool Sloth #61 Hat",
         "description": "",
-        "image": "38.png",
+        "image": "61.png",
         "edition": 1,
         "attributes": [
             {
@@ -494,9 +793,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #39 Eyes",
+        "name": "Cool Sloth #62 Eyes",
         "description": "",
-        "image": "39.png",
+        "image": "62.png",
         "edition": 1,
         "attributes": [
             {
@@ -507,9 +806,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #40 Eyes",
+        "name": "Cool Sloth #63 Eyes",
         "description": "",
-        "image": "40.png",
+        "image": "63.png",
         "edition": 1,
         "attributes": [
             {
@@ -520,9 +819,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #41 Eyes",
+        "name": "Cool Sloth #64 Eyes",
         "description": "",
-        "image": "41.png",
+        "image": "64.png",
         "edition": 1,
         "attributes": [
             {
@@ -533,9 +832,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #42 Eyes",
+        "name": "Cool Sloth #65 Eyes",
         "description": "",
-        "image": "42.png",
+        "image": "65.png",
         "edition": 1,
         "attributes": [
             {
@@ -546,9 +845,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #43 Eyes",
+        "name": "Cool Sloth #66 Eyes",
         "description": "",
-        "image": "43.png",
+        "image": "66.png",
         "edition": 1,
         "attributes": [
             {
@@ -559,9 +858,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #44 Eyes",
+        "name": "Cool Sloth #67 Eyes",
         "description": "",
-        "image": "44.png",
+        "image": "67.png",
         "edition": 1,
         "attributes": [
             {
@@ -572,9 +871,9 @@
         "compiler": "TowneSpace Engine"
     },
     {
-        "name": "Cool Sloth #45 Eyes",
+        "name": "Cool Sloth #68 Eyes",
         "description": "",
-        "image": "45.png",
+        "image": "68.png",
         "edition": 1,
         "attributes": [
             {

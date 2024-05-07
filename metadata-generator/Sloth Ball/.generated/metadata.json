@@ -1,0 +1,652 @@
+[
+    {
+        "name": "OG Slothball #1",
+        "description": "",
+        "image": "1.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "OG Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "OG Slothball #2",
+        "description": "",
+        "image": "2.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "OG Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "OG Slothball #3",
+        "description": "",
+        "image": "3.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "OG Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "OG Slothball #4",
+        "description": "",
+        "image": "4.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "OG Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "OG Slothball #5",
+        "description": "",
+        "image": "5.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "OG Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Wheat Slothball #6",
+        "description": "",
+        "image": "6.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Wheat Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Wheat Slothball #7",
+        "description": "",
+        "image": "7.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Wheat Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Wheat Slothball #8",
+        "description": "",
+        "image": "8.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Wheat Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Wheat Slothball #9",
+        "description": "",
+        "image": "9.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Wheat Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Wheat Slothball #10",
+        "description": "",
+        "image": "10.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Wheat Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Hazelnut Slothball #11",
+        "description": "",
+        "image": "11.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Hazelnut Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Hazelnut Slothball #12",
+        "description": "",
+        "image": "12.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Hazelnut Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Hazelnut Slothball #13",
+        "description": "",
+        "image": "13.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Hazelnut Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Hazelnut Slothball #14",
+        "description": "",
+        "image": "14.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Hazelnut Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Hazelnut Slothball #15",
+        "description": "",
+        "image": "15.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Hazelnut Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Beetroot Slothball #16",
+        "description": "",
+        "image": "16.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Beetroot Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Beetroot Slothball #17",
+        "description": "",
+        "image": "17.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Beetroot Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Beetroot Slothball #18",
+        "description": "",
+        "image": "18.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Beetroot Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Beetroot Slothball #19",
+        "description": "",
+        "image": "19.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Beetroot Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Beetroot Slothball #20",
+        "description": "",
+        "image": "20.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Beetroot Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Marhsmallow Slothball #21",
+        "description": "",
+        "image": "21.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Marhsmallow Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Marhsmallow Slothball #22",
+        "description": "",
+        "image": "22.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Marhsmallow Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Marhsmallow Slothball #23",
+        "description": "",
+        "image": "23.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Marhsmallow Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Marhsmallow Slothball #24",
+        "description": "",
+        "image": "24.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Marhsmallow Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Marhsmallow Slothball #25",
+        "description": "",
+        "image": "25.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Marhsmallow Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Panda Slothball #26",
+        "description": "",
+        "image": "26.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Panda Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Panda Slothball #27",
+        "description": "",
+        "image": "27.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Panda Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Panda Slothball #28",
+        "description": "",
+        "image": "28.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Panda Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Panda Slothball #29",
+        "description": "",
+        "image": "29.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Panda Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Panda Slothball #30",
+        "description": "",
+        "image": "30.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Panda Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Golden Slothball #31",
+        "description": "",
+        "image": "31.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Golden Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Golden Slothball #32",
+        "description": "",
+        "image": "32.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Golden Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Golden Slothball #33",
+        "description": "",
+        "image": "33.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Golden Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Golden Slothball #34",
+        "description": "",
+        "image": "34.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Golden Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Golden Slothball #35",
+        "description": "",
+        "image": "35.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Golden Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Ghost Slothball #36",
+        "description": "",
+        "image": "36.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Ghost Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Ghost Slothball #37",
+        "description": "",
+        "image": "37.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Ghost Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Ghost Slothball #38",
+        "description": "",
+        "image": "38.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Ghost Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Ghost Slothball #39",
+        "description": "",
+        "image": "39.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Ghost Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Ghost Slothball #40",
+        "description": "",
+        "image": "40.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Ghost Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Zombie Slothball #41",
+        "description": "",
+        "image": "41.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Zombie Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Zombie Slothball #42",
+        "description": "",
+        "image": "42.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Zombie Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Zombie Slothball #43",
+        "description": "",
+        "image": "43.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Zombie Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Zombie Slothball #44",
+        "description": "",
+        "image": "44.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Zombie Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Zombie Slothball #45",
+        "description": "",
+        "image": "45.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Zombie Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Solar Spiral Slothball #46",
+        "description": "",
+        "image": "46.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Solar Spiral Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Solar Spiral Slothball #47",
+        "description": "",
+        "image": "47.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Solar Spiral Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Solar Spiral Slothball #48",
+        "description": "",
+        "image": "48.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Solar Spiral Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Solar Spiral Slothball #49",
+        "description": "",
+        "image": "49.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Solar Spiral Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    },
+    {
+        "name": "Solar Spiral Slothball #50",
+        "description": "",
+        "image": "50.png",
+        "edition": 1,
+        "attributes": [
+            {
+                "type": "Sloth Ball",
+                "value": "Solar Spiral Slothball"
+            }
+        ],
+        "compiler": "TowneSpace Engine"
+    }
+]
