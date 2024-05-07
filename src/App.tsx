@@ -14,6 +14,7 @@ import Generate from './pages/generate';
 import RedirectPage from './pages/redirectPage';
 import { NFT_COLLECTION_OWNED_ID_QUERY } from './util';
 import { useQuery } from '@apollo/client';
+import CreateModal from './components/modal/createModal';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -48,6 +49,7 @@ function App() {
         <Route path="/migrate/*" element={<Migrate />} />
         <Route path="/redirectPage/" element={<RedirectPage />} />
       </Routes>
+      <CreateModal />
     </div>
   );
 }

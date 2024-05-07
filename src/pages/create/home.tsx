@@ -5,7 +5,7 @@ const Home = () => {
    const navigation = useNavigate();
    useEffect(() => {
       navigation("/create/step1");
-   })
+   },[])
    return (
       <h1>Home</h1>
    )
