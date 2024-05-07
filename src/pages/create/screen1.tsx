@@ -23,7 +23,7 @@ const Screen1 = () => {
                </div>
             </div>
             <div className="w-full flex flex-col">
-               <img src="/create/dynamic-background.webp" alt="background" />
+               <img src="/create/dynamic-background.svg" className="bg-[#121212]" alt="background" />
                <div className="h-full px-6 py-6 flex flex-col gap-4 justify-end">
                   <p className="text-2xl md:text-3xl font-bold white">
                      Dynamic PFP

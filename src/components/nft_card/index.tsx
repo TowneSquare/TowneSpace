@@ -46,7 +46,7 @@ const NftCard: React.FC<Props> = ({ data }) => {
       <div className="group w-[140px] md:w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer">
          <div className="relative h-[132px] md:h-[156px] bg-gray-light-2 rounded-t-lg">
             {!isUriEmpty(tokenImage) &&
-               <img src={tokenImage} className="w-full h-full" alt="nft" />
+               <img src={tokenImage} className="w-full h-full rounded-t-[8px]" alt="nft" />
             }
             <div className="group/3dots hidden group-hover:flex flex-col absolute w-6 h-6 justify-center items-center top-2 right-2 hover:bg-black rounded-full z-10">
                <img src="/nft-card/3dots.svg" alt="3dots" />
@@ -82,12 +82,12 @@ const NftCard: React.FC<Props> = ({ data }) => {
             <p className="text-base md:text-lg font-semibold">
                {data.current_token_data.token_name}
             </p>
-            {/* <div className="mt-3 flex gap-2">
+            <div className="mt-3 flex gap-2">
                <img src="/nft-card/aptos-logo.svg" alt="logo" />
                <p className="text-sm md:text-base font-semibold">
                   {data.price}
                </p>
-            </div> */}
+            </div>
          </div>
       </div>
    )
