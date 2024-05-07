@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './state/store';
 import { AppContext } from './wallet-adapter/AppContext';
-import WalletModal from './components/header/walletModal';
+import WalletModal from './components/modal/walletModal';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
