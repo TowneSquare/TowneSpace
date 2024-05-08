@@ -1,6 +1,7 @@
 import os
 import shutil
 import json
+import csv
 
 # Images folder path
 folder_path = "Sloth Ball"
@@ -10,6 +11,7 @@ occurrence_num = 5  # Number of times each image should be repeated in the metad
 def generate_image_metadata(folder_path, mirror_folder_path):
     folder_name = os.path.basename(folder_path)
     images_metadata = []
+    image_names_csv = []  # List to store image names for CSV
     index = 1  # Initialize index for images
     png_files_count = 0  # Initialize count for PNG files
     
@@ -48,6 +50,7 @@ def generate_image_metadata(folder_path, mirror_folder_path):
                     # Copy image to mirror folder
                     mirror_image_path = os.path.join(mirror_folder_path, f"{new_image_name}.png")
                     shutil.copyfile(os.path.join(root, filename), mirror_image_path)
+                    image_names_csv.append(f"{image_name} #")  # Add image name to CSV list
                     index += 1  # Increment index for the next image
                     i += 1
                 if index > png_files_count:  # Stop processing once the count is reached
@@ -55,13 +58,22 @@ def generate_image_metadata(folder_path, mirror_folder_path):
         else:
             continue
         break  # Exit the loop once the count is reached
-    return images_metadata
+    return images_metadata, image_names_csv  # Return image metadata and CSV data
 
 def save_metadata_to_json(metadata, output_file):
     with open(output_file, 'w') as json_file:
         json.dump(metadata, json_file, indent=4)
 
+def save_image_names_to_csv(image_names, csv_file):
+    with open(csv_file, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['image_name'])  # Write header
+        for name in image_names:
+            writer.writerow([name])
+
 if __name__ == "__main__":
-    output_file = os.path.join(mirror_folder_path, "metadata.json")
-    images_metadata = generate_image_metadata(folder_path, mirror_folder_path)
+    output_file = os.path.join(mirror_folder_path, ".metadata.json")
+    csv_file = os.path.join(mirror_folder_path, ".image_names.csv")
+    images_metadata, image_names_csv = generate_image_metadata(folder_path, mirror_folder_path)
     save_metadata_to_json(images_metadata, output_file)
+    save_image_names_to_csv(image_names_csv, csv_file)
