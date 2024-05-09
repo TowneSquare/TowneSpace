@@ -35,7 +35,7 @@ const Screen5 = () => {
 
    return (
       <div className="pb-10">
-         <Header onNext={onNext} />
+         <Header />
          <p className="text-base md:text-xl text-center">
             Drag to set the Trait category order that will be applied <br />to every Dynamic PFP generated
          </p>

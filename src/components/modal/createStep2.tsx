@@ -24,7 +24,7 @@ const CreateStep2 = () => {
     const handleSubmit = () => {
         if (!isButtonDisabled) {
             dispatch(toggleStep2(false));
-            navigate("/create/step3");
+            navigate("/create/step1");
         }
     }
 
