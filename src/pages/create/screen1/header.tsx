@@ -19,7 +19,7 @@ const Header: React.FC<Props> = ({ }) => {
       { name: "Select the base trait", link: "/create/step4" }
    ];
 
-   const currentStep = 3;
+   const currentStep = 1;
 
    return (
       <div className="relative h-[124px] mx-4 md:mx-8 flex justify-center items-center">
