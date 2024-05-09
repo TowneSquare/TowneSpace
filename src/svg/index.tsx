@@ -11,6 +11,11 @@ export const CancelIcon: React.FC = () => (
         </defs>
     </svg>
 );
+export const ArrowBottom: React.FC = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 13 8" fill="none">
+        <path d="M1.70377 0.922852H11.2962C11.7258 0.922852 11.9554 1.42881 11.6725 1.7521L6.87629 7.23351C6.67708 7.46118 6.32292 7.46118 6.12371 7.23351L1.32748 1.7521C1.0446 1.42881 1.27419 0.922852 1.70377 0.922852Z" fill="black" stroke="#666666" />
+    </svg>
+)
 export const QuestionMark: React.FC = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
         <g clip-path="url(#clip0_2564_29872)">
