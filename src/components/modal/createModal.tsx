@@ -5,7 +5,7 @@ import ButtonStatus from "../../type/button_status";
 import { useAppSelector } from "../../state/hooks";
 import { CancelIcon } from "../../svg";
 import { useDispatch } from "react-redux";
-import { toggleCreateModal } from "../../state/dialog";
+import { toggleCreateModal, toggleStep2 } from "../../state/dialog";
 
 const CreateModal = () => {
     const isOpen = useAppSelector((state) => state.dialogState.bCreateModal);
@@ -20,6 +20,11 @@ const CreateModal = () => {
                 return "/create/dynamic-background.svg";
         }
     };
+
+    const handleContinue = () => {
+        dispatch(toggleCreateModal(false));
+        dispatch(toggleStep2(true));
+      };
 
     return (
         <div className={`${isOpen ? "block" : "hidden"} fixed z-[100] inset-0 flex justify-center items-center bg-[#00000050]`}>
@@ -55,7 +60,7 @@ const CreateModal = () => {
                                     Learn More
                                 </p>
                             </Link>
-                            <PrimaryButton className="w-[153px]" type={ButtonStatus.active} onClick={() => dispatch(toggleCreateModal(false))}>
+                            <PrimaryButton className="w-[153px]" type={ButtonStatus.active} onClick={handleContinue}>
                                 Create
                             </PrimaryButton>
                         </div>

@@ -6,6 +6,7 @@ interface dialogStates {
    bWalletPanel: boolean;
    bWalletHold: boolean;
    bCreateModal: boolean;
+   bStep2: boolean;
 };
 
 const initialState: dialogStates = {
@@ -13,7 +14,8 @@ const initialState: dialogStates = {
    bRemovePanel: false,
    bWalletPanel: false,
    bWalletHold: false,
-   bCreateModal: false
+   bCreateModal: false,
+   bStep2: false
 }
 
 export const dialogSlice = createSlice({
@@ -34,6 +36,9 @@ export const dialogSlice = createSlice({
       },
       toggleCreateModal: (state, action: PayloadAction<boolean>) => {
          state.bCreateModal = action.payload;
+      },
+      toggleStep2: (state, action: PayloadAction<boolean>) => {
+         state.bStep2 = action.payload;
       }
    },
    extraReducers: (builder) => {
@@ -46,7 +51,8 @@ export const {
    toggleRemovePanel,
    toggleWalletPanel,
    toggleConnectRequest,
-   toggleCreateModal
+   toggleCreateModal,
+   toggleStep2
 } = dialogSlice.actions;
 export default dialogSlice.reducer;
 
