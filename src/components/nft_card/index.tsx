@@ -18,17 +18,17 @@ const NftCard: React.FC<Props> = ({ data }) => {
       }
    }
    const [tokenImage, setTokenImage] = useState("");
-   
+
    useEffect(() => {
       // React advises to declare the async function directly inside useEffect
       async function getTokenImage() {
-         if(data.current_token_data.token_uri.includes("ipfs://")) {
+         if (data.current_token_data.token_uri.includes("ipfs://")) {
             let cid = data.current_token_data.token_uri.replace("ipfs://", "");
             let ipfsGatewayUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
-      
+
             const result = await fetch(ipfsGatewayUrl)
             const json = await result.json()
-            if(json.image && json.image.includes("ipfs://")) {
+            if (json.image && json.image.includes("ipfs://")) {
                cid = json.image.replace("ipfs://", "");
                let _tokenImageUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
                setTokenImage(_tokenImageUrl);
@@ -40,8 +40,8 @@ const NftCard: React.FC<Props> = ({ data }) => {
          }
       };
       getTokenImage();
-    }, []);
-    
+   }, []);
+
    return (
       <div className="group w-[140px] md:w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer">
          <div className="relative h-[132px] md:h-[156px] bg-gray-light-2 rounded-t-lg">
@@ -50,7 +50,18 @@ const NftCard: React.FC<Props> = ({ data }) => {
             }
             <div className="group/3dots hidden group-hover:flex flex-col absolute w-6 h-6 justify-center items-center top-2 right-2 hover:bg-black rounded-full z-10">
                <img src="/nft-card/3dots.svg" alt="3dots" />
-               @material-tailwind/react
+               <div className="hidden group-hover/3dots:block absolute top-6 right-0 ">
+                  <div className="w-full h-2" />
+                  <div className="py-2 rounded-lg bg-white">
+                     <p className="px-2 text-[10px] md:text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap ">
+                        See on TowneSpace
+                     </p>
+                     <div className="mt-2 h-px bg-gray-dark-2" />
+                     <p className="px-2 mt-2 text-[10px] md:text-[13px] text-gray-dark-2  hover:bg-gray-light-2" onClick={() => onCustomize()}>
+                        Customize
+                     </p>
+                  </div>
+               </div>
             </div>
             <div className="absolute flex left-1 bottom-1">
                {data.token_standard == "v2" &&

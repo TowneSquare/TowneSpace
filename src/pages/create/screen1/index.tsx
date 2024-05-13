@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "./header";
 import FolderType, { FileType } from "../../../type/folder_type";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
@@ -9,7 +9,12 @@ import { isSupportFile } from "../../../util";
 const Screen3 = () => {
    const dispatch = useAppDispatch();
    const traits = useAppSelector(state => state.createState.traits);
+   const [fileCount, setFileCount] = useState(0);
 
+   useEffect(() => {
+      const totalFiles = traits.reduce((acc, trait) => acc + trait.files.length, 0);
+      setFileCount(totalFiles);
+   },[traits])
    useEffect(() => {
       const supportsFileSystemAccessAPI =
          "getAsFileSystemHandle" in DataTransferItem.prototype;
@@ -25,16 +30,19 @@ const Screen3 = () => {
          });
 
          elem.addEventListener("dragenter", (e) => {
-            elem.style.outline = "solid red 1px";
+            elem.style.outline = "solid #9264F8 3px";
+            elem.style.backgroundColor = "rgba(184, 130, 255, 0.10)";
          });
 
          elem.addEventListener("dragleave", (e) => {
             elem.style.outline = "";
+            elem.style.backgroundColor = "";
          });
 
          elem.addEventListener("drop", async (e) => {
             e.preventDefault();
             elem.style.outline = "";
+            elem.style.backgroundColor = "";
             if (!e.dataTransfer) return;
 
             const fileHandlesPromises = [...(e.dataTransfer.items as any)]
@@ -140,26 +148,34 @@ const Screen3 = () => {
                      <img src="/create/folder-structure.svg" className="mt-6" alt="structure" />
                   </div>
                </div>
-               <div id="folder" className="w-[492px] mx-4 py-[140px] flex flex-col justify-center items-center border border-dashed border-gray-light-1 rounded-md cursor-pointer" onClick={() => onFolderSelector()}>
-                  <img src="/create/folder.svg" alt="folder" />
-                  <p className="text-base md:text-xl font-semibold mt-5">
-                     Drop your folder here
-                  </p>
-                  <p className="text-sm md:text-base mt-1">
-                     or &nbsp;<span className="text-primary-light font-semibold">choose a folder</span>&nbsp; to upload
-                  </p>
-                  <input directory="" webkitdirectory="" type="file" id="folder-selector" className="hidden" onChange={onChangeFolder} />
-                  <p className="mt-4" id="preview">
-                  </p>
-                  {traits.slice(0, 10).map((trait, index) => (
-                     <>
-                        {trait.files.slice(0, 5).map((file, index) => (
-                           <p className="text-xs">{file.folderName} : {file.name}</p>
-
-                        ))}
-                     </>
-                  ))}
-               </div>
+               {traits.length > 0 ?
+                  <div id="folder" className="w-[492px] mx-4 py-[140px] bg-gray-dark-2 flex flex-col justify-center items-center border border-dashed border-gray-light-1 rounded-md cursor-pointer" onClick={() => onFolderSelector()}>
+                     <img src="/create/folder-uploaded.svg" alt="folder" />
+                     <p className="text-base md:text-xl font-semibold mt-3">
+                     Folder uploaded!
+                     </p>
+                     <p className="text-[16px] font-semibold" >{fileCount} images have been uploaded</p>
+                     <p className="text-sm md:text-base mt-[64px]">
+                        Wrong folder? <br/> <span className="text-primary-light font-semibold">Upload again</span>
+                     </p>
+                     <input directory="" webkitdirectory="" type="file" id="folder-selector" className="hidden" onChange={onChangeFolder} />
+                     <p className="mt-4" id="preview">
+                     </p>
+                  </div>
+                  :
+                  <div id="folder" className="w-[492px] mx-4 py-[140px] flex flex-col justify-center items-center border border-dashed border-gray-light-1 rounded-md cursor-pointer" onClick={() => onFolderSelector()}>
+                     <img src="/create/folder.svg" alt="folder" />
+                     <p className="text-base md:text-xl font-semibold mt-5">
+                        Drop your folder here
+                     </p>
+                     <p className="text-sm md:text-base mt-1">
+                        or &nbsp;<span className="text-primary-light font-semibold">choose a folder</span>&nbsp; to upload
+                     </p>
+                     <input directory="" webkitdirectory="" type="file" id="folder-selector" className="hidden" onChange={onChangeFolder} />
+                     <p className="mt-4" id="preview">
+                     </p>
+                  </div>
+               }
             </div>
          </div>
       </div>
