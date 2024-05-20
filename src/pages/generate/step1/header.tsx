@@ -24,7 +24,7 @@ const Header: React.FC<Props> = ({ }) => {
             </p>
          </div>
          <div className="absolute right-0">
-            <PrimaryButton type={ButtonStatus.active} className="px-10" onClick={() => navigate("/generate/step2")}>
+            <PrimaryButton type={ButtonStatus.active} className="px-14" onClick={() => navigate("/generate/step2")}>
                Next
             </PrimaryButton>
          </div>

@@ -36,7 +36,7 @@ const Screen5 = () => {
    return (
       <div className="pb-10">
          <Header />
-         <p className="text-base md:text-xl text-center">
+         <p className="text-base md:text-xl text-center mt-8">
             Drag to set the Trait category order that will be applied <br />to every Dynamic PFP generated
          </p>
          <div className="mt-16 flex justify-center gap-0 md:gap-8">

@@ -14,7 +14,7 @@ const Folder: React.FC<Props> = ({ data }) => {
             {data.files.map((file, index) => (
                <div key={index}>
                   <div className="w-24 md:w-32 bg-gray-dark-2 rounded-md">
-                     <img src={file.imageUrl} alt="image" />
+                     <img src={file.imageUrl} className="rounded-md" alt="image" />
                   </div>
                   <p className="px-1 text-sm md:text-base">{file.name}</p>
                </div>
