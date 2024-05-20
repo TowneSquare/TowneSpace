@@ -12,7 +12,7 @@ const Screen6 = () => {
    return (
       <div className="pb-10">
          <Header />
-         <p className="text-base md:text-xl text-center">
+         <p className="text-base md:text-xl text-center mt-8">
             Choose which trait will become the base of your Dynamic PFP&nbsp; <br />
             <span className="text-primary-light">Learn more</span>
          </p>

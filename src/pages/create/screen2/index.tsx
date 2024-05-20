@@ -10,7 +10,7 @@ const Screen4 = () => {
    return (
       <div className="pb-10">
          <Header />
-         <p className="text-base md:text-xl text-center">
+         <p className="text-base md:text-xl text-center mt-8">
             Check how are you assets named and how they look like.<br />
             If there are errors, you can always &nbsp;
             <span className="text-sm md:text-base text-primary-light cursor-pointer" onClick={() => navigate("/create/step3")}>upload them again</span>

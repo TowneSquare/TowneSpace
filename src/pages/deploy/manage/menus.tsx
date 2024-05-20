@@ -18,7 +18,7 @@ const Menu: React.FC<Props> = ({ data }) => {
    const isActive = location.pathname.includes(data.href);
    return (
       <Link to={data.href}>
-         <p className={`p-4 ${isActive ? "text-primary-light bg-gray-light-3" : ""} rounded-md`}>
+         <p className={`p-4 ${isActive ? "text-primary-light bg-gray-dark-1" : ""} rounded-md`}>
             {data.label}
          </p>
       </Link>
