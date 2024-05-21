@@ -1,6 +1,13 @@
-import { FC, ReactNode, useEffect, useState, createContext, useContext } from "react";
+import {
+  FC,
+  ReactNode,
+  useEffect,
+  useState,
+  createContext,
+  useContext,
+} from 'react';
 
-const AUTO_CONNECT_LOCAL_STORAGE_KEY = "AptosWalletAutoConnect";
+const AUTO_CONNECT_LOCAL_STORAGE_KEY = 'AptosWalletAutoConnect';
 
 export interface AutoConnectContextState {
   autoConnect: boolean;
@@ -25,7 +32,7 @@ export const AutoConnectProvider: FC<{ children: ReactNode }> = ({
       );
       if (isAutoConnect) return JSON.parse(isAutoConnect);
     } catch (e: any) {
-      if (typeof window !== "undefined") {
+      if (typeof window !== 'undefined') {
         console.error(e);
       }
     }
@@ -42,7 +49,7 @@ export const AutoConnectProvider: FC<{ children: ReactNode }> = ({
         );
       }
     } catch (error: any) {
-      if (typeof window !== "undefined") {
+      if (typeof window !== 'undefined') {
         console.error(error);
       }
     }

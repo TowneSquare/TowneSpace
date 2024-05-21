@@ -1,6 +1,6 @@
 enum FilterType {
-   composable = "composable",
-   nfts = "nfts",
-};
+  composable = 'composable',
+  nfts = 'nfts',
+}
 
 export default FilterType;

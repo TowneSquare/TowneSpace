@@ -4,10 +4,10 @@ import {
   Wallet,
   isRedirectable,
   WalletName,
-} from "@aptos-labs/wallet-adapter-react";
-import { toast } from "react-toastify";
-import { useAppDispatch } from "../state/hooks";
-import { toggleConnectRequest, toggleWalletPanel } from "../state/dialog";
+} from '@aptos-labs/wallet-adapter-react';
+import { toast } from 'react-toastify';
+import { useAppDispatch } from '../state/hooks';
+import { toggleConnectRequest, toggleWalletPanel } from '../state/dialog';
 
 const WalletButtons = () => {
   const { wallets } = useWallet();
@@ -24,14 +24,14 @@ const WalletButtons = () => {
 const WalletView = (wallet: Wallet) => {
   const { connect } = useWallet();
   const isWalletReady =
-  wallet.readyState === WalletReadyState.Installed ||
-  wallet.readyState === WalletReadyState.Loadable;
+    wallet.readyState === WalletReadyState.Installed ||
+    wallet.readyState === WalletReadyState.Loadable;
   const mobileSupport = wallet.deeplinkProvider;
   const dispatch = useAppDispatch();
 
   const onWalletConnectRequest = async (walletName: WalletName) => {
     try {
-      console.log("toggleConnectRequest");
+      console.log('toggleConnectRequest');
       dispatch(toggleConnectRequest(true));
       await connect(walletName);
     } catch (error: any) {
@@ -40,7 +40,6 @@ const WalletView = (wallet: Wallet) => {
     dispatch(toggleConnectRequest(false));
     dispatch(toggleWalletPanel(false));
   };
-
 
   /**
    * If we are on a mobile browser, adapter checks whether a wallet has a `deeplinkProvider` property
@@ -76,17 +75,18 @@ const WalletView = (wallet: Wallet) => {
         onClick={() => onWalletConnectRequest(wallet.name)}
       >
         <img src={wallet.icon} alt="uri" className="w-10 h-10" />
-        <span className="text-left">{wallet.name} <br /> Desktop Only</span>
+        <span className="text-left">
+          {wallet.name} <br /> Desktop Only
+        </span>
       </button>
     );
   } else {
     // we are on desktop view
     return (
       <button
-        className={`flex justify-between items-center  text-white py-2 rounded ${isWalletReady
-          ? "hover:bg-gray-light-8"
-          : "cursor-not-allowed"
-          }`}
+        className={`flex justify-between items-center  text-white py-2 rounded ${
+          isWalletReady ? 'hover:bg-gray-light-8' : 'cursor-not-allowed'
+        }`}
         disabled={!isWalletReady}
         key={wallet.name}
         onClick={() => onWalletConnectRequest(wallet.name)}

@@ -1,7 +1,7 @@
-enum ButtonStatus{
-   active,
-   inactive,
-   disabled
-};
+enum ButtonStatus {
+  active,
+  inactive,
+  disabled,
+}
 
 export default ButtonStatus;
