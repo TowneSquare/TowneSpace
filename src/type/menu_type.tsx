@@ -1,4 +1,4 @@
-export default interface MenuType{
-   href: string;
-   label: string;
+export default interface MenuType {
+  href: string;
+  label: string;
 }

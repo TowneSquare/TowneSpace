@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
 import Studio from './pages/studio';
 import Collections from './pages/collections';
@@ -19,8 +19,10 @@ import CreateStep2 from './components/modal/createStep2';
 
 function App() {
   const dispatch = useAppDispatch();
-  const collections = useAppSelector(state => state.tokensState.collections)
-  const currentCollection = useAppSelector(state => state.tokensState.currentCollection)
+  const collections = useAppSelector((state) => state.tokensState.collections);
+  const currentCollection = useAppSelector(
+    (state) => state.tokensState.currentCollection
+  );
 
   useEffect(() => {
     // dispatch(fetchCollections());
@@ -35,7 +37,7 @@ function App() {
     //   });
     //   dispatch(data);
     // }
-  }, [collections, currentCollection])
+  }, [collections, currentCollection]);
 
   return (
     <div>

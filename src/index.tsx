@@ -10,18 +10,21 @@ import { AppContext } from './wallet-adapter/AppContext';
 import WalletModal from './components/modal/walletModal';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
 const client = new ApolloClient({
   uri: process.env.REACT_APP_INDEXER_URL,
   headers: {
-    "apikey" : process.env.REACT_APP_API_KEY as string
+    apikey: process.env.REACT_APP_API_KEY as string,
   },
   cache: new InMemoryCache(),
   defaultOptions: {
     watchQuery: {
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     },
     query: {
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     },
   },
 });
@@ -33,9 +36,11 @@ root.render(
   <React.StrictMode>
     <AppContext>
       <BrowserRouter>
-        <Provider store={store} >
+        <Provider store={store}>
           <ApolloProvider client={client}>
-            <App />
+            <DndProvider backend={HTML5Backend}>
+              <App />
+            </DndProvider>
           </ApolloProvider>
           <WalletModal />
         </Provider>

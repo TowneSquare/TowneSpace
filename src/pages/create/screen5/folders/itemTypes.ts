@@ -1,4 +1,3 @@
 export const ItemTypes = {
-   FOLDER: 'folder',
- }
- 
+  FOLDER: 'folder',
+};

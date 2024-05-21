@@ -1,4 +1,3 @@
 export const ItemTypes = {
-   TOKEN: 'token',
- }
- 
+  TOKEN: 'token',
+};

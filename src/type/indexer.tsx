@@ -1,24 +1,23 @@
-// query 
+// query
 
 export type CollectionIndexer = {
-    creator_address: string,
-    address: string,
-    name: string,
-    description: string,
-    uri: string,
-    total_supply: number,   
-}
+  creator_address: string;
+  address: string;
+  name: string;
+  description: string;
+  uri: string;
+  total_supply: number;
+};
 
 export type TokenIndexer = {
-    owner_address: string,
-    address: string,
-    name: string,
-    description: string,
-    uri: string,
-}
+  owner_address: string;
+  address: string;
+  name: string;
+  description: string;
+  uri: string;
+};
 
-export const COLLECTIONS_QUERY = 
-    `
+export const COLLECTIONS_QUERY = `
     query getCollectionData(
         $where_condition: current_collections_v2_bool_exp!
         $offset: Int
@@ -42,10 +41,9 @@ export const COLLECTIONS_QUERY =
           uri
         }
       }
-    `
+    `;
 
-export const TOKENS_QUERY =
-      `
+export const TOKENS_QUERY = `
       #import "./CurrentTokenOwnershipFieldsFragment";
       query getOwnedTokens(
         $where_condition: current_token_ownerships_v2_bool_exp!
@@ -57,35 +55,35 @@ export const TOKENS_QUERY =
             ...CurrentTokenOwnershipFields
           }
         }
-      `
+      `;
 
 // response
 
 export type CollectionsQueryResponse = {
-  studio_collections: Array<CollectionIndexer>
-}
+  studio_collections: Array<CollectionIndexer>;
+};
 
 export type TokensQueryResponse = {
-  studio_tokens: Array<TokenIndexer>
-}
+  studio_tokens: Array<TokenIndexer>;
+};
 
-export type CollectionsResponse = Array<Collection>
+export type CollectionsResponse = Array<Collection>;
 
-export type TokensResponse = Array<Token>
+export type TokensResponse = Array<Token>;
 
 export type Collection = {
-    creator_address: string,
-    address: string,
-    name: string,
-    description: string,
-    uri: string,
-    total_supply: number,
-}
+  creator_address: string;
+  address: string;
+  name: string;
+  description: string;
+  uri: string;
+  total_supply: number;
+};
 
 export type Token = {
-    owner_address: string,
-    address: string,
-    name: string,
-    description: string,
-    uri: string,
-}
+  owner_address: string;
+  address: string;
+  name: string;
+  description: string;
+  uri: string;
+};

@@ -1,4 +1,4 @@
-import {Network, Provider} from "aptos";
+import { Network, Provider } from 'aptos';
 
 export const DEVNET_PROVIDER = new Provider(Network.DEVNET);
 export const TESTNET_PROVIDER = new Provider(Network.TESTNET);
