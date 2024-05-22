@@ -1,5 +1,5 @@
 interface Props {
-  children: any;
+  children?: any;
   icon?: boolean;
   label?: string;
   className?: string;

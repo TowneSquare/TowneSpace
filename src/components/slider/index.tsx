@@ -35,24 +35,22 @@ const Slider: FC<Props> = ({ className, value, onChange }) => {
         label="Super rare"
         icon={false}
         onClick={() => onChange && onChange(0)}
-      >
-        <div />
-      </ToolTip>
+      ></ToolTip>
       <ToolTip
         className="absolute w-[20px] h-[20px] left-[33%] rounded-full bg-primary-light border border-black cursor-pointer -translate-x-1/2 z-20"
         label="Rare"
         icon={false}
-        onClick={() => onChange && onChange(33)} children={undefined}></ToolTip>
+        onClick={() => onChange && onChange(33)}></ToolTip>
       <ToolTip
         className="absolute w-[20px] h-[20px] left-[67%] rounded-full bg-primary-light border border-black cursor-pointer -translate-x-1/2 z-20"
         label="Common"
         icon={false}
-        onClick={() => onChange && onChange(67)} children={undefined}></ToolTip>
+        onClick={() => onChange && onChange(67)}></ToolTip>
       <ToolTip
         className="absolute w-[20px] h-[20px] right-0 rounded-full bg-primary-light border border-black cursor-pointer translate-x-1/2 z-20"
         label="Often"
         icon={false}
-        onClick={() => onChange && onChange(100)} children={undefined}></ToolTip>
+        onClick={() => onChange && onChange(100)}></ToolTip>
     </div>
   );
 };
