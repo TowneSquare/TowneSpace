@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.9.11",
+    "@aptos-labs/ts-sdk": "^1.16.0",
     "@aptos-labs/wallet-adapter-core": "*",
     "@aptos-labs/wallet-adapter-react": "*",
     "@blocto/aptos-wallet-adapter-plugin": "^0.2.2",

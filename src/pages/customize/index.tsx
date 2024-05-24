@@ -10,37 +10,6 @@ import ReplacePanel from './replace_panel';
 import { useEffect, useState } from 'react';
 import { chooseNft } from '../../state/tokens';
 import RemovePanel from './remove_panel';
-import { STUDIO_ADDRESS } from '../../constants';
-import { ensureImageUri, getProvider } from '../../api/Helper';
-import { Token } from '../../type/indexer';
-import { TransactionContext } from '../../type/transaction';
-import { Studio as Helper } from '../../api/transactions/StudioHelper';
-
-function GetNFTs(props: { ctx: TransactionContext; address: string }) {
-  const STUDIO_HELPER = new Helper(
-    getProvider(props.ctx.network),
-    STUDIO_ADDRESS
-  );
-  const [nfts, setNfts] = useState<Array<Token>>();
-  const [nftsError, setNftsError] = useState<String>();
-
-  useEffect(() => {
-    loadNfts();
-  }, [props.ctx.account]);
-
-  const loadNfts = async () => {
-    try {
-      let nfts = await STUDIO_HELPER.getAllTokens(STUDIO_ADDRESS);
-      for (let nft of nfts) {
-        nft.uri = await ensureImageUri(nft.uri);
-      }
-      setNftsError('');
-      setNfts(nfts);
-    } catch (error: any) {
-      setNftsError(`Caanot load nft: ${error.message}`);
-    }
-  };
-}
 
 const Customize = () => {
   const { address } = useParams();
