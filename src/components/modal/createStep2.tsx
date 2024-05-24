@@ -29,8 +29,11 @@ const CreateStep2 = () => {
   };
 
   const handleMaxSupplyChange = (e: any) => {
-    setMaxSupply(e.target.value);
-    dispatch(updateTotalMaxSupply(e.target.value));
+    const re = /^[0-9\b]+$/;
+    if (e.target.value === '' || re.test(e.target.value)) {
+      setMaxSupply(e.target.value);
+      dispatch(updateTotalMaxSupply(e.target.value));
+    }
   };
 
   const isButtonDisabled = !collectionName || !maxSupply;
@@ -106,6 +109,7 @@ const CreateStep2 = () => {
             onChange={handleMaxSupplyChange}
             className="mt-2 bg-gray-dark-3 font-normal placeholder:text-gray-light-3"
             placeholder="10,000"
+            value={maxSupply}
           />
         </div>
         <div className="flex justify-center my-14">

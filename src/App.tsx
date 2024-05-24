@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelector } from './state/hooks';
 import { fetchNfts, fetchCollections } from './state/tokens';
 import { useEffect } from 'react';
 import Generate from './pages/generate';
+import Overview from './pages/overview';
+import MainDeploy from './pages/maindeploy';
 import RedirectPage from './pages/redirectPage';
 import { NFT_COLLECTION_OWNED_ID_QUERY } from './util';
 import { useQuery } from '@apollo/client';
@@ -49,6 +51,8 @@ function App() {
         <Route path="/create/*" element={<Create />} />
         <Route path="/deploy/*" element={<Deploy />} />
         <Route path="/generate/*" element={<Generate />} />
+        <Route path="/overview/*" element={<Overview />} />
+        <Route path="/maindeploy/*" element={<MainDeploy />} />
         <Route path="/migrate/*" element={<Migrate />} />
         <Route path="/redirectPage/" element={<RedirectPage />} />
       </Routes>

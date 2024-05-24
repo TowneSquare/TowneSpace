@@ -9,23 +9,47 @@ const Header: React.FC<Props> = ({}) => {
   const onClose = () => {
     navigate('/studio');
   };
+
+  const steps = [
+    { name: 'Export Settings', link: '/generate/step1' },
+    { name: 'Final review', link: '/generate/step2' },
+    { name: 'Deploy assets', link: '/generate/step3' },
+  ];
+
+  const currentStep = 2;
+
   return (
     <div className="relative h-[124px] mx-4 md:mx-8 flex justify-center items-center">
       <div
         className="absolute left-0 w-4 h-4 cursor-pointer"
         onClick={() => onClose()}
       >
-        <p className="text-2xl font-semibold">×</p>
+        <p className="text-3xl font-[200]">×</p>
       </div>
       <div>
-        <p className="text-xl font-bold text-center">Generate tokens</p>
-        <p className="text-center">Set up - Step 2 of 3</p>
+        <div className="flex justify-center space-x-2 mt-2 gap-8">
+          {steps.map((step, index) => (
+            <div className="flex flex-col items-center gap-1">
+              <div
+                key={index}
+                className={`w-[34px] h-[34px] rounded-full flex items-center justify-center ${currentStep === index + 1 ? 'bg-primary-light border-[3px] border-white text-white' : 'bg-gray-light-3 text-white'}`}
+              >
+                {index + 1}
+              </div>
+              <p
+                className={`text-xl ${currentStep === index + 1 && 'font-bold'} text-center`}
+              >
+                {step.name}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="absolute right-0">
         <PrimaryButton
           type={ButtonStatus.active}
           className="px-14"
-          onClick={() => navigate('/generate/step3')}
+          onClick={() => navigate(steps[currentStep].link)}
         >
           Next
         </PrimaryButton>

@@ -1,10 +1,10 @@
 import { useEffect, useState, useCallback } from 'react';
-import Header from './header';
 import FolderType, { FileType } from '../../../type/folder_type';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import { updateTraits } from '../../../state/create';
 import { toast } from 'react-toastify';
 import { isSupportFile } from '../../../util';
+import Header from '../../../components/create/header';
 
 const Screen3 = () => {
   const dispatch = useAppDispatch();
@@ -154,7 +154,7 @@ const Screen3 = () => {
 
   return (
     <div className="pb-10">
-      <Header />
+      <Header stepNumber={1} />
       <div className="flex flex-col items-center">
         <p className="w-[509px] mt-10 text-base font-normal md:text-xl text-center">
           Let’s first upload images that will serve as the traits for your new

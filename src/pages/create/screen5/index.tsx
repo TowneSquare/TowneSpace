@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from './header';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import Folders from './folders';
 import FolderType from '../../../type/folder_type';
 import { updatePrimaryTrait, updateTraits } from '../../../state/create';
+import Header from '../../../components/create/header';
 
 const Screen5 = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Screen5 = () => {
 
   return (
     <div className="pb-10">
-      <Header onNext={onNext} />
+      <Header stepNumber={3} />
       <p className="text-base md:text-xl text-center mt-8">
         Drag to set the Trait category order that will be applied <br />
         to every Dynamic PFP generated

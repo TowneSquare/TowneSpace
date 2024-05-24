@@ -3,21 +3,17 @@ import { useAppSelector } from '../../../state/hooks';
 import PrimaryButton from '../../../components/primary_button';
 import ButtonStatus from '../../../type/button_status';
 
-interface Props {
-  onNext: () => void;
-}
-
-const Header: React.FC<Props> = ({ onNext }) => {
+interface Props {}
+const Header: React.FC<Props> = ({}) => {
   const navigate = useNavigate();
   const onClose = () => {
     navigate('/studio');
   };
 
   const steps = [
-    { name: 'Upload assets', link: '/create/step1' },
-    { name: 'Preview assets', link: '/create/step2' },
-    { name: 'Set the traits order', link: '/create/step3' },
-    { name: 'Select the base trait', link: '/create/step4' },
+    { name: 'Export Settings', link: '/generate/step1' },
+    { name: 'Final review', link: '/generate/step2' },
+    { name: 'Deploy assets', link: '/generate/step3' },
   ];
 
   const currentStep = 3;
@@ -36,36 +32,18 @@ const Header: React.FC<Props> = ({ onNext }) => {
             <div className="flex flex-col items-center gap-1">
               <div
                 key={index}
-                className={`w-[34px] h-[34px] rounded-full flex items-center justify-center ${
-                  currentStep === index + 1
-                    ? 'bg-primary-light border-[3px] border-white text-white'
-                    : 'bg-gray-light-3 text-white'
-                }`}
+                className={`w-[34px] h-[34px] rounded-full flex items-center justify-center ${currentStep === index + 1 ? 'bg-primary-light border-[3px] border-white text-white' : 'bg-gray-light-3 text-white'}`}
               >
                 {index + 1}
               </div>
               <p
-                className={`text-xl ${
-                  currentStep === index + 1 && 'font-bold'
-                } text-center`}
+                className={`text-xl ${currentStep === index + 1 && 'font-bold'} text-center`}
               >
                 {step.name}
               </p>
             </div>
           ))}
         </div>
-      </div>
-      <div className="absolute right-0">
-        <PrimaryButton
-          type={ButtonStatus.active}
-          className="px-14"
-          onClick={() => {
-            onNext();
-            navigate(steps[currentStep].link);
-          }}
-        >
-          Next
-        </PrimaryButton>
       </div>
     </div>
   );

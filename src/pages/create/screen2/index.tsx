@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import Header from './header';
 import { useAppSelector } from '../../../state/hooks';
 import FolderType from '../../../type/folder_type';
+import Header from '../../../components/create/header';
 
 const Screen4 = () => {
   const navigate = useNavigate();
@@ -9,13 +9,13 @@ const Screen4 = () => {
 
   return (
     <div className="pb-10">
-      <Header />
+      <Header stepNumber={2} />
       <p className="text-base md:text-xl text-center mt-8">
         Check how are you assets named and how they look like.
         <br />
         If there are errors, you can always &nbsp;
         <span
-          className="text-sm md:text-base text-primary-light cursor-pointer"
+          className="!text-[20px] md:text-base text-primary-light cursor-pointer"
           onClick={() => navigate('/create/step3')}
         >
           upload them again

@@ -12,7 +12,7 @@ const ChooseTrait = () => {
             {trait.files.map((file, index) => (
               <div className="flex gap-2" key={index}>
                 <input type="checkbox" />
-                <p className="text-sm md:text-base ">{file.name}</p>
+                <p className="text-sm md:text-base">{file.name}</p>
               </div>
             ))}
           </div>
