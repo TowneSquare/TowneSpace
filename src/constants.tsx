@@ -4,8 +4,6 @@
  * ========
 */
 
-import { e } from "mathjs"
-
 /** TESTNET */
 
 export const COMPOSABLE_TOKEN_TESTNET = '0x51ad96e82f8a4a5f0e32b7a4ea25ed7672661661a86cac795e41bb8d26cf0721'
