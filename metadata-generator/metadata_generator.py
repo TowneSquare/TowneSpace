@@ -5,7 +5,7 @@ import csv
 
 # Images folder path
 folder_path = "Sloth Ball"
-mirror_folder_path = os.path.join(folder_path, ".generated")
+mirror_folder_path = os.path.join(folder_path, "generated")
 occurrence_num = 5  # Number of times each image should be repeated in the metadata
 
 def generate_image_metadata(folder_path, mirror_folder_path):
