@@ -1,3 +1,6 @@
+import { AccountAddressInput, Aptos, AptosConfig } from "@aptos-labs/ts-sdk";
+import { Network } from "aptos";
+
 /** 
  * ========
  * PACKAGES 
@@ -94,3 +97,5 @@ export const PROPERTY_UPDATED = `PropertyUpdatedEvent`
 
 /** Token Minter */
 
+export const APTOS_CONFIG = new AptosConfig({ network: Network.TESTNET });
+export const APTOS = new Aptos(APTOS_CONFIG);
