@@ -9,7 +9,7 @@ const Step2 = () => {
     <div>
       <Header />
       <div className="flex gap-7 justify-center items-center">
-        <p className="text-xl md:text-2xl font-semibold">Collection preview</p>
+        <p className="text-xl md:text-2xl font-semibold">Final review</p>
         <Link to="/deploy/preview">
           <p className="text-sm md:text-base font-semibold text-primary-light">
             Edit

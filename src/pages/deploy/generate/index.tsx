@@ -11,10 +11,10 @@ const Generate = () => {
         <div className="py-4 flex flex-col justify-between">
           <div>
             <p className="text-base md:text-xl font-semibold">
-              Deploy contract
+              Deploy collection
             </p>
             <p className="mt-1 text-sm md:text-base">
-              Deploy the contract to Aptos Tesnet or Mainnet.
+              Deploy the collection to Aptos Tesnet or Mainnet.
             </p>
           </div>
           <PrimaryButton
@@ -30,10 +30,11 @@ const Generate = () => {
         <img src="/deploy/download-assets.png" alt="deploy" />
         <div className="py-4 flex flex-col justify-between">
           <div>
-            <p className="text-base md:text-xl font-semibold">Download asset</p>
+            <p className="text-base md:text-xl font-semibold">
+              Download assets
+            </p>
             <p className="mt-1 text-sm md:text-base">
-              Download the set of images that will be created upon minting
-              through the smart contract.
+              Download the preview images and metadata files
             </p>
           </div>
           <PrimaryButton

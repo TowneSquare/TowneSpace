@@ -1,10 +1,31 @@
+import { useNavigate } from 'react-router-dom';
 import PrimaryButton from '../../../components/primary_button';
 import ButtonStatus from '../../../type/button_status';
 import Header from './header';
+import DeployModal from '../../../components/modal/deployModal';
 import { useState } from 'react';
 
 const Step3 = () => {
   const [option, setOption] = useState(0);
+
+  const [isDeployModalOpen, setIsDeployModalOpen] = useState(false);
+
+  const openDeployModal = () => setIsDeployModalOpen(true);
+  const closeDeployModal = () => setIsDeployModalOpen(false);
+
+  const navigate = useNavigate();
+  const onGotoOverview = () => {
+    navigate('/overview/view');
+  };
+
+  const onClickDeploy = async () => {
+    if (option === 0) {
+      openDeployModal();
+    } else {
+      onGotoOverview();
+    }
+  };
+
   return (
     <div className="pb-10">
       <Header />
@@ -42,10 +63,21 @@ const Step3 = () => {
             );
           })}
         </div>
-        <PrimaryButton type={ButtonStatus.active} className="mt-10">
+        <PrimaryButton
+          type={ButtonStatus.active}
+          onClick={onClickDeploy}
+          className="mt-10"
+        >
           Deploy
         </PrimaryButton>
       </div>
+      <DeployModal
+        isOpen={isDeployModalOpen}
+        onClose={closeDeployModal}
+        title="Connect Aptos wallet"
+      >
+        <p>Please switch to Aptos Tesnet</p>
+      </DeployModal>
     </div>
   );
 };

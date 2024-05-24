@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ToolTip from '../../../components/tooltip';
 import { updateCollectionName } from '../../../state/create';
 import {
@@ -10,20 +11,47 @@ import {
   updateTotalSupply,
 } from '../../../state/deploy';
 import { useAppDispatch } from '../../../state/hooks';
+import PrimaryButton from '../../../components/primary_button';
+import ButtonStatus from '../../../type/button_status';
+import StoreModal from '../../../components/modal/storeModal';
 
 const Settings = () => {
   const dispatch = useAppDispatch();
+
+  const [uploadImg, setUploadImg] = useState<File>();
+  const [previewImg, setPreviewImg] = useState('');
+
+  const [isStoreModalOpen, setIsStoreModalOpen] = useState(true);
+
+  const openStoreModal = () => setIsStoreModalOpen(true);
+  const closeStoreModal = () => setIsStoreModalOpen(false);
+
+  const onFolderSelector = async () => {
+    const selector = document.getElementById('folder-selector');
+    selector?.click();
+  };
+
+  const onClickImgUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = e.target.files as FileList;
+    setUploadImg(selectedFiles?.[0]);
+    console.log(URL.createObjectURL(selectedFiles?.[0]));
+    setPreviewImg(URL.createObjectURL(selectedFiles?.[0]));
+  };
+
   return (
-    <div className="mt-10 flex justify-center">
+    <div className="mt-10 w-full flex justify-center pl-32">
       <div className="mx-4">
-        <p className="text-2xl md:text-3xl">Settings</p>
-        <p className="mt-1 text-base md:text-xl">
-          Set how often or rarely each trait will appear in the collection
-        </p>
+        <div className="flex flex-col relative">
+          <StoreModal isOpen={isStoreModalOpen} onClose={closeStoreModal} />
+          <p className="text-2xl md:text-3xl">Settings</p>
+          <p className="mt-1 text-base md:text-xl text-gray-light-1">
+            Set how often or rarely each trait will appear in the collection
+          </p>
+        </div>
         <p className="mt-14 text-xl md:text-2xl">General</p>
-        <div className="mt-12 mb-10 flex flex-col md:flex-row justify-center gap-10 border-b-gray-light-1">
+        <div className="mt-12 mb-10 flex flex-col md:flex-row justify-center gap-[140px] border-b-gray-light-1">
           <div className="md:w-[450px]">
-            <ToolTip label="Collection Name">
+            <ToolTip label="Collection Name" className="mt-8">
               <p className="text-sm md:text-base">Collection Name</p>
             </ToolTip>
             <div className="min-w-[48px] h-11 px-4 py-2 border border-white rounded-full mt-2">
@@ -138,9 +166,27 @@ const Settings = () => {
             <ToolTip label="Collection Photo" className="mt-8">
               <p>Collection Photo</p>
             </ToolTip>
-            <div className="w-[234px] h-[234px] flex gap-2 justify-center items-center border border-dashed border-primary-light rounded-lg mt-2">
-              <img src="/deploy/upload.svg" alt="upload" className="w-6 h-6" />
-              <p>Upload image</p>
+            <div
+              id="folder"
+              className="w-[234px] h-[234px] flex gap-2 justify-center items-center border border-dashed border-primary-light rounded-lg mt-2 cursor-pointer"
+              onClick={() => onFolderSelector()}
+            >
+              {!previewImg && (
+                <img
+                  src="/deploy/upload.svg"
+                  alt="upload"
+                  className="w-6 h-6"
+                />
+              )}
+              {previewImg && <img src={previewImg} />}
+              <input
+                accept="image/*"
+                type="file"
+                id="folder-selector"
+                className="hidden"
+                onChange={onClickImgUpload}
+              />
+              {!previewImg && <p>Upload image</p>}
             </div>
           </div>
         </div>

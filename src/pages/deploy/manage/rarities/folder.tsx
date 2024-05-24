@@ -18,11 +18,16 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
     <div className="px-6 py-2 md:py-4 bg-gray-dark-2 rounded-md">
       <div className="flex items-center justify-between">
         <p className="text-base md:text-xl font-semibold">{data.name}</p>
-        <p className="text-sm md:text-base">{data.files.length} Traits</p>
+        {/* <p className="text-sm md:text-base">{data.files.length} Traits</p> */}
       </div>
       <div className="mt-8 flex flex-col gap-10 md:gap-4">
-        <div className="flex items-center justify-between">
-          <p className="text-sm">Trait</p>
+        <div className="flex items-center ">
+          <div className="flex gap-4 w-44">
+            <p className="text-sm">TRAIT</p>
+          </div>
+          <div className="flex gap-4 w-[582px]">
+            <p className="text-sm">RARITY</p>
+          </div>
           <div className="flex gap-4">
             <p className="text-sm w-10">EST.%</p>
             <p className="text-sm w-5">EST.#</p>
@@ -50,7 +55,7 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
                     value={file.rarities}
                     onChange={(value) => onChangeRarities(value, index)}
                   />
-                  <div className="px-4 py-2 flex items-center gap-2 border border-gray-light-1 rounded-full">
+                  <div className="px-4 py-2 flex items-center gap-2 border border-gray-light-1 rounded-full bg-gray-dark-3">
                     <input
                       className="w-10 md:w-20 h-6 md:h-8 placeholder-gray-light-3 focus-visible:outline-0"
                       placeholder="25%"
@@ -65,7 +70,7 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
                   <div className="w-12 h-11 flex justify-center items-center border-l border-t border-b border-primary-light rounded-l-full bg-primary-dark/30">
                     <p className="text-xl">%</p>
                   </div>
-                  <div className="w-12  h-11 flex justify-center items-center border rounded-r-full bg-primary-dark/30">
+                  <div className="w-12  h-11 flex justify-center items-center border rounded-r-full bg-gray-dark1/30">
                     <p className="text-xl">#</p>
                   </div>
                 </div>

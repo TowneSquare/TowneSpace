@@ -26,7 +26,7 @@ const Step1 = () => {
           </div>
           <div className="mt-4 px-8 py-6 flex flex-col gap-2 border border-gray-light-3 rounded-lg">
             <p className="text-sm md:text-base font-semibold text-gray-light-1">
-              General
+              GENERAL
             </p>
             <p className="text-sm md:text-base ">
               Collection name:&nbsp;
@@ -51,7 +51,7 @@ const Step1 = () => {
               </span>
             </p>
             <p className="text-sm md:text-base ">
-              Token Extenal Link:&nbsp;
+              Token Extenal URL:&nbsp;
               <span className="font-semibold">{state.externalLink}</span>
             </p>
             <p className="text-sm md:text-base ">
@@ -75,11 +75,11 @@ const Step1 = () => {
           <div className="mt-4 px-8 py-6 flex flex-col gap-2 border border-gray-light-3 rounded-lg">
             <p className="font-semibold text-gray-light-1">COMMISSIONS</p>
             <p className="text-sm md:text-base ">
-              Payout Address:&nbsp;
+              Payout address:&nbsp;
               <span className="font-semibold">{state.payoutAddress}</span>
             </p>
             <p className="text-sm md:text-base ">
-              Royalties %:&nbsp;
+              Royalties:&nbsp;
               <span className="font-semibold">{state.royalties}</span>
             </p>
             <p className="text-sm md:text-base ">

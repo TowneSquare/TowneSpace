@@ -5,12 +5,14 @@ interface createStates {
   collectionName: string;
   totalMaxSupply: string;
   traits: FolderType[];
+  step: number;
   primaryTrait: FolderType | undefined;
 }
 
 const initialState: createStates = {
   collectionName: '',
   totalMaxSupply: '',
+  step: 0,
   traits: [],
   primaryTrait: undefined,
 };
@@ -30,6 +32,9 @@ export const createflowSlice = createSlice({
     },
     updatePrimaryTrait: (state, action: PayloadAction<FolderType>) => {
       state.primaryTrait = action.payload;
+    },
+    updateStep: (state, action: PayloadAction<number>) => {
+      state.step = action.payload;
     },
     updateRarities: (
       state,
@@ -57,5 +62,6 @@ export const {
   updatePrimaryTrait,
   updateRarities,
   updateIsIncluded,
+  updateStep,
 } = createflowSlice.actions;
 export default createflowSlice.reducer;

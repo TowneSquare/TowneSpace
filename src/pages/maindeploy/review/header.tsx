@@ -4,7 +4,6 @@ import PrimaryButton from '../../../components/primary_button';
 import ButtonStatus from '../../../type/button_status';
 
 interface Props {}
-
 const Header: React.FC<Props> = ({}) => {
   const navigate = useNavigate();
   const onClose = () => {
@@ -12,13 +11,12 @@ const Header: React.FC<Props> = ({}) => {
   };
 
   const steps = [
-    { name: 'Upload assets', link: '/create/step1' },
-    { name: 'Preview assets', link: '/create/step2' },
-    { name: 'Set the traits order', link: '/create/step3' },
-    { name: 'Select the base trait', link: '/create/step4' },
+    { name: 'Export Settings', link: '/maindeploy/settings' },
+    { name: 'Final review', link: '/maindeploy/review' },
+    { name: 'Deploy assets', link: '/maindeploy/deploy' },
   ];
 
-  const currentStep = 4;
+  const currentStep = 2;
 
   return (
     <div className="relative h-[124px] mx-4 md:mx-8 flex justify-center items-center">
@@ -51,7 +49,7 @@ const Header: React.FC<Props> = ({}) => {
         <PrimaryButton
           type={ButtonStatus.active}
           className="px-14"
-          onClick={() => navigate('/deploy')}
+          onClick={() => navigate(steps[currentStep].link)}
         >
           Next
         </PrimaryButton>

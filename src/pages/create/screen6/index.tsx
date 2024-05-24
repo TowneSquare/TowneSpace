@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import Header from './header';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import { updatePrimaryTrait } from '../../../state/create';
 import { Fragment } from 'react';
+import Header from '../../../components/create/header';
 
 const Screen6 = () => {
   const traits = useAppSelector((state) => state.createState.traits);
@@ -13,17 +13,21 @@ const Screen6 = () => {
 
   return (
     <div className="pb-10">
-      <Header />
+      <Header stepNumber={4} />
       <p className="text-base md:text-xl text-center mt-8">
-        Choose which trait will become the base of your Dynamic PFP&nbsp; <br />
+        Choose which trait will become the base of your Dynamic PFP.
+        <br />
+        Holders won’t be able to remove the Base trait from their PFP, all other
+        traits can be removed.&nbsp;&nbsp;
         <span className="text-primary-light">Learn more</span>
       </p>
       <div className="mt-16 flex flex-col md:flex-row justify-center gap-2 md:gap-8">
         <div className="min-w-max p-4 md:w-[30vw] flex flex-col gap-4 rounded-md">
+          <span className="text-[20px]">Traits</span>
           {traits.map((trait, index) => {
             const isActive = trait.name == primaryTrait?.name;
             const bg = isActive
-              ? 'bg-primary-dark border border-primary-light'
+              ? 'bg-primary-default/20 border-2 border-primary-dark-1 '
               : 'bg-gray-dark-2 hover:bg-gray-dark-1';
             return (
               <div
@@ -41,7 +45,8 @@ const Screen6 = () => {
         </div>
         {primaryTrait ? (
           <>
-            <div className="p-4 w-[300px] rounded-md">
+            <div className="p-4 w-[300px] rounded-md items-center text-center">
+              <span className="text-[20px]">Base trait</span>
               <p className="text-sm md:text-base">
                 {primaryTrait?.name} will be the base trait
               </p>
@@ -56,7 +61,8 @@ const Screen6 = () => {
                 {primaryTrait?.name}
               </p>
             </div>
-            <div className="p-4 w-[328px]">
+            <div className="p-4 w-[328px] items-center text-center">
+              <span className="text-[20px]">Other traits</span>
               <p className="text-sm md:text-base">
                 These traits will be placed inside the base trait
               </p>
@@ -66,17 +72,22 @@ const Screen6 = () => {
                   return (
                     <Fragment key={index}>
                       {!isActive && (
-                        <div className="w-32 rounded-md" key={index}>
-                          <div className="h-32 bg-gray-light-3 rounded-md">
-                            <img
-                              src={trait.files[0].imageUrl}
-                              alt="image"
-                              className="w-32 h-32"
-                            />
+                        <div className="p-[8px] w-full rounded-md bg-[#404040]">
+                          <div
+                            className="rounded-md flex items-center text-center"
+                            key={index}
+                          >
+                            <div className="h-32 w-32 bg-gray-light-3 rounded-md mr-4">
+                              <img
+                                src={trait.files[0].imageUrl}
+                                alt="image"
+                                className="w-32 h-32"
+                              />
+                            </div>
+                            <p className="mt-2 text-sm md:text-base text-center">
+                              {trait.name}
+                            </p>
                           </div>
-                          <p className="mt-2 text-sm md:text-base text-center">
-                            {trait.name}
-                          </p>
                         </div>
                       )}
                     </Fragment>
