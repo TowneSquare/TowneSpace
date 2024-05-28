@@ -17,6 +17,18 @@ export const TOKEN_MINTER_MAINNET = ''
 export const TOWNESPACE_MAINNET = ''
 
 /** 
+ * =========
+ * ENDPOINTS
+ * =========
+*/
+
+/** TESTNET */
+export const COMPOSABLE_TOKEN_ENDPOINT_TESTNET = COMPOSABLE_TOKEN_TESTNET + COMPOSABLE_TOKEN_TESTNET
+
+/** MAINNET */
+export const COMPOSABLE_TOKEN_ENDPOINT_MAINNET = COMPOSABLE_TOKEN_MAINNET + COMPOSABLE_TOKEN_MAINNET
+
+/** 
  * =======
  * MODULES
  * =======
@@ -34,12 +46,34 @@ export const BATCH_MINT = `batch_mint`
 /** Token Minter */
 
 /** 
+ * =====
+ * TYPES
+ * =====
+*/
+
+//
+// TODO: update when on mainnet!
+// 
+export const CNFT_COLLECTION =  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Collection`
+export const COMPOSABLE_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Composable`
+export const TRAIT_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Trait`
+export const DIGITAL_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `DA`
+export const FUNGIBLE_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `FA`
+
+/** 
  * =========
  * READ APIs
  * =========
 */
 
 /** Composable Token */
+export const COLLECTION_NAME = `collection_name`
+export const COLLECTION_SYMBOL = `collection_symbol`
+export const COLLECTION_SUPPLY_TYPE = `collection_supply_type`
+
+export const PARENT_TOKEN_OBJECT = `parent_token`
+export const TOKEN_INDEX = `index`
+export const TRAITS_FROM_COMPOSABLE = `traits_from_composable`
 
 /** Townespace */
 
