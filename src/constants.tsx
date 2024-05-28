@@ -41,6 +41,7 @@ export const STUDIO = `studio`
 /** Townespace */
 
 export const TOWNESPACE_STUDIO = `studio`
+export const RANDOM_MINT = `random_mint`
 export const BATCH_MINT = `batch_mint`
 
 /** Token Minter */
@@ -86,8 +87,18 @@ export const TRAITS_FROM_COMPOSABLE = `traits_from_composable`
 */
 
 /** Composable Token */
+export const CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_ROYALTY = `create_collection_with_fixed_supply_and_royalty`
+export const CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_fixed_supply_and_no_royalty`
+export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_ROYALTY = `create_collection_with_unlimited_supply_and_royalty`
+export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_unlimited_supply_and_no_royalty`
+
+export const EQUIP_TRAIT = `equip_trait`
+export const UNEQUIP_TRAIT = `unequip_trait`
+
+export const DECOMPOSE_ENTIRE_COMPOSABLE_TOKEN = `decompose_entire_composable_token`
 
 /** Townespace */
+export const MINT_TOKENS = `mint_tokens`
 
 /** Token Minter */
 
