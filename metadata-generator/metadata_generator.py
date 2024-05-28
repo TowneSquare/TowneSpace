@@ -3,6 +3,7 @@ import shutil
 
 folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/Cool Sloth'
 mirror_folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated'
+output_md_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated_names.md'
 
 def generate_image_metadata(folder_path, mirror_folder_path):
     folder_name = os.path.basename(folder_path)
@@ -18,7 +19,7 @@ def generate_image_metadata(folder_path, mirror_folder_path):
     # Copy images directly into the generated folder
     for filename in os.listdir(os.path.join(folder_path, 'Body')):
         if filename.endswith(".png"):
-            new_image_name = f"{folder_name} #{index}" 
+            new_image_name = f"{folder_name}"  # Removed #<index>
             image_metadata = {
                 "name": new_image_name,
                 "description": "",
@@ -31,7 +32,7 @@ def generate_image_metadata(folder_path, mirror_folder_path):
             }
             images_metadata.append(image_metadata)
             # Copy image to mirror folder
-            mirror_image_path = os.path.join(mirror_folder_path, f"{new_image_name}.png")
+            mirror_image_path = os.path.join(mirror_folder_path, f"{new_image_name} {index}.png")
             shutil.copyfile(os.path.join(folder_path, 'Body', filename), mirror_image_path)
             image_names_csv.append(new_image_name)  # Add image name to CSV list
             index += 1  # Increment index for the next image
@@ -43,7 +44,7 @@ def generate_image_metadata(folder_path, mirror_folder_path):
             for filename in os.listdir(subfolder_path):
                 if filename.endswith(".png"):
                     image_name = filename.split('.')[0]  # Remove file extension from filename
-                    new_image_name = f"{dir_name} #{index}" 
+                    new_image_name = f"{image_name}"  # Removed #<index>
                     image_metadata = {
                         "name": new_image_name,
                         "description": "",
@@ -56,7 +57,7 @@ def generate_image_metadata(folder_path, mirror_folder_path):
                     }
                     images_metadata.append(image_metadata)
                     # Copy image to mirror folder
-                    mirror_image_path = os.path.join(mirror_folder_path, f"{new_image_name}.png")
+                    mirror_image_path = os.path.join(mirror_folder_path, f"{new_image_name} {index}.png")
                     shutil.copyfile(os.path.join(subfolder_path, filename), mirror_image_path)
                     image_names_csv.append(new_image_name)  # Add image name to CSV list
                     index += 1  # Increment index for the next image
@@ -64,3 +65,9 @@ def generate_image_metadata(folder_path, mirror_folder_path):
     return images_metadata, image_names_csv  # Return image metadata and CSV data
 
 metadata, csv_data = generate_image_metadata(folder_path, mirror_folder_path)
+
+# Generate Markdown file with list of generated names in the specified format
+with open(output_md_path, 'w') as md_file:
+    md_file.write('["')
+    md_file.write('", "'.join(csv_data))
+    md_file.write('"]\n')
