@@ -7,6 +7,12 @@ interface dialogStates {
   bWalletHold: boolean;
   bCreateModal: boolean;
   bStep2: boolean;
+  bViewNFTModal: boolean;
+  bTraitRemove: boolean;
+  bRemoveTraitConfirm: boolean;
+  bNftEdit: boolean;
+  bExitEdit: boolean;
+  bFinishEdit: boolean;
 }
 
 const initialState: dialogStates = {
@@ -16,6 +22,12 @@ const initialState: dialogStates = {
   bWalletHold: false,
   bCreateModal: false,
   bStep2: false,
+  bViewNFTModal: false,
+  bTraitRemove: false,
+  bRemoveTraitConfirm: false,
+  bNftEdit: false,
+  bExitEdit: false,
+  bFinishEdit: false,
 };
 
 export const dialogSlice = createSlice({
@@ -40,6 +52,24 @@ export const dialogSlice = createSlice({
     toggleStep2: (state, action: PayloadAction<boolean>) => {
       state.bStep2 = action.payload;
     },
+    toggleViewNFTModal: (state, action: PayloadAction<boolean>) => {
+      state.bViewNFTModal = action.payload;
+    },
+    toggleRemoveTrait: (state, action: PayloadAction<boolean>) => {
+      state.bTraitRemove = action.payload;
+    },
+    toggleRemoveTraitConfirm: (state, action: PayloadAction<boolean>) => {
+      state.bRemoveTraitConfirm = action.payload;
+    },
+    toggleNFTEdit: (state, action: PayloadAction<boolean>) => {
+      state.bNftEdit = action.payload;
+    },
+    toggleExitEdit: (state, action: PayloadAction<boolean>) => {
+      state.bExitEdit = action.payload;
+    },
+    toggleFinishEdit: (state, action: PayloadAction<boolean>) => {
+      state.bFinishEdit = action.payload;
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -51,5 +81,11 @@ export const {
   toggleConnectRequest,
   toggleCreateModal,
   toggleStep2,
+  toggleViewNFTModal,
+  toggleRemoveTrait,
+  toggleRemoveTraitConfirm,
+  toggleNFTEdit,
+  toggleExitEdit,
+  toggleFinishEdit,
 } = dialogSlice.actions;
 export default dialogSlice.reducer;
