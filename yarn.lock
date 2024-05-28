@@ -94,7 +94,7 @@
     eventemitter3 "^5.0.1"
     form-data "^4.0.0"
 
-"@aptos-labs/wallet-adapter-core@*", "@aptos-labs/wallet-adapter-core@2.5.1", "@aptos-labs/wallet-adapter-core@^2.2.0", "@aptos-labs/wallet-adapter-core@^2.5.0":
+"@aptos-labs/wallet-adapter-core@*", "@aptos-labs/wallet-adapter-core@^2.2.0", "@aptos-labs/wallet-adapter-core@^2.5.0":
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/@aptos-labs/wallet-adapter-core/-/wallet-adapter-core-2.5.1.tgz#75d4a306e0246c19dc5b68cbf4873a7fc151aa50"
   integrity sha512-ny6CD47ivpnVV22reyN6LouDMVY9eccY3F3HscqfhAK+IqFm4C1C4BTFCoMQwPe9/yht2E/B6VuZBRIsYf7NvQ==
@@ -132,6 +132,15 @@
     eventemitter3 "^4.0.7"
     tweetnacl "^1.0.3"
 
+"@aptos-labs/wallet-adapter-core@3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@aptos-labs/wallet-adapter-core/-/wallet-adapter-core-3.6.0.tgz#04f407646a5ce69c6877397668ffb505d9f99656"
+  integrity sha512-xSwlOlTmBgFvPMDBlD/7D7FSJ22ioC8z3O6iYQls1qvV2ibrL6RThGKMC8QD2qus9f0rP9523RLNJT4P/RvSOg==
+  dependencies:
+    buffer "^6.0.3"
+    eventemitter3 "^4.0.7"
+    tweetnacl "^1.0.3"
+
 "@aptos-labs/wallet-adapter-core@^0.2.0", "@aptos-labs/wallet-adapter-core@^0.2.2":
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@aptos-labs/wallet-adapter-core/-/wallet-adapter-core-0.2.3.tgz#916807716242333d3e098f4704c8494244723a81"
@@ -142,13 +151,12 @@
     eventemitter3 "^4.0.7"
     tweetnacl "^1.0.3"
 
-"@aptos-labs/wallet-adapter-react@*":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@aptos-labs/wallet-adapter-react/-/wallet-adapter-react-1.3.2.tgz#a88ff2e458c8a6ffc33d9c7f6cc91e8c8544714b"
-  integrity sha512-aZ1tfzD5Gp56zpjhgBWHgWUd45FN6V6/NiZ9ClFuCJE+gEw/3R6ezGwjuXAMEEKdFarBSY3qMQDXzInLa+lFDg==
+"@aptos-labs/wallet-adapter-react@2.1.8":
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/@aptos-labs/wallet-adapter-react/-/wallet-adapter-react-2.1.8.tgz#86792dd448bd04e20b4c2aa11786ae0db99f77da"
+  integrity sha512-gpLuafUaykq8HUfSR5BRDRNl4kHfSrnZphqo29HkJdZLnKhv7sOKRUoFNXJP1jfPX7nX0ce38pg24v8SVg8gvw==
   dependencies:
-    "@aptos-labs/wallet-adapter-core" "2.5.1"
-    react "^18"
+    "@aptos-labs/wallet-adapter-core" "3.6.0"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.0", "@babel/code-frame@^7.22.13", "@babel/code-frame@^7.8.3":
   version "7.22.13"
@@ -9818,7 +9826,7 @@ react-tooltip@^5.26.4:
     "@floating-ui/dom" "^1.6.1"
     classnames "^2.3.0"
 
-react@^18, react@^18.2.0:
+react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
