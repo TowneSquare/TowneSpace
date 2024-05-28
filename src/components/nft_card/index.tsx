@@ -4,6 +4,8 @@ import { isUriEmpty } from '../../util';
 import { useAppDispatch } from '../../state/hooks';
 import { chooseNft } from '../../state/tokens';
 import { useEffect, useState } from 'react';
+import { toggleViewNFTModal } from '../../state/dialog';
+import ViewNFTModal from '../modal/viewNFTModal';
 
 interface Props {
   data: NftMetadataType;
@@ -12,32 +14,35 @@ const NftCard: React.FC<Props> = ({ data }) => {
   const navigation = useNavigate();
   const dispatch = useAppDispatch();
   const onCustomize = () => {
-    if (data.token_standard == 'v2') {
-      dispatch(chooseNft(data));
-      navigation(`/customize/${data.address}`);
-    }
+    console.log(data);
+    // if (data.token_standard == 'v2') {
+    dispatch(chooseNft(data));
+    navigation(`/customize/${data.address}`);
+    // }
   };
   const [tokenImage, setTokenImage] = useState('');
 
   useEffect(() => {
     // React advises to declare the async function directly inside useEffect
     async function getTokenImage() {
-      if (data.current_token_data.token_uri.includes('ipfs://')) {
-        let cid = data.current_token_data.token_uri.replace('ipfs://', '');
-        let ipfsGatewayUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
+      try {
+        if (data.current_token_data.token_uri.includes('ipfs://')) {
+          let cid = data.current_token_data.token_uri.replace('ipfs://', '');
+          let ipfsGatewayUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
 
-        const result = await fetch(ipfsGatewayUrl);
-        const json = await result.json();
-        if (json.image && json.image.includes('ipfs://')) {
-          cid = json.image.replace('ipfs://', '');
-          let _tokenImageUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
-          setTokenImage(_tokenImageUrl);
+          const result = await fetch(ipfsGatewayUrl);
+          const json = await result.json();
+          if (json.image && json.image.includes('ipfs://')) {
+            cid = json.image.replace('ipfs://', '');
+            let _tokenImageUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
+            setTokenImage(_tokenImageUrl);
+          } else {
+            setTokenImage(json.image);
+          }
         } else {
-          setTokenImage(json.image);
+          setTokenImage(data.current_token_data.token_uri);
         }
-      } else {
-        setTokenImage(data.current_token_data.token_uri);
-      }
+      } catch (e) {}
     }
     getTokenImage();
   }, []);
@@ -57,7 +62,10 @@ const NftCard: React.FC<Props> = ({ data }) => {
           <div className="hidden group-hover/3dots:block absolute top-6 right-0 ">
             <div className="w-full h-2" />
             <div className="py-2 rounded-lg bg-white">
-              <p className="px-2 text-[10px] md:text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap ">
+              <p
+                className="px-2 text-[10px] md:text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap "
+                onClick={() => dispatch(toggleViewNFTModal(true))}
+              >
                 See on TowneSpace
               </p>
               <div className="mt-2 h-px bg-gray-dark-2" />

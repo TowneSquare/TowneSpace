@@ -7,6 +7,7 @@ import Tabs from './tabs';
 import HelpCenter from './tabs/links';
 import Tokens from './tokens';
 import Welcome from './welcome';
+import ViewNFTModal from '../../components/modal/viewNFTModal';
 
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
@@ -37,6 +38,7 @@ const Studio = () => {
           <div className="flex items-center gap-14">
             <HelpCenter />
             <Commands />
+            <ViewNFTModal />
           </div>
         </div>
         <Tabs />
