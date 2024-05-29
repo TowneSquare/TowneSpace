@@ -1,3 +1,6 @@
+# TODO: should print seperate payloads: 1st of composables and then for traits
+# TODO: work on payload scripts
+
 import os
 import shutil
 
