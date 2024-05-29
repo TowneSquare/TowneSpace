@@ -121,18 +121,18 @@ export const OWNED_V1_COLLECTIONS_QUERY = `
     `;
 
 export const OWNED_V2_COLLECTIONS_QUERY = `
-    query MyQuery($offset: Int!, $limit: Int, $account_address: String) {
-    current_collection_ownership_v2_view(
-        where: {creator_address: {_eq: $account_address}}
-        limit: $limit
-        offset: $offset
-        order_by: {collection_name: asc}
+query MyQuery($offset: Int!, $limit: Int, $account_address: String) {
+    current_collections_v2(
+      limit: $limit
+      offset: $offset
+      order_by: {collection_name: asc}
+      where: {creator_address: {_eq: $account_address}}
     ) {
-        collection_id
-        collection_name
-        collection_uri
-        }
+      collection_id
+      collection_name
+      uri
     }
+  }
     `;
 export class Queries { 
     readonly provider: Aptos;
