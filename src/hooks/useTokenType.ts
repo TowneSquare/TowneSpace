@@ -1,5 +1,5 @@
 import { Aptos, InputViewFunctionData } from "@aptos-labs/ts-sdk"
-import { COMPOSABLE_TOKEN, COMPOSABLE_TOKEN_TESTNET, COMPOSABLE_TOKEN_TYPE , TRAIT_TOKEN_TYPE} from "../constants";
+import { COMPOSABLE_TOKEN_TYPE , TRAIT_TOKEN_TYPE} from "../constants";
 
 /**
  * 
@@ -11,7 +11,7 @@ import { COMPOSABLE_TOKEN, COMPOSABLE_TOKEN_TESTNET, COMPOSABLE_TOKEN_TYPE , TRA
 export const useTraitType = async (aptos: Aptos, tokenObject: string) => {
     const payload: InputViewFunctionData = {
         function: `0x4::token::description`,
-        typeArguments: [`${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${TRAIT_TOKEN_TYPE}`],
+        typeArguments: [TRAIT_TOKEN_TYPE],
         functionArguments: [tokenObject],
     };
     const response = await aptos.view({
@@ -30,7 +30,7 @@ export const useTraitType = async (aptos: Aptos, tokenObject: string) => {
 export const useComposableType = async (aptos: Aptos, tokenObject: string) => {
     const payload: InputViewFunctionData = {
         function: `0x4::token::description`,
-        typeArguments: [`${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${COMPOSABLE_TOKEN_TYPE}`],
+        typeArguments: [COMPOSABLE_TOKEN_TYPE],
         functionArguments: [tokenObject],
     };
     const response = await aptos.view({
@@ -51,7 +51,7 @@ export const useTraitTypes = async (aptos: Aptos, tokenObjects: string[]) => {
     for (const tokenObject of tokenObjects) {
         const payload: InputViewFunctionData = {
             function: `0x4::token::description`,
-            typeArguments: [`${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${TRAIT_TOKEN_TYPE}`],
+            typeArguments: [TRAIT_TOKEN_TYPE],
             functionArguments: [tokenObject],
         };
         const response = await aptos.view({
@@ -74,7 +74,7 @@ export const useComposableTypes = async (aptos: Aptos, tokenObjects: string[]) =
     for (const tokenObject of tokenObjects) {
         const payload: InputViewFunctionData = {
             function: `0x4::token::description`,
-            typeArguments: [`${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${COMPOSABLE_TOKEN_TYPE}`],
+            typeArguments: [COMPOSABLE_TOKEN_TYPE],
             functionArguments: [tokenObject],
         };
         const response = await aptos.view({
