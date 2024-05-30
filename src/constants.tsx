@@ -1,4 +1,4 @@
-/** 
+/**
  * ========
  * PACKAGES
  * ========
@@ -6,9 +6,12 @@
 
 /** TESTNET */
 
-export const COMPOSABLE_TOKEN_TESTNET = '0xe3f938b1a3bd9ae7b890c06629b092409ca3adcaa48a3b393b4f142652b7ff57'
-export const TOKEN_MINTER_TESTNET = '0x07ff0308d16a5041ace8e7e306a60b2946b6a4aee0e7e923b8f20e49bf3508ce'
-export const TOWNESPACE_TESTNET = '0x8ccfe7bf29ea35b26c2d42b1ff05acfbd6283ba5970bdb1ffca8110224adc5de'
+export const COMPOSABLE_TOKEN_TESTNET =
+  '0xe3f938b1a3bd9ae7b890c06629b092409ca3adcaa48a3b393b4f142652b7ff57';
+export const TOKEN_MINTER_TESTNET =
+  '0x07ff0308d16a5041ace8e7e306a60b2946b6a4aee0e7e923b8f20e49bf3508ce';
+export const TOWNESPACE_TESTNET =
+  '0x8ccfe7bf29ea35b26c2d42b1ff05acfbd6283ba5970bdb1ffca8110224adc5de';
 
 /** MAINNET */
 
@@ -16,19 +19,21 @@ export const COMPOSABLE_TOKEN_MAINNET = '';
 export const TOKEN_MINTER_MAINNET = '';
 export const TOWNESPACE_MAINNET = '';
 
-/** 
+/**
  * =========
  * ENDPOINTS
  * =========
-*/
+ */
 
 /** TESTNET */
-export const COMPOSABLE_TOKEN_ENDPOINT_TESTNET = COMPOSABLE_TOKEN_TESTNET + COMPOSABLE_TOKEN_TESTNET
+export const COMPOSABLE_TOKEN_ENDPOINT_TESTNET =
+  COMPOSABLE_TOKEN_TESTNET + COMPOSABLE_TOKEN_TESTNET;
 
 /** MAINNET */
-export const COMPOSABLE_TOKEN_ENDPOINT_MAINNET = COMPOSABLE_TOKEN_MAINNET + COMPOSABLE_TOKEN_MAINNET
+export const COMPOSABLE_TOKEN_ENDPOINT_MAINNET =
+  COMPOSABLE_TOKEN_MAINNET + COMPOSABLE_TOKEN_MAINNET;
 
-/** 
+/**
  * =======
  * MODULES
  * =======
@@ -40,41 +45,42 @@ export const STUDIO = `studio`;
 
 /** Townespace */
 
-export const TOWNESPACE_STUDIO = `studio`
-export const RANDOM_MINT = `random_mint`
-export const BATCH_MINT = `batch_mint`
+export const TOWNESPACE_STUDIO = `studio`;
+export const RANDOM_MINT = `random_mint`;
+export const BATCH_MINT = `batch_mint`;
 
 /** Token Minter */
 
-/** 
+/**
  * =====
  * TYPES
  * =====
-*/
+ */
 
 //
 // TODO: update when on mainnet!
-// 
-export const CNFT_COLLECTION =  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Collection`
-export const COMPOSABLE_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Composable`
-export const TRAIT_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Trait`
-export const DIGITAL_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `DA`
-export const FUNGIBLE_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `FA`
+//
+export const CNFT_COLLECTION = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Collection`;
+export const COMPOSABLE_TOKEN_TYPE =
+  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Composable`;
+export const TRAIT_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Trait`;
+export const DIGITAL_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `DA`;
+export const FUNGIBLE_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `FA`;
 
-/** 
+/**
  * =========
  * READ APIs
  * =========
  */
 
 /** Composable Token */
-export const COLLECTION_NAME = `collection_name`
-export const COLLECTION_SYMBOL = `collection_symbol`
-export const COLLECTION_SUPPLY_TYPE = `collection_supply_type`
+export const COLLECTION_NAME = `collection_name`;
+export const COLLECTION_SYMBOL = `collection_symbol`;
+export const COLLECTION_SUPPLY_TYPE = `collection_supply_type`;
 
-export const PARENT_TOKEN_OBJECT = `parent_token`
-export const TOKEN_INDEX = `index`
-export const TRAITS_FROM_COMPOSABLE = `traits_from_composable`
+export const PARENT_TOKEN_OBJECT = `parent_token`;
+export const TOKEN_INDEX = `index`;
+export const TRAITS_FROM_COMPOSABLE = `traits_from_composable`;
 
 /** Townespace */
 
@@ -87,18 +93,18 @@ export const TRAITS_FROM_COMPOSABLE = `traits_from_composable`
  */
 
 /** Composable Token */
-export const CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_ROYALTY = `create_collection_with_fixed_supply_and_royalty`
-export const CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_fixed_supply_and_no_royalty`
-export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_ROYALTY = `create_collection_with_unlimited_supply_and_royalty`
-export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_unlimited_supply_and_no_royalty`
+export const CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_ROYALTY = `create_collection_with_fixed_supply_and_royalty`;
+export const CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_fixed_supply_and_no_royalty`;
+export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_ROYALTY = `create_collection_with_unlimited_supply_and_royalty`;
+export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_unlimited_supply_and_no_royalty`;
 
-export const EQUIP_TRAIT = `equip_trait`
-export const UNEQUIP_TRAIT = `unequip_trait`
+export const EQUIP_TRAIT = `equip_trait`;
+export const UNEQUIP_TRAIT = `unequip_trait`;
 
-export const DECOMPOSE_ENTIRE_COMPOSABLE_TOKEN = `decompose_entire_composable_token`
+export const DECOMPOSE_ENTIRE_COMPOSABLE_TOKEN = `decompose_entire_composable_token`;
 
 /** Townespace */
-export const MINT_TOKENS = `mint_tokens`
+export const MINT_TOKENS = `mint_tokens`;
 
 /** Token Minter */
 

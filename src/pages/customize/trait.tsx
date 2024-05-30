@@ -22,18 +22,22 @@ const Trait: React.FC<Props> = ({}) => {
       {currentTrait ? (
         <div className="md:w-[30vw] mx-4 md:mx-0 px-4 lg:px-10 py-10 flex flex-col rounded-md bg-gray-dark-2">
           <div className="w-48 md:w-52 lg:w-64 h-48 md:h-52 lg:h-64 bg-gray-dark-1 rounded-md">
-            <img src={currentTrait.uri} alt="uri" className="w-full h-full" />
+            <img
+              src={currentTrait.token_uri}
+              alt="uri"
+              className="w-full h-full"
+            />
           </div>
           <div className="flex gap-2 mt-4">
             <p className="text-[14px] text-gray-light-1 font-semibold">
-              {currentNft?.collection}
+              {currentNft?.collection_name}
             </p>
             <img src="/nft-card/polygon-check.svg" alt="check" />
           </div>
           <p className="text-[14px] text-gray-light-1 pt-4 font-semibold">
-            {currentTrait.collection}
+            {currentTrait.collection_name}
           </p>
-          <p className="text-[14px] font-semibold">{currentTrait.name}</p>
+          <p className="text-[14px] font-semibold">{currentTrait.token_name}</p>
           <p className="text-[14px] mt-4">
             NFT Description lorem ipsum dolro sit amet qot lorem ipsum dolro sit
             amet qot

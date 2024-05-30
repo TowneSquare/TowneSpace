@@ -1,4 +1,10 @@
+import { Aptos, AptosConfig } from '@aptos-labs/ts-sdk';
+import { Network } from 'aptos';
+
 import { NftMetadataType, NftType } from '../type/nft_type';
+
+export const APTOS_CONFIG = new AptosConfig({ network: Network.TESTNET });
+export const APTOS = new Aptos(APTOS_CONFIG);
 
 export const NFTS: NftMetadataType[] = [
   //    {

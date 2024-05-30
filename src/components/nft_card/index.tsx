@@ -17,44 +17,47 @@ const NftCard: React.FC<Props> = ({ data }) => {
     console.log(data);
     // if (data.token_standard == 'v2') {
     dispatch(chooseNft(data));
-    navigation(`/customize/${data.address}`);
+    navigation(`/nftcustomize/${data.token_data_id}`);
     // }
   };
-  const [tokenImage, setTokenImage] = useState('');
 
-  useEffect(() => {
-    // React advises to declare the async function directly inside useEffect
-    async function getTokenImage() {
-      try {
-        if (data.current_token_data.token_uri.includes('ipfs://')) {
-          let cid = data.current_token_data.token_uri.replace('ipfs://', '');
-          let ipfsGatewayUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
+  // const [tokenImage, setTokenImage] = useState('');
+  // useEffect(() => {
+  //   async function getTokenImage() {
+  //     try {
+  //       if (data.current_token_data.token_uri.includes('ipfs://')) {
+  //         let cid = data.current_token_data.token_uri.replace('ipfs://', '');
+  //         let ipfsGatewayUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
 
-          const result = await fetch(ipfsGatewayUrl);
-          const json = await result.json();
-          if (json.image && json.image.includes('ipfs://')) {
-            cid = json.image.replace('ipfs://', '');
-            let _tokenImageUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
-            setTokenImage(_tokenImageUrl);
-          } else {
-            setTokenImage(json.image);
-          }
-        } else {
-          setTokenImage(data.current_token_data.token_uri);
-        }
-      } catch (e) {}
-    }
-    getTokenImage();
-  }, []);
+  //         const result = await fetch(ipfsGatewayUrl);
+  //         const json = await result.json();
+  //         if (json.image && json.image.includes('ipfs://')) {
+  //           cid = json.image.replace('ipfs://', '');
+  //           let _tokenImageUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
+  //           setTokenImage(_tokenImageUrl);
+  //         } else {
+  //           setTokenImage(json.image);
+  //         }
+  //       } else {
+  //         setTokenImage(data.current_token_data.token_uri);
+  //       }
+  //     } catch (e) {}
+  //   }
+  //   getTokenImage();
+  // }, []);
 
   return (
     <div className="group w-[140px] md:w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer">
       <div className="relative h-[132px] md:h-[156px] bg-gray-light-2 rounded-t-lg">
-        {!isUriEmpty(tokenImage) && (
+        {!isUriEmpty(data.token_uri) && (
           <img
-            src={tokenImage}
+            src={data.token_uri}
             className="w-full h-full rounded-t-[8px]"
-            alt="nft"
+            alt="Primary image"
+            onError={(e) => {
+              console.error(data.token_uri);
+              e.currentTarget.src = '/logo.png';
+            }}
           />
         )}
         <div className="group/3dots hidden group-hover:flex flex-col absolute w-6 h-6 justify-center items-center top-2 right-2 hover:bg-black rounded-full z-10">
@@ -82,7 +85,7 @@ const NftCard: React.FC<Props> = ({ data }) => {
           {data.token_standard == 'v2' && (
             <img src="/nft-card/v2-badge.svg" alt="v2-badge" />
           )}
-          {data.object_tokens && data.object_tokens.length > 0 && (
+          {data.composed_nfts && data.composed_nfts.length > 0 && (
             <img src="/nft-card/composed.svg" alt="composed" />
           )}
         </div>
@@ -90,15 +93,13 @@ const NftCard: React.FC<Props> = ({ data }) => {
       </div>
       <div className="mx-2 my-2">
         <div className="flex items-center gap-2 text-xs md:text-[14px] font-semibold text-gray-light-1">
-          {data.current_token_data.current_collection.collection_name}
+          {data.collection_name}
           {/* <img src="/nft-card/polygon-check.svg" alt="check" /> */}
         </div>
-        <p className="text-base md:text-lg font-semibold">
-          {data.current_token_data.token_name}
-        </p>
+        <p className="text-base md:text-lg font-semibold">{data.token_name}</p>
         <div className="mt-3 flex gap-2">
           <img src="/nft-card/aptos-logo.svg" alt="logo" />
-          <p className="text-sm md:text-base font-semibold">{data.price}</p>
+          <p className="text-sm md:text-base font-semibold">{'data.price'}</p>
         </div>
       </div>
     </div>

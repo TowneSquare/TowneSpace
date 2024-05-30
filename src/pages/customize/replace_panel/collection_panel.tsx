@@ -22,7 +22,7 @@ const CollectionPanel = () => {
   );
   useEffect(() => {
     let res = NFTS.filter(
-      (nft) => nft.collection == traitCollection.collection
+      (nft) => nft.collection_id == traitCollection.collection_id
     );
     setTraitTokens(res);
     setNewTrait(undefined);
@@ -31,7 +31,7 @@ const CollectionPanel = () => {
   const traitCollections = TRAITS.map((trait) => {
     return {
       collection: trait,
-      traitCount: NFTS.filter((nft) => nft.collection == trait.collection)
+      traitCount: NFTS.filter((nft) => nft.collection_id == trait.collection_id)
         .length,
     };
   });
@@ -47,29 +47,29 @@ const CollectionPanel = () => {
         <div>
           {traitCollections.map((trait, index) => (
             <div
-              className={`h-16 px-4 py-2 flex items-center hover:bg-gray-light-1 ${traitCollection.collection == trait.collection.collection ? 'bg-gray-light-1' : ''} rounded-md`}
+              className={`h-16 px-4 py-2 flex items-center hover:bg-gray-light-1 ${traitCollection.collection_id == trait.collection.collection_id ? 'bg-gray-light-1' : ''} rounded-md`}
               key={index}
               onClick={() => setTraitCollection(trait.collection)}
             >
-              {`${trait.collection.collection}(${trait.traitCount})`}
+              {`${trait.collection.collection_name}(${trait.traitCount})`}
             </div>
           ))}
         </div>
         <div className="flex flex-wrap gap-4">
           {traitTokens?.map((token, index) => (
             <div
-              className={`w-36 p-2 rounded-md ${newTrait?.address == token.address ? 'bg-gray-dark-1' : ''}`}
+              className={`w-36 p-2 rounded-md ${newTrait?.token_data_id == token.token_data_id ? 'bg-gray-dark-1' : ''}`}
               key={index}
               onClick={() => setNewTrait(token)}
             >
               <div className="h-32 bg-gray-light-3 hover:bg-gray-light-2 rounded-md overflow-hidden">
-                <img src={token.uri} alt="token" className="w-32 h-32" />
+                <img src={token.token_uri} alt="token" className="w-32 h-32" />
               </div>
               <div className="flex gap-4">
-                <p className="">{token.collection}</p>
+                <p className="">{token.collection_name}</p>
                 <img src="/nft-card/polygon-check.svg" alt="check" />
               </div>
-              <p className="text-lg font-semibold">{token.name}</p>
+              <p className="text-lg font-semibold">{token.token_name}</p>
             </div>
           ))}
         </div>
