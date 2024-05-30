@@ -77,6 +77,9 @@ export const PARENT_TOKEN_OBJECT = `parent_token`
 export const TOKEN_INDEX = `index`
 export const TRAITS_FROM_COMPOSABLE = `traits_from_composable`
 
+export const IDENTIFY_OBJECT = `object_type`
+export const IDENTIFY_OBJECTS = `object_types`
+
 /** Townespace */
 
 /** Token Minter */
