@@ -165,6 +165,27 @@ export const OWNED_V2_COLLECTIONS_QUERY = `
       }
     }
     `;
+
+export const OWNED_V2_TOKENS_IN_A_COLLECTION_QUERY = `
+  query MyQuery($offset: Int!, $limit: Int, $account_address: String, $collection_id: String) {
+    current_token_ownerships_v2(
+      limit: $limit
+      where: {owner_address: {_eq: $account_address}, current_token_data: {current_collection: {collection_id: {_eq: $collection_id}}}}
+      offset: $offset
+    ) {
+      current_token_data {
+        collection_id
+        token_name
+        token_data_id
+        description
+        token_uri
+        current_collection {
+          collection_name
+        }
+      }
+    }
+  }
+  `;
 export class Queries {
   readonly provider: Aptos;
 
@@ -351,5 +372,43 @@ export class Queries {
       collections.push(collection);
     }
     return collections;
+  }
+
+  /**
+   *
+   * Get owned v2 tokens in a collection
+   * @param offset
+   * @param limit
+   * @param account_address
+   * @param collection_id
+   * @returns
+   */
+  async getOwnedV2TokensInACollection(
+    offset: number,
+    limit: number,
+    account_address: string,
+    collection_id: string
+  ): Promise<Array<TokenV2Fields>> {
+    const variables = {
+      offset,
+      limit,
+      account_address,
+      collection_id,
+    };
+
+    const response: any = await this.queryIndexer(
+      OWNED_V2_TOKENS_IN_A_COLLECTION_QUERY,
+      variables
+    );
+
+    const tokens = [];
+
+    for (const token of response.current_token_ownerships_v2) {
+      tokens.push({
+        ...token.current_token_data,
+        collection_name: token.current_token_data.current_collection.collection_name,
+      });
+    }
+    return tokens;
   }
 }
