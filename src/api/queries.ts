@@ -84,74 +84,86 @@ export type OwnedCollectionV2Indexer = {
  *
  */
 
-export const OWNED_V1_TOKENS_QUERY = `
-    query MyQuery($offset: Int, $limit: Int, $account_address: String, $collection_data_id_hash: String) {
-      token_ownerships(
-        where: {
-          owner_address: {_eq: $account_address},
-          collection_data_id_hash: {_eq: $collection_data_id_hash}
-        }
+export const OWNED_OBJECTS_QUERY = `
+  query MyQuery($account_address: String, $offset: Int, $limit: Int) {
+      current_objects(
+        where: {owner_address: {_eq: $account_address}}
         offset: $offset
         limit: $limit
-        order_by: {name: asc}
       ) {
-          collection_data_id_hash: collection_id
-          name: token_name
-          token_data_id_hash: token_data_id
-      }
-    }
-    `;
-export const OWNED_V2_TOKENS_QUERY = `
-    query MyQuery($offset: Int!, $limit: Int, $account_address: String, $collection_id: String) {
-      current_token_ownerships_v2(
-        limit: $limit
-        where: {owner_address: {_eq: $account_address}, current_token_data: {current_collection: {collection_id: {_eq: $collection_id}}}}
-        offset: $offset
-      ) {
-        current_token_data {
-          collection_id
-          token_name
-          token_data_id
-          description
-          token_uri
-          current_collection {
-            collection_name
-          }
-        }
+        object_address
       }
     }
   `;
 
-export const OWNED_V1_COLLECTIONS_QUERY = `
-    query MyQuery($limit: Int, $offset: Int, $account_address: String) {
-        collection_datas(
-        limit: $limit
-        offset: $offset
-        order_by: {collection_name: asc}
-        where: {creator_address: {_eq: $account_address}}
-        ) {
-        collection_id: collection_data_id_hash
-        collection_name
-        description
-        uri: metadata_uri
-        }
+export const OWNED_V1_TOKENS_QUERY = `
+  query MyQuery($offset: Int, $limit: Int, $account_address: String, $collection_data_id_hash: String) {
+    token_ownerships(
+      where: {
+        owner_address: {_eq: $account_address},
+        collection_data_id_hash: {_eq: $collection_data_id_hash}
+      }
+      offset: $offset
+      limit: $limit
+      order_by: {name: asc}
+    ) {
+        collection_data_id_hash: collection_id
+        name: token_name
+        token_data_id_hash: token_data_id
     }
-    `;
+  }
+  `;
+export const OWNED_V2_TOKENS_QUERY = `
+  query MyQuery($offset: Int!, $limit: Int, $account_address: String, $collection_id: String) {
+    current_token_ownerships_v2(
+      limit: $limit
+      where: {owner_address: {_eq: $account_address}, current_token_data: {current_collection: {collection_id: {_eq: $collection_id}}}}
+      offset: $offset
+    ) {
+      current_token_data {
+        collection_id
+        token_name
+        token_data_id
+        description
+        token_uri
+        current_collection {
+          collection_name
+        }
+      }
+    }
+  }
+`;
 
-export const OWNED_V2_COLLECTIONS_QUERY = `
-query MyQuery($offset: Int!, $limit: Int, $account_address: String) {
-    current_collections_v2(
+export const OWNED_V1_COLLECTIONS_QUERY = `
+  query MyQuery($limit: Int, $offset: Int, $account_address: String) {
+      collection_datas(
       limit: $limit
       offset: $offset
       order_by: {collection_name: asc}
       where: {creator_address: {_eq: $account_address}}
-    ) {
-      collection_id
+      ) {
+      collection_id: collection_data_id_hash
       collection_name
       description
-      uri
-    }
+      uri: metadata_uri
+      }
   }
+  `;
+
+export const OWNED_V2_COLLECTIONS_QUERY = `
+  query MyQuery($offset: Int!, $limit: Int, $account_address: String) {
+      current_collections_v2(
+        limit: $limit
+        offset: $offset
+        order_by: {collection_name: asc}
+        where: {creator_address: {_eq: $account_address}}
+      ) {
+        collection_id
+        collection_name
+        description
+        uri
+      }
+    }
     `;
 export class Queries {
   readonly provider: Aptos;
@@ -168,6 +180,35 @@ export class Queries {
     return this.provider.queryIndexer<T>({
       query: graphqlQuery,
     });
+  }
+
+  /**
+   *
+   * Get owned objects
+   * @param offset
+   * @param limit
+   * @param account_address
+   * @returns list of addresses
+   */
+  async getOwnedObjects(
+    offset: number,
+    limit: number,
+    account_address: string
+  ): Promise<Array<string>> {
+    const variables = {
+      offset,
+      limit,
+      account_address,
+    };
+
+    const response: any = await this.queryIndexer(OWNED_OBJECTS_QUERY, variables);
+
+    const objects = [];
+
+    for (const object of response.current_objects) {
+      objects.push(object.object_address);
+    }
+    return objects;
   }
 
   /**
