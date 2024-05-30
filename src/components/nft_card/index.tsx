@@ -20,7 +20,10 @@ const NftCard: React.FC<Props> = ({ data }) => {
     navigation(`/nftcustomize/${data.token_data_id}`);
     // }
   };
-
+  const onSeeTowneSpace = () => {
+    dispatch(chooseNft(data));
+    dispatch(toggleViewNFTModal(true));
+  };
   // const [tokenImage, setTokenImage] = useState('');
   // useEffect(() => {
   //   async function getTokenImage() {
@@ -67,7 +70,7 @@ const NftCard: React.FC<Props> = ({ data }) => {
             <div className="py-2 rounded-lg bg-white">
               <p
                 className="px-2 text-[10px] md:text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap "
-                onClick={() => dispatch(toggleViewNFTModal(true))}
+                onClick={() => onSeeTowneSpace()}
               >
                 See on TowneSpace
               </p>
