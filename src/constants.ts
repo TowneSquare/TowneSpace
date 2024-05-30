@@ -16,23 +16,12 @@ export const COMPOSABLE_TOKEN_MAINNET = '';
 export const TOKEN_MINTER_MAINNET = '';
 export const TOWNESPACE_MAINNET = '';
 
-/** 
- * =========
- * ENDPOINTS
- * =========
-*/
-
-/** TESTNET */
-export const COMPOSABLE_TOKEN_ENDPOINT_TESTNET = COMPOSABLE_TOKEN_TESTNET + COMPOSABLE_TOKEN_TESTNET
-
-/** MAINNET */
-export const COMPOSABLE_TOKEN_ENDPOINT_MAINNET = COMPOSABLE_TOKEN_MAINNET + COMPOSABLE_TOKEN_MAINNET
 
 /** 
  * =======
  * MODULES
  * =======
- */
+*/
 
 /** Composable Token */
 export const COMPOSABLE_TOKEN = `composable_token`;
@@ -47,6 +36,18 @@ export const BATCH_MINT = `batch_mint`
 /** Token Minter */
 
 /** 
+ * =========
+ * ENDPOINTS
+ * =========
+*/
+
+/** TESTNET */
+export const COMPOSABLE_TOKEN_ENDPOINT_TESTNET = COMPOSABLE_TOKEN_TESTNET + `::` + COMPOSABLE_TOKEN
+
+/** MAINNET */
+export const COMPOSABLE_TOKEN_ENDPOINT_MAINNET = COMPOSABLE_TOKEN_MAINNET + `::` + COMPOSABLE_TOKEN
+
+/** 
  * =====
  * TYPES
  * =====
@@ -55,11 +56,11 @@ export const BATCH_MINT = `batch_mint`
 //
 // TODO: update when on mainnet!
 // 
-export const CNFT_COLLECTION =  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Collection`
-export const COMPOSABLE_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Composable`
-export const TRAIT_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `Trait`
-export const DIGITAL_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `DA`
-export const FUNGIBLE_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `FA`
+export const CNFT_COLLECTION =  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Collection`
+export const COMPOSABLE_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Composable`
+export const TRAIT_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Trait`
+export const DIGITAL_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::DA`
+export const FUNGIBLE_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::FA`
 
 /** 
  * =========
