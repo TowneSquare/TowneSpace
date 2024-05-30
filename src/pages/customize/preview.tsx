@@ -7,13 +7,13 @@ const Preview: React.FC<Props> = ({}) => {
   return (
     <div className="w-[200px] md:md-[230px] lg:w-[264px]">
       <div className="h-[200px] md:h-[230px] lg:h-[264px] rounded-lg overflow-hidden">
-        <img src={currentNft?.uri} className="w-full h-full" alt="uri" />
+        <img src={currentNft?.token_uri} className="w-full h-full" alt="uri" />
       </div>
       <div className="mt-2 flex items-center gap-2 text-[14px] font-semibold text-gray-light-1">
-        {currentNft?.collection}
+        {currentNft?.collection_name}
         <img src="/nft-card/polygon-check.svg" alt="check" />
       </div>
-      <p className="text-lg font-semibold">{currentNft?.name}</p>
+      <p className="text-lg font-semibold">{currentNft?.token_name}</p>
     </div>
   );
 };

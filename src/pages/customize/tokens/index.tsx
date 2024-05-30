@@ -11,15 +11,17 @@ const Tokens: React.FC<Props> = ({}) => {
   const [tokens, setTokens] = useState<NftMetadataType[]>([]);
 
   useEffect(() => {
-    if (currentNft?.object_tokens) {
+    if (currentNft?.composed_nfts) {
       let tokens: NftMetadataType[] = [];
-      currentNft?.object_tokens.forEach((address) => {
-        let token = NFTS.filter((nft) => nft.address == address);
+      currentNft?.composed_nfts.forEach((address) => {
+        let token = NFTS.filter(
+          (nft) => nft.token_data_id == address.token_data_id
+        );
         if (token.length > 0) tokens.push(token[0]);
       });
       setTokens(tokens);
     }
-  }, [currentNft?.object_tokens]);
+  }, [currentNft?.composed_nfts]);
 
   const moveToken = useCallback((dragIndex: number, hoverIndex: number) => {
     setTokens((prevTokens: NftMetadataType[]) =>
@@ -37,7 +39,7 @@ const Tokens: React.FC<Props> = ({}) => {
       <Token
         key={index}
         index={index}
-        id={token.address}
+        id={token.token_data_id}
         data={token}
         moveToken={moveToken}
       />

@@ -87,25 +87,25 @@ export const Token: FC<Props> = ({ id, data, index, moveToken }) => {
     <div
       ref={ref}
       data-handler-id={handlerId}
-      className={`relative p-2 flex items-center gap-4 bg-gray-dark-2 hover:bg-gray-light-3 rounded-md cursor-pointer ${currentTrait?.address == data.address ? 'bg-gray-light-3' : ''} opacity-${opacity}`}
+      className={`relative p-2 flex items-center gap-4 bg-gray-dark-2 hover:bg-gray-light-3 rounded-md cursor-pointer ${currentTrait?.token_data_id == data.token_data_id ? 'bg-gray-light-3' : ''} opacity-${opacity}`}
       key={index}
       onClick={() => onChooseTrait(data)}
     >
       <img src="/customize/indicator.svg" alt="indicator" />
       <div className="w-20 h-20 bg-gray-dark-1 rounded-md">
-        <img src={data.uri} alt="uri" className="w-full h-full" />
+        <img src={data.token_uri} alt="uri" className="w-full h-full" />
       </div>
       <div className="">
         <div className="flex gap-2">
           <p className="text-[14px] text-gray-light-1 font-semibold">
-            {currentNft?.collection}
+            {currentNft?.collection_name}
           </p>
           <img src="/nft-card/polygon-check.svg" alt="check" />
         </div>
         <p className="text-[14px] text-gray-light-1 font-semibold pt-4">
-          {data.collection}
+          {data.collection_name}
         </p>
-        <p className="text-[14px] font-semibold">{data.name}</p>
+        <p className="text-[14px] font-semibold">{data.token_name}</p>
       </div>
     </div>
   );

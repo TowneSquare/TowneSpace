@@ -24,7 +24,7 @@ const ReplacePanel: React.FC<Props> = ({}) => {
         >
           <p className="text-2xl font-semibold">×</p>
         </div>
-        <p className="text-xl font-semibold">{currentTrait?.name}</p>
+        <p className="text-xl font-semibold">{currentTrait?.token_name}</p>
       </div>
       <Filter filter={filter} setFilter={setFilter} />
       <CollectionPanel />

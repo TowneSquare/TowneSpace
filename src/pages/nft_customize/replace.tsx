@@ -6,9 +6,9 @@ import {
 } from '../../state/dialog';
 import { useAppDispatch } from '../../state/hooks';
 import ButtonStatus from '../../type/button_status';
-import RemoveDialog from './removedialog';
-import RemoveConfirm from './removeconfirm';
-import NFTEdit from './nftedit';
+import RemoveDialog from './remove_dialog';
+import RemoveConfirm from './remove_confirm';
+import NFTEdit from './nft_edit';
 
 const Replace = () => {
   const dispatch = useAppDispatch();

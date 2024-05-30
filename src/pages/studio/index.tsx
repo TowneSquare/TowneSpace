@@ -10,9 +10,38 @@ import Welcome from './welcome';
 import ViewNFTModal from '../../components/modal/viewNFTModal';
 
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { fetchCollections, fetchNfts } from '../../state/tokens';
 
 const Studio = () => {
   const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+  const filter = useAppSelector((state) => state.tokensState.filter);
+
+  const collections = useAppSelector((state) => state.tokensState.collections);
+  const currentCollection = useAppSelector(
+    (state) => state.tokensState.currentCollection
+  );
+
+  const { account } = useWallet();
+
+  useEffect(() => {
+    if (account) dispatch(fetchCollections(account?.address));
+  }, [filter, account]);
+
+  useEffect(() => {
+    console.log(collections, currentCollection);
+    if (currentCollection && account) {
+      dispatch(
+        fetchNfts({
+          address: account?.address,
+          collection_id: currentCollection.collection_id,
+        })
+      );
+    }
+  }, [collections, currentCollection]);
 
   useEffect(() => {
     const handleResize = () => {

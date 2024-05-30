@@ -7,41 +7,16 @@ import Customize from './pages/customize';
 import Create from './pages/create';
 import Deploy from './pages/deploy';
 import Migrate from './pages/migrate';
-import { useAppDispatch, useAppSelector } from './state/hooks';
-import { fetchNfts, fetchCollections } from './state/tokens';
-import { useEffect } from 'react';
 import Generate from './pages/generate';
 import Overview from './pages/overview';
 import MainDeploy from './pages/maindeploy';
 import RedirectPage from './pages/redirectPage';
-import { NFT_COLLECTION_OWNED_ID_QUERY } from './util';
 import { useQuery } from '@apollo/client';
 import CreateModal from './components/modal/createModal';
 import CreateStep2 from './components/modal/createStep2';
-import NftCustomize from './pages/nftcustomize';
+import NftCustomize from './pages/nft_customize';
 
 function App() {
-  const dispatch = useAppDispatch();
-  const collections = useAppSelector((state) => state.tokensState.collections);
-  const currentCollection = useAppSelector(
-    (state) => state.tokensState.currentCollection
-  );
-
-  useEffect(() => {
-    // dispatch(fetchCollections());
-  }, []);
-
-  useEffect(() => {
-    // console.log("Collection: ", currentCollection);
-    // if (currentCollection) {
-    //   // dispatch(fetchNfts(currentCollection.name));
-    //   const { loading, error, data } = useQuery(NFT_COLLECTION_OWNED_ID_QUERY, {
-    //     variables: { wallet: "0x239589c5cfb0cc96f76fa59165a7cbb6ef99ad50d0acc34cf3a2585d861511be", offset: 0, collectionId: currentCollection.collection_id },
-    //   });
-    //   dispatch(data);
-    // }
-  }, [collections, currentCollection]);
-
   return (
     <div>
       <Routes>
@@ -55,7 +30,7 @@ function App() {
         <Route path="/overview/*" element={<Overview />} />
         <Route path="/maindeploy/*" element={<MainDeploy />} />
         <Route path="/migrate/*" element={<Migrate />} />
-        <Route path="/nftcustomize/" element={<NftCustomize />} />
+        <Route path="/nftcustomize/:address" element={<NftCustomize />} />
         <Route path="/redirectPage/" element={<RedirectPage />} />
       </Routes>
       <CreateModal />

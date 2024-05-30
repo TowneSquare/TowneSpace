@@ -21,11 +21,11 @@ const Customize = () => {
     console.log(nfts, currentNft, address);
 
     if (
-      (!currentNft || currentNft.address != address) &&
+      (!currentNft || currentNft.token_data_id != address) &&
       address &&
       nfts.length > 0
     ) {
-      let res = nfts.filter((nft) => nft.address == address);
+      let res = nfts.filter((nft) => nft.token_data_id == address);
       if (res.length > 0) {
         dispatch(chooseNft(res[0]));
       }
@@ -37,7 +37,7 @@ const Customize = () => {
       <Header />
       <div className="my-10 flex flex-col md:flex-row justify-center items-center md:items-start gap-6">
         <Preview />
-        {currentNft?.object_tokens && currentNft.object_tokens.length > 0 ? (
+        {currentNft?.composed_nfts && currentNft.composed_nfts.length > 0 ? (
           <>
             <div className="flex flex-col gap-4 items-center">
               <Tokens />
@@ -52,7 +52,7 @@ const Customize = () => {
             <div className="md:w-[30vw] py-[100px] flex flex-col gap-10 justify-center items-center border border-gray-light-2 rounded-md">
               <img src="/customize/haveno-trait.svg" alt="haveno-trait" />
               <p className="text-xl font-semibold text-gray-light-2 text-center">
-                {currentNft?.name} doesn't have
+                {currentNft?.token_name} doesn't have
                 <br /> any Trait NFTs
               </p>
               <p className="text-lg font-semibold text-gray-light-2 text-center -mt-4">

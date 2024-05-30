@@ -20,7 +20,7 @@ const Header: React.FC<Props> = ({}) => {
       </div>
       <div className="flex flex-col items-center">
         <p className="text-base md:text-xl font-bold text-center">
-          {currentNft ? currentNft.name : 'unknown'}
+          {currentNft ? currentNft.token_name : 'unknown'}
         </p>
         <p className="w-1/2 md:w-full text-sm md:text-base text-center">
           Select NFTs or crypto assets you want to put inside, replace or remove
