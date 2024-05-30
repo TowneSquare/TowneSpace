@@ -2,8 +2,11 @@ import { Icon } from '@iconify/react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import WalletButtons from '../../wallet-adapter/WalletButtons';
 import { toggleViewNFTModal } from '../../state/dialog';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { APTOS } from '../../state/constants';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useTraitType, useComposableType } from '../../hooks/useTokenType';
 
 const ViewNFTModal = () => {
   const navigate = useNavigate();
@@ -11,10 +14,29 @@ const ViewNFTModal = () => {
   const sentRequest = useAppSelector((state) => state.dialogState.bWalletHold);
   const dispatch = useAppDispatch();
 
+  const currentNft = useAppSelector((state) => state.tokensState.currentNft);
+
   const onClickToCustomize = () => {
-    navigate('/nftcustomize');
+    navigate(`/nftcustomize/${currentNft?.token_data_id}`);
     dispatch(toggleViewNFTModal(false));
   };
+
+  const { account } = useWallet();
+
+  console.log('currentNft', currentNft);
+
+  const pendingTraitType = useTraitType(APTOS, currentNft?.token_data_id);
+  pendingTraitType.then((data) => {
+    console.log('trait type', data);
+  });
+
+  const pendingComposableType = useComposableType(
+    APTOS,
+    currentNft?.token_data_id
+  );
+  pendingComposableType.then((data) => {
+    console.log('composable type', data);
+  });
 
   const traits = [
     {

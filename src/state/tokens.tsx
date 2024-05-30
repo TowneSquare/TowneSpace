@@ -34,6 +34,7 @@ export const fetchCollections = createAsyncThunk(
       const filter = (thunkAPI.getState() as RootState).tokensState.filter;
       if (filter == FilterType.composable) {
         const res = await queries.getOwnedV2Collections(0, 100, address);
+        console.log(res);
         return res;
       } else {
         const res = await queries.getOwnedV1Collections(0, 100, address);
