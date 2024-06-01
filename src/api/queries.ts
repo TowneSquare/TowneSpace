@@ -44,8 +44,9 @@ export type CollectionV1Fields = {
 export type CollectionV2Fields = {
   collection_id: string;
   collection_name: string;
-  collection_uri: string;
+  current_supply: number;
   description: string;
+  collection_uri: string;
 };
 
 type TokenV1FieldsIndexerResponse = {
@@ -157,19 +158,21 @@ export const OWNED_V1_COLLECTIONS_QUERY = `
 
 export const OWNED_V2_COLLECTIONS_QUERY = `
   query MyQuery($offset: Int!, $limit: Int, $account_address: String) {
-      current_collections_v2(
-        limit: $limit
-        offset: $offset
-        order_by: {collection_name: asc}
-        where: {creator_address: {_eq: $account_address}}
-      ) {
+    current_collection_ownership_v2_view(
+      limit: $limit
+      offset: $offset
+      order_by: {collection_name: asc}
+      where: {owner_address: {_eq: $account_address}}
+    ) {
+      current_collection {
         collection_id
         collection_name
+        current_supply
         description
         uri
       }
     }
-    `;
+  }`;
 
 export const OWNED_V2_TOKENS_IN_A_COLLECTION_QUERY = `
   query MyQuery($offset: Int!, $limit: Int, $account_address: String, $collection_id: String) {
