@@ -1,129 +1,47 @@
-import { Icon } from '@iconify/react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import WalletButtons from '../../wallet-adapter/WalletButtons';
 import { toggleViewNFTModal } from '../../state/dialog';
-import { Fragment, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { APTOS, APTOS_CONFIG } from '../../state/constants';
-import { useWallet } from '@aptos-labs/wallet-adapter-react';
-import { useTraitType, useComposableType } from '../../hooks/useTokenType';
-import { Events, Queries } from '../../api';
-import { getIdentifyObject } from '../../hooks/useIdentifyObject';
-import { getTraitListinComposable } from '../../hooks/useTraitListinComposable';
+import LazyImage from '../lazyImage';
+import { useEffect, useState } from 'react';
+import { NftMetadataType } from '../../type/nft_type';
 
 const ViewNFTModal = () => {
   const navigate = useNavigate();
-  const isOpen = useAppSelector((state) => state.dialogState.bViewNFTModal);
-  const sentRequest = useAppSelector((state) => state.dialogState.bWalletHold);
   const dispatch = useAppDispatch();
 
+  const isOpen = useAppSelector((state) => state.dialogState.bViewNFTModal);
+
+  const nfts = useAppSelector((state) => state.tokensState.nfts);
   const currentNft = useAppSelector((state) => state.tokensState.currentNft);
+  const [traits, setTraits] = useState<NftMetadataType[]>([]);
+  const [seletedTrait, setSelectedTrait] = useState<
+    NftMetadataType | undefined
+  >(undefined);
+
+  useEffect(() => {
+    const fetch = async () => {
+      if (currentNft?.composed_nfts) {
+        const traits = [];
+        for (const object of currentNft?.composed_nfts) {
+          const res = nfts.filter(
+            (nft) => nft.token_data_id == object.token_data_id
+          );
+          if (res.length > 0) traits.push(res[0]);
+        }
+        setTraits(traits);
+
+        if (traits.length > 0) setSelectedTrait(traits[0]);
+        else setSelectedTrait(undefined);
+      }
+    };
+    fetch();
+  }, [currentNft]);
 
   const onClickToCustomize = () => {
     navigate(`/nftcustomize/${currentNft?.token_data_id}`);
     dispatch(toggleViewNFTModal(false));
   };
 
-  const { account } = useWallet();
-
-  // const pendingTraitType = useTraitType(APTOS, currentNft?.token_data_id);
-  // pendingTraitType.then((data) => {
-  //   console.log('trait type', data);
-  // });
-
-  // const pendingComposableType = useComposableType(
-  //   APTOS,
-  //   "0x1fb8c4dbe6ae8c62a464aa63c29edc4fdb9de5b26a39c6cf79654fa42d0c71af" 
-  // );
-  // pendingComposableType.then((data) => {
-  //   console.log('composable type', data);
-  // });
-
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const event = new Events(APTOS_CONFIG);
-  //     console.log(event);
-  //     const res = await event.getDigitalAssetCreatedEvents();
-  //     console.log('event', res);
-  //   };
-  //   fetch();
-  // }, []);
-
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     if(!account) return;
-  //     const queries = new Queries(APTOS);
-  //     const res: any[] = await queries.getOwnedObjects(0, 100, account?.address);
-
-  //     console.log(res)
-  //     for(const object of res){
-  //       const res = await getIdentifyObject(APTOS, object)
-  //       console.log(object, res);
-  //     }
-  //   };
-  //   fetch();
-  // }, [account]);
-
-  // const nfts = useAppSelector((state) => state.tokensState.nfts);
-  // console.log(nfts)
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     console.log("count", nfts.length);
-
-  //     for (const nft of nfts) {
-  //       const res = await getIdentifyObject(APTOS, nft.token_data_id);
-  //       console.log(nft.token_data_id, res);
-  //     }
-  //   };
-  //   fetch();
-  // }, [nfts]);
-
-    // useEffect(() => {
-    //   const fetch = async() => {
-    //     console.log("traits list");
-    //     const res = await getTraitListinComposable(APTOS, "0x1fb8c4dbe6ae8c62a464aa63c29edc4fdb9de5b26a39c6cf79654fa42d0c71af");
-    //     console.log(res)
-    //   }
-    //   fetch();
-    // }, [])
-  const traits = [
-    {
-      image: '/customize/banner.png',
-      tokenName: 'Cool SLOTHS',
-      traitsName: 'HAT',
-      traitsType: 'Crown #58',
-    },
-    {
-      image: '/customize/banner.png',
-      tokenName: 'Cool SLOTHS',
-      traitsName: 'MOUTH',
-      traitsType: 'Gum #7821',
-    },
-    {
-      image: '/customize/banner.png',
-      tokenName: 'Cool SLOTHS',
-      traitsName: 'EYES',
-      traitsType: 'Gum #7821',
-    },
-    {
-      image: '/customize/banner.png',
-      tokenName: 'Cool SLOTHS',
-      traitsName: 'EYES',
-      traitsType: 'Gum #7821',
-    },
-    {
-      image: '/customize/banner.png',
-      tokenName: 'Cool SLOTHS',
-      traitsName: 'EYES',
-      traitsType: 'Gum #7821',
-    },
-    {
-      image: '/customize/banner.png',
-      tokenName: 'Cool SLOTHS',
-      traitsName: 'BACKGROUND',
-      traitsType: 'Gum #7821',
-    },
-  ];
   return (
     <div>
       <div
@@ -157,45 +75,48 @@ const ViewNFTModal = () => {
           </div>
           <div className="flex">
             <div className="ml-16 w-[206px] h-[206px] border-4 border-primary-default rounded-xl">
-              <img src="/customize/banner.png" />
+              <LazyImage src={currentNft?.token_uri} />
             </div>
             <div className="ml-2 w-[255px] overflow-auto  h-[80vh] p-2 border-2 border-gray-dark-1 rounded-xl">
               {traits.map((trait, index) => (
-                <div className="h-[76px] mb-2 gap-2 rounded-[8px] w-full flex items-center bg-gray-dark-1 p-2 cursor-pointer">
+                <div
+                  className="h-[76px] mb-2 gap-2 rounded-[8px] w-full flex items-center bg-gray-dark-1 p-2 cursor-pointer"
+                  key={index}
+                >
                   <div className="w-[60px] bg-gray-light-3 rounded-lg">
-                    <img
-                      src={trait.image}
+                    <LazyImage
+                      src={trait.token_uri}
                       alt="image"
                       className="w-[60px] h-[60px]"
                     />
                   </div>
                   <div className="flex flex-col leading-4 font-semibold text-[10px] md:text-[14px] text-start">
-                    <p className="text-gray-light-1">{trait.tokenName}</p>
+                    <p className="text-gray-light-1">{trait.collection_name}</p>
                     <p className="text-gray-light-1 mt-2 font-normal">
-                      {trait.traitsName}
+                      {trait.description}
                     </p>
-                    <p className="">{trait.traitsType}</p>
+                    <p className="">{trait.token_name}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="bg-[#000000] rounded-[10px] w-[310px] h-[80vh] ml-[27px] p-4">
-              <div>
-                <img
-                  className="w-[278px] h-[278px]"
-                  src="/customize/banner.png"
-                  alt=""
-                />
+            {seletedTrait && (
+              <div className="bg-[#000000] rounded-[10px] w-[310px] h-[80vh] ml-[27px] p-4">
+                <div className="bg-gray-light-3">
+                  <LazyImage
+                    className="w-[278px] h-[278px]"
+                    src={seletedTrait.token_uri}
+                    alt=""
+                  />
+                </div>
+                <div className="gap-1 mt-2">
+                  <p className="text-xl mb-2">{seletedTrait.token_name}</p>
+                  <p className="text-sm text-gray-light-1">
+                    {seletedTrait.description}
+                  </p>
+                </div>
               </div>
-              <div className="gap-1 mt-2">
-                <p className="text-xl mb-2">Slothian #9898</p>
-                <p className="text-sm text-gray-light-1">
-                  NFT Description lorem ipsum dolro sit amet qot lorem ipsum
-                  dolro sit amet qotNFT Description lorem ipsum dolro sit amet
-                  qot lorem ipsum dolro sit amet qot
-                </p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

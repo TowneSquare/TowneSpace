@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../../../state/hooks';
 import { chooseCollection } from '../../../../state/tokens';
 import Search from './search';
 import { CollectionV1Fields, CollectionV2Fields } from '../../../../api';
+import LazyImage from '../../../../components/lazyImage';
 
 const CollectionPanel = () => {
   const collections = useAppSelector((state) => state.tokensState.collections);
@@ -26,7 +27,7 @@ const CollectionPanel = () => {
           key={index}
           onClick={() => onChooseCollection(collection)}
         >
-          <img src={'/logo.png'} className="w-12" alt="uri" />
+          <LazyImage src={collection.collection_uri} className="w-12" alt="uri" />
           <span className="font-medium truncate">
             {collection.collection_name}
           </span>
