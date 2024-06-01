@@ -37,8 +37,9 @@ export type TokenV2Fields = {
 export type CollectionV1Fields = {
   collection_id: string;
   collection_name: string;
+  current_supply: number;
   description: string;
-  uri: string;
+  collection_uri: string;
 };
 
 export type CollectionV2Fields = {

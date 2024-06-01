@@ -153,7 +153,6 @@ export const tokensSlice = createSlice({
         }, []);
 
       state.folders = folders;
-      console.log('folders', folders);
     });
   },
 });

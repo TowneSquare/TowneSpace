@@ -32,32 +32,9 @@ const NftCard: React.FC<Props> = ({ data }) => {
   };
   const onSeeTowneSpace = () => {
     dispatch(chooseNft(data));
+
     dispatch(toggleViewNFTModal(true));
   };
-  // const [tokenImage, setTokenImage] = useState('');
-  // useEffect(() => {
-  //   async function getTokenImage() {
-  //     try {
-  //       if (data.current_token_data.token_uri.includes('ipfs://')) {
-  //         let cid = data.current_token_data.token_uri.replace('ipfs://', '');
-  //         let ipfsGatewayUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
-
-  //         const result = await fetch(ipfsGatewayUrl);
-  //         const json = await result.json();
-  //         if (json.image && json.image.includes('ipfs://')) {
-  //           cid = json.image.replace('ipfs://', '');
-  //           let _tokenImageUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
-  //           setTokenImage(_tokenImageUrl);
-  //         } else {
-  //           setTokenImage(json.image);
-  //         }
-  //       } else {
-  //         setTokenImage(data.current_token_data.token_uri);
-  //       }
-  //     } catch (e) {}
-  //   }
-  //   getTokenImage();
-  // }, []);
 
   return (
     <div className="group w-[140px] md:w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer">
