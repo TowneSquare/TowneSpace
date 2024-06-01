@@ -62,7 +62,7 @@ type CollectionV1FieldsIndexerResponse = {
 };
 
 type CollectionV2FieldsIndexerResponse = {
-  current_collections_v2: Array<CollectionV2Fields>;
+  current_collection_ownership_v2_view: Array<CollectionV2Fields>;
 };
 
 export type TokenV1FieldsIndexer = {
@@ -374,15 +374,21 @@ export class Queries {
       account_address,
     };
 
-    const response: CollectionV2FieldsIndexerResponse = await this.queryIndexer(
+    const response: any = await this.queryIndexer(
       OWNED_V2_COLLECTIONS_QUERY,
       variables
     );
+console.log(response)
+    const collections: CollectionV2Fields[] = [];
 
-    const collections = [];
-
-    for (const collection of response.current_collections_v2) {
-      collections.push(collection);
+    for (const collection of response.current_collection_ownership_v2_view) {
+      collections.push({
+        collection_id: collection.current_collection.collection_id,
+        collection_name: collection.current_collection.collection_name,
+        description: collection.current_collection.description,
+        collection_uri: collection.current_collection.uri,
+        current_supply: collection.current_collection.current_supply
+      });
     }
 
     return collections;

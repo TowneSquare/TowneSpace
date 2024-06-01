@@ -5,6 +5,7 @@ import { CollectionV1Fields, CollectionV2Fields } from '../../../../api';
 
 const CollectionPanel = () => {
   const collections = useAppSelector((state) => state.tokensState.collections);
+  console.log(collections)
   const currentCollection = useAppSelector(
     (state) => state.tokensState.currentCollection
   );
