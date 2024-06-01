@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { toggleViewNFTModal } from '../../state/dialog';
 import ViewNFTModal from '../modal/viewNFTModal';
 import LazyImage from '../lazyImage';
+import CustomFolderType from '../../type/custom_folder_type';
 
 interface Props {
   data: NftMetadataType;
@@ -14,17 +15,34 @@ interface Props {
 const NftCard: React.FC<Props> = ({ data }) => {
   const navigation = useNavigate();
   const dispatch = useAppDispatch();
-  const folders = useAppSelector(state=>state.tokensState.folders);
+  const folders = useAppSelector((state) => state.tokensState.folders);
+  const nfts = useAppSelector((state) => state.tokensState.nfts);
 
   const onCustomize = () => {
-    console.log(data);
     // if (data.token_standard == 'v2') {
     dispatch(chooseNft(data));
 
-    const currentTraitFolders = [];
-    for(const folder of folders){
-      currentTraitFolders.push({name: folder, trait: undefined});
+    const currentTraitFolders: CustomFolderType[] = [];
+    if (data && data.composed_nfts) {
+      for (const composed of data?.composed_nfts) {
+        const trait = nfts.find(
+          (nft) => nft.token_data_id == composed.token_data_id
+        );
+        if (trait && trait.description) {
+          currentTraitFolders.push({ name: trait.description, trait });
+        }
+      }
     }
+
+    for (const folder of folders) {
+      const traitFolder = currentTraitFolders.find(
+        (traitFolder) => traitFolder.name == folder
+      );
+      if (!traitFolder) {
+        currentTraitFolders.push({ name: folder, trait: undefined });
+      }
+    }
+
     dispatch(setCurrentTraitFolders(currentTraitFolders));
 
     navigation(`/nftcustomize/${data.token_data_id}`);

@@ -2,9 +2,8 @@ import axios from 'axios';
 import FormData from 'form-data';
 
 const JWT = process.env.REACT_APP_PINATA_JWT;
-console.log(JWT)
+
 export async function pinJSONToIPFS(blob: Blob) {
-    console.log(JWT)
   const formData = new FormData();
   formData.append('file', blob, 'filename.png'); // Append the blob to formData
 

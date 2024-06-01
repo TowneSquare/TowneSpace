@@ -1,5 +1,8 @@
-import { Aptos } from '@aptos-labs/ts-sdk';
-import { getIdentifyObject } from '../hooks/useIdentifyObject';
+import { Aptos, MoveString, MoveVector, U8 } from '@aptos-labs/ts-sdk';
+import {
+  getIdentifyObject,
+  getIdentifyObjects,
+} from '../hooks/useIdentifyObject';
 import { APTOS } from '../state/constants';
 
 /**
@@ -301,12 +304,8 @@ export class Queries {
     const res: any = await this.queryIndexer(OWNED_V2_TOKENS_QUERY, variables);
     const tokens: TokenV1Fields[] = [];
 
+    const tokenObjects = [];
     for (const token of res.current_token_ownerships_v2) {
-      const typeRes = await getIdentifyObject(
-        APTOS,
-        token.current_token_data.token_data_id
-      );
-
       tokens.push({
         collection_id: token.current_token_data.collection_id,
         collection_name:
@@ -316,10 +315,18 @@ export class Queries {
         description: token.current_token_data.description,
         token_uri: token.current_token_data.token_uri,
         composed_nfts: token.composed_nfts,
-        type: typeRes && typeRes[0] ? typeRes[0].toString().toLowerCase() : '',
       });
 
-      console.log(tokens)
+      tokenObjects.push(token.current_token_data.token_data_id);
+    }
+
+    const object: any = await getIdentifyObjects(APTOS, tokenObjects);
+    const types = object[0].data;
+
+    if (types && tokens.length == types.length) {
+      for (let i = 0; i < tokens.length; i++) {
+        tokens[i].type = types[i].value.toLowerCase();
+      }
     }
     return tokens;
   }
@@ -379,7 +386,7 @@ export class Queries {
       OWNED_V2_COLLECTIONS_QUERY,
       variables
     );
-console.log(response)
+
     const collections: CollectionV2Fields[] = [];
 
     for (const collection of response.current_collection_ownership_v2_view) {
@@ -388,7 +395,7 @@ console.log(response)
         collection_name: collection.current_collection.collection_name,
         description: collection.current_collection.description,
         collection_uri: collection.current_collection.uri,
-        current_supply: collection.current_collection.current_supply
+        current_supply: collection.current_collection.current_supply,
       });
     }
 

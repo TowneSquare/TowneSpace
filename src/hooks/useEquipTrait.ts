@@ -12,15 +12,16 @@ import { useWallet } from '@aptos-labs/wallet-adapter-react';
  * 
  */
 export const useEquipTrait = () => {
-  const { signAndSubmitTransaction } = useWallet();
+  const { signAndSubmitTransaction, account } = useWallet();
   const equipTrait = async (
-    accountAddress: string,
     composableObject: string,
     traitObject: string,
     new_uri: string
   ) => {
+    if(!account) return;
+
     const response = await signAndSubmitTransaction({
-      sender: accountAddress,
+      sender: account.address,
       data: {
         function: `${COMPOSABLE_TOKEN_TESTNET}::${STUDIO}::${EQUIP_TRAIT}`,
         typeArguments: [],
@@ -28,6 +29,7 @@ export const useEquipTrait = () => {
       },
     });
     console.log(response);
+    return response;
   };
   return equipTrait;
 };
@@ -43,15 +45,17 @@ export const useEquipTrait = () => {
  * 
  */
 export const useEquipTraits = () => {
-  const { signAndSubmitTransaction } = useWallet();
+  const { signAndSubmitTransaction, account } = useWallet();
+  
   const equipTraits = async (
-    accountAddress: string,
     composableObject: string,
     traitObjects: string[],
     new_uri: string
   ) => {
+    if(!account) return;
+
     const response = await signAndSubmitTransaction({
-      sender: accountAddress,
+      sender: account.address,
       data: {
         function: `${COMPOSABLE_TOKEN_TESTNET}::${STUDIO}::${EQUIP_TRAITS}`,
         typeArguments: [],
@@ -59,6 +63,7 @@ export const useEquipTraits = () => {
       },
     });
     console.log(response);
+    return response;
   };
   return equipTraits;
 };
