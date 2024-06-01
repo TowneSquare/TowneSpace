@@ -6,8 +6,7 @@ import PrimaryButton from '../../components/primary_button';
 import ButtonStatus from '../../type/button_status';
 import { toggleFinishEdit } from '../../state/dialog';
 import { pinJSONToIPFS, sleep } from '../../util';
-import useEquipTrait from '../../hooks/useEquipTrait';
-import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useEquipTrait, useEquipTraits } from '../../hooks/useEquipTrait';
 import { NftMetadataType } from '../../type/nft_type';
 
 const FinishEdit = () => {
@@ -17,13 +16,13 @@ const FinishEdit = () => {
   const navigate = useNavigate();
 
   const equipTrait = useEquipTrait();
-  
-  const {account} = useWallet();
+  const equipTraits = useEquipTraits();
+
   const currentNft = useAppSelector((state) => state.tokensState.currentNft);
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
-  
+
   const canvasRef = useRef<any>(null);
   const [isLoading, toggleLoading] = useState(false);
 
@@ -71,26 +70,41 @@ const FinishEdit = () => {
     const blob = await fetch(imageData).then((res) => res.blob());
 
     try {
-      const imageLink = await pinJSONToIPFS(blob); //"https://ipfs.io/ipfs/QmRrG65xXw2Vbdfiu5Gj7wvMnUFxDJinWXXfSCcwiF3r2g"; 
-      console.log(imageLink);
+      const imageLink =
+        'https://ipfs.io/ipfs/QmPXkpBsgNR1XcWUvCb9xaqXADCCCcuwC2jVpJauurHDJe';
+      // await pinJSONToIPFS(blob);
 
-      let trait: NftMetadataType | undefined = undefined;
-      for(let i=0; i<currentTraitFolders.length; i++){
-        if(currentTraitFolders[i].trait){
-          trait = currentTraitFolders[i].trait;
-          break;
+      const tokenObjects: string[] = [];
+      for (let i = 0; i < currentTraitFolders.length; i++) {
+        const token_id = currentTraitFolders[i]?.trait?.token_data_id;
+        console.log(token_id);
+        if (token_id) {
+          tokenObjects.push(token_id);
         }
       }
-      if(trait && account && currentNft?.token_data_id){
-        console.log("equipping")
-        const res = await equipTrait(account?.address, currentNft?.token_data_id, trait.token_data_id, imageLink);
-        console.log(res);
-      }
-    } catch (e) {}
 
-    toggleLoading(false);
-    navigate('/studio/mytoken');
-    dispatch(toggleFinishEdit(false));
+      if (tokenObjects.length > 0 && currentNft?.token_data_id) {
+        console.log('equipping');
+        // const res = await equipTrait(
+        //   currentNft?.token_data_id,
+        //   tokenObjects[0],
+        //   imageLink
+        // );
+
+        const res = await equipTraits(
+          currentNft?.token_data_id,
+          tokenObjects,
+          imageLink
+        );
+        console.log(res);
+
+        toggleLoading(false);
+        navigate('/studio/mytoken');
+        dispatch(toggleFinishEdit(false));
+      }
+    } catch (e) {
+      toggleLoading(false);
+    }
   };
 
   return (

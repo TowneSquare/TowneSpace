@@ -6,7 +6,6 @@ import LazyImage from '../../../../components/lazyImage';
 
 const CollectionPanel = () => {
   const collections = useAppSelector((state) => state.tokensState.collections);
-  console.log(collections)
   const currentCollection = useAppSelector(
     (state) => state.tokensState.currentCollection
   );

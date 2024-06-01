@@ -6,7 +6,7 @@ import { toggleExitEdit } from '../../state/dialog';
 
 const ExitEdit = () => {
   const isOpen = useAppSelector((state) => state.dialogState.bExitEdit);
-  console.log(isOpen);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

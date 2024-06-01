@@ -12,7 +12,6 @@ const Folders = () => {
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
-  console.log(currentTraitFolders);
 
   const [folders, setFolders] =
     useState<CustomFolderType[]>(currentTraitFolders);

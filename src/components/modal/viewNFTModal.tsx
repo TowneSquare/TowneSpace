@@ -60,8 +60,8 @@ const ViewNFTModal = () => {
               </div>
               <img src="/customize/V2Badges.svg" />
               <div className="">
-                <p>Sloth #9898</p>
-                <p>Cool Sloths</p>
+                <p>{currentNft?.token_name}</p>
+                <p>{currentNft?.collection_name}</p>
               </div>
             </div>
             <button
