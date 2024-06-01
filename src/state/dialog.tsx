@@ -10,7 +10,7 @@ interface dialogStates {
   bViewNFTModal: boolean;
   bTraitRemove: boolean;
   bRemoveTraitConfirm: boolean;
-  bNftEdit: boolean;
+  bChooseTrait: boolean;
   bExitEdit: boolean;
   bFinishEdit: boolean;
 }
@@ -25,7 +25,7 @@ const initialState: dialogStates = {
   bViewNFTModal: false,
   bTraitRemove: false,
   bRemoveTraitConfirm: false,
-  bNftEdit: false,
+  bChooseTrait: false,
   bExitEdit: false,
   bFinishEdit: false,
 };
@@ -61,8 +61,8 @@ export const dialogSlice = createSlice({
     toggleRemoveTraitConfirm: (state, action: PayloadAction<boolean>) => {
       state.bRemoveTraitConfirm = action.payload;
     },
-    toggleNFTEdit: (state, action: PayloadAction<boolean>) => {
-      state.bNftEdit = action.payload;
+    toggleChooseTrait: (state, action: PayloadAction<boolean>) => {
+      state.bChooseTrait = action.payload;
     },
     toggleExitEdit: (state, action: PayloadAction<boolean>) => {
       state.bExitEdit = action.payload;
@@ -84,7 +84,7 @@ export const {
   toggleViewNFTModal,
   toggleRemoveTrait,
   toggleRemoveTraitConfirm,
-  toggleNFTEdit,
+  toggleChooseTrait,
   toggleExitEdit,
   toggleFinishEdit,
 } = dialogSlice.actions;

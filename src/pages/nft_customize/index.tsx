@@ -4,11 +4,12 @@ import { useEffect } from 'react';
 import Preview from './preview';
 import Header from './header';
 import Replace from './replace';
-import Traits from './traits';
+import Folders from './folders';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import ExitEdit from './exit_edit';
 import FinishEdit from './finish_edit';
 import { chooseNft } from '../../state/tokens';
+import ChooseTrait from './choose_trait';
 
 const NftCustomize = () => {
   const { address } = useParams();
@@ -34,9 +35,10 @@ const NftCustomize = () => {
       <Header />
       <div className="md:mx-20 lg:mx-32 flex flex-col md:flex-row justify-center items-center md:items-start gap-6">
         <Preview />
-        <Traits />
+        <Folders />
         <Replace />
       </div>
+      <ChooseTrait />
       <ExitEdit />
       <FinishEdit />
     </div>

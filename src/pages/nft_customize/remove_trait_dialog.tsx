@@ -6,14 +6,40 @@ import {
   toggleRemoveTrait,
   toggleRemoveTraitConfirm,
 } from '../../state/dialog';
+import LazyImage from '../../components/lazyImage';
+import CustomFolderType from '../../type/custom_folder_type';
+import { chooseCurrentTraitFolder, setCurrentTraitFolders } from '../../state/tokens';
 
 const RemoveDialog = () => {
-  const isOpen = useAppSelector((state) => state.dialogState.bTraitRemove);
-  const isD = useAppSelector((state) => state.dialogState.bRemoveTraitConfirm);
-
   const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((state) => state.dialogState.bTraitRemove);
 
-  const onHandleModal = () => {
+  const currentNft = useAppSelector((state) => state.tokensState.currentNft);
+  const currentTraitFolder = useAppSelector(
+    (state) => state.tokensState.currentTraitFolder
+  );
+  const currentTraitFolders = useAppSelector(
+    (state) => state.tokensState.currentTraitFolders
+  );
+
+  const onRemove = () => {
+    const tempFolders: CustomFolderType[] = JSON.parse(
+      JSON.stringify(currentTraitFolders)
+    );
+    for (const folder of tempFolders) {
+      if (folder.name == currentTraitFolder?.name) {
+        folder.trait = undefined;
+        break;
+      }
+    }
+    dispatch(setCurrentTraitFolders(tempFolders));
+
+    const tempTrait: CustomFolderType = JSON.parse(
+      JSON.stringify(currentTraitFolder)
+    );
+    tempTrait.trait = undefined;
+    dispatch(chooseCurrentTraitFolder(tempTrait));
+
     dispatch(toggleRemoveTrait(false));
     dispatch(toggleRemoveTraitConfirm(true));
   };
@@ -34,14 +60,16 @@ const RemoveDialog = () => {
             </button>
           </div>
           <div className="flex mt-4 p-2 mx-4 text-center flex-col justify-center items-center gap-6">
-            <img src="/customize/banner.png" alt="" />
+            <LazyImage src={currentTraitFolder?.trait?.token_uri} alt="" />
             <p>
-              Do you want to remove Crown #7821 from Slothian #9898?Crown #7821
-              will be transferred back to your wallet.
+              Do you want to remove {currentTraitFolder?.trait?.token_name} from{' '}
+              {currentNft?.token_name}?<br />
+              {currentTraitFolder?.trait?.token_name}&nbsp; will be transferred
+              back to your wallet.
             </p>
             <PrimaryButton
               type={ButtonStatus.active}
-              onClick={onHandleModal}
+              onClick={onRemove}
               className="px-10 my-6 w-1/2"
             >
               Remove Trait

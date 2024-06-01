@@ -4,9 +4,12 @@ import WalletButtons from '../../wallet-adapter/WalletButtons';
 import { toggleViewNFTModal } from '../../state/dialog';
 import { Fragment, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { APTOS } from '../../state/constants';
+import { APTOS, APTOS_CONFIG } from '../../state/constants';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 import { useTraitType, useComposableType } from '../../hooks/useTokenType';
+import { Events, Queries } from '../../api';
+import { getIdentifyObject } from '../../hooks/useIdentifyObject';
+import { getTraitListinComposable } from '../../hooks/useTraitListinComposable';
 
 const ViewNFTModal = () => {
   const navigate = useNavigate();
@@ -23,21 +26,66 @@ const ViewNFTModal = () => {
 
   const { account } = useWallet();
 
-  console.log('currentNft', currentNft);
+  // const pendingTraitType = useTraitType(APTOS, currentNft?.token_data_id);
+  // pendingTraitType.then((data) => {
+  //   console.log('trait type', data);
+  // });
 
-  const pendingTraitType = useTraitType(APTOS, currentNft?.token_data_id);
-  pendingTraitType.then((data) => {
-    console.log('trait type', data);
-  });
+  // const pendingComposableType = useComposableType(
+  //   APTOS,
+  //   "0x1fb8c4dbe6ae8c62a464aa63c29edc4fdb9de5b26a39c6cf79654fa42d0c71af" 
+  // );
+  // pendingComposableType.then((data) => {
+  //   console.log('composable type', data);
+  // });
 
-  const pendingComposableType = useComposableType(
-    APTOS,
-    currentNft?.token_data_id
-  );
-  pendingComposableType.then((data) => {
-    console.log('composable type', data);
-  });
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const event = new Events(APTOS_CONFIG);
+  //     console.log(event);
+  //     const res = await event.getDigitalAssetCreatedEvents();
+  //     console.log('event', res);
+  //   };
+  //   fetch();
+  // }, []);
 
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     if(!account) return;
+  //     const queries = new Queries(APTOS);
+  //     const res: any[] = await queries.getOwnedObjects(0, 100, account?.address);
+
+  //     console.log(res)
+  //     for(const object of res){
+  //       const res = await getIdentifyObject(APTOS, object)
+  //       console.log(object, res);
+  //     }
+  //   };
+  //   fetch();
+  // }, [account]);
+
+  // const nfts = useAppSelector((state) => state.tokensState.nfts);
+  // console.log(nfts)
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     console.log("count", nfts.length);
+
+  //     for (const nft of nfts) {
+  //       const res = await getIdentifyObject(APTOS, nft.token_data_id);
+  //       console.log(nft.token_data_id, res);
+  //     }
+  //   };
+  //   fetch();
+  // }, [nfts]);
+
+    // useEffect(() => {
+    //   const fetch = async() => {
+    //     console.log("traits list");
+    //     const res = await getTraitListinComposable(APTOS, "0x1fb8c4dbe6ae8c62a464aa63c29edc4fdb9de5b26a39c6cf79654fa42d0c71af");
+    //     console.log(res)
+    //   }
+    //   fetch();
+    // }, [])
   const traits = [
     {
       image: '/customize/banner.png',

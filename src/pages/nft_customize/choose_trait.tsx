@@ -1,15 +1,55 @@
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { toggleNFTEdit } from '../../state/dialog';
+import { toggleChooseTrait } from '../../state/dialog';
 import { useState } from 'react';
+import { NftMetadataType } from '../../type/nft_type';
+import LazyImage from '../../components/lazyImage';
+import {
+  chooseCurrentTraitFolder,
+  setCurrentTraitFolders,
+} from '../../state/tokens';
+import CustomFolderType from '../../type/custom_folder_type';
 
-const NFTEdit = () => {
-  const isOpen = useAppSelector((state) => state.dialogState.bNftEdit);
-  const traits = useAppSelector((state) => state.createState.traits);
+const ChooseTrait = () => {
   const dispatch = useAppDispatch();
+  const isOpen = useAppSelector((state) => state.dialogState.bChooseTrait);
+  const currentTraitFolders = useAppSelector(
+    (state) => state.tokensState.currentTraitFolders
+  );
+  const currentTraitFolder = useAppSelector(
+    (state) => state.tokensState.currentTraitFolder
+  );
+  const nfts = useAppSelector((state) => state.tokensState.nfts);
+  const traits = nfts.filter(
+    (nft) => nft.description == currentTraitFolder?.name
+  );
+  const [selectedTrait, setSelectedTrait] = useState<
+    NftMetadataType | undefined
+  >(undefined);
 
   const css = traits.length < 0 ? 'flex' : 'flex-col justify-between';
 
+  const onSave = () => {
+    if (currentTraitFolder) {
+      const tempFolders: CustomFolderType[] = JSON.parse(
+        JSON.stringify(currentTraitFolders)
+      );
+      for (const folder of tempFolders) {
+        if (folder.name == currentTraitFolder.name) {
+          folder.trait = selectedTrait;
+          break;
+        }
+      }
+      dispatch(setCurrentTraitFolders(tempFolders));
+
+      const tempTrait: CustomFolderType = JSON.parse(
+        JSON.stringify(currentTraitFolder)
+      );
+      tempTrait.trait = selectedTrait;
+      dispatch(chooseCurrentTraitFolder(tempTrait));
+    }
+    dispatch(toggleChooseTrait(false));
+  };
   return (
     <div>
       <div
@@ -25,17 +65,25 @@ const NFTEdit = () => {
           <div className={`flex ${css} h-full`}>
             <div className="w-full p-6 grid grid-cols-4">
               {traits.length > 0 ? (
-                traits[0].files.map((trait, index) => {
-                  const isActive = trait.name == 'Carrot';
+                traits.map((trait, index) => {
+                  const isActive =
+                    selectedTrait?.token_data_id == trait.token_data_id;
                   const borderColor = isActive
                     ? 'border-primary-default'
                     : 'border-gray-dark-1';
-                  const isSelected = trait.name == 'Cigar';
+                  const isSelected =
+                    currentTraitFolder?.trait?.token_data_id ==
+                    trait.token_data_id;
                   const bgColor = isSelected
                     ? 'bg-primary-default border-primary-default'
                     : '';
+
                   return (
-                    <div className="">
+                    <div
+                      className=""
+                      key={index}
+                      onClick={() => setSelectedTrait(trait)}
+                    >
                       <div
                         className={`w-[120px] h-[120px] cursor-pointer border-4 relative ${borderColor} ${bgColor} rounded-xl`}
                       >
@@ -46,11 +94,14 @@ const NFTEdit = () => {
                             alt=""
                           />
                         )}
-                        <img src={trait.imageUrl} className="w-full h-full" />
+                        <LazyImage
+                          src={trait.token_uri}
+                          className="w-full h-full"
+                        />
                       </div>
                       <div className="my-2">
-                        <p className="text-[13px]">Sl0thians</p>
-                        <p className="text-sm">{trait.name}&nbsp;#7821</p>
+                        <p className="text-[13px]">{trait.collection_name}</p>
+                        <p className="text-sm">{trait.token_name}</p>
                       </div>
                     </div>
                   );
@@ -74,7 +125,7 @@ const NFTEdit = () => {
                 <Link
                   to=""
                   onClick={() => {
-                    dispatch(toggleNFTEdit(false));
+                    dispatch(toggleChooseTrait(false));
                   }}
                 >
                   <p className="text-sm md:text-base text-primary-light font-semibold">
@@ -82,7 +133,10 @@ const NFTEdit = () => {
                   </p>
                 </Link>
               </div>
-              <button className="md:flex flex-col hidden bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center">
+              <button
+                className="md:flex flex-col hidden bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center"
+                onClick={() => onSave()}
+              >
                 <p className="font-[500] text-[16px]">Save</p>
               </button>
             </div>
@@ -93,4 +147,4 @@ const NFTEdit = () => {
   );
 };
 
-export default NFTEdit;
+export default ChooseTrait;

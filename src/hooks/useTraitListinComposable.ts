@@ -22,4 +22,19 @@ const useTraitListinComposable = (
   };
   return updateTraitList;
 };
+
+export const getTraitListinComposable = async (
+  aptos: Aptos,
+  composableTokenAddress: string
+) => {
+  const payload: InputViewFunctionData = {
+    function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${TRAITS_FROM_COMPOSABLE}`,
+    typeArguments: [],
+    functionArguments: [composableTokenAddress],
+  };
+  const response = await aptos.view({
+    payload,
+  });
+  return response;
+};
 export default useTraitListinComposable;
