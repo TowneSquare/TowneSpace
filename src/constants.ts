@@ -97,7 +97,9 @@ export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_ROYALTY = `create_colle
 export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_unlimited_supply_and_no_royalty`
 
 export const EQUIP_TRAIT = `equip_trait`
+export const EQUIP_TRAITS = `equip_traits`
 export const UNEQUIP_TRAIT = `unequip_trait`
+export const UNEQUIP_TRAITS = `unequip_traits`
 
 export const DECOMPOSE_ENTIRE_COMPOSABLE_TOKEN = `decompose_entire_composable_token`
 
