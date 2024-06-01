@@ -28,11 +28,12 @@ const Studio = () => {
   const { account } = useWallet();
 
   useEffect(() => {
+    console.log("fetch collections")
     if (account) dispatch(fetchCollections(account?.address));
-  }, [filter, account]);
+  }, [account]);
 
   useEffect(() => {
-    console.log(collections, currentCollection);
+    console.log("fetch nft")
     if (currentCollection && account) {
       dispatch(
         fetchNfts({

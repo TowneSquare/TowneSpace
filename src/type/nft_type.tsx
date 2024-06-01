@@ -1,10 +1,10 @@
 import { TokenV1Fields, TokenV2Fields } from '../api/queries';
 
-export enum NftType {
-  nft = 0x01,
-  nftv2 = 0x02,
-}
-export type NftMetadataType = TokenV1Fields | TokenV2Fields;
+// export enum NftType {
+//   nft = 0x01,
+//   nftv2 = 0x02,
+// }
+export type NftMetadataType = TokenV1Fields;
 
 // {
 //   address: string;

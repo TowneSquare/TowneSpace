@@ -28,6 +28,25 @@ export const useIdentifyObject = async (
   }
 };
 
+export const getIdentifyObject = async (
+  aptos: Aptos,
+  tokenObject: string | undefined
+) => {
+  if (!tokenObject) return;
+  try {
+    const payload: InputViewFunctionData = {
+      function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${IDENTIFY_OBJECT}`,
+      typeArguments: [],
+      functionArguments: [tokenObject],
+    };
+    const response = await aptos.view({
+      payload,
+    });
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
 /**
  *
  * Get a list of objects, itereate through the list and get the object type: can be composable_collection, composable_token, trait_token or digital_asset

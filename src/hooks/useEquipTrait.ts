@@ -1,14 +1,14 @@
 import { COMPOSABLE_TOKEN_TESTNET, EQUIP_TRAIT, STUDIO } from '../constants';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 
-const useEquipTrait = (
-  accountAddress: string,
-  composableObject: string,
-  traitObject: string,
-  new_uri: string
-) => {
+const useEquipTrait = () => {
   const { signAndSubmitTransaction } = useWallet();
-  const payload = async () => {
+  const equipTrait = async (
+    accountAddress: string,
+    composableObject: string,
+    traitObject: string,
+    new_uri: string
+  ) => {
     const response = await signAndSubmitTransaction({
       sender: accountAddress,
       data: {
@@ -19,6 +19,6 @@ const useEquipTrait = (
     });
     console.log(response);
   };
-  return payload;
+  return equipTrait;
 };
 export default useEquipTrait;

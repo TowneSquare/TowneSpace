@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { NftMetadataType, NftType } from '../../type/nft_type';
+import { NftMetadataType } from '../../type/nft_type';
 import { isUriEmpty } from '../../util';
-import { useAppDispatch } from '../../state/hooks';
-import { chooseNft } from '../../state/tokens';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { chooseNft, setCurrentTraitFolders } from '../../state/tokens';
 import { useEffect, useState } from 'react';
 import { toggleViewNFTModal } from '../../state/dialog';
 import ViewNFTModal from '../modal/viewNFTModal';
+import LazyImage from '../lazyImage';
 
 interface Props {
   data: NftMetadataType;
@@ -13,10 +14,19 @@ interface Props {
 const NftCard: React.FC<Props> = ({ data }) => {
   const navigation = useNavigate();
   const dispatch = useAppDispatch();
+  const folders = useAppSelector(state=>state.tokensState.folders);
+
   const onCustomize = () => {
     console.log(data);
     // if (data.token_standard == 'v2') {
     dispatch(chooseNft(data));
+
+    const currentTraitFolders = [];
+    for(const folder of folders){
+      currentTraitFolders.push({name: folder, trait: undefined});
+    }
+    dispatch(setCurrentTraitFolders(currentTraitFolders));
+
     navigation(`/nftcustomize/${data.token_data_id}`);
     // }
   };
@@ -53,14 +63,10 @@ const NftCard: React.FC<Props> = ({ data }) => {
     <div className="group w-[140px] md:w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer">
       <div className="relative h-[132px] md:h-[156px] bg-gray-light-2 rounded-t-lg">
         {!isUriEmpty(data.token_uri) && (
-          <img
+          <LazyImage
             src={data.token_uri}
             className="w-full h-full rounded-t-[8px]"
             alt="Primary image"
-            onError={(e) => {
-              console.error(data.token_uri);
-              e.currentTarget.src = '/logo.png';
-            }}
           />
         )}
         <div className="group/3dots hidden group-hover:flex flex-col absolute w-6 h-6 justify-center items-center top-2 right-2 hover:bg-black rounded-full z-10">
@@ -85,7 +91,7 @@ const NftCard: React.FC<Props> = ({ data }) => {
           </div>
         </div>
         <div className="absolute flex left-1 bottom-1">
-          {data.token_standard == 'v2' && (
+          {data.type == 'composable' && (
             <img src="/nft-card/v2-badge.svg" alt="v2-badge" />
           )}
           {data.composed_nfts && data.composed_nfts.length > 0 && (
@@ -102,7 +108,7 @@ const NftCard: React.FC<Props> = ({ data }) => {
         <p className="text-base md:text-lg font-semibold">{data.token_name}</p>
         <div className="mt-3 flex gap-2">
           <img src="/nft-card/aptos-logo.svg" alt="logo" />
-          <p className="text-sm md:text-base font-semibold">{'data.price'}</p>
+          <p className="text-sm md:text-base font-semibold"></p>
         </div>
       </div>
     </div>

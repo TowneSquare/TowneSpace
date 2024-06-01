@@ -1,4 +1,5 @@
 import { ApolloClient, gql } from '@apollo/client';
+export * from "./ipfs";
 
 export function isUriEmpty(uri: string | undefined) {
   return uri == undefined || uri == '';

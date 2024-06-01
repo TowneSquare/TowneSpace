@@ -49,7 +49,7 @@ export const useComposableType = async (
     const response = await aptos.view({
       payload,
     });
-    console.log(response);
+    return response;
   } catch (e) {
     console.log(e);
   }

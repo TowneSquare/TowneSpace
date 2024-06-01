@@ -1,4 +1,6 @@
 import { Aptos } from '@aptos-labs/ts-sdk';
+import { getIdentifyObject } from '../hooks/useIdentifyObject';
+import { APTOS } from '../state/constants';
 
 /**
  *
@@ -17,8 +19,8 @@ export type TokenV1Fields = {
   token_data_id: string;
   description?: string;
   token_uri?: string;
-  token_standard: 'v1';
   composed_nfts?: ComposedNfts[];
+  type?: string;
 };
 
 export type TokenV2Fields = {
@@ -28,8 +30,8 @@ export type TokenV2Fields = {
   token_data_id: string;
   description: string;
   token_uri: string;
-  token_standard: 'v2';
   composed_nfts: ComposedNfts[];
+  type: string;
 };
 
 export type CollectionV1Fields = {
@@ -120,6 +122,9 @@ export const OWNED_V2_TOKENS_QUERY = `
       where: {owner_address: {_eq: $account_address}, current_token_data: {current_collection: {collection_id: {_eq: $collection_id}}}}
       offset: $offset
     ) {
+      composed_nfts {
+        token_data_id
+      }
       current_token_data {
         collection_id
         token_name
@@ -222,7 +227,10 @@ export class Queries {
       account_address,
     };
 
-    const response: any = await this.queryIndexer(OWNED_OBJECTS_QUERY, variables);
+    const response: any = await this.queryIndexer(
+      OWNED_OBJECTS_QUERY,
+      variables
+    );
 
     const objects = [];
 
@@ -279,7 +287,7 @@ export class Queries {
     limit: number,
     account_address: string,
     collection_id: string
-  ): Promise<Array<TokenV2Fields>> {
+  ): Promise<Array<TokenV1Fields>> {
     const variables = {
       offset,
       limit,
@@ -287,26 +295,28 @@ export class Queries {
       collection_id,
     };
     const res: any = await this.queryIndexer(OWNED_V2_TOKENS_QUERY, variables);
-    // const tokens: TokenV2Fields[] = res.current_token_ownerships_v2.map(
-    //   (token: any) =>
-    //     (token.collection_name = token.current_collection.collection_name)
-    // );
-    // console.log(tokens);
-    // const response: TokenV2FieldsIndexerResponse = await this.queryIndexer(
-    //   OWNED_V2_TOKENS_QUERY,
-    //   variables
-    // );
-    // console.log(response)
-    const tokens: TokenV2Fields[] = [];
+    const tokens: TokenV1Fields[] = [];
 
     for (const token of res.current_token_ownerships_v2) {
+      const typeRes = await getIdentifyObject(
+        APTOS,
+        token.current_token_data.token_data_id
+      );
+
       tokens.push({
-        ...token.current_token_data,
-        colletion_name:
+        collection_id: token.current_token_data.collection_id,
+        collection_name:
           token.current_token_data.current_collection.collection_name,
+        token_name: token.current_token_data.token_name,
+        token_data_id: token.current_token_data.token_data_id,
+        description: token.current_token_data.description,
+        token_uri: token.current_token_data.token_uri,
+        composed_nfts: token.composed_nfts,
+        type: typeRes && typeRes[0] ? typeRes[0].toString().toLowerCase() : '',
       });
+
+      console.log(tokens)
     }
-    console.log(tokens);
     return tokens;
   }
 
@@ -371,6 +381,7 @@ export class Queries {
     for (const collection of response.current_collections_v2) {
       collections.push(collection);
     }
+
     return collections;
   }
 
@@ -406,7 +417,8 @@ export class Queries {
     for (const token of response.current_token_ownerships_v2) {
       tokens.push({
         ...token.current_token_data,
-        collection_name: token.current_token_data.current_collection.collection_name,
+        collection_name:
+          token.current_token_data.current_collection.collection_name,
       });
     }
     return tokens;
