@@ -1,7 +1,17 @@
-import { COMPOSABLE_TOKEN_TESTNET, UNEQUIP_TRAIT, STUDIO } from '../constants';
+import { COMPOSABLE_TOKEN_TESTNET, UNEQUIP_TRAIT, STUDIO, UNEQUIP_TRAITS } from '../constants';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 
-const useUnequipTrait = (
+/**
+ * 
+ * Unequip a trait from a composable nft
+ * @param accountAddress
+ * @param composableObject
+ * @param traitObject
+ * @param new_uri
+ * @returns payload
+ * 
+ */
+export const useUnequipTrait = (
   accountAddress: string,
   composableObject: string,
   traitObject: string,
@@ -21,4 +31,34 @@ const useUnequipTrait = (
   };
   return payload;
 };
-export default useUnequipTrait;
+
+/**
+ * 
+ * Unequip a list of traits from a composable nft
+ * @param accountAddress
+ * @param composableObject
+ * @param traitObjects
+ * @param new_uri
+ * @returns payload
+ * 
+ */
+export const useUnequipTraits = (
+  accountAddress: string,
+  composableObject: string,
+  traitObjects: string[],
+  new_uri: string
+) => {
+  const { signAndSubmitTransaction } = useWallet();
+  const payload = async () => {
+    const response = await signAndSubmitTransaction({
+      sender: accountAddress,
+      data: {
+        function: `${COMPOSABLE_TOKEN_TESTNET}::${STUDIO}::${UNEQUIP_TRAITS}`,
+        typeArguments: [],
+        functionArguments: [composableObject, traitObjects, new_uri],
+      },
+    });
+    console.log(response);
+  };
+  return payload;
+}
