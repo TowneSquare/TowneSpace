@@ -112,7 +112,7 @@ export const tokensSlice = createSlice({
     setCurrentTraitFolders: (state, action: PayloadAction<CustomFolderType[]>) => {
       state.currentTraitFolders = action.payload;
     },
-    chooseCurrentTraitFolder: (state, action: PayloadAction<CustomFolderType>) => {
+    chooseCurrentTraitFolder: (state, action: PayloadAction<CustomFolderType | undefined>) => {
       state.currentTraitFolder = action.payload;
     },
     setFetchState: (state, action: PayloadAction<boolean>) => {

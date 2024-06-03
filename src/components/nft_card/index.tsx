@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { NftMetadataType } from '../../type/nft_type';
 import { isUriEmpty } from '../../util';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { chooseNft, setCurrentTraitFolders } from '../../state/tokens';
+import { chooseCurrentTraitFolder, chooseNft, setCurrentTraitFolders } from '../../state/tokens';
 import { useEffect, useState } from 'react';
 import { toggleViewNFTModal } from '../../state/dialog';
 import ViewNFTModal from '../modal/viewNFTModal';
@@ -44,7 +44,7 @@ const NftCard: React.FC<Props> = ({ data }) => {
     }
 
     dispatch(setCurrentTraitFolders(currentTraitFolders));
-
+    dispatch(chooseCurrentTraitFolder(undefined));
     navigation(`/nftcustomize/${data.token_data_id}`);
     // }
   };
