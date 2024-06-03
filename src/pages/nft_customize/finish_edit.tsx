@@ -71,20 +71,19 @@ const FinishEdit = () => {
 
     try {
       const imageLink =
-        'https://ipfs.io/ipfs/QmPXkpBsgNR1XcWUvCb9xaqXADCCCcuwC2jVpJauurHDJe';
-      // await pinJSONToIPFS(blob);
-
+        // 'https://ipfs.io/ipfs/QmPXkpBsgNR1XcWUvCb9xaqXADCCCcuwC2jVpJauurHDJe';
+      await pinJSONToIPFS(blob);
+console.log(imageLink)
       const tokenObjects: string[] = [];
       for (let i = 0; i < currentTraitFolders.length; i++) {
         const token_id = currentTraitFolders[i]?.trait?.token_data_id;
-        console.log(token_id);
         if (token_id) {
           tokenObjects.push(token_id);
         }
       }
 
       if (tokenObjects.length > 0 && currentNft?.token_data_id) {
-        console.log('equipping');
+        console.log('equipping', tokenObjects);
         // const res = await equipTrait(
         //   currentNft?.token_data_id,
         //   tokenObjects[0],
