@@ -21,7 +21,7 @@ const ChooseTrait = () => {
   );
   const nfts = useAppSelector((state) => state.tokensState.nfts);
   const traits = nfts.filter(
-    (nft) => nft.description == currentTraitFolder?.name
+    (nft) => nft.description == currentTraitFolder?.name && nft.composed_to == false
   );
   const [selectedTrait, setSelectedTrait] = useState<
     NftMetadataType | undefined

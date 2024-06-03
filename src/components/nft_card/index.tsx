@@ -3,9 +3,7 @@ import { NftMetadataType } from '../../type/nft_type';
 import { isUriEmpty } from '../../util';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { chooseCurrentTraitFolder, chooseNft, setCurrentTraitFolders } from '../../state/tokens';
-import { useEffect, useState } from 'react';
 import { toggleViewNFTModal } from '../../state/dialog';
-import ViewNFTModal from '../modal/viewNFTModal';
 import LazyImage from '../lazyImage';
 import CustomFolderType from '../../type/custom_folder_type';
 
