@@ -74,6 +74,7 @@ export const COLLECTION_SYMBOL = `collection_symbol`
 export const COLLECTION_SUPPLY_TYPE = `collection_supply_type`
 
 export const PARENT_TOKEN_OBJECT = `parent_token`
+export const PARENTS_TOKENS_OBJECTS = `parents_tokens`
 export const TOKEN_INDEX = `index`
 export const TRAITS_FROM_COMPOSABLE = `traits_from_composable`
 
