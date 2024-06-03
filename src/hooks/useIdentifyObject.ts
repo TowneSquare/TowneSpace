@@ -97,4 +97,5 @@ export const getIdentifyObjects = async (
   } catch (e) {
     console.log(e);
   }
+  return [];
 };

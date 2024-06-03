@@ -51,7 +51,6 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
       autoConnect={true}
       onError={(error) => {
         console.log('Custom error handling', error);
-        toast(error);
       }}
     >
       {children}

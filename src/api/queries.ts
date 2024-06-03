@@ -1,9 +1,7 @@
-import { Aptos, MoveString, MoveVector, U8 } from '@aptos-labs/ts-sdk';
-import {
-  getIdentifyObject,
-  getIdentifyObjects,
-} from '../hooks/useIdentifyObject';
+import { Aptos } from '@aptos-labs/ts-sdk';
+import { getIdentifyObjects } from '../hooks/useIdentifyObject';
 import { APTOS } from '../state/constants';
+import { getParentTokens } from '../hooks/useParentToken';
 
 /**
  *
@@ -11,7 +9,7 @@ import { APTOS } from '../state/constants';
  *
  */
 
-export type ComposedNfts = {
+export type ComposedNft = {
   token_data_id: string;
 };
 
@@ -22,8 +20,9 @@ export type TokenV1Fields = {
   token_data_id: string;
   description?: string;
   token_uri?: string;
-  composed_nfts?: ComposedNfts[];
+  composed_nfts?: ComposedNft[];
   type?: string;
+  composed_to?: boolean;
 };
 
 export type TokenV2Fields = {
@@ -33,8 +32,9 @@ export type TokenV2Fields = {
   token_data_id: string;
   description: string;
   token_uri: string;
-  composed_nfts: ComposedNfts[];
+  composed_nfts: ComposedNft[];
   type: string;
+  composed_to: boolean;
 };
 
 export type CollectionV1Fields = {
@@ -305,6 +305,7 @@ export class Queries {
     const tokens: TokenV1Fields[] = [];
 
     const tokenObjects = [];
+
     for (const token of res.current_token_ownerships_v2) {
       tokens.push({
         collection_id: token.current_token_data.collection_id,
@@ -315,19 +316,26 @@ export class Queries {
         description: token.current_token_data.description,
         token_uri: token.current_token_data.token_uri,
         composed_nfts: token.composed_nfts,
+        composed_to: false,
       });
 
       tokenObjects.push(token.current_token_data.token_data_id);
     }
-
-    const object: any = await getIdentifyObjects(APTOS, tokenObjects);
+    
+    let object: any = await getIdentifyObjects(APTOS, tokenObjects);
     const types = object[0].data;
+
+    // object = await getParentTokens(APTOS, ["0x709e7a0245d955f2fe405a21057fd23938d04fcd633b3b035cbc330b75b45b13"]);
+    // console.log(object);
 
     if (types && tokens.length == types.length) {
       for (let i = 0; i < tokens.length; i++) {
         tokens[i].type = types[i].value.toLowerCase();
+
+        tokens[i].composed_to = false;
       }
     }
+
     return tokens;
   }
 

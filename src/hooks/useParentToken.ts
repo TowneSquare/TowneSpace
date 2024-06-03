@@ -52,3 +52,21 @@ export const useParentTokens = async (
         console.log(e);
     }
 }
+
+export const getParentTokens = async (
+  aptos: Aptos,
+  tokenObjects: string[] | undefined
+) => {
+    if (!tokenObjects) return;
+    try {
+        const payload: InputViewFunctionData = {
+            function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${PARENTS_OBJECTS}`,
+            typeArguments: [TRAIT_TOKEN_TYPE],
+            functionArguments: tokenObjects,
+        };
+        const response = await aptos.view({payload});
+        return response;
+    } catch (e) {
+        console.log(e);
+    }
+}

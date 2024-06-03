@@ -6,8 +6,9 @@ import PrimaryButton from '../../components/primary_button';
 import ButtonStatus from '../../type/button_status';
 import { toggleFinishEdit } from '../../state/dialog';
 import { pinJSONToIPFS, sleep } from '../../util';
-import { useEquipTrait, useEquipTraits } from '../../hooks/useEquipTrait';
-import { NftMetadataType } from '../../type/nft_type';
+import { useReplaceTraits } from '../../hooks/useReplaceTrait';
+import { ComposedNft } from '../../api';
+import CustomFolderType from '../../type/custom_folder_type';
 
 const FinishEdit = () => {
   const isOpen = useAppSelector((state) => state.dialogState.bFinishEdit);
@@ -15,10 +16,11 @@ const FinishEdit = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const equipTrait = useEquipTrait();
-  const equipTraits = useEquipTraits();
+  const replaceTraits = useReplaceTraits();
 
   const currentNft = useAppSelector((state) => state.tokensState.currentNft);
+  const composedTraits = currentNft?.composed_nfts;
+
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
@@ -72,27 +74,44 @@ const FinishEdit = () => {
     try {
       const imageLink =
         // 'https://ipfs.io/ipfs/QmPXkpBsgNR1XcWUvCb9xaqXADCCCcuwC2jVpJauurHDJe';
-      await pinJSONToIPFS(blob);
-console.log(imageLink)
-      const tokenObjects: string[] = [];
-      for (let i = 0; i < currentTraitFolders.length; i++) {
-        const token_id = currentTraitFolders[i]?.trait?.token_data_id;
-        if (token_id) {
-          tokenObjects.push(token_id);
-        }
+        await pinJSONToIPFS(blob);
+      console.log(imageLink);
+
+
+      const addObjects = currentTraitFolders.reduce((acc: string[], folder: CustomFolderType) => {
+        const token_id = folder?.trait?.token_data_id;
+        if (
+          token_id &&
+          (!composedTraits ||
+            !composedTraits.find((trait) => trait.token_data_id == token_id))
+        )
+          acc.push(token_id);
+        return acc;
+      }, []);
+
+      let removeObjects: string[] = [];
+      if (composedTraits) {
+        removeObjects = composedTraits.reduce(
+          (acc: string[], trait: ComposedNft) => {
+            if (
+              !currentTraitFolders.find(
+                (folder) => folder.trait?.token_data_id == trait.token_data_id
+              )
+            )
+              acc.push(trait.token_data_id);
+            return acc;
+          },
+          []
+        );
       }
+console.log(currentNft, currentTraitFolders, addObjects, removeObjects)
+      if (currentNft?.token_data_id) {
+        console.log('replacing', addObjects, removeObjects);
 
-      if (tokenObjects.length > 0 && currentNft?.token_data_id) {
-        console.log('equipping', tokenObjects);
-        // const res = await equipTrait(
-        //   currentNft?.token_data_id,
-        //   tokenObjects[0],
-        //   imageLink
-        // );
-
-        const res = await equipTraits(
+        const res = await replaceTraits(
           currentNft?.token_data_id,
-          tokenObjects,
+          removeObjects,
+          addObjects,
           imageLink
         );
         console.log(res);
