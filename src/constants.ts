@@ -74,7 +74,7 @@ export const COLLECTION_SYMBOL = `collection_symbol`
 export const COLLECTION_SUPPLY_TYPE = `collection_supply_type`
 
 export const PARENT_TOKEN_OBJECT = `parent_token`
-export const PARENTS_TOKENS_OBJECTS = `parents_tokens`
+export const PARENTS_OBJECTS = `parents`
 export const TOKEN_INDEX = `index`
 export const TRAITS_FROM_COMPOSABLE = `traits_from_composable`
 
@@ -101,6 +101,7 @@ export const EQUIP_TRAIT = `equip_trait`
 export const EQUIP_TRAITS = `equip_traits`
 export const UNEQUIP_TRAIT = `unequip_trait`
 export const UNEQUIP_TRAITS = `unequip_traits`
+export const REPLACE_TRAITS = `replace_traits_of_composable`
 
 export const DECOMPOSE_ENTIRE_COMPOSABLE_TOKEN = `decompose_entire_composable_token`
 

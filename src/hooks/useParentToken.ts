@@ -1,5 +1,5 @@
 import { Aptos, InputViewFunctionData } from '@aptos-labs/ts-sdk';
-import { COMPOSABLE_TOKEN, COMPOSABLE_TOKEN_TESTNET, PARENT_TOKEN_OBJECT, PARENTS_TOKENS_OBJECTS, TRAIT_TOKEN_TYPE } from '../constants';
+import { COMPOSABLE_TOKEN, COMPOSABLE_TOKEN_TESTNET, PARENT_TOKEN_OBJECT, PARENTS_OBJECTS, TRAIT_TOKEN_TYPE } from '../constants';
 
 /**
  *
@@ -42,7 +42,7 @@ export const useParentTokens = async (
     if (!tokenObjects) return;
     try {
         const payload: InputViewFunctionData = {
-            function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${PARENTS_TOKENS_OBJECTS}`,
+            function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${PARENTS_OBJECTS}`,
             typeArguments: [TRAIT_TOKEN_TYPE],
             functionArguments: tokenObjects,
         };
