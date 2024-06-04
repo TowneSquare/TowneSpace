@@ -25,8 +25,9 @@ const useTraitListinComposable = (
 
 export const getTraitListinComposable = async (
   aptos: Aptos,
-  composableTokenAddress: string
+  composableTokenAddress: string | undefined
 ) => {
+  if (!composableTokenAddress) return [];
   const payload: InputViewFunctionData = {
     function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${TRAITS_FROM_COMPOSABLE}`,
     typeArguments: [],
@@ -35,6 +36,6 @@ export const getTraitListinComposable = async (
   const response = await aptos.view({
     payload,
   });
-  return response;
+  return response as any[];
 };
 export default useTraitListinComposable;

@@ -2,10 +2,18 @@ import { useNavigate } from 'react-router-dom';
 import { NftMetadataType } from '../../type/nft_type';
 import { isUriEmpty } from '../../util';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { chooseCurrentTraitFolder, chooseNft, setCurrentTraitFolders } from '../../state/tokens';
+import {
+  chooseCurrentTraitFolder,
+  chooseNft,
+  setCurrentTraitFolders,
+} from '../../state/tokens';
 import { toggleViewNFTModal } from '../../state/dialog';
 import LazyImage from '../lazyImage';
 import CustomFolderType from '../../type/custom_folder_type';
+import { getTraitListinComposable } from '../../hooks/useTraitListinComposable';
+import { APTOS } from '../../state/constants';
+import { useEffect, useState } from 'react';
+import { ComposedNft } from '../../api';
 
 interface Props {
   data: NftMetadataType;
@@ -15,20 +23,39 @@ const NftCard: React.FC<Props> = ({ data }) => {
   const dispatch = useAppDispatch();
   const folders = useAppSelector((state) => state.tokensState.folders);
   const nfts = useAppSelector((state) => state.tokensState.nfts);
+  const [composedNfts, setComposedNfts] = useState<ComposedNft[]>([]);
 
-  const onCustomize = () => {
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await getTraitListinComposable(APTOS, data?.token_data_id);
+
+      if (res.length > 0) {
+        const composedNfts: ComposedNft[] = [];
+        for (const nft of res[0]) {
+          composedNfts.push({
+            token_data_id: nft.inner,
+          });
+        }
+        setComposedNfts(composedNfts);
+      }
+    };
+    fetch();
+  }, []);
+
+  const onCustomize = async () => {
     // if (data.token_standard == 'v2') {
-    dispatch(chooseNft(data));
+    const temp = JSON.parse(JSON.stringify(data));
+    temp.composed_nfts = composedNfts;
+    dispatch(chooseNft(temp));
 
     const currentTraitFolders: CustomFolderType[] = [];
-    if (data && data.composed_nfts) {
-      for (const composed of data?.composed_nfts) {
-        const trait = nfts.find(
-          (nft) => nft.token_data_id == composed.token_data_id
-        );
-        if (trait && trait.description) {
-          currentTraitFolders.push({ name: trait.description, trait });
-        }
+
+    for (const composed of composedNfts) {
+      const trait = nfts.find(
+        (nft) => nft.token_data_id == composed.token_data_id
+      );
+      if (trait && trait.description) {
+        currentTraitFolders.push({ name: trait.description, trait });
       }
     }
 
@@ -47,7 +74,9 @@ const NftCard: React.FC<Props> = ({ data }) => {
     // }
   };
   const onSeeTowneSpace = () => {
-    dispatch(chooseNft(data));
+    const temp = JSON.parse(JSON.stringify(data));
+    temp.composed_nfts = composedNfts;
+    dispatch(chooseNft(temp));
 
     dispatch(toggleViewNFTModal(true));
   };
@@ -87,7 +116,7 @@ const NftCard: React.FC<Props> = ({ data }) => {
           {data.type == 'composable' && (
             <img src="/nft-card/v2-badge.svg" alt="v2-badge" />
           )}
-          {data.composed_nfts && data.composed_nfts.length > 0 && (
+          {composedNfts.length > 0 && (
             <img src="/nft-card/composed.svg" alt="composed" />
           )}
         </div>
