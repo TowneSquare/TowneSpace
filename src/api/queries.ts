@@ -321,18 +321,31 @@ export class Queries {
 
       tokenObjects.push(token.current_token_data.token_data_id);
     }
-    
-    let object: any = await getIdentifyObjects(APTOS, tokenObjects);
-    const types = object[0].data;
 
-    // object = await getParentTokens(APTOS, ["0x709e7a0245d955f2fe405a21057fd23938d04fcd633b3b035cbc330b75b45b13"]);
-    // console.log(object);
+    const identifyObject: any = await getIdentifyObjects(APTOS, tokenObjects);
+    const types = identifyObject[0].data;
 
+    const traitObjects = [];
     if (types && tokens.length == types.length) {
       for (let i = 0; i < tokens.length; i++) {
         tokens[i].type = types[i].value.toLowerCase();
+        if (tokens[i].type === 'trait')
+          traitObjects.push(tokens[i].token_data_id);
+      }
+    }
 
-        tokens[i].composed_to = false;
+    const parentObject: any = await getParentTokens(APTOS, traitObjects);
+    const parents = parentObject[0].data;
+
+    if (parents) {
+      for (let i = 0; i < parents.length; i++) {
+        const parentVec = parents[i].value.vec;
+        if (parentVec && parentVec.length > 0) {
+          const index = tokens.findIndex(
+            (token) => token.token_data_id == parents[i].key
+          );
+          if (index >= 0) tokens[index].composed_to = true;
+        }
       }
     }
 
