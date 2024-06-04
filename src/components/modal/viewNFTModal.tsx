@@ -20,7 +20,7 @@ const ViewNFTModal = () => {
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
-
+console.log(currentTraitFolders, currentTraitFolder)
   useEffect(() => {
     if (currentTraitFolder == undefined && currentTraitFolders.length > 0) {
       dispatch(chooseCurrentTraitFolder(currentTraitFolders[0]));
@@ -76,6 +76,8 @@ const ViewNFTModal = () => {
                 .map((folder, index) => {
                   const isActive = currentTraitFolder?.trait?.token_data_id == folder.trait?.token_data_id;
                   const bg = isActive ? "bg-gray-dark-1" : "bg-gray-dark-2"
+
+                  console.log(folder)
                   return (
                     <div
                       className={`h-[76px] mb-2 gap-2 rounded-[8px] w-full flex items-center ${bg} hover:bg-gray-light-3/50 p-2 cursor-pointer`}
@@ -102,7 +104,7 @@ const ViewNFTModal = () => {
                   );
                 })}
             </div>
-            {currentTraitFolder && (
+            {currentTraitFolder?.trait && (
               <div className="bg-[#000000] rounded-[10px] w-[310px] h-[80vh] ml-[27px] p-4">
                 <div className="bg-gray-light-3">
                   <LazyImage
