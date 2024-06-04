@@ -1,5 +1,5 @@
 import { ApolloClient, gql } from '@apollo/client';
-export * from "./ipfs";
+export * from './ipfs';
 
 export function isUriEmpty(uri: string | undefined) {
   return uri == undefined || uri == '';
@@ -14,6 +14,15 @@ export function isSupportFile(extension: string) {
   if (ext == 'jpg' || ext == 'png' || ext == 'svg' || ext == 'webp')
     return true;
   return false;
+}
+export function compareAddress(a: string | undefined, b: string | undefined) {
+  if (!a || !b || a.length < 60 || b.length < 60) return false;
+  if (a.length == b.length) {
+    return a === b;
+  } else {
+    const len = Math.min(a.length, b.length) - 3;
+    return a.slice(-len) == b.slice(-len);
+  }
 }
 
 export const NFT_COLLECTION_OWNED_QUERY = gql`

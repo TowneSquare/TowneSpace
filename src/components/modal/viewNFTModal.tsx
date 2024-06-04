@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import LazyImage from '../lazyImage';
 import { useEffect, useState } from 'react';
 import { NftMetadataType } from '../../type/nft_type';
+import CustomFolderType from '../../type/custom_folder_type';
+import { chooseCurrentTraitFolder } from '../../state/tokens';
 
 const ViewNFTModal = () => {
   const navigate = useNavigate();
@@ -11,37 +13,28 @@ const ViewNFTModal = () => {
 
   const isOpen = useAppSelector((state) => state.dialogState.bViewNFTModal);
 
-  const nfts = useAppSelector((state) => state.tokensState.nfts);
   const currentNft = useAppSelector((state) => state.tokensState.currentNft);
-  const [traits, setTraits] = useState<NftMetadataType[]>([]);
-  const [seletedTrait, setSelectedTrait] = useState<
-    NftMetadataType | undefined
-  >(undefined);
+  const currentTraitFolder = useAppSelector(
+    (state) => state.tokensState.currentTraitFolder
+  );
+  const currentTraitFolders = useAppSelector(
+    (state) => state.tokensState.currentTraitFolders
+  );
 
   useEffect(() => {
-    const fetch = async () => {
-      if (currentNft?.composed_nfts) {
-        const traits = [];
-        for (const object of currentNft?.composed_nfts) {
-          const res = nfts.filter(
-            (nft) => nft.token_data_id == object.token_data_id
-          );
-          if (res.length > 0) traits.push(res[0]);
-        }
-        setTraits(traits);
-
-        if (traits.length > 0) setSelectedTrait(traits[0]);
-        else setSelectedTrait(undefined);
-      }
-    };
-    fetch();
-  }, [currentNft]);
+    if (currentTraitFolder == undefined && currentTraitFolders.length > 0) {
+      dispatch(chooseCurrentTraitFolder(currentTraitFolders[0]));
+    }
+  }, currentTraitFolders);
 
   const onClickToCustomize = () => {
     navigate(`/nftcustomize/${currentNft?.token_data_id}`);
     dispatch(toggleViewNFTModal(false));
   };
 
+  const onClickFolder = (folder: CustomFolderType) => {
+    dispatch(chooseCurrentTraitFolder(folder));
+  };
   return (
     <div>
       <div
@@ -78,41 +71,52 @@ const ViewNFTModal = () => {
               <LazyImage src={currentNft?.token_uri} />
             </div>
             <div className="ml-2 w-[255px] overflow-auto  h-[80vh] p-2 border-2 border-gray-dark-1 rounded-xl">
-              {traits.map((trait, index) => (
-                <div
-                  className="h-[76px] mb-2 gap-2 rounded-[8px] w-full flex items-center bg-gray-dark-1 p-2 cursor-pointer"
-                  key={index}
-                >
-                  <div className="w-[60px] bg-gray-light-3 rounded-lg">
-                    <LazyImage
-                      src={trait.token_uri}
-                      alt="image"
-                      className="w-[60px] h-[60px]"
-                    />
-                  </div>
-                  <div className="flex flex-col leading-4 font-semibold text-[10px] md:text-[14px] text-start">
-                    <p className="text-gray-light-1">{trait.collection_name}</p>
-                    <p className="text-gray-light-1 mt-2 font-normal">
-                      {trait.description}
-                    </p>
-                    <p className="">{trait.token_name}</p>
-                  </div>
-                </div>
-              ))}
+              {currentTraitFolders
+                .filter((folder) => folder.trait != undefined)
+                .map((folder, index) => {
+                  const isActive = currentTraitFolder?.trait?.token_data_id == folder.trait?.token_data_id;
+                  const bg = isActive ? "bg-gray-dark-1" : "bg-gray-dark-2"
+                  return (
+                    <div
+                      className={`h-[76px] mb-2 gap-2 rounded-[8px] w-full flex items-center ${bg} hover:bg-gray-light-3/50 p-2 cursor-pointer`}
+                      key={index}
+                      onClick={() => onClickFolder(folder)}
+                    >
+                      <div className="w-[60px] bg-gray-light-3 rounded-lg">
+                        <LazyImage
+                          src={folder?.trait?.token_uri}
+                          alt="image"
+                          className="w-[60px] h-[60px]"
+                        />
+                      </div>
+                      <div className="flex flex-col leading-4 font-semibold text-[10px] md:text-[14px] text-start">
+                        <p className="text-gray-light-1">
+                          {folder?.trait?.collection_name}
+                        </p>
+                        <p className="text-gray-light-1 mt-2 font-normal">
+                          {folder?.trait?.description}
+                        </p>
+                        <p className="">{folder?.trait?.token_name}</p>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
-            {seletedTrait && (
+            {currentTraitFolder && (
               <div className="bg-[#000000] rounded-[10px] w-[310px] h-[80vh] ml-[27px] p-4">
                 <div className="bg-gray-light-3">
                   <LazyImage
                     className="w-[278px] h-[278px]"
-                    src={seletedTrait.token_uri}
+                    src={currentTraitFolder?.trait?.token_uri}
                     alt=""
                   />
                 </div>
                 <div className="gap-1 mt-2">
-                  <p className="text-xl mb-2">{seletedTrait.token_name}</p>
+                  <p className="text-xl mb-2">
+                    {currentTraitFolder?.trait?.token_name}
+                  </p>
                   <p className="text-sm text-gray-light-1">
-                    {seletedTrait.description}
+                    {currentTraitFolder?.trait?.description}
                   </p>
                 </div>
               </div>

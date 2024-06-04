@@ -42,14 +42,9 @@ export const fetchCollections = createAsyncThunk(
     try {
       const queries = new Queries(APTOS);
 
-      // const filter = (thunkAPI.getState() as RootState).tokensState.filter;
-      // if (filter == FilterType.composable) {
-      const res = await queries.getOwnedV2Collections(0, 100, address);
+      const res = await queries.getOwnedV2Collections(0, 9999999, address);
       return res;
-      // } else {
-      //   const res = await queries.getOwnedV1Collections(0, 100, address);
-      //   return res;
-      // }
+
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -62,27 +57,17 @@ export const fetchNfts = createAsyncThunk(
     try {
       const queries = new Queries(APTOS);
 
-      // const filter = (thunkAPI.getState() as RootState).tokensState.filter;
-      // if (filter == FilterType.composable) {
       thunkAPI.dispatch(setFetchState(true));
       const res = await queries.getOwnedV2Tokens(
         0,
-        100,
+        9999999,
         args.address,
         args.collection_id
       );
 
       thunkAPI.dispatch(setFetchState(false));
       return res;
-      // } else {
-      // const res = await queries.getOwnedV1Tokens(
-      //   0,
-      //   100,
-      //   args.address,
-      //   args.collection_id
-      // );
-      // return res;
-      // }
+
     } catch (error: any) {
       thunkAPI.dispatch(setFetchState(false));
       return thunkAPI.rejectWithValue(error.response.data);
