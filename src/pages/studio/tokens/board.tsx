@@ -1,8 +1,8 @@
 import NftCard from '../../../components/nft_card';
 import { useAppSelector } from '../../../state/hooks';
 import FilterType from '../../../type/filter_type';
-interface Props {}
-const Board: React.FC<Props> = ({}) => {
+
+const Board = () => {
   const isFetching = useAppSelector(state => state.tokensState.isFetching);
 
   const filter = useAppSelector((state) => state.tokensState.filter);
@@ -23,7 +23,7 @@ const Board: React.FC<Props> = ({}) => {
   return (
     <div className="flex h-full flex-wrap gap-4 items-baseline">
       {filtered.map((nft, index) => (
-        <NftCard data={nft} key={index} />
+        <NftCard data={nft} index={index} key={index} />
       ))}
     </div>
   );

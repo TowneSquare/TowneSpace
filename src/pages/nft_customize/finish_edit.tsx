@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import PrimaryButton from '../../components/primary_button';
 import ButtonStatus from '../../type/button_status';
 import { toggleFinishEdit } from '../../state/dialog';
-import { pinJSONToIPFS, sleep } from '../../util';
+import { compareAddress, pinJSONToIPFS, sleep } from '../../util';
 import { useReplaceTraits } from '../../hooks/useReplaceTrait';
 import { ComposedNft } from '../../api';
 import CustomFolderType from '../../type/custom_folder_type';
@@ -83,7 +83,7 @@ const FinishEdit = () => {
         if (
           token_id &&
           (!composedTraits ||
-            !composedTraits.find((trait) => trait.token_data_id == token_id))
+            !composedTraits.find((trait) => compareAddress(trait.token_data_id, token_id)))
         )
           acc.push(token_id);
         return acc;
@@ -95,7 +95,7 @@ const FinishEdit = () => {
           (acc: string[], trait: ComposedNft) => {
             if (
               !currentTraitFolders.find(
-                (folder) => folder.trait?.token_data_id == trait.token_data_id
+                (folder) => compareAddress(folder.trait?.token_data_id, trait.token_data_id)
               )
             )
               acc.push(trait.token_data_id);
@@ -104,7 +104,7 @@ const FinishEdit = () => {
           []
         );
       }
-console.log(currentNft, currentTraitFolders, addObjects, removeObjects)
+
       if (currentNft?.token_data_id) {
         console.log('replacing', addObjects, removeObjects);
 

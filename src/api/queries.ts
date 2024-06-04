@@ -2,6 +2,7 @@ import { Aptos } from '@aptos-labs/ts-sdk';
 import { getIdentifyObjects } from '../hooks/useIdentifyObject';
 import { APTOS } from '../state/constants';
 import { getParentTokens } from '../hooks/useParentToken';
+import { compareAddress } from '../util';
 
 /**
  *
@@ -342,7 +343,7 @@ export class Queries {
         const parentVec = parents[i].value.vec;
         if (parentVec && parentVec.length > 0) {
           const index = tokens.findIndex(
-            (token) => token.token_data_id == parents[i].key
+            (token) => compareAddress(token.token_data_id, parents[i].key)
           );
           if (index >= 0) tokens[index].composed_to = true;
         }
