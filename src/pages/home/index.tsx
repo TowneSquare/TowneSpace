@@ -10,16 +10,6 @@ import Last from './items/last';
 import Footer from './items/footer';
 
 const Home = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const { connected } = useWallet();
-
-  if (connected) {
-    navigate('/studio');
-  } else {
-    toggleWalletPanel(true);
-  }
-
   return (
     <div className="w-full h-screen !bg-cover bg-gray-dark-3">
       <Header />
