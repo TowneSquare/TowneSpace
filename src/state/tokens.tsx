@@ -7,7 +7,8 @@ import { RootState } from './store';
 import CustomFolderType from '../type/custom_folder_type';
 
 interface tokensStates {
-  filter: FilterType;
+  nftFilter: FilterType;
+  collectionFilter: FilterType;
   collections: CollectionV1Fields[] | CollectionV2Fields[];
   currentCollection: CollectionV1Fields | CollectionV2Fields | undefined;
   nfts: NftMetadataType[];
@@ -22,7 +23,8 @@ interface tokensStates {
 }
 
 const initialState: tokensStates = {
-  filter: FilterType.composable,
+  nftFilter: FilterType.composable,
+  collectionFilter: FilterType.composable,
   collections: [],
   currentCollection: undefined,
   nfts: [],
@@ -79,8 +81,11 @@ export const tokensSlice = createSlice({
   name: 'collections',
   initialState,
   reducers: {
-    setFilter: (state, action: PayloadAction<FilterType>) => {
-      state.filter = action.payload;
+    setNftFilter: (state, action: PayloadAction<FilterType>) => {
+      state.nftFilter = action.payload;
+    },
+    setCollectionFilter: (state, action: PayloadAction<FilterType>) => {
+      state.collectionFilter = action.payload;
     },
     chooseCollection: (
       state,
@@ -143,7 +148,8 @@ export const tokensSlice = createSlice({
 });
 
 export const {
-  setFilter,
+  setNftFilter,
+  setCollectionFilter,
   chooseCollection,
   chooseNft,
   setFolders,

@@ -20,7 +20,7 @@ interface Props {
   data: NftMetadataType;
 }
 const NftCard: React.FC<Props> = ({ data, index }) => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const folders = useAppSelector((state) => state.tokensState.folders);
   const nfts = useAppSelector((state) => state.tokensState.nfts);
@@ -76,7 +76,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   const onCustomize = async () => {
     makeFolders();
 
-    navigation(`/nftcustomize/${data.token_data_id}`);
+    navigate(`/nftcustomize/${data.token_data_id}`);
   };
   const onSeeTowneSpace = () => {
     makeFolders();
@@ -90,10 +90,10 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
 
   return (
     <div
-      className="group w-[140px] md:w-[167px] bg-gray-dark-2 rounded-lg cursor-pointer"
+      className="group w-[140px] md:w-[200px] bg-gray-dark-2 rounded-lg cursor-pointer"
       onClick={() => onCardClick(index)}
     >
-      <div className="relative h-[132px] md:h-[156px] bg-gray-light-2 rounded-t-lg">
+      <div className="relative h-[132px] md:h-[200px] bg-gray-light-2 rounded-t-lg">
         <LazyImage
           src={data.token_uri}
           className="w-full h-full rounded-t-[8px]"
@@ -124,7 +124,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
         )}
         <div className="absolute flex left-1 bottom-1">
           {data.type == 'composable' && (
-            <img src="/nft-card/v2-badge.svg" alt="v2-badge" />
+            <img src="/nft-card/v2-badge.svg" alt="v2-badge"  />
           )}
           {composedNfts.length > 0 && (
             <img src="/nft-card/composed.svg" alt="composed" />

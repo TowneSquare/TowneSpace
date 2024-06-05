@@ -15,6 +15,7 @@ import { useQuery } from '@apollo/client';
 import CreateModal from './components/modal/createModal';
 import CreateStep2 from './components/modal/createStep2';
 import NftCustomize from './pages/nft_customize';
+import Archived from './pages/archived';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/maindeploy/*" element={<MainDeploy />} />
         <Route path="/migrate/*" element={<Migrate />} />
         <Route path="/nftcustomize/:address" element={<NftCustomize />} />
+        <Route path="/archived/" element={<Archived />} />
         <Route path="/redirectPage/" element={<RedirectPage />} />
       </Routes>
       <CreateModal />

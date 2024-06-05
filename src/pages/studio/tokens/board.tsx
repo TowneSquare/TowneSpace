@@ -5,7 +5,7 @@ import FilterType from '../../../type/filter_type';
 const Board = () => {
   const isFetching = useAppSelector(state => state.tokensState.isFetching);
 
-  const filter = useAppSelector((state) => state.tokensState.filter);
+  const filter = useAppSelector((state) => state.tokensState.nftFilter);
   const nfts = useAppSelector((state) => state.tokensState.nfts);
 
   const filtered =

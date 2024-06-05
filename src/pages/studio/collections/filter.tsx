@@ -3,15 +3,17 @@ import PrimaryButton from '../../../components/primary_button';
 import ButtonStatus from '../../../type/button_status';
 import FilterType from '../../../type/filter_type';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { setNftFilter } from '../../../state/tokens';
+import { setCollectionFilter } from '../../../state/tokens';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {}
 const Filter: React.FC<Props> = ({}) => {
-  const filter = useAppSelector((state) => state.tokensState.nftFilter);
+  const filter = useAppSelector((state) => state.tokensState.collectionFilter);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   return (
-    <div className="flex justify-center">
+    <div className="relative flex justify-center items-center w-full">
       <div className="flex bg-gray-dark-2 p-1 rounded-full">
         <PrimaryButton
           type={
@@ -19,9 +21,9 @@ const Filter: React.FC<Props> = ({}) => {
               ? ButtonStatus.active
               : ButtonStatus.inactive
           }
-          onClick={() => dispatch(setNftFilter(FilterType.composable))}
+          onClick={() => dispatch(setCollectionFilter(FilterType.composable))}
         >
-          Composable NFTs
+          CNFT Collections
         </PrimaryButton>
         <PrimaryButton
           type={
@@ -29,11 +31,15 @@ const Filter: React.FC<Props> = ({}) => {
               ? ButtonStatus.active
               : ButtonStatus.inactive
           }
-          onClick={() => dispatch(setNftFilter(FilterType.nfts))}
-          className="md:w-[120px]"
+          onClick={() => dispatch(setCollectionFilter(FilterType.nfts))}
         >
-          NFTs
+          NFT Collections
         </PrimaryButton>
+      </div>
+      <div className="absolute right-20" onClick={() => navigate('/archived')}>
+        <p className="text-base text-primary-default hover:text-primary-light/50 cursor-pointer">
+          Archived collections
+        </p>
       </div>
     </div>
   );
