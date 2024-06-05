@@ -1,9 +1,9 @@
 import { Aptos } from '@aptos-labs/ts-sdk';
-import { getIdentifyObjects } from '../hooks/useIdentifyObject';
-import { APTOS } from '../state/constants';
-import { getParentTokens } from '../hooks/useParentToken';
+import { getIdentifyObjects } from './getIdentifyObject';
+import { getParentTokens } from './getParentToken';
 import { compareAddress } from '../util';
 
+import { APTOS } from '../state/constants';
 /**
  *
  * Types

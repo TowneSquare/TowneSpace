@@ -5,24 +5,6 @@ import {
   TRAITS_FROM_COMPOSABLE,
 } from '../constants';
 
-const useTraitListinComposable = (
-  aptos: Aptos,
-  composableTokenAddress: string
-) => {
-  const updateTraitList = async () => {
-    const payload: InputViewFunctionData = {
-      function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${TRAITS_FROM_COMPOSABLE}`,
-      typeArguments: [],
-      functionArguments: [composableTokenAddress],
-    };
-    const response = await aptos.view({
-      payload,
-    });
-    console.log(response);
-  };
-  return updateTraitList;
-};
-
 export const getTraitListinComposable = async (
   aptos: Aptos,
   composableTokenAddress: string | undefined
@@ -38,4 +20,3 @@ export const getTraitListinComposable = async (
   });
   return response as any[];
 };
-export default useTraitListinComposable;

@@ -28,12 +28,10 @@ const Studio = () => {
   const { account } = useWallet();
 
   useEffect(() => {
-    console.log("fetch collections")
     if (account) dispatch(fetchCollections(account?.address));
   }, [account]);
 
   useEffect(() => {
-    console.log("fetch nft")
     if (currentCollection && account) {
       dispatch(
         fetchNfts({
@@ -52,10 +50,8 @@ const Studio = () => {
     };
     handleResize();
 
-    // Add event listener
     window.addEventListener('resize', handleResize);
 
-    // Cleanup function to remove the event listener
     return () => window.removeEventListener('resize', handleResize);
   }, [navigate]);
 

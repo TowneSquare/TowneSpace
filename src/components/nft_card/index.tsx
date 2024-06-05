@@ -10,7 +10,7 @@ import {
 import { toggleViewNFTModal } from '../../state/dialog';
 import LazyImage from '../lazyImage';
 import CustomFolderType from '../../type/custom_folder_type';
-import { getTraitListinComposable } from '../../hooks/useTraitListinComposable';
+import { getTraitListinComposable } from '../../api/getTraitListinComposable';
 import { APTOS } from '../../state/constants';
 import { useEffect, useState } from 'react';
 import { ComposedNft } from '../../api';

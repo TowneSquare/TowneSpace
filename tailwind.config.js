@@ -19,8 +19,12 @@ module.exports = {
       'gray-dark-2': '#222222',
       'gray-dark-3': '#121212',
       'gray-dark-4': '#1C1C1C',
+      'gray-dark-5': '#D9D9D9',
       'black': '#000000',
-      'white-10': '#ffffff2f'
+      'white-10': '#ffffff2f',
+    },
+    backgroundImage: {
+      'gradient-gray-1': "linear-gradient(180deg, rgba(18, 18, 18, 0.00) 0%, #151515 80%)"
     },
     extend: {},
     fontFamily: {
