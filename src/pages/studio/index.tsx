@@ -16,16 +16,18 @@ import { fetchCollections, fetchNfts } from '../../state/tokens';
 
 const Studio = () => {
   const navigate = useNavigate();
-
   const dispatch = useAppDispatch();
-  const filter = useAppSelector((state) => state.tokensState.filter);
 
   const collections = useAppSelector((state) => state.tokensState.collections);
   const currentCollection = useAppSelector(
     (state) => state.tokensState.currentCollection
   );
 
-  const { account } = useWallet();
+  const { connected, account } = useWallet();
+
+  useEffect(() => {
+    if (!connected) navigate('/');
+  }, [connected]);
 
   useEffect(() => {
     if (account) dispatch(fetchCollections(account?.address));

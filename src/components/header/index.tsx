@@ -2,9 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import Menu from './menu';
 import ConnectButton from './connect_button';
 import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../state/hooks';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { toggleWalletPanel } from '../../state/dialog';
 
 const Header = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { connected } = useWallet();
   const [show, toggleShow] = useState(false);
 
   const [pathname, setPathname] = useState('');
@@ -14,8 +19,20 @@ const Header = () => {
   }, []);
 
   const openStudio = () => {
-    navigate('/studio');
+    if (!connected) {
+      toggleShow(true);
+      dispatch(toggleWalletPanel(true));
+    } else {
+      navigate('/studio');
+    }
   };
+
+  useEffect(() => {
+    console.log(connected, show)
+    if (connected && show) {
+      navigate('/studio');
+    }
+  }, [connected, show]);
 
   return (
     <>
