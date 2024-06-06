@@ -276,8 +276,8 @@ export class Queries {
 
     for (const token of res.current_token_ownerships_v1) {
       
-      // if the latest owner address is not the same as the account address, skip
-      if (!compareAddress(token.current_token_data.current_token_ownerships[0].owner_address, account_address)) {
+      // if the latest owner address (length - 1) is not the same as the account address, skip
+      if (!compareAddress(token.current_token_data.current_token_ownerships[token.current_token_data.current_token_ownerships.length - 1].owner_address, account_address)) {
         continue;
       }
 
@@ -323,8 +323,8 @@ export class Queries {
 
     for (const token of res.current_token_ownerships_v2) {
 
-      // if the latest owner address is not the same as the account address, skip
-      if (!compareAddress(token.current_token_data.current_token_ownerships[0].owner_address, account_address)) {
+      // if the latest owner address (length - 1) is not the same as the account address, skip
+      if (!compareAddress(token.current_token_data.current_token_ownerships[token.current_token_data.current_token_ownerships.length - 1].owner_address, account_address)) {
         continue;
       }
 
