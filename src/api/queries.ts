@@ -4,6 +4,7 @@ import { getParentTokens } from './getParentToken';
 import { compareAddress } from '../util';
 
 import { APTOS } from '../state/constants';
+import { re } from 'mathjs';
 
 /**
  *
@@ -276,24 +277,22 @@ export class Queries {
 
     for (const token of res.current_token_ownerships_v1) {
       
-      // if the latest owner address (length - 1) is not the same as the account address, skip
-      if (!compareAddress(token.current_token_data.current_token_ownerships[token.current_token_data.current_token_ownerships.length - 1].owner_address, account_address)) {
-        continue;
+      // if the latest owner address is the same as the account address, add the token to the list
+      if (compareAddress(token.current_token_data.current_token_ownerships[0].owner_address, account_address)) {
+        tokens.push({
+          collection_id: token.current_token_data.collection_id,
+          collection_name: token.current_token_data.current_collection.collection_name,
+          token_name: token.current_token_data.token_name,
+          token_data_id: token.current_token_data.token_data_id,
+          description: token.current_token_data.description,
+          token_uri: token.current_token_data.token_uri,
+          composed_nfts: token.composed_nfts,
+          composed_to: false,
+        });
+      
       }
-
-      tokens.push({
-        collection_id: token.current_token_data.collection_id,
-        collection_name: token.current_token_data.current_collection.collection_name,
-        token_name: token.current_token_data.token_name,
-        token_data_id: token.current_token_data.token_data_id,
-        description: token.current_token_data.description,
-        token_uri: token.current_token_data.token_uri,
-        composed_nfts: token.composed_nfts,
-        composed_to: false,
-      });
-
+      return tokens;
     }
-    return tokens;
   }
 
   /**
@@ -323,23 +322,21 @@ export class Queries {
 
     for (const token of res.current_token_ownerships_v2) {
 
-      // if the latest owner address (length - 1) is not the same as the account address, skip
-      if (!compareAddress(token.current_token_data.current_token_ownerships[token.current_token_data.current_token_ownerships.length - 1].owner_address, account_address)) {
-        continue;
+      // if the latest owner address is the same as the account address, 
+      if (compareAddress(token.current_token_data.current_token_ownerships[0].owner_address, account_address)) {
+        tokens.push({
+          collection_id: token.current_token_data.collection_id,
+          collection_name: token.current_token_data.current_collection.collection_name,
+          token_name: token.current_token_data.token_name,
+          token_data_id: token.current_token_data.token_data_id,
+          description: token.current_token_data.description,
+          token_uri: token.current_token_data.token_uri,
+          composed_nfts: token.composed_nfts,
+          composed_to: false,
+        });
+  
+        tokenObjects.push(token.current_token_data.token_data_id);
       }
-
-      tokens.push({
-        collection_id: token.current_token_data.collection_id,
-        collection_name: token.current_token_data.current_collection.collection_name,
-        token_name: token.current_token_data.token_name,
-        token_data_id: token.current_token_data.token_data_id,
-        description: token.current_token_data.description,
-        token_uri: token.current_token_data.token_uri,
-        composed_nfts: token.composed_nfts,
-        composed_to: false,
-      });
-
-      tokenObjects.push(token.current_token_data.token_data_id);
     }
     
     let identifyObject: any = await getIdentifyObjects(APTOS, tokenObjects);
