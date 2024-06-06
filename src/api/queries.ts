@@ -4,7 +4,6 @@ import { getParentTokens } from './getParentToken';
 import { compareAddress } from '../util';
 
 import { APTOS } from '../state/constants';
-import { re } from 'mathjs';
 
 /**
  *
@@ -14,7 +13,7 @@ import { re } from 'mathjs';
 
 export type ComposedNft = {
   token_data_id: string;
-}
+};
 
 export type TokenResponse = {
   collection_name: string;
@@ -24,7 +23,7 @@ export type TokenResponse = {
   description: string;
   token_uri: string;
   owner_address: string;
-}
+};
 
 export type TokenFields = {
   collection_id: string;
@@ -36,7 +35,7 @@ export type TokenFields = {
   composed_nfts?: ComposedNft[];
   type?: string;
   composed_to?: boolean;
-}
+};
 
 export type CollectionV1Fields = {
   collection_id: string;
@@ -44,7 +43,7 @@ export type CollectionV1Fields = {
   current_supply: number;
   description: string;
   collection_uri: string;
-}
+};
 
 export type CollectionV2Fields = {
   collection_id: string;
@@ -52,28 +51,27 @@ export type CollectionV2Fields = {
   current_supply: number;
   description: string;
   collection_uri: string;
-}
-
+};
 
 type CollectionV1FieldsIndexerResponse = {
   collection_datas: Array<CollectionV1Fields>;
-}
+};
 
 export type TokenFieldsIndexer = {
   token_ownerships: Array<TokenFields>;
-}
+};
 
 export type OwnedTokenIndexer = {
   current_token_data: TokenFields;
-}
+};
 
 export type CollectionV1FieldsIndexer = {
   collection_datas: Array<CollectionV1Fields>;
-}
+};
 
 export type OwnedCollectionV2Indexer = {
   current_collection_data: CollectionV2Fields;
-}
+};
 
 /**
  *
@@ -268,20 +266,22 @@ export class Queries {
       collection_data_id,
     };
 
-    const res: any = await this.queryIndexer(
-      OWNED_V1_TOKENS_QUERY,
-      variables
-    );
+    const res: any = await this.queryIndexer(OWNED_V1_TOKENS_QUERY, variables);
 
     const tokens: TokenFields[] = [];
 
     for (const token of res.current_token_ownerships_v1) {
-      
       // if the latest owner address is the same as the account address, add the token to the list
-      if (compareAddress(token.current_token_data.current_token_ownerships[0].owner_address, account_address)) {
+      if (
+        compareAddress(
+          token.current_token_data.current_token_ownerships[0].owner_address,
+          account_address
+        )
+      ) {
         tokens.push({
           collection_id: token.current_token_data.collection_id,
-          collection_name: token.current_token_data.current_collection.collection_name,
+          collection_name:
+            token.current_token_data.current_collection.collection_name,
           token_name: token.current_token_data.token_name,
           token_data_id: token.current_token_data.token_data_id,
           description: token.current_token_data.description,
@@ -289,10 +289,9 @@ export class Queries {
           composed_nfts: token.composed_nfts,
           composed_to: false,
         });
-      
       }
-      return tokens;
     }
+    return tokens;
   }
 
   /**
@@ -319,14 +318,19 @@ export class Queries {
     const tokens: TokenFields[] = [];
 
     const tokenObjects = [];
-
+console.log(account_address, collection_id, tokens)
     for (const token of res.current_token_ownerships_v2) {
-
-      // if the latest owner address is the same as the account address, 
-      if (compareAddress(token.current_token_data.current_token_ownerships[0].owner_address, account_address)) {
+      // if the latest owner address is the same as the account address,
+      if (
+        compareAddress(
+          token.current_token_data.current_token_ownerships[0].owner_address,
+          account_address
+        )
+      ) {
         tokens.push({
           collection_id: token.current_token_data.collection_id,
-          collection_name: token.current_token_data.current_collection.collection_name,
+          collection_name:
+            token.current_token_data.current_collection.collection_name,
           token_name: token.current_token_data.token_name,
           token_data_id: token.current_token_data.token_data_id,
           description: token.current_token_data.description,
@@ -334,11 +338,11 @@ export class Queries {
           composed_nfts: token.composed_nfts,
           composed_to: false,
         });
-  
+
         tokenObjects.push(token.current_token_data.token_data_id);
       }
     }
-    
+
     let identifyObject: any = await getIdentifyObjects(APTOS, tokenObjects);
     const types = identifyObject[0].data;
     const traitObjects = [];
@@ -362,13 +366,14 @@ export class Queries {
       for (let i = 0; i < parents.length; i++) {
         const parentVec = parents[i].value.vec;
         if (parentVec && parentVec.length > 0) {
-          const index = tokens.findIndex(
-            (token) => compareAddress(token.token_data_id, parents[i].key)
+          const index = tokens.findIndex((token) =>
+            compareAddress(token.token_data_id, parents[i].key)
           );
           if (index >= 0) tokens[index].composed_to = true;
         }
       }
     }
+console.log(tokens)
     return tokens;
   }
 
