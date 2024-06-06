@@ -1,22 +1,29 @@
-import { useDispatch } from 'react-redux';
-import { toggleConnectRequest, toggleWalletPanel } from '../../../state/dialog';
-import { useNavigate } from 'react-router-dom';
-import PrimaryButton from '../../../components/primary_button';
-import ButtonStatus from '../../../type/button_status';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toggleWalletPanel } from '../../../state/dialog';
 
 const MainSection = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { connected } = useWallet();
+  const [show, toggleShow] = useState(false);
 
   const openStudio = () => {
-    if (connected) {
-      navigate('/studio');
-    } else {
+    if (!connected) {
+      toggleShow(true);
       dispatch(toggleWalletPanel(true));
+    } else {
+      navigate('/studio');
     }
   };
+
+  useEffect(() => {
+    if (connected && show) {
+      navigate('/studio');
+    }
+  }, [connected, show]);
 
   return (
     <div className="flex flex-col items-center xl:flex-row justify-between w-[360px] md:w-[1280px] relative mt-9 md:mt-[67px]">

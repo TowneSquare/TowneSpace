@@ -28,7 +28,7 @@ const ViewNFTModal = () => {
   }, currentTraitFolders);
 
   const onClickToCustomize = () => {
-    navigate(`/nftcustomize/${currentNft?.token_data_id}`);
+    navigate(`/customize/${currentNft?.token_data_id}`);
     dispatch(toggleViewNFTModal(false));
   };
 
