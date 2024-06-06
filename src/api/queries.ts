@@ -318,7 +318,7 @@ export class Queries {
     const tokens: TokenFields[] = [];
 
     const tokenObjects = [];
-console.log(account_address, collection_id, tokens)
+console.log(account_address, collection_id, res)
     for (const token of res.current_token_ownerships_v2) {
       // if the latest owner address is the same as the account address,
       if (
