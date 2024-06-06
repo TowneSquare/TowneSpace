@@ -321,7 +321,7 @@ export class Queries {
     const tokenObjects = [];
 console.log(account_address, collection_id, res)
     for (const token of res.current_token_ownerships_v2) {
-      // if the latest owner address is the same as the account address,
+      // if the latest owner address is the same as the account address, add the token to the list
       if (
         compareAddress(
           token.current_token_data.current_token_ownerships[0].owner_address,
@@ -333,22 +333,43 @@ console.log(account_address, collection_id, res)
           collection_name:
             token.current_token_data.current_collection.collection_name,
           token_name: token.current_token_data.token_name,
-          token_data_id: token.current_token_data.token_data_id,
+          token_data_id: sanitizeAddress(token.current_token_data.token_data_id),
           description: token.current_token_data.description,
           token_uri: token.current_token_data.token_uri,
           composed_nfts: token.composed_nfts,
           composed_to: false,
         });
-
-        tokenObjects.push(token.current_token_data.token_data_id);
+        sanitizeAddress(token.current_token_data.token_data_id);
+        tokenObjects.push(sanitizeAddress(token.current_token_data.token_data_id));
+        // console.log("Token data id: ", token.current_token_data.token_data_id);
       }
     }
 
+    // sanitize address
+    function sanitizeAddress(address: string): string {
+      // Remove leading zeros
+      const sanitizedAddress = address.replace(/^0x0+/g, '0x');
+      return sanitizedAddress;
+  }
+
     // filter out the tokens that are not owned by the account address
     const ownedTokens: any = await getOwnedTokens(APTOS, account_address, tokenObjects);
-    console.log(ownedTokens[0])
-
-
+    console.log("Before view functions:" + tokenObjects + " | "+ tokenObjects.length) // 25
+    // console.log("After view functions:" + ownedTokens[0] + " | "+ ownedTokens[0].length) // 12
+    // console.log("response from getOwnedTokens: ", ownedTokens);
+    // in tokens, leave only the tokens that are in ownedTokens
+    const tokens_filtered: TokenFields[] = [];
+    for (const token of tokens) {
+      // console.log("Checking token: ", token.token_data_id);
+      // console.log("Owned tokens: ", ownedTokens[0]);
+      if (ownedTokens[0].includes(token.token_data_id)) {
+        tokens_filtered.push(token);
+        // console.log("Token included: ", token.token_data_id);
+      } else {
+        // console.log("Token not found: " + token.token_data_id);
+      }
+    }
+    // tokens_filtered = 10 but it should be 12!
     let identifyObject: any = await getIdentifyObjects(APTOS, ownedTokens[0]);
     const types = identifyObject[0].data;
     const traitObjects = [];
@@ -356,12 +377,12 @@ console.log(account_address, collection_id, res)
     // object = await getParentTokens(APTOS, ["0x709e7a0245d955f2fe405a21057fd23938d04fcd633b3b035cbc330b75b45b13"]);
     // console.log(object);
 
-    if (types && tokens.length == types.length) {
-      for (let i = 0; i < tokens.length; i++) {
-        tokens[i].type = types[i].value.toLowerCase();
+    if (types && tokens_filtered.length == types.length) {
+      for (let i = 0; i < tokens_filtered.length; i++) {
+        tokens_filtered[i].type = types[i].value.toLowerCase();
 
-        if (tokens[i].type === 'trait')
-          traitObjects.push(tokens[i].token_data_id);
+        if (tokens_filtered[i].type === 'trait')
+          traitObjects.push(tokens_filtered[i].token_data_id);
       }
     }
 
@@ -372,15 +393,15 @@ console.log(account_address, collection_id, res)
       for (let i = 0; i < parents.length; i++) {
         const parentVec = parents[i].value.vec;
         if (parentVec && parentVec.length > 0) {
-          const index = tokens.findIndex((token) =>
+          const index = tokens_filtered.findIndex((token) =>
             compareAddress(token.token_data_id, parents[i].key)
           );
-          if (index >= 0) tokens[index].composed_to = true;
+          if (index >= 0) tokens_filtered[index].composed_to = true;
         }
       }
     }
-console.log(tokens)
-    return tokens;
+console.log(tokens_filtered)
+    return tokens_filtered;
   }
 
   /**
