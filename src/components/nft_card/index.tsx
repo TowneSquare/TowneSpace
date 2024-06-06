@@ -76,7 +76,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   const onCustomize = async () => {
     makeFolders();
 
-    navigate(`/nftcustomize/${data.token_data_id}`);
+    navigate(`/customize/${data.token_data_id}`);
   };
   const onSeeTowneSpace = () => {
     makeFolders();
@@ -85,7 +85,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   };
 
   const onCardClick = (index: number) => {
-    // console.log(index, data, composedNfts, nfts);
+    console.log(index, data, composedNfts, nfts);
   };
 
   return (
@@ -126,7 +126,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
           {data.type == 'composable' && (
             <img src="/nft-card/v2-badge.svg" alt="v2-badge"  />
           )}
-          {composedNfts.length > 0 && (
+          {data.type == 'composable' && composedNfts.length > 0 && (
             <img src="/nft-card/composed.svg" alt="composed" />
           )}
         </div>

@@ -8,7 +8,6 @@ import CustomFolderType from '../type/custom_folder_type';
 
 interface tokensStates {
   nftFilter: FilterType;
-  collectionFilter: FilterType;
   collections: CollectionV1Fields[] | CollectionV2Fields[];
   currentCollection: CollectionV1Fields | CollectionV2Fields | undefined;
   nfts: NftMetadataType[];
@@ -18,13 +17,12 @@ interface tokensStates {
   currentTraitFolder: CustomFolderType | undefined;
   isFetching: boolean;
 
-  currentTrait: NftMetadataType | undefined;
-  newTrait: NftMetadataType | undefined;
+  collectionFilter: FilterType;
+  myCollections: CollectionV1Fields[] | CollectionV2Fields[];
 }
 
 const initialState: tokensStates = {
   nftFilter: FilterType.composable,
-  collectionFilter: FilterType.composable,
   collections: [],
   currentCollection: undefined,
   nfts: [],
@@ -34,19 +32,42 @@ const initialState: tokensStates = {
   currentTraitFolder: undefined,
   isFetching: false,
 
-  currentTrait: undefined,
-  newTrait: undefined,
+  collectionFilter: FilterType.composable,
+  myCollections: []
 };
+
+export const fetchMyCollections = createAsyncThunk(
+  'myCollection/fetch',
+  async (address: string, thunkAPI) => {
+    try {
+      const queries = new Queries(APTOS);
+      const filter = (thunkAPI.getState() as RootState).tokensState.collectionFilter;
+      if (filter == FilterType.composable) {
+        const res = await queries.getOwnedV2Collections(0, 9999999, address);
+        return res;
+      } else {
+        const res = await queries.getOwnedV1Collections(0, 9999999, address);
+        return res;
+      }
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const fetchCollections = createAsyncThunk(
   'collection/fetch',
   async (address: string, thunkAPI) => {
     try {
       const queries = new Queries(APTOS);
-
-      const res = await queries.getOwnedV2Collections(0, 9999999, address);
-      return res;
-
+      const filter = (thunkAPI.getState() as RootState).tokensState.nftFilter;
+      if (filter == FilterType.composable) {
+        const res = await queries.getOwnedV2Collections(0, 9999999, address);
+        return res;
+      } else {
+        const res = await queries.getOwnedV1Collections(0, 9999999, address);
+        return res;
+      }
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -58,18 +79,42 @@ export const fetchNfts = createAsyncThunk(
   async (args: { address: string; collection_id: string }, thunkAPI) => {
     try {
       const queries = new Queries(APTOS);
+      const filter = (thunkAPI.getState() as RootState).tokensState.nftFilter;
 
       thunkAPI.dispatch(setFetchState(true));
-      const res = await queries.getOwnedV2Tokens(
-        0,
-        9999999,
-        args.address,
-        args.collection_id
-      );
+      let res;
+
+      if (filter == FilterType.composable) {
+        res = await queries.getOwnedV2Tokens(
+          0,
+          9999999,
+          args.address,
+          args.collection_id
+        );
+      } else {
+        res = await queries.getOwnedV1Tokens(
+          0,
+          9999999,
+          args.address,
+          args.collection_id
+        );
+      }
 
       thunkAPI.dispatch(setFetchState(false));
-      return res;
 
+      res.sort((a, b) => {
+        if (a.type === undefined) return 1;
+        if (b.type === undefined) return -1;
+        if (a.type < b.type) return -1;
+        if (a.type > b.type) return 1;
+
+        if (a.description === undefined) return 1;
+        if (b.description === undefined) return -1;
+        if (a.description < b.description) return -1;
+        if (a.description > b.description) return 1;
+        return 0;
+      });
+      return res;
     } catch (error: any) {
       thunkAPI.dispatch(setFetchState(false));
       return thunkAPI.rejectWithValue(error.response.data);
@@ -84,8 +129,9 @@ export const tokensSlice = createSlice({
     setNftFilter: (state, action: PayloadAction<FilterType>) => {
       state.nftFilter = action.payload;
     },
-    setCollectionFilter: (state, action: PayloadAction<FilterType>) => {
-      state.collectionFilter = action.payload;
+    emptyCollections: (state) => {
+      state.collections = [];
+      state.nfts = [];
     },
     chooseCollection: (
       state,
@@ -99,22 +145,28 @@ export const tokensSlice = createSlice({
     setFolders: (state, action: PayloadAction<string[]>) => {
       state.folders = action.payload;
     },
-    setCurrentTraitFolders: (state, action: PayloadAction<CustomFolderType[]>) => {
+    setCurrentTraitFolders: (
+      state,
+      action: PayloadAction<CustomFolderType[]>
+    ) => {
       state.currentTraitFolders = action.payload;
     },
-    chooseCurrentTraitFolder: (state, action: PayloadAction<CustomFolderType | undefined>) => {
+    chooseCurrentTraitFolder: (
+      state,
+      action: PayloadAction<CustomFolderType | undefined>
+    ) => {
       state.currentTraitFolder = action.payload;
     },
     setFetchState: (state, action: PayloadAction<boolean>) => {
       state.isFetching = action.payload;
     },
 
-    chooseTrait: (state, action: PayloadAction<NftMetadataType>) => {
-      state.currentTrait = action.payload;
+    setCollectionFilter: (state, action: PayloadAction<FilterType>) => {
+      state.collectionFilter = action.payload;
     },
-    chooseNewTrait: (state, action: PayloadAction<NftMetadataType>) => {
-      state.newTrait = action.payload;
-    },
+    emptyMyCollections: (state) => {
+      state.myCollections = [];
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCollections.fulfilled, (state, action) => {
@@ -144,12 +196,15 @@ export const tokensSlice = createSlice({
 
       state.folders = folders;
     });
+    builder.addCase(fetchMyCollections.fulfilled, (state, action) => {
+      state.myCollections = action.payload;
+    });
   },
 });
 
 export const {
   setNftFilter,
-  setCollectionFilter,
+  emptyCollections,
   chooseCollection,
   chooseNft,
   setFolders,
@@ -157,7 +212,7 @@ export const {
   chooseCurrentTraitFolder,
   setFetchState,
 
-  chooseTrait,
-  chooseNewTrait,
+  setCollectionFilter,
+  emptyMyCollections
 } = tokensSlice.actions;
 export default tokensSlice.reducer;

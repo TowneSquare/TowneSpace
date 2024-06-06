@@ -18,6 +18,7 @@ const Studio = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const filter = useAppSelector(state => state.tokensState.nftFilter);
   const collections = useAppSelector((state) => state.tokensState.collections);
   const currentCollection = useAppSelector(
     (state) => state.tokensState.currentCollection
@@ -31,7 +32,7 @@ const Studio = () => {
 
   useEffect(() => {
     if (account) dispatch(fetchCollections(account?.address));
-  }, [account]);
+  }, [account, filter]);
 
   useEffect(() => {
     if (currentCollection && account) {

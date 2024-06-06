@@ -8,10 +8,6 @@ const Board = () => {
   const filter = useAppSelector((state) => state.tokensState.nftFilter);
   const nfts = useAppSelector((state) => state.tokensState.nfts);
 
-  const filtered =
-    filter == FilterType.composable
-      ? nfts.filter((nft) => nft.type == 'composable')
-      : nfts.filter((nft) => nft.type != 'composable');
   
   if(isFetching) {
     return (
@@ -22,7 +18,7 @@ const Board = () => {
   }
   return (
     <div className="flex h-full flex-wrap gap-4 items-baseline">
-      {filtered.map((nft, index) => (
+      {nfts.map((nft, index) => (
         <NftCard data={nft} index={index} key={index} />
       ))}
     </div>

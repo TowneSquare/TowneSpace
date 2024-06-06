@@ -3,7 +3,7 @@ import PrimaryButton from '../../../components/primary_button';
 import ButtonStatus from '../../../type/button_status';
 import FilterType from '../../../type/filter_type';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { setCollectionFilter } from '../../../state/tokens';
+import { emptyMyCollections, setCollectionFilter } from '../../../state/tokens';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {}
@@ -11,6 +11,19 @@ const Filter: React.FC<Props> = ({}) => {
   const filter = useAppSelector((state) => state.tokensState.collectionFilter);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const onComposable = () => {
+    if (filter != FilterType.composable) {
+      dispatch(setCollectionFilter(FilterType.composable));
+      dispatch(emptyMyCollections());
+    }
+  };
+  const onNfts = () => {
+    if (filter != FilterType.nfts) {
+      dispatch(setCollectionFilter(FilterType.nfts));
+      dispatch(emptyMyCollections());
+    }
+  };
 
   return (
     <div className="relative flex justify-center items-center w-full">
@@ -21,9 +34,9 @@ const Filter: React.FC<Props> = ({}) => {
               ? ButtonStatus.active
               : ButtonStatus.inactive
           }
-          onClick={() => dispatch(setCollectionFilter(FilterType.composable))}
+          onClick={() => onComposable()}
         >
-          CNFT Collections
+          cNFT Collections
         </PrimaryButton>
         <PrimaryButton
           type={
@@ -31,7 +44,7 @@ const Filter: React.FC<Props> = ({}) => {
               ? ButtonStatus.active
               : ButtonStatus.inactive
           }
-          onClick={() => dispatch(setCollectionFilter(FilterType.nfts))}
+          onClick={() => onNfts()}
         >
           NFT Collections
         </PrimaryButton>

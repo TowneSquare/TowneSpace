@@ -28,7 +28,6 @@ const Header = () => {
   };
 
   useEffect(() => {
-    console.log(connected, show)
     if (connected && show) {
       navigate('/studio');
     }
