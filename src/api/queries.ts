@@ -4,6 +4,7 @@ import { getParentTokens } from './getParentToken';
 import { compareAddress } from '../util';
 
 import { APTOS } from '../state/constants';
+
 /**
  *
  * Types
@@ -12,31 +13,29 @@ import { APTOS } from '../state/constants';
 
 export type ComposedNft = {
   token_data_id: string;
-};
+}
 
-export type TokenV1Fields = {
-  collection_id: string;
+export type TokenResponse = {
   collection_name: string;
+  collection_id: string;
   token_name: string;
   token_data_id: string;
-  description?: string;
-  token_uri?: string;
-  composed_nfts?: ComposedNft[];
-  type?: string;
-  composed_to?: boolean;
-};
+  description: string;
+  token_uri: string;
+  owner_address: string;
+}
 
-export type TokenV2Fields = {
+export type TokenFields = {
   collection_id: string;
   collection_name: string;
   token_name: string;
   token_data_id: string;
   description: string;
-  token_uri: string;
-  composed_nfts: ComposedNft[];
-  type: string;
-  composed_to: boolean;
-};
+  token_uri?: string;
+  composed_nfts?: ComposedNft[];
+  type?: string;
+  composed_to?: boolean;
+}
 
 export type CollectionV1Fields = {
   collection_id: string;
@@ -44,7 +43,7 @@ export type CollectionV1Fields = {
   current_supply: number;
   description: string;
   collection_uri: string;
-};
+}
 
 export type CollectionV2Fields = {
   collection_id: string;
@@ -52,39 +51,28 @@ export type CollectionV2Fields = {
   current_supply: number;
   description: string;
   collection_uri: string;
-};
+}
 
-type TokenV1FieldsIndexerResponse = {
-  token_ownerships: Array<TokenV1Fields>;
-};
-
-type TokenV2FieldsIndexerResponse = {
-  current_token_ownerships_v2: Array<OwnedTokenV2Indexer>;
-};
 
 type CollectionV1FieldsIndexerResponse = {
   collection_datas: Array<CollectionV1Fields>;
-};
+}
 
-type CollectionV2FieldsIndexerResponse = {
-  current_collection_ownership_v2_view: Array<CollectionV2Fields>;
-};
+export type TokenFieldsIndexer = {
+  token_ownerships: Array<TokenFields>;
+}
 
-export type TokenV1FieldsIndexer = {
-  token_ownerships: Array<TokenV1Fields>;
-};
-
-export type OwnedTokenV2Indexer = {
-  current_token_data: TokenV2Fields;
-};
+export type OwnedTokenIndexer = {
+  current_token_data: TokenFields;
+}
 
 export type CollectionV1FieldsIndexer = {
   collection_datas: Array<CollectionV1Fields>;
-};
+}
 
 export type OwnedCollectionV2Indexer = {
   current_collection_data: CollectionV2Fields;
-};
+}
 
 /**
  *
@@ -105,61 +93,71 @@ export const OWNED_OBJECTS_QUERY = `
   `;
 
 export const OWNED_V1_TOKENS_QUERY = `
-  query MyQuery($offset: Int, $limit: Int, $account_address: String, $collection_data_id_hash: String) {
-    token_ownerships(
-      where: {
-        owner_address: {_eq: $account_address},
-        collection_data_id_hash: {_eq: $collection_data_id_hash}
-      }
-      offset: $offset
-      limit: $limit
-      order_by: {name: asc}
-    ) {
-        collection_data_id_hash: collection_id
-        name: token_name
-        token_data_id_hash: token_data_id
-    }
-  }
-  `;
-export const OWNED_V2_TOKENS_QUERY = `
-  query MyQuery($offset: Int!, $limit: Int, $account_address: String, $collection_id: String) {
+  query Query($offset: Int!, $limit: Int, $account_address: String, $collection_id: String) {
     current_token_ownerships_v2(
       limit: $limit
-      where: {owner_address: {_eq: $account_address}, current_token_data: {current_collection: {collection_id: {_eq: $collection_id}}}}
+      where: {owner_address: {_eq: $account_address}, current_token_data: {current_collection: {collection_id: {_eq: $collection_id}, token_standard: {_eq: "v1"}}}}
       offset: $offset
+      order_by: {last_transaction_timestamp: desc}
     ) {
-      composed_nfts {
-        token_data_id
-      }
       current_token_data {
-        collection_id
+        current_collection {
+          collection_name
+          collection_id
+        }
         token_name
         token_data_id
         description
         token_uri
-        current_collection {
-          collection_name
+        current_token_ownerships(limit: 1) {
+          owner_address
         }
       }
     }
   }
-`;
+  `;
+export const OWNED_V2_TOKENS_QUERY = `
+  query Query($offset: Int!, $limit: Int, $account_address: String, $collection_id: String) {
+    current_token_ownerships_v2(
+      limit: $limit
+      where: {owner_address: {_eq: $account_address}, current_token_data: {current_collection: {collection_id: {_eq: $collection_id}}, token_standard: {_eq: "v2"}}}
+      offset: $offset
+      order_by: {last_transaction_timestamp: desc}
+    ) {
+      current_token_data {
+        current_collection {
+          collection_name
+          collection_id
+        }
+        token_name
+        token_data_id
+        description
+        token_uri
+        current_token_ownerships(limit: 1) {
+          owner_address
+        }
+      }
+    }
+  }
+  `;
 
 export const OWNED_V1_COLLECTIONS_QUERY = `
-  query MyQuery($limit: Int, $offset: Int, $account_address: String) {
-      collection_datas(
+  query MyQuery($offset: Int!, $limit: Int, $account_address: String) {
+    current_collection_ownership_v2_view(
       limit: $limit
       offset: $offset
       order_by: {collection_name: asc}
-      where: {creator_address: {_eq: $account_address}}
-      ) {
-      collection_id: collection_data_id_hash
-      collection_name
-      description
-      uri: metadata_uri
+      where: {owner_address: {_eq: $account_address}}
+    ) {
+      current_collection {
+        collection_id
+        collection_name
+        current_supply
+        description
+        uri
       }
-  }
-  `;
+    }
+  }`;
 
 export const OWNED_V2_COLLECTIONS_QUERY = `
   query MyQuery($offset: Int!, $limit: Int, $account_address: String) {
@@ -260,24 +258,40 @@ export class Queries {
     offset: number,
     limit: number,
     account_address: string,
-    collection_data_id_hash: string
-  ): Promise<Array<TokenV1Fields>> {
+    collection_data_id: string
+  ): Promise<Array<TokenFields>> {
     const variables = {
       offset,
       limit,
       account_address,
-      collection_data_id_hash,
+      collection_data_id,
     };
 
-    const response: TokenV1FieldsIndexerResponse = await this.queryIndexer(
+    const res: any = await this.queryIndexer(
       OWNED_V1_TOKENS_QUERY,
       variables
     );
 
-    const tokens = [];
+    const tokens: TokenFields[] = [];
 
-    for (const token of response.token_ownerships) {
-      tokens.push(token);
+    for (const token of res.current_token_ownerships_v1) {
+      
+      // if the latest owner address is not the same as the account address, skip
+      if (!compareAddress(token.current_token_data.current_token_ownerships[0].owner_address, account_address)) {
+        continue;
+      }
+
+      tokens.push({
+        collection_id: token.current_token_data.collection_id,
+        collection_name: token.current_token_data.current_collection.collection_name,
+        token_name: token.current_token_data.token_name,
+        token_data_id: token.current_token_data.token_data_id,
+        description: token.current_token_data.description,
+        token_uri: token.current_token_data.token_uri,
+        composed_nfts: token.composed_nfts,
+        composed_to: false,
+      });
+
     }
     return tokens;
   }
@@ -295,7 +309,7 @@ export class Queries {
     limit: number,
     account_address: string,
     collection_id: string
-  ): Promise<Array<TokenV1Fields>> {
+  ): Promise<Array<TokenFields>> {
     const variables = {
       offset,
       limit,
@@ -303,15 +317,20 @@ export class Queries {
       collection_id,
     };
     const res: any = await this.queryIndexer(OWNED_V2_TOKENS_QUERY, variables);
-    const tokens: TokenV1Fields[] = [];
+    const tokens: TokenFields[] = [];
 
     const tokenObjects = [];
 
     for (const token of res.current_token_ownerships_v2) {
+
+      // if the latest owner address is not the same as the account address, skip
+      if (!compareAddress(token.current_token_data.current_token_ownerships[0].owner_address, account_address)) {
+        continue;
+      }
+
       tokens.push({
         collection_id: token.current_token_data.collection_id,
-        collection_name:
-          token.current_token_data.current_collection.collection_name,
+        collection_name: token.current_token_data.current_collection.collection_name,
         token_name: token.current_token_data.token_name,
         token_data_id: token.current_token_data.token_data_id,
         description: token.current_token_data.description,
@@ -322,31 +341,18 @@ export class Queries {
 
       tokenObjects.push(token.current_token_data.token_data_id);
     }
+    
+    let object: any = await getIdentifyObjects(APTOS, tokenObjects);
+    const types = object[0].data;
 
-    const identifyObject: any = await getIdentifyObjects(APTOS, tokenObjects);
-    const types = identifyObject[0].data;
+    // object = await getParentTokens(APTOS, ["0x709e7a0245d955f2fe405a21057fd23938d04fcd633b3b035cbc330b75b45b13"]);
+    // console.log(object);
 
-    const traitObjects = [];
     if (types && tokens.length == types.length) {
       for (let i = 0; i < tokens.length; i++) {
         tokens[i].type = types[i].value.toLowerCase();
-        if (tokens[i].type === 'trait')
-          traitObjects.push(tokens[i].token_data_id);
-      }
-    }
 
-    const parentObject: any = await getParentTokens(APTOS, traitObjects);
-    const parents = parentObject[0].data;
-
-    if (parents) {
-      for (let i = 0; i < parents.length; i++) {
-        const parentVec = parents[i].value.vec;
-        if (parentVec && parentVec.length > 0) {
-          const index = tokens.findIndex(
-            (token) => compareAddress(token.token_data_id, parents[i].key)
-          );
-          if (index >= 0) tokens[index].composed_to = true;
-        }
+        tokens[i].composed_to = false;
       }
     }
 
@@ -438,7 +444,7 @@ export class Queries {
     limit: number,
     account_address: string,
     collection_id: string
-  ): Promise<Array<TokenV2Fields>> {
+  ): Promise<Array<TokenFields>> {
     const variables = {
       offset,
       limit,
