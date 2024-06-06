@@ -8,7 +8,7 @@
 
 export const COMPOSABLE_TOKEN_TESTNET = '0x69ef0832ab2fba22869ad8c174f5a8872d3d2f16b941bf7a36916c00f7f8c6c6'
 export const TOKEN_MINTER_TESTNET = '0xf50bac511401dd7671108053e71ee3b5a60aef091c3c959eb8b47cb217945af3'
-export const TOWNESPACE_TESTNET = '0x709e7e45a7b0c4349f2ce17762c4432bdf0cae65ce4b3e6905c17b76c6144680'
+export const TOWNESPACE_TESTNET = '0x91429ed62db58173ea4e5b06b071c90c506e02c01bac3a7fadf9cfb3e08d937d'
 
 /** MAINNET */
 
@@ -82,6 +82,7 @@ export const IDENTIFY_OBJECT = `object_type`
 export const IDENTIFY_OBJECTS = `object_types`
 
 /** Townespace */
+export const OWNED_TOKENS = `owned_tokens`
 
 /** Token Minter */
 
