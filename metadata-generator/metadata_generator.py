@@ -87,8 +87,7 @@ def generate_image_metadata(folder_path, mirror_folder_path):
 
     # Traverse through the rest of the folders, excluding "Body"
     for root, dirs, files in os.walk(folder_path):
-        if root == body_folder_path:
-            continue  # Skip the "Body" folder as it is already processed
+        dirs[:] = [d for d in dirs if d != 'Body']  # Skip the "Body" folder as it is already processed
         for dir_name in dirs:
             subfolder_path = os.path.join(root, dir_name)
             for filename in os.listdir(subfolder_path):
