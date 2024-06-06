@@ -1,5 +1,6 @@
 import { Aptos } from '@aptos-labs/ts-sdk';
 import { getIdentifyObjects } from './getIdentifyObject';
+import { getOwnedTokens } from './getOwnedTokens';
 import { getParentTokens } from './getParentToken';
 import { compareAddress } from '../util';
 
@@ -343,7 +344,12 @@ console.log(account_address, collection_id, res)
       }
     }
 
-    let identifyObject: any = await getIdentifyObjects(APTOS, tokenObjects);
+    // filter out the tokens that are not owned by the account address
+    const ownedTokens: any = await getOwnedTokens(APTOS, account_address, tokenObjects);
+    console.log(ownedTokens[0])
+
+
+    let identifyObject: any = await getIdentifyObjects(APTOS, ownedTokens[0]);
     const types = identifyObject[0].data;
     const traitObjects = [];
 
@@ -484,6 +490,7 @@ console.log(tokens)
           token.current_token_data.current_collection.collection_name,
       });
     }
+    
     return tokens;
   }
 }
