@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { NftMetadataType } from '../type/nft_type';
 import { APTOS, COLLECTIONS, NFTS } from './constants';
 import FilterType from '../type/filter_type';
-import { CollectionV1Fields, CollectionV2Fields, Queries } from '../api';
+import { CollectionV1Fields, CollectionV2Fields, Queries, TokenFields } from '../api';
 import { RootState } from './store';
 import CustomFolderType from '../type/custom_folder_type';
 
@@ -10,6 +10,7 @@ interface tokensStates {
   nftFilter: FilterType;
   collections: CollectionV1Fields[] | CollectionV2Fields[];
   currentCollection: CollectionV1Fields | CollectionV2Fields | undefined;
+  allNfts: NftMetadataType[]; 
   nfts: NftMetadataType[];
   currentNft: NftMetadataType | undefined;
   folders: string[];
@@ -25,6 +26,7 @@ const initialState: tokensStates = {
   nftFilter: FilterType.composable,
   collections: [],
   currentCollection: undefined,
+  allNfts: [],
   nfts: [],
   currentNft: undefined,
   folders: [],
@@ -82,7 +84,7 @@ export const fetchNfts = createAsyncThunk(
       const filter = (thunkAPI.getState() as RootState).tokensState.nftFilter;
 
       thunkAPI.dispatch(setFetchState(true));
-      let res;
+      let res: { allNfts: Array<TokenFields>; ownedNfts: Array<TokenFields> };
 
       if (filter == FilterType.composable) {
         res = await queries.getOwnedV2Tokens(
@@ -102,7 +104,7 @@ export const fetchNfts = createAsyncThunk(
 
       thunkAPI.dispatch(setFetchState(false));
 
-      res.sort((a, b) => {
+      res.ownedNfts.sort((a, b) => {
         if (a.type === undefined) return 1;
         if (b.type === undefined) return -1;
         if (a.type < b.type) return -1;
@@ -179,10 +181,11 @@ export const tokensSlice = createSlice({
       }
     });
     builder.addCase(fetchNfts.fulfilled, (state, action) => {
-      state.nfts = action.payload;
-      if (action.payload.length > 0) state.currentNft = action.payload[0];
+      state.allNfts = action.payload.allNfts;
+      state.nfts = action.payload.ownedNfts;
+      if (state.nfts.length > 0) state.currentNft =state.nfts[0];
 
-      const folders = action.payload
+      const folders = state.nfts
         .filter((nft) => nft.type != 'composable')
         .reduce((acc: string[], nft: NftMetadataType) => {
           const { description } = nft;

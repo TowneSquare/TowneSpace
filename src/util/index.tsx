@@ -25,6 +25,11 @@ export function compareAddress(a: string | undefined, b: string | undefined) {
   }
 }
 
+export function sanitizeAddress(address: string): string {
+  const sanitizedAddress = address.replace(/^0x0+/g, '0x');
+  return sanitizedAddress;
+}
+
 export const NFT_COLLECTION_OWNED_QUERY = gql`
   query getCollectionsWithOwnedTokens($wallet: String!, $offset: Int!) {
     current_collection_ownership_v2_view(
