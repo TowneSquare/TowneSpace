@@ -1,7 +1,7 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toggleChooseTrait } from '../../state/dialog';
-import { useState } from 'react';
 import { NftMetadataType } from '../../type/nft_type';
 import LazyImage from '../../components/lazyImage';
 import {
@@ -9,23 +9,45 @@ import {
   setCurrentTraitFolders,
 } from '../../state/tokens';
 import CustomFolderType from '../../type/custom_folder_type';
+import { TokenFields } from '../../api';
+import { compareAddress } from '../../util';
 
 const ChooseTrait = () => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.dialogState.bChooseTrait);
+  const [traits, setTraits] = useState<TokenFields[]>([]);
+
+  const currentNft = useAppSelector((state) => state.tokensState.currentNft);
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
   const currentTraitFolder = useAppSelector(
     (state) => state.tokensState.currentTraitFolder
   );
+  const allNfts = useAppSelector((state) => state.tokensState.allNfts);
   const nfts = useAppSelector((state) => state.tokensState.nfts);
-  const traits = nfts.filter(
-    (nft) => nft.description == currentTraitFolder?.name && nft.composed_to == false
-  );
+
   const [selectedTrait, setSelectedTrait] = useState<
     NftMetadataType | undefined
   >(undefined);
+
+  useEffect(() => {
+    let traits = nfts.filter(
+      (nft) =>
+        nft.description == currentTraitFolder?.name && nft.composed_to == false
+    );
+    if (currentNft?.composed_nfts) {
+      for (const composed of currentNft?.composed_nfts) {
+        const trait = allNfts.find((nft) =>
+          compareAddress(nft.token_data_id, composed.token_data_id)
+        );
+        if (trait && trait.description == currentTraitFolder?.name) {
+          traits.push(trait);
+        }
+      }
+    }
+    setTraits(traits);
+  }, [currentTraitFolder]);
 
   const css = traits.length < 0 ? 'flex' : 'flex-col justify-between';
 

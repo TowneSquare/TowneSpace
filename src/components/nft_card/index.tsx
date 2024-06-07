@@ -23,6 +23,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const folders = useAppSelector((state) => state.tokensState.folders);
+  const allNfts = useAppSelector(state => state.tokensState.allNfts);
   const nfts = useAppSelector((state) => state.tokensState.nfts);
   const [composedNfts, setComposedNfts] = useState<ComposedNft[]>([]);
 
@@ -53,7 +54,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
     const currentTraitFolders: CustomFolderType[] = [];
 
     for (const composed of composedNfts) {
-      const trait = nfts.find(
+      const trait = allNfts.find(
         (nft) => compareAddress(nft.token_data_id, composed.token_data_id)
       );
       if (trait && trait.description) {
