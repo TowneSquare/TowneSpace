@@ -4,7 +4,11 @@
 import os
 import shutil
 
-folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/Cool Sloth'
+# folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/Cool Sloth'
+# mirror_folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated'
+# output_md_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated_for_payload.md'
+
+folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/Sloth Ball'
 mirror_folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated'
 output_md_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated_for_payload.md'
 
@@ -16,7 +20,7 @@ def generate_image_metadata(folder_path, mirror_folder_path):
     suffixes = []  # List to store suffixes for image names
     index = 1  # Initialize index for images
     descriptions = []  # List to store descriptions
-    occurrence_num = 1  # Number of times to repeat each image
+    occurrence_num = 5  # Number of times to repeat each image
     names_with_no_index = []  # List to store names of images that don't have an index
     
     # Create the mirror folder if it doesn't exist
@@ -26,32 +30,33 @@ def generate_image_metadata(folder_path, mirror_folder_path):
     # Copy images directly into the generated folder
     for filename in os.listdir(os.path.join(folder_path, 'Body')):
         if filename.endswith(".png"):
-            new_image_name = f"{folder_name} #{index}.png"
-            name_with_no_index = f"{folder_name}"
-            # parse through the folder name and change sapces to %20
-            parsed_folder_name = folder_name.replace(" ", "%20")
-            image_uri = f"{parsed_folder_name}"
-            description = f"{folder_name}"
-            image_metadata = {
-                "name": new_image_name,
-                "description": "",
-                "image": f"{index}.png",
-                "edition": 1,
-                "attributes": [
-                    {"type": folder_name, "value": folder_name},
-                ],
-                "compiler": "TowneSpace Engine"
-            }
-            images_metadata.append(image_metadata)
-            # Copy image to mirror folder
-            mirror_image_path = os.path.join(mirror_folder_path, new_image_name)
-            shutil.copyfile(os.path.join(folder_path, 'Body', filename), mirror_image_path)
-            image_names_csv.append(new_image_name)  # Add image name to CSV list
-            uris.append(image_uri)  # Add image URI to list
-            suffixes.append(f"")
-            descriptions.append(description)
-            names_with_no_index.append(name_with_no_index)
-            index += 1  # Increment index for the next image
+            for i in range(occurrence_num):
+                new_image_name = f"{folder_name} #{index}.png"
+                name_with_no_index = f"{folder_name}"
+                # parse through the folder name and change sapces to %20
+                parsed_folder_name = folder_name.replace(" ", "%20")
+                image_uri = f"{parsed_folder_name}"
+                description = f"{folder_name}"
+                image_metadata = {
+                    "name": new_image_name,
+                    "description": "",
+                    "image": f"{index}.png",
+                    "edition": 1,
+                    "attributes": [
+                        {"type": folder_name, "value": folder_name},
+                    ],
+                    "compiler": "TowneSpace Engine"
+                }
+                images_metadata.append(image_metadata)
+                # Copy image to mirror folder
+                mirror_image_path = os.path.join(mirror_folder_path, new_image_name)
+                shutil.copyfile(os.path.join(folder_path, 'Body', filename), mirror_image_path)
+                image_names_csv.append(new_image_name)  # Add image name to CSV list
+                uris.append(image_uri)  # Add image URI to list
+                suffixes.append(f"")
+                descriptions.append(description)
+                names_with_no_index.append(name_with_no_index)
+                index += 1  # Increment index for the next image
 
     # Process the "Body" folder first, if it exists
     body_folder_path = os.path.join(folder_path, "Body")
