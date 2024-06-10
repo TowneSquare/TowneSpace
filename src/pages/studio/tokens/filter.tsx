@@ -24,7 +24,7 @@ const Filter: React.FC<Props> = ({}) => {
   };
   return (
     <div className="flex justify-center">
-      <div className="flex bg-gray-dark-2 p-1 rounded-full">
+      <div className="flex p-1 rounded-full bg-gray-dark-2">
         <PrimaryButton
           type={
             filter == FilterType.composable
@@ -33,7 +33,7 @@ const Filter: React.FC<Props> = ({}) => {
           }
           onClick={() => onComposable()}
         >
-          Composable NFTs
+          V2 Tokens
         </PrimaryButton>
         <PrimaryButton
           type={
@@ -44,7 +44,7 @@ const Filter: React.FC<Props> = ({}) => {
           onClick={() => onNfts()}
           className="md:w-[120px]"
         >
-          NFTs
+          V1 Tokens
         </PrimaryButton>
       </div>
     </div>
