@@ -133,15 +133,11 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
         </div>
         <div className="absolute inset-0 hidden bg-black opacity-50 group-hover:block" />
       </div>
-      <div className="mx-2 my-2">
+      <div className="mx-2 my-2 mb-12">
         <div className="flex items-center gap-2 text-xs md:text-[14px] font-semibold text-gray-light-1">
           {data.collection_name}
         </div>
         <p className="text-base font-semibold md:text-lg">{data.token_name}</p>
-        <div className="flex gap-2 mt-3">
-          <img src="/nft-card/aptos-logo.svg" alt="logo" />
-          <p className="text-sm font-semibold md:text-base"></p>
-        </div>
       </div>
     </div>
   );
