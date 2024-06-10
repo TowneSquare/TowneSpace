@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import type { Identifier, XYCoord } from 'dnd-core';
 
@@ -42,7 +42,7 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
     }
   };
 
-  const isStared = false;
+  const isStared = data.name  === "Body";
   const background = isStared ? 'bg-gray-dark-2' : 'bg-gray-dark-1';
 
   const isActive = data.name == currentTraitFolder?.name;
@@ -122,15 +122,16 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
           </div>
           <div className="w-[154px] flex flex-col leading-4 font-semibold text-[10px] md:text-[14px] text-start mr-8">
             <p className="text-gray-light-1">{currentNft?.collection_name}</p>
-            <p className="text-gray-light-1 mt-2 font-normal">{data.name}</p>
+            <p className="mt-2 font-normal text-gray-light-1">{data.name}</p>
             <p className="">{currentNft?.token_name}</p>
           </div>
           <div className="flex justify-end">
             {isStared && (
-              <div className="relative">
-                <Tooltip id="my-tooltip" className="w-[24px] bg-gray-dark-3" />
+              <div>
+                <Tooltip id="my-tooltip" className="border border-white bg-gray-dark-3" />
                 <img
                   src="/customize/star.png"
+                  className='ml-2'
                   alt="star"
                   data-tooltip-id="my-tooltip"
                   data-tooltip-content="This is a base trait. It can’t be removed or replaced."

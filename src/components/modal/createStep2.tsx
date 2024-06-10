@@ -28,19 +28,23 @@ const CreateStep2 = () => {
     }
   };
 
-  const handleMaxSupplyChange = (e: any) => {
-    const re = /^[0-9\b]+$/;
+  const handleMaxSupplyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const re = /^[\d,]*$/;
     if (e.target.value === '' || re.test(e.target.value)) {
-      setMaxSupply(e.target.value);
-      dispatch(updateTotalMaxSupply(e.target.value));
+      const formattedValue = e.target.value.replace(/,/g, '');
+      const numberWithCommas = formattedValue
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+        .replace(/(?<=\d)(?=(\d{3})+\b)/g, '.');
+      setMaxSupply(numberWithCommas);
     }
+    dispatch(updateTotalMaxSupply(e.target.value));
   };
 
   const isButtonDisabled = !collectionName || !maxSupply;
 
   return (
     <div
-      className={`${isOpen ? 'block' : 'hidden'} fixed z-[100] inset-0 flex justify-center items-center bg-black`}
+      className={`${isOpen ? 'block' : 'hidden'} fixed z-[100] inset-0 flex justify-center items-center bg-black/80`}
       style={{
         backgroundImage: `url(/create/background-create.png)`,
         backgroundSize: 'cover',
@@ -63,16 +67,16 @@ const CreateStep2 = () => {
       </p>
       <div className="md:w-[558px] h-fit mx-4 bg-gray-dark-1 rounded-lg">
         <div className="flex justify-center mt-10 mb-9">
-          <p className="text-base md:text-xl font-semibold">
+          <p className="text-base font-semibold md:text-xl">
             Create a new collection for your PFPs
           </p>
         </div>
         <div className="px-4 md:px-8">
           <div className="relative flex items-center">
-            <p className="text-sm md:text-base mr-1">
+            <p className="mr-1 text-sm font-normal md:text-base">
               What is the collection’s name?
             </p>
-            <div className="group relative">
+            <div className="relative group">
               <QuestionMark />
               <div className="flex-col gap-[2px] items-center hidden group-hover:flex absolute -right-[170px] bottom-8">
                 <div className="border border-gray-light-3 leading-normal w-[368px] h-fit p-3 bg-black text-white text-sm rounded-md shadow-lg">
@@ -87,14 +91,14 @@ const CreateStep2 = () => {
           </div>
           <PrimaryInput
             onChange={handleCollectionNameChange}
-            className="mt-2 bg-gray-dark-3 font-normal placeholder:text-gray-light-3"
-            placeholder="Slothians"
+            className="mt-2 font-normal bg-gray-dark-3 placeholder:text-gray-light-3"
+            placeholder="Insert collection name"
           />
-          <div className="flex gap-1 items-center mt-8">
+          <div className="flex items-center gap-1 mt-8">
             <p className="text-sm md:text-base">
               How many Dynamic PFPs will the collection have?
             </p>
-            <div className="group relative">
+            <div className="relative group">
               <QuestionMark />
               <div className="flex-col gap-[2px] items-center hidden group-hover:flex absolute -right-[120px] bottom-8">
                 <div className="border border-gray-light-3 leading-normal w-[260px] h-fit p-3 bg-black text-white text-sm rounded-md shadow-lg">
@@ -107,7 +111,7 @@ const CreateStep2 = () => {
           </div>
           <PrimaryInput
             onChange={handleMaxSupplyChange}
-            className="mt-2 bg-gray-dark-3 font-normal placeholder:text-gray-light-3"
+            className="mt-2 font-normal bg-gray-dark-3 placeholder:text-gray-light-3"
             placeholder="10,000"
             value={maxSupply}
           />

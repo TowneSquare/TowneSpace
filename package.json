@@ -6,7 +6,7 @@
     "@apollo/client": "^3.9.11",
     "@aptos-labs/ts-sdk": "^1.16.0",
     "@aptos-labs/wallet-adapter-core": "*",
-    "@aptos-labs/wallet-adapter-react": "2.1.8",
+    "@aptos-labs/wallet-adapter-react": "^3.0.1",
     "@blocto/aptos-wallet-adapter-plugin": "^0.2.2",
     "@flipperplatform/wallet-adapter-plugin": "^0.1.0",
     "@haechi-labs/face-aptos-adapter-plugin": "^0.0.4",

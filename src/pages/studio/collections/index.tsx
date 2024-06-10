@@ -24,15 +24,15 @@ const Collections = () => {
   return (
     <div className="px-2 md:px-8 pt-[40px] pb-4">
       <Filter />
-      <div className="flex flex-col md:flex-row gap-10 mt-8">
+      <div className="flex flex-col gap-10 mt-8 md:flex-row">
         {isEmpty ? (
-          <div className="relative w-full flex justify-center gap-6">
+          <div className="relative flex justify-center w-full gap-6">
             {Array(5)
               .fill(null)
               .map(() => (
                 <EmptyCard />
               ))}
-            <div className="absolute w-full h-full flex flex-col justify-end items-center gap-14">
+            <div className="absolute flex flex-col items-center justify-end w-full h-full gap-14">
               <h1 className="text-2xl font-semibold">
                 You did't have any{' '}
                 {filter == FilterType.composable ? 'Composable NFT' : 'NFT'}{' '}

@@ -38,7 +38,7 @@ const Last = () => {
         </p>
         <p className="text-[36px] font-bold text-center">
           Create your first collection of{' '}
-          <span className=" font-Permanent font-normal text-primary-default">
+          <span className="font-normal font-Permanent text-primary-default">
             Composable NFTs!
           </span>
         </p>
@@ -47,7 +47,6 @@ const Last = () => {
           onClick={() => {}}
         >
           <p className="font-[500] text-[16px]">Launch Creator studio</p>
-          <p className="font-[300] text-[14px] -mt-1">Coming soon</p>
         </button>
       </div>
     </div>

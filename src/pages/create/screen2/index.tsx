@@ -10,18 +10,18 @@ const Screen4 = () => {
   return (
     <div className="pb-10">
       <Header stepNumber={2} />
-      <p className="text-base md:text-xl text-center mt-8">
+      <p className="mt-8 text-base text-center md:text-xl">
         Check how are you assets named and how they look like.
         <br />
         If there are errors, you can always &nbsp;
         <span
           className="!text-[20px] md:text-base text-primary-light cursor-pointer"
-          onClick={() => navigate('/create/step3')}
+          onClick={() => navigate('/create/step1')}
         >
           upload them again
         </span>
       </p>
-      <div className="mt-16 flex flex-col gap-8">
+      <div className="flex flex-col gap-8 mt-16">
         {traits.map((trait, index) => (
           <Trait data={trait} key={index} />
         ))}
@@ -32,18 +32,18 @@ const Screen4 = () => {
 
 const Trait = ({ data }: { data: FolderType }) => {
   return (
-    <div className="mx-4 md:mx-20 lg:mx-32 p-4 bg-gray-dark-2 rounded-md">
-      <div className="w-full flex justify-between">
-        <p className="text-base md:text-xl font-semibold">{data.name}</p>
+    <div className="p-4 mx-4 rounded-md md:mx-20 lg:mx-32 bg-gray-dark-2">
+      <div className="flex justify-between w-full">
+        <p className="text-base font-semibold md:text-xl">{data.name}</p>
         <p className="text-sm md:text-base">{data.files.length} Traits</p>
       </div>
-      <div className="mt-4 flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4 mt-4">
         {data.files.map((file, index) => (
           <div className="w-32 rounded-md" key={index}>
-            <div className="h-32 bg-gray-light-3 rounded-md">
+            <div className="h-32 rounded-md bg-gray-light-3">
               <img src={file.imageUrl} alt="image" className="w-32 h-32" />
             </div>
-            <p className="mt-2 text-sm md:text-base text-center">{file.name}</p>
+            <p className="mt-2 text-sm text-center md:text-base">{file.name}</p>
           </div>
         ))}
       </div>

@@ -48,13 +48,12 @@ const MainSection = () => {
             Aptos Digital Assets.
           </p>
         </div>
-        <div className="flex flex-col md:flex-row md:items-center gap-4 mt-12">
+        <div className="flex flex-col gap-4 mt-12 md:flex-row md:items-center">
           <button
             className="md:flex flex-col hidden bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center"
             onClick={() => openStudio()}
           >
             <p className="font-[500] text-[16px]">Creator studio</p>
-            <p className="font-[300] text-[14px] -mt-1">Coming soon</p>
           </button>
 
           <button
@@ -62,11 +61,9 @@ const MainSection = () => {
             onClick={() => openStudio()}
           >
             <p className="font-[500] text-[16px]">Creator studio</p>
-            <p className="font-[300] text-[14px] -mt-1">Coming soon</p>
           </button>
           <button className="w-[242px] md:w-[196px] h-[48px] justify-center items-center text-black font-medium bg-white rounded-full">
             <p className="font-[500] text-[16px]">Dev docs</p>
-            <p className="font-[300] text-[14px] -mt-1">Coming soon</p>
           </button>
         </div>
       </div>
