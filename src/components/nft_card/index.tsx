@@ -101,18 +101,18 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
           alt="Primary image"
         />
         {data.type === 'composable' && (
-          <div className="group/3dots hidden group-hover:flex flex-col absolute w-6 h-6 justify-center items-center top-2 right-2 hover:bg-black rounded-full z-10">
+          <div className="absolute z-10 flex-col items-center justify-center hidden w-6 h-6 rounded-full group/3dots group-hover:flex top-2 right-2 hover:bg-black">
             <img src="/nft-card/3dots.svg" alt="3dots" />
-            <div className="hidden group-hover/3dots:block absolute top-6 right-0 ">
+            <div className="absolute right-0 hidden group-hover/3dots:block top-6 ">
               <div className="w-full h-4 -mt-2" />
-              <div className="py-2 rounded-lg bg-white">
+              <div className="py-2 bg-white rounded-lg">
                 <p
                   className="px-2 text-[10px] md:text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap "
                   onClick={() => onSeeTowneSpace()}
                 >
                   See on TowneSpace
                 </p>
-                <div className="mt-2 h-px bg-gray-dark-2" />
+                <div className="h-px mt-2 bg-gray-dark-2" />
                 <p
                   className="px-2 mt-2 text-[10px] md:text-[13px] text-gray-dark-2  hover:bg-gray-light-2"
                   onClick={() => onCustomize()}
@@ -131,17 +131,16 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
             <img src="/nft-card/composed.svg" alt="composed" />
           )}
         </div>
-        <div className="hidden group-hover:block absolute inset-0 bg-black opacity-50" />
+        <div className="absolute inset-0 hidden bg-black opacity-50 group-hover:block" />
       </div>
       <div className="mx-2 my-2">
         <div className="flex items-center gap-2 text-xs md:text-[14px] font-semibold text-gray-light-1">
           {data.collection_name}
-          <img src="/nft-card/polygon-check.svg" alt="check" />
         </div>
-        <p className="text-base md:text-lg font-semibold">{data.token_name}</p>
-        <div className="mt-3 flex gap-2">
+        <p className="text-base font-semibold md:text-lg">{data.token_name}</p>
+        <div className="flex gap-2 mt-3">
           <img src="/nft-card/aptos-logo.svg" alt="logo" />
-          <p className="text-sm md:text-base font-semibold"></p>
+          <p className="text-sm font-semibold md:text-base"></p>
         </div>
       </div>
     </div>

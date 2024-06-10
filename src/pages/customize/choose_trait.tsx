@@ -85,7 +85,7 @@ const ChooseTrait = () => {
           </div>
 
           <div className={`flex ${css} h-full`}>
-            <div className="w-full p-6 grid grid-cols-4">
+            <div className="grid w-full grid-cols-4 p-6">
               {traits.length > 0 ? (
                 traits.map((trait, index) => {
                   const isActive =
@@ -150,7 +150,7 @@ const ChooseTrait = () => {
                     dispatch(toggleChooseTrait(false));
                   }}
                 >
-                  <p className="text-sm md:text-base text-primary-light font-semibold">
+                  <p className="text-sm font-semibold md:text-base text-primary-light">
                     Cancel
                   </p>
                 </Link>

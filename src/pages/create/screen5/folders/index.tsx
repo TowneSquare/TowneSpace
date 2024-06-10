@@ -32,7 +32,7 @@ const Folders: React.FC<Props> = ({ folders, setFolders }) => {
   }, []);
 
   return (
-    <div className="p-4 flex flex-col gap-4 rounded-md">
+    <div className="flex flex-col gap-4 p-4 rounded-md w-96">
       {folders.map((folder, i) => renderFolder(folder, i))}
     </div>
   );

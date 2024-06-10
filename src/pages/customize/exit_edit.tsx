@@ -12,9 +12,9 @@ const ExitEdit = () => {
 
   return (
     <div className={`${isOpen ? 'block' : 'hidden'}`}>
-      <div className="fixed inset-0 bg-gray-dark-2 bg-opacity-80 flex items-center justify-center">
-        <div className="rounded-lg w-2/6 bg-gray-dark-4">
-          <div className="flex justify-between m-6 items-center">
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-dark-2 bg-opacity-80">
+        <div className="w-2/6 rounded-lg bg-gray-dark-4">
+          <div className="flex items-center justify-between m-6">
             <h2 className="text-lg font-semibold">Exit & discard changes</h2>
             <button
               className="text-gray-700"
@@ -23,19 +23,19 @@ const ExitEdit = () => {
               <img src="/customize/close.svg" alt="close" />
             </button>
           </div>
-          <div className="flex my-10 px-10 text-center flex-col justify-center items-center gap-6">
+          <div className="flex flex-col items-center justify-center gap-6 px-10 my-10 text-center">
             <p>
               Note that all the changes you have made to the cNFT will be
               discarded
             </p>
           </div>
-          <div className="flex justify-between px-12 mb-6">
+          <div className="flex items-center justify-between px-12 mb-6">
             <Link
               to=""
               className="px-10 my-2"
               onClick={() => dispatch(toggleExitEdit(false))}
             >
-              <p className="text-sm md:text-base text-primary-light font-semibold">
+              <p className="text-sm font-semibold md:text-base text-primary-light">
                 Continue editing
               </p>
             </Link>

@@ -29,12 +29,12 @@ const CreateModal = () => {
 
   return (
     <div
-      className={`${isOpen ? 'block' : 'hidden'} fixed z-[100] inset-0 flex justify-center items-center bg-[#00000050]`}
+      className={`${isOpen ? 'block' : 'hidden'} fixed z-[100] inset-0 flex justify-center items-center bg-black/80`}
     >
       <div className="w-full lg:w-[1023px] mx-4 h-fit flex  bg-gray-dark-1 rounded-[10px]">
         <div className="flex flex-col md:w-[373px] bg-gray-dark-2 px-2 md:px-6 py-10 rounded-l-[10px]">
           <p className="text-2xl md:text-[29px] text-white font-bold">Create</p>
-          <div className="mt-20 flex flex-col w-full">
+          <div className="flex flex-col w-full mt-20">
             {Menus.map((menu, index) => (
               <div
                 className={`h-[88px] px-2 md:px-4 flex items-center text-sm md:text-base hover:text-primary-dark-1 whitespace-nowrap ${currentIndex == index ? 'bg-gray-dark-1 text-primary-dark-1' : ''} rounded-md cursor-pointer`}
@@ -49,7 +49,7 @@ const CreateModal = () => {
         <div className="w-[650px] flex flex-col relative">
           <div
             onClick={() => dispatch(toggleCreateModal(false))}
-            className="absolute right-4 top-4 flex items-center justify-center w-10 h-10 rounded-full bg-white bg-opacity-20 cursor-pointer"
+            className="absolute flex items-center justify-center w-10 h-10 bg-white rounded-full cursor-pointer right-4 top-4 bg-opacity-20"
           >
             <CancelIcon />
           </div>
@@ -58,17 +58,29 @@ const CreateModal = () => {
             className="bg-[#121212] rounded-tr-[10px]"
             alt="background"
           />
-          <div className="h-full px-6 py-6 flex flex-col gap-4 justify-end">
-            <p className="text-2xl md:text-[29px] font-bold white">
-              Dynamic PFP
-            </p>
-            <p className="text-base md:text-xl">
-              Dynamic PFPs will change their appearance based on their traits
-              and metadata changes.
-            </p>
-            <div className="w-full flex items-center gap-6 sm:gap-14 justify-end">
+          <div className="flex flex-col justify-end h-full gap-4 px-6 py-6">
+            {currentIndex === 0 ? (<>
+              <p className="text-2xl md:text-[29px] font-bold white">
+                Dynamic PFP
+              </p>
+              <p className="text-base md:text-xl">
+                Dynamic PFPs will change their appearance based on their traits
+                and metadata changes.
+              </p>
+            </>) :
+              (<>
+                <p className="text-2xl md:text-[29px] font-bold white">
+                  Game cNFTs
+                </p>
+                <p className="text-base md:text-xl">
+                  Game cNFTs are used in gaming and can contain other various types of NFT Game
+                  items
+                </p>
+              </>)}
+
+            <div className="flex items-center justify-end w-full gap-6 sm:gap-14">
               <Link to="/">
-                <p className="text-sm md:text-base text-primary-light font-semibold whitespace-nowrap">
+                <p className="text-sm font-semibold md:text-base text-primary-light whitespace-nowrap">
                   Learn More
                 </p>
               </Link>
