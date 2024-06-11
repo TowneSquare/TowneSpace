@@ -57,11 +57,11 @@ const Screen6 = () => {
                   it from the cNFT
                 </p>
               </div>
-              <div className="rounded-md bg-gray-dark-1">
+              <div className="mt-2 rounded-md bg-gray-dark-1">
                 <img
                   src={primaryTrait?.files[0].imageUrl}
                   alt="img"
-                  className="w-full mt-4"
+                  className="w-full"
                 />
               </div>
               <p className="mt-4 text-2xl font-bold text-center">
@@ -77,7 +77,7 @@ const Screen6 = () => {
                   these traits from the cNFT
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2 mt-4">
+              <div className="flex flex-wrap gap-2 mt-2">
                 {traits.map((trait, index) => {
                   const isActive = trait.name == primaryTrait?.name;
                   return (
