@@ -2,16 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import FolderType from '../type/folder_type';
 
 interface createStates {
-  collectionName: string;
-  totalMaxSupply: string;
   traits: FolderType[];
   step: number;
   primaryTrait: FolderType | undefined;
 }
 
 const initialState: createStates = {
-  collectionName: '',
-  totalMaxSupply: '',
   step: 0,
   traits: [],
   primaryTrait: undefined,
@@ -21,12 +17,6 @@ export const createflowSlice = createSlice({
   name: 'dialog',
   initialState,
   reducers: {
-    updateCollectionName: (state, action: PayloadAction<string>) => {
-      state.collectionName = action.payload;
-    },
-    updateTotalMaxSupply: (state, action: PayloadAction<string>) => {
-      state.totalMaxSupply = action.payload;
-    },
     updateTraits: (state, action: PayloadAction<FolderType[]>) => {
       state.traits = action.payload;
     },
@@ -56,8 +46,6 @@ export const createflowSlice = createSlice({
 });
 
 export const {
-  updateCollectionName,
-  updateTotalMaxSupply,
   updateTraits,
   updatePrimaryTrait,
   updateRarities,

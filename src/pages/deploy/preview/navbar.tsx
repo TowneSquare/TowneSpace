@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 const Navbar = () => {
   const dispatch = useAppDispatch();
 
-  const tokenName = useAppSelector((state) => state.createState.collectionName);
-  const totalSupply = useAppSelector((state) => state.createState.totalMaxSupply);
+  const tokenName = useAppSelector((state) => state.deployState.collectionName);
+  const totalSupply = useAppSelector((state) => state.deployState.totalSupply);
   return (
     <div className="flex flex-col gap-4 px-4 mt-8 md:flex-row md:items-end">
       <div className="flex items-end gap-4">

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ToolTip from '../../../components/tooltip';
-import { updateCollectionName } from '../../../state/create';
+import { updateCollectionName } from '../../../state/deploy';
 import {
   updateCollectionDescription,
   updateCollectionSymbol,
@@ -34,14 +34,14 @@ const Settings = () => {
   return (
     <div>
       <Header />
-      <div className="mt-10 flex justify-center">
+      <div className="flex justify-center mt-10">
         <div className="mx-4">
           <p className="text-2xl md:text-3xl">Settings</p>
           <p className="mt-1 text-base md:text-xl">
             Set how often or rarely each trait will appear in the collection
           </p>
-          <p className="mt-14 text-xl md:text-2xl">General</p>
-          <div className="mt-12 mb-10 flex flex-col md:flex-row justify-center gap-10 border-b-gray-light-1">
+          <p className="text-xl mt-14 md:text-2xl">General</p>
+          <div className="flex flex-col justify-center gap-10 mt-12 mb-10 md:flex-row border-b-gray-light-1">
             <div className="md:w-[450px]">
               <ToolTip label="Collection Name" className="mt-8">
                 <p className="text-sm md:text-base">Collection Name</p>
@@ -69,7 +69,7 @@ const Settings = () => {
                   }
                 />
               </div>
-              <div className="mt-8 flex gap-4">
+              <div className="flex gap-4 mt-8">
                 <div>
                   <ToolTip label="Collection Symbol">
                     <p>Collection Symbol</p>
@@ -114,7 +114,7 @@ const Settings = () => {
                 />
               </div>
               <div className="h-px bg-gray-dark-1 -mr-[300px] my-10" />
-              <p className="mt-14 text-2xl">Commissions</p>
+              <p className="text-2xl mt-14">Commissions</p>
               <ToolTip label="Payout Address" className="mt-10">
                 <p>Payout Address</p>
               </ToolTip>

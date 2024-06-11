@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ToolTip from '../../../components/tooltip';
-import { updateCollectionName } from '../../../state/create';
+import { updateCollectionName } from '../../../state/deploy';
 import {
   updateCollectionDescription,
   updateCollectionSymbol,
@@ -20,8 +20,8 @@ import { toggleSettingModal } from '../../../state/dialog';
 const Settings = () => {
   const dispatch = useAppDispatch();
 
-  const tokenName = useAppSelector((state) => state.createState.collectionName);
-  const totalSupply = useAppSelector((state) => state.createState.totalMaxSupply);
+  const tokenName = useAppSelector((state) => state.deployState.collectionName);
+  const totalSupply = useAppSelector((state) => state.deployState.totalSupply);
 
   const [uploadImg, setUploadImg] = useState<File>();
   const [previewImg, setPreviewImg] = useState('');
