@@ -20,8 +20,8 @@ import { toggleSettingModal } from '../../../state/dialog';
 const Settings = () => {
   const dispatch = useAppDispatch();
 
-  const tokenName = useAppSelector((state) => state.deployState.tokenName);
-  const tokens = useAppSelector((state) => state.deployState.tokens);
+  const tokenName = useAppSelector((state) => state.createState.collectionName);
+  const totalSupply = useAppSelector((state) => state.createState.totalMaxSupply);
 
   const [uploadImg, setUploadImg] = useState<File>();
   const [previewImg, setPreviewImg] = useState('');
@@ -101,11 +101,8 @@ const Settings = () => {
                     <input
                       className="w-full placeholder-gray-light-3 focus-visible:outline-0"
                       placeholder="500"
-                      value={tokens.length}
+                      value={totalSupply}
                       style={{ background: 'none' }}
-                      onChange={(e) =>
-                        dispatch(updateTotalSupply(parseInt(e.target.value)))
-                      }
                     />
                   </div>
                 </div>

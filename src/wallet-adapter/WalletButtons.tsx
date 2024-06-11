@@ -5,7 +5,6 @@ import {
   isRedirectable,
   WalletName,
 } from '@aptos-labs/wallet-adapter-react';
-import { toast } from 'react-toastify';
 import { useAppDispatch } from '../state/hooks';
 import { toggleConnectRequest, toggleWalletPanel } from '../state/dialog';
 
@@ -13,15 +12,15 @@ const WalletButtons = () => {
   const { wallets } = useWallet();
 
   return (
-    <div className="pl-10 mt-4 flex flex-col gap-4">
-      {wallets.map((wallet: Wallet) => {
+    <div className="flex flex-col gap-4 pl-10 mt-4">
+      {wallets?.map((wallet: any) => {
         return WalletView(wallet);
       })}
     </div>
   );
 };
 
-const WalletView = (wallet: Wallet) => {
+const WalletView = (wallet:any) => {
   const { connect } = useWallet();
   const isWalletReady =
     wallet.readyState === WalletReadyState.Installed ||
@@ -91,7 +90,7 @@ const WalletView = (wallet: Wallet) => {
         key={wallet.name}
         onClick={() => onWalletConnectRequest(wallet.name)}
       >
-        <div className="flex gap-4 items-center font-bold">
+        <div className="flex items-center gap-4 font-bold">
           <img src={wallet.icon} alt="uri" className="w-10 h-10" />
           {wallet.name}
         </div>

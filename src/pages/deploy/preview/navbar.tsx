@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 const Navbar = () => {
   const dispatch = useAppDispatch();
 
-  const tokenName = useAppSelector((state) => state.deployState.tokenName);
-  const tokens = useAppSelector((state) => state.deployState.tokens);
+  const tokenName = useAppSelector((state) => state.createState.collectionName);
+  const totalSupply = useAppSelector((state) => state.createState.totalMaxSupply);
   return (
     <div className="flex flex-col gap-4 px-4 mt-8 md:flex-row md:items-end">
       <div className="flex items-end gap-4">
@@ -31,7 +31,7 @@ const Navbar = () => {
               className="w-full placeholder-gray-light-3 focus-visible:outline-0"
               placeholder="10,000"
               style={{ background: 'none' }}
-              value={tokens.length}
+              value={totalSupply}
               disabled
             />
           </div>

@@ -18,7 +18,7 @@ const Collections = () => {
   const isEmpty = collections.length == 0;
 
   useEffect(() => {
-    if (account) dispatch(fetchMyCollections(account?.address));
+    if (account) dispatch(fetchMyCollections(account?.address.toString()));
   }, [account, filter]);
 
   return (
