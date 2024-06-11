@@ -16,6 +16,7 @@ interface deployStates {
   payoutAddress: string;
   royalties: number;
   royaltiesPayoutAddress: string;
+  step: number;
 }
 
 const initialState: deployStates = {
@@ -33,6 +34,7 @@ const initialState: deployStates = {
   payoutAddress: '',
   royalties: 0,
   royaltiesPayoutAddress: '',
+  step: 0,
 };
 
 export const deploySlice = createSlice({
@@ -84,6 +86,9 @@ export const deploySlice = createSlice({
     updateRoyaltiesPayoutAddress: (state, action: PayloadAction<string>) => {
       state.royaltiesPayoutAddress = action.payload;
     },
+    updateStep: (state, action: PayloadAction<number>) => {
+      state.step = action.payload;
+    },
   },
 });
 
@@ -102,5 +107,6 @@ export const {
   updatePayoutAddress,
   updateRoyalties,
   updateRoyaltiesPayoutAddress,
+  updateStep,
 } = deploySlice.actions;
 export default deploySlice.reducer;

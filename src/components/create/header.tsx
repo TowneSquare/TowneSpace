@@ -48,7 +48,7 @@ const Header: React.FC<Props> = ({ stepNumber }) => {
         <p className="text-3xl font-[200]">×</p>
       </div>
       <div>
-        <div className="flex justify-center space-x-2 mt-2 gap-8">
+        <div className="flex justify-center gap-8 mt-2 space-x-2">
           {steps.map((step, index) => (
             <div className="flex flex-col items-center gap-1">
               <div

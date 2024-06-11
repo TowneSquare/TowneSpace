@@ -13,6 +13,7 @@ interface dialogStates {
   bChooseTrait: boolean;
   bExitEdit: boolean;
   bFinishEdit: boolean;
+  bSetModal: boolean;
 }
 
 const initialState: dialogStates = {
@@ -28,6 +29,7 @@ const initialState: dialogStates = {
   bChooseTrait: false,
   bExitEdit: false,
   bFinishEdit: false,
+  bSetModal: false,
 };
 
 export const dialogSlice = createSlice({
@@ -70,8 +72,11 @@ export const dialogSlice = createSlice({
     toggleFinishEdit: (state, action: PayloadAction<boolean>) => {
       state.bFinishEdit = action.payload;
     },
+    toggleSettingModal: (state, action: PayloadAction<boolean>) => {
+      state.bSetModal = action.payload;
+    },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => { },
 });
 
 export const {
@@ -87,5 +92,6 @@ export const {
   toggleChooseTrait,
   toggleExitEdit,
   toggleFinishEdit,
+  toggleSettingModal,
 } = dialogSlice.actions;
 export default dialogSlice.reducer;

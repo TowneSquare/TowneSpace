@@ -9,7 +9,6 @@ import Generate from './generate';
 const Deploy = () => {
   return (
     <div>
-      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/preview" element={<Preview />} />
