@@ -1,11 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface MenuItem {
-  label: string;
-  href: string;
-  visited: boolean;
-}
-
 interface dialogStates {
   bTraitPanel: boolean;
   bRemovePanel: boolean;
@@ -20,8 +14,6 @@ interface dialogStates {
   bExitEdit: boolean;
   bFinishEdit: boolean;
   bSetModal: boolean;
-  bStepManage: boolean;
-  bMenuState: MenuItem[];
 }
 
 const initialState: dialogStates = {
@@ -38,13 +30,6 @@ const initialState: dialogStates = {
   bExitEdit: false,
   bFinishEdit: false,
   bSetModal: false,
-  bStepManage: false,
-  bMenuState: [
-    { label: 'Manage', href: '/deploy/manage', visited: false },
-    { label: 'Collection Preview', href: '/deploy/preview', visited: false },
-    { label: 'Settings', href: '/deploy/settings', visited: false },
-    { label: 'Deploy', href: '/deploy/generate', visited: false },
-  ],
 };
 
 export const dialogSlice = createSlice({
@@ -90,12 +75,6 @@ export const dialogSlice = createSlice({
     toggleSettingModal: (state, action: PayloadAction<boolean>) => {
       state.bSetModal = action.payload;
     },
-    toggleSetMenu(state, action: PayloadAction<string>) {
-      const menuItem = state.bMenuState.find(item => item.label === action.payload);
-      if (menuItem) {
-        menuItem.visited = true;
-      }
-    }
   },
   extraReducers: (builder) => { },
 });
@@ -114,6 +93,5 @@ export const {
   toggleExitEdit,
   toggleFinishEdit,
   toggleSettingModal,
-  toggleSetMenu,
 } = dialogSlice.actions;
 export default dialogSlice.reducer;

@@ -5,8 +5,8 @@ import FilterType from '../../../type/filter_type';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import { emptyCollections, setNftFilter } from '../../../state/tokens';
 
-interface Props {}
-const Filter: React.FC<Props> = ({}) => {
+interface Props { }
+const Filter: React.FC<Props> = ({ }) => {
   const filter = useAppSelector((state) => state.tokensState.nftFilter);
   const dispatch = useAppDispatch();
 
@@ -33,7 +33,7 @@ const Filter: React.FC<Props> = ({}) => {
           }
           onClick={() => onComposable()}
         >
-          V2 Tokens
+          Tokens V1
         </PrimaryButton>
         <PrimaryButton
           type={
@@ -44,7 +44,7 @@ const Filter: React.FC<Props> = ({}) => {
           onClick={() => onNfts()}
           className="md:w-[120px]"
         >
-          V1 Tokens
+          Tokens V2
         </PrimaryButton>
       </div>
     </div>
