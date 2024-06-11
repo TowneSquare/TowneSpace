@@ -4,13 +4,8 @@ import { getOwnedTokens } from './getOwnedTokens';
 import { getParentTokens } from './getParentToken';
 import { compareAddress, sanitizeAddress } from '../util';
 
-import { APTOS } from '../state/constants';
-
-/**
- *
- * Types
- *
- */
+import { APTOS, APTOS_CONFIG } from '../state/constants';
+import { Events } from './events';
 
 export type ComposedNft = {
   token_data_id: string;
@@ -73,24 +68,6 @@ export type CollectionV1FieldsIndexer = {
 export type OwnedCollectionV2Indexer = {
   current_collection_data: CollectionV2Fields;
 };
-
-/**
- *
- * Queries
- *
- */
-
-export const OWNED_OBJECTS_QUERY = `
-  query MyQuery($account_address: String, $offset: Int, $limit: Int) {
-      current_objects(
-        where: {owner_address: {_eq: $account_address}}
-        offset: $offset
-        limit: $limit
-      ) {
-        object_address
-      }
-    }
-  `;
 
 export const OWNED_V1_TOKENS_QUERY = `
   query Query($offset: Int!, $limit: Int, $account_address: String, $collection_id: String) {
@@ -177,22 +154,22 @@ export const OWNED_V2_COLLECTIONS_QUERY = `
     }
   }`;
 
-export const OWNED_V2_TOKENS_IN_A_COLLECTION_QUERY = `
-  query MyQuery($offset: Int!, $limit: Int, $account_address: String, $collection_id: String) {
+export const ALL_TOKENS_IN_A_COLLECTION_QUERY = `
+  query MyQuery($offset: Int!, $limit: Int, $collection_id: String) {
     current_token_ownerships_v2(
       limit: $limit
-      where: {owner_address: {_eq: $account_address}, current_token_data: {current_collection: {collection_id: {_eq: $collection_id}}}}
+      where: {current_token_data: {current_collection: {collection_id: {_eq: $collection_id}}}}
       offset: $offset
     ) {
       current_token_data {
-        collection_id
+        current_collection {
+          collection_name
+          collection_id
+        }
         token_name
         token_data_id
         description
         token_uri
-        current_collection {
-          collection_name
-        }
       }
     }
   }
@@ -214,46 +191,6 @@ export class Queries {
     });
   }
 
-  /**
-   *
-   * Get owned objects
-   * @param offset
-   * @param limit
-   * @param account_address
-   * @returns list of addresses
-   */
-  async getOwnedObjects(
-    offset: number,
-    limit: number,
-    account_address: string
-  ): Promise<Array<string>> {
-    const variables = {
-      offset,
-      limit,
-      account_address,
-    };
-
-    const response: any = await this.queryIndexer(
-      OWNED_OBJECTS_QUERY,
-      variables
-    );
-
-    const objects = [];
-
-    for (const object of response.current_objects) {
-      objects.push(object.object_address);
-    }
-    return objects;
-  }
-
-  /**
-   *
-   * Get owned v1 tokens
-   * @param offset
-   * @param limit
-   * @param account_address
-   * @returns
-   */
   async getOwnedV1Tokens(
     offset: number,
     limit: number,
@@ -266,7 +203,6 @@ export class Queries {
       account_address,
       collection_data_id,
     };
-
     const res: any = await this.queryIndexer(OWNED_V1_TOKENS_QUERY, variables);
 
     const tokens: TokenFields[] = [];
@@ -280,7 +216,8 @@ export class Queries {
         )
       ) {
         tokens.push({
-          collection_id: token.current_token_data.current_collection.collection_id,
+          collection_id:
+            token.current_token_data.current_collection.collection_id,
           collection_name:
             token.current_token_data.current_collection.collection_name,
           token_name: token.current_token_data.token_name,
@@ -297,20 +234,18 @@ export class Queries {
     return { allNfts: [], ownedNfts: tokens };
   }
 
-  /**
-   *
-   * Get owned v2 tokens
-   * @param offset
-   * @param limit
-   * @param account_address
-   * @returns
-   */
   async getOwnedV2Tokens(
     offset: number,
     limit: number,
     account_address: string,
     collection_id: string
   ): Promise<{ allNfts: Array<TokenFields>; ownedNfts: Array<TokenFields> }> {
+    const all = await this.getAllTokensInACollection(
+      offset,
+      limit,
+      collection_id
+    );
+
     const variables = {
       offset,
       limit,
@@ -348,7 +283,6 @@ export class Queries {
         );
       }
     }
-
 
     const ownedTokens: any = await getOwnedTokens(
       APTOS,
@@ -392,17 +326,9 @@ export class Queries {
       }
     }
 
-    return { allNfts: tokens, ownedNfts: tokens_filtered };
+    return { allNfts: all, ownedNfts: tokens_filtered };
   }
 
-  /**
-   *
-   * Get owned v1 collections
-   * @param offset
-   * @param limit
-   * @param account_address
-   * @returns
-   */
   async getOwnedV1Collections(
     offset: number,
     limit: number,
@@ -427,14 +353,6 @@ export class Queries {
     return collections;
   }
 
-  /**
-   *
-   * Get owned v2 collections
-   * @param offset
-   * @param limit
-   * @param account_address
-   * @returns
-   */
   async getOwnedV2Collections(
     offset: number,
     limit: number,
@@ -462,34 +380,23 @@ export class Queries {
         current_supply: collection.current_collection.current_supply,
       });
     }
-
+console.log(collections)
     return collections;
   }
 
-  /**
-   *
-   * Get owned v2 tokens in a collection
-   * @param offset
-   * @param limit
-   * @param account_address
-   * @param collection_id
-   * @returns
-   */
-  async getOwnedV2TokensInACollection(
+  async getAllTokensInACollection(
     offset: number,
     limit: number,
-    account_address: string,
     collection_id: string
   ): Promise<Array<TokenFields>> {
     const variables = {
       offset,
       limit,
-      account_address,
       collection_id,
     };
 
     const response: any = await this.queryIndexer(
-      OWNED_V2_TOKENS_IN_A_COLLECTION_QUERY,
+      ALL_TOKENS_IN_A_COLLECTION_QUERY,
       variables
     );
 
@@ -497,9 +404,16 @@ export class Queries {
 
     for (const token of response.current_token_ownerships_v2) {
       tokens.push({
-        ...token.current_token_data,
+        collection_id:
+          token.current_token_data.current_collection.collection_id,
         collection_name:
           token.current_token_data.current_collection.collection_name,
+        token_name: token.current_token_data.token_name,
+        token_data_id: sanitizeAddress(token.current_token_data.token_data_id),
+        description: token.current_token_data.description,
+        token_uri: token.current_token_data.token_uri,
+        composed_nfts: token.composed_nfts,
+        composed_to: false,
       });
     }
 
