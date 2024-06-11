@@ -31,14 +31,14 @@ const Studio = () => {
   }, [connected]);
 
   useEffect(() => {
-    if (account) dispatch(fetchCollections(account?.address));
+    if (account) dispatch(fetchCollections(account?.address.toString()));
   }, [account, filter]);
 
   useEffect(() => {
     if (currentCollection && account) {
       dispatch(
         fetchNfts({
-          address: account?.address,
+          address: account?.address.toString(),
           collection_id: currentCollection.collection_id,
         })
       );
@@ -61,8 +61,8 @@ const Studio = () => {
   return (
     <div className="">
       <Header />
-      <div className="pt-9 px-2 md:px-12 border-b-2 border-b-gray-dark-1">
-        <div className="flex flex-col md:flex-row gap-4 md:gap-0 md:justify-between">
+      <div className="px-2 border-b-2 pt-9 md:px-12 border-b-gray-dark-1">
+        <div className="flex flex-col gap-4 md:flex-row md:gap-0 md:justify-between">
           <Welcome />
           <div className="flex items-center gap-14">
             <HelpCenter />

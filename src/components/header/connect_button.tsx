@@ -8,6 +8,7 @@ const ConnectButton = () => {
   const { account, connected, disconnect } = useWallet();
   const [isOpenDropDown, toggleOpen] = useState(false);
 
+  const address = account?.address.toString() ?? "";
   return (
     <>
       {connected ? (
@@ -23,7 +24,7 @@ const ConnectButton = () => {
               }}
               className="font-bold"
             >
-              {account?.address.slice(0, 5)}...{account?.address.slice(-3)}
+              {address.slice(0, 5)}...{address.slice(-3)}
               <span className="text-xs">
                 &nbsp;&nbsp;&nbsp;{isOpenDropDown ? '▲' : '▼'}
               </span>
