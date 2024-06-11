@@ -4,13 +4,13 @@
 import os
 import shutil
 
-# folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/Cool Sloth'
-# mirror_folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated'
-# output_md_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated_for_payload.md'
-
-folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/Sloth Ball'
+folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/Cool Sloth'
 mirror_folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated'
 output_md_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated_for_payload.md'
+
+# folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/Sloth Ball'
+# mirror_folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated'
+# output_md_path = '/Users/maclay/Code/TowneSpace/metadata-generator/generated_for_payload.md'
 
 def generate_image_metadata(folder_path, mirror_folder_path):
     folder_name = os.path.basename(folder_path)
@@ -20,7 +20,7 @@ def generate_image_metadata(folder_path, mirror_folder_path):
     suffixes = []  # List to store suffixes for image names
     index = 1  # Initialize index for images
     descriptions = []  # List to store descriptions
-    occurrence_num = 5  # Number of times to repeat each image
+    occurrence_num = 1  # Number of times to repeat each image
     names_with_no_index = []  # List to store names of images that don't have an index
     
     # Create the mirror folder if it doesn't exist
@@ -61,6 +61,8 @@ def generate_image_metadata(folder_path, mirror_folder_path):
     # Process the "Body" folder first, if it exists
     body_folder_path = os.path.join(folder_path, "Body")
     if os.path.exists(body_folder_path):
+        # reset index
+        index = 1
         for filename in os.listdir(body_folder_path):
             if filename.endswith(".png"):
                 image_name = filename.split('.')[0]  # Remove file extension from filename
@@ -95,6 +97,8 @@ def generate_image_metadata(folder_path, mirror_folder_path):
         dirs[:] = [d for d in dirs if d != 'Body']  # Skip the "Body" folder as it is already processed
         for dir_name in dirs:
             subfolder_path = os.path.join(root, dir_name)
+            # reset index
+            index = 1
             for filename in os.listdir(subfolder_path):
                 if filename.endswith(".png"):
                     image_name = filename.split('.')[0]  # Remove file extension from filename
