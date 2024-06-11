@@ -8,7 +8,6 @@ import Header from '../header';
 const Manage = () => {
   return (
     <div>
-      <Header stepNumber={1} />
       <div className="flex justify-center mx-4 mt-10 mb-10">
         <div className="flex flex-col gap-10 md:flex-row">
           <Menus />

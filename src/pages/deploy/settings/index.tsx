@@ -40,7 +40,6 @@ const Settings = () => {
 
   return (
     <div>
-      <Header stepNumber={3} />
       <div className="flex justify-center w-full pl-32 mt-10">
         <div className="mx-4">
           <div className="relative flex flex-col">

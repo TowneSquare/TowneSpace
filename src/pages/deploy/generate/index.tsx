@@ -7,7 +7,6 @@ const Generate = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <Header stepNumber={4} />
       <div className="flex flex-col items-center gap-8 mt-12 mb-12">
         <div className="flex gap-4 p-2 mx-4 border rounded-md md:w-1/3 md:p-4 md:gap-8 border-gray-light-3">
           <img src="/deploy/deploy-contract.png" alt="deploy" />
