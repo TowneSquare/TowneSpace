@@ -15,15 +15,19 @@ const Screen6 = () => {
     <div className="pb-10">
       <Header stepNumber={4} />
       <p className="mt-8 text-base text-center md:text-xl">
-        Choose which trait will become the <span className='font-semibold'>base</span> of your Dynamic PFP.
+        Choose which trait will become the{' '}
+        <span className="font-semibold">base</span> of your Dynamic PFP.
         <br />
-        Holders won’t be able to remove the <span className='font-semibold'>Base trait</span> from their PFP, all other
-        traits can be removed.&nbsp;&nbsp;
+        Holders won’t be able to remove the{' '}
+        <span className="font-semibold">Base trait</span> from their PFP, all
+        other traits can be removed.&nbsp;&nbsp;
         <span className="text-primary-light">Learn more</span>
       </p>
       <div className="flex flex-col justify-center gap-2 mt-16 md:flex-row md:gap-8">
-        <div className="min-w-max p-4 md:w-[30vw] flex flex-col gap-4 rounded-md">
-          <span className="text-[20px]">Traits</span>
+        <div className="min-w-max p-4 md:w-[385px] flex flex-col gap-2 rounded-md">
+          <div className="flex items-center h-20">
+            <span className="text-[20px]">Traits</span>
+          </div>
           {traits.map((trait, index) => {
             const isActive = trait.name == primaryTrait?.name;
             const bg = isActive
@@ -31,7 +35,7 @@ const Screen6 = () => {
               : 'bg-gray-dark-2 hover:bg-gray-dark-1';
             return (
               <div
-                className={`h-14 p-2 flex justify-between items-center gap-4 ${bg} rounded-md cursor-pointer`}
+                className={`h-14 px-4 py-2 flex justify-between items-center gap-4 ${bg} rounded-md cursor-pointer`}
                 key={index}
                 onClick={() => dispatch(updatePrimaryTrait(trait))}
               >
@@ -46,11 +50,14 @@ const Screen6 = () => {
         {primaryTrait ? (
           <>
             <div className="p-4 w-[300px] rounded-md items-center text-center">
-              <span className="text-[20px] font-semibold">Base trait</span>
-              <p className="text-sm md:text-base">
-                {primaryTrait?.name} will be the base trait
-              </p>
-              <div className="rounded-md bg-gray-light-3">
+              <div className="flex flex-col items-center h-20">
+                <span className="text-[20px] font-semibold">Base trait</span>
+                <p className="text-sm md:text-base">
+                  It won’t be possible to remove <b>{`${primaryTrait.name}`}</b>{' '}
+                  it from the cNFT
+                </p>
+              </div>
+              <div className="rounded-md bg-gray-dark-1">
                 <img
                   src={primaryTrait?.files[0].imageUrl}
                   alt="img"
@@ -62,26 +69,30 @@ const Screen6 = () => {
               </p>
             </div>
             <div className="p-4 w-[328px] items-center text-center">
-              <span className="text-[20px] font-semibold">Other traits</span>
-              <p className="text-sm md:text-base">
-                It will be possible to remove<br/>these traits from the cNFT
-              </p>
-              <div className="flex flex-wrap gap-4 mt-4">
+              <div className="flex flex-col items-center h-20">
+                <span className="text-[20px] font-semibold">Other traits</span>
+                <p className="text-sm md:text-base">
+                  It will be possible to remove
+                  <br />
+                  these traits from the cNFT
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-4">
                 {traits.map((trait, index) => {
                   const isActive = trait.name == primaryTrait?.name;
                   return (
                     <Fragment key={index}>
                       {!isActive && (
-                        <div className="p-[8px] w-full rounded-md bg-[#404040]">
+                        <div className="p-[8px] w-full rounded-md bg-gray-dark-2">
                           <div
                             className="flex items-center text-center rounded-md"
                             key={index}
                           >
-                            <div className="w-32 h-32 mr-4 rounded-md bg-gray-light-3">
+                            <div className="w-[88px] h-[88px] mr-4 rounded-md bg-gray-dark-1">
                               <img
                                 src={trait.files[0].imageUrl}
                                 alt="image"
-                                className="w-32 h-32"
+                                className="rounded-md"
                               />
                             </div>
                             <p className="mt-2 text-sm text-center md:text-base">
@@ -100,8 +111,13 @@ const Screen6 = () => {
           <>
             <div className="w-[300px] h-[300px] p-4 flex flex-col gap-4 justify-center items-center border border-dashed border-gray-light-1 rounded-md">
               <img src="/create/left-arrow.svg" alt="arrow" />
-              <p className="text-base font-normal text-center">Select the <span className='font-bold'>base trait.</span><br />
-                This trait cannot be<br />removed from the PFP</p>
+              <p className="text-base font-normal text-center">
+                Select the <span className="font-bold">base trait.</span>
+                <br />
+                This trait cannot be
+                <br />
+                removed from the PFP
+              </p>
               <p className="text-center text-gray-light-1">
                 When you select the base trait it will show here
               </p>
