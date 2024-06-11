@@ -68,7 +68,7 @@ export const deploySlice = createSlice({
     updateCollectionSymbol: (state, action: PayloadAction<string>) => {
       state.collectionSymbol = action.payload;
     },
-    updateTotalSupply: (state, action: PayloadAction<number>) => {
+    updateTotalSupply: (state, action: PayloadAction<any>) => {
       state.totalSupply = action.payload;
     },
     updateExternalLink: (state, action: PayloadAction<string>) => {

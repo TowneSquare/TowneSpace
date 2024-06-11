@@ -3,7 +3,7 @@ import PrimaryButton from '../../components/primary_button';
 import PrimaryInput from '../../components/primary_input';
 import ButtonStatus from '../../type/button_status';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { updateCollectionName, updateTotalMaxSupply } from '../../state/create';
+import { updateCollectionName, updateTotalSupply } from '../../state/deploy';
 import { ArrowBottom, CancelIcon, QuestionMark } from '../../svg';
 import { useState } from 'react';
 import { toggleCreateModal, toggleStep2 } from '../../state/dialog';
@@ -37,7 +37,7 @@ const CreateStep2 = () => {
         .replace(/(?<=\d)(?=(\d{3})+\b)/g, '.');
       setMaxSupply(numberWithCommas);
     }
-    dispatch(updateTotalMaxSupply(e.target.value));
+    dispatch(updateTotalSupply(e.target.value));
   };
 
   const isButtonDisabled = !collectionName || !maxSupply;
