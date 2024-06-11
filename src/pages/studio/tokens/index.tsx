@@ -21,8 +21,8 @@ const Tokens = () => {
           <div className="relative flex justify-center w-full gap-6">
             {Array(5)
               .fill(null)
-              .map(() => (
-                <EmptyCard />
+              .map((_, index) => (
+                <EmptyCard key={index}/>
               ))}
             <div className="absolute flex flex-col items-center justify-end w-full h-full gap-14">
               <h1 className="text-2xl font-semibold">
