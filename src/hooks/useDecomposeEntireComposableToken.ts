@@ -1,7 +1,7 @@
 import {
   COMPOSABLE_TOKEN_TESTNET,
   DECOMPOSE_ENTIRE_COMPOSABLE_TOKEN,
-  STUDIO,
+  COMPOSABLE_TOKEN_ENTRY,
 } from '../constants';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 
@@ -15,7 +15,7 @@ const useDecomposeEntireComposableToken = (
     const response = await signAndSubmitTransaction({
       sender: accountAddress,
       data: {
-        function: `${COMPOSABLE_TOKEN_TESTNET}::${STUDIO}::${DECOMPOSE_ENTIRE_COMPOSABLE_TOKEN}`,
+        function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN_ENTRY}::${DECOMPOSE_ENTIRE_COMPOSABLE_TOKEN}`,
         typeArguments: [],
         functionArguments: [composableObject, new_uri],
       },
