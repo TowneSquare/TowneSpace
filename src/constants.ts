@@ -25,12 +25,13 @@ export const TOWNESPACE_MAINNET = '';
 
 /** Composable Token */
 export const COMPOSABLE_TOKEN = `composable_token`;
-export const STUDIO = `studio`;
+export const COMPOSABLE_TOKEN_ENTRY = `composable_token_entry`;
 
 /** Townespace */
 
 export const TOWNESPACE_STUDIO = `studio`
 export const RANDOM_MINT = `random_mint`
+// TODO: delete
 export const BATCH_MINT = `batch_mint`
 
 /** Token Minter */

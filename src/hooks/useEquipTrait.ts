@@ -1,4 +1,4 @@
-import { COMPOSABLE_TOKEN_TESTNET, EQUIP_TRAIT, EQUIP_TRAITS, STUDIO } from '../constants';
+import { COMPOSABLE_TOKEN_TESTNET, EQUIP_TRAIT, EQUIP_TRAITS, COMPOSABLE_TOKEN_ENTRY } from '../constants';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 
 /**
@@ -23,7 +23,7 @@ export const useEquipTrait = () => {
     const response = await signAndSubmitTransaction({
       sender: account.address,
       data: {
-        function: `${COMPOSABLE_TOKEN_TESTNET}::${STUDIO}::${EQUIP_TRAIT}`,
+        function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN_ENTRY}::${EQUIP_TRAIT}`,
         typeArguments: [],
         functionArguments: [composableObject, traitObject, new_uri],
       },
@@ -57,7 +57,7 @@ export const useEquipTraits = () => {
     const response = await signAndSubmitTransaction({
       sender: account.address,
       data: {
-        function: `${COMPOSABLE_TOKEN_TESTNET}::${STUDIO}::${EQUIP_TRAITS}`,
+        function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN_ENTRY}::${EQUIP_TRAITS}`,
         typeArguments: [],
         functionArguments: [composableObject, traitObjects, new_uri],
       },

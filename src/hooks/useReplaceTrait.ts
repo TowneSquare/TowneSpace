@@ -1,4 +1,4 @@
-import { COMPOSABLE_TOKEN_TESTNET, REPLACE_TRAITS, STUDIO } from '../constants';
+import { COMPOSABLE_TOKEN_TESTNET, REPLACE_TRAITS, COMPOSABLE_TOKEN_ENTRY } from '../constants';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 
 /**
@@ -25,7 +25,7 @@ export const useReplaceTraits = () => {
         const response = await signAndSubmitTransaction({
             sender: account.address,
             data: {
-                function: `${COMPOSABLE_TOKEN_TESTNET}::${STUDIO}::${REPLACE_TRAITS}`,
+                function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN_ENTRY}::${REPLACE_TRAITS}`,
                 typeArguments: [],
                 functionArguments: [composableObject, traitObjectsToRemove, traitObjectsToAdd, new_uri],
             },

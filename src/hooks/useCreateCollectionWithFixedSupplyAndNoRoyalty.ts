@@ -1,7 +1,7 @@
 import {
   COMPOSABLE_TOKEN_TESTNET,
   CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_NO_ROYALTY,
-  STUDIO,
+  COMPOSABLE_TOKEN_ENTRY,
 } from '../constants';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 
@@ -27,7 +27,7 @@ const useCreateCollectionWithFixedSupplyAndNoRoyalty = (
     const response = await signAndSubmitTransaction({
       sender: accountAddress,
       data: {
-        function: `${COMPOSABLE_TOKEN_TESTNET}::${STUDIO}::${CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_NO_ROYALTY}`,
+        function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN_ENTRY}::${CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_NO_ROYALTY}`,
         typeArguments: [],
         functionArguments: [
           description,
