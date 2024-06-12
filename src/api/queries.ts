@@ -358,6 +358,14 @@ export class Queries {
     limit: number,
     account_address: string
   ): Promise<Array<CollectionV2Fields>> {
+    const events = new Events(APTOS_CONFIG);
+    const createdEvents = await events.getCollectionCreatedEvents();
+
+    const whitelists: string[] = [];
+    for (const event of createdEvents) {
+      whitelists.push(event.data.metadata.collection_addr);
+    }
+
     const variables = {
       offset,
       limit,
@@ -372,15 +380,19 @@ export class Queries {
     const collections: CollectionV2Fields[] = [];
 
     for (const collection of response.current_collection_ownership_v2_view) {
-      collections.push({
-        collection_id: collection.current_collection.collection_id,
-        collection_name: collection.current_collection.collection_name,
-        description: collection.current_collection.description,
-        collection_uri: collection.current_collection.uri,
-        current_supply: collection.current_collection.current_supply,
-      });
+      const found = whitelists.find((whitelist) =>
+        compareAddress(whitelist, collection.current_collection.collection_id)
+      );
+      if (found)
+        collections.push({
+          collection_id: collection.current_collection.collection_id,
+          collection_name: collection.current_collection.collection_name,
+          description: collection.current_collection.description,
+          collection_uri: collection.current_collection.uri,
+          current_supply: collection.current_collection.current_supply,
+        });
     }
-console.log(collections)
+    console.log(collections);
     return collections;
   }
 
