@@ -345,11 +345,12 @@ export class Queries {
       variables
     );
 
-    const collections = [];
+    const collections:CollectionV1Fields[]  = [];
 
-    for (const collection of response.collection_datas) {
-      collections.push(collection);
-    }
+    // for (const collection of response.collection_datas) {
+    //   collections.push(collection);
+    // }
+    
     return collections;
   }
 

@@ -14,8 +14,8 @@ const Collections = () => {
   const dispatch = useAppDispatch();
   const filter = useAppSelector((state) => state.tokensState.collectionFilter);
   const collections = useAppSelector((state) => state.tokensState.myCollections);
-
-  const isEmpty = collections.length == 0;
+  const bFetched = useAppSelector(state => state.tokensState.bFetched);
+  const isEmpty = bFetched && collections.length == 0;
 
   useEffect(() => {
     if (account) dispatch(fetchMyCollections(account?.address.toString()));
