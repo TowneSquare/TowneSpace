@@ -16,13 +16,9 @@ export function isSupportFile(extension: string) {
   return false;
 }
 export function compareAddress(a: string | undefined, b: string | undefined) {
-  if (!a || !b || a.length < 60 || b.length < 60) return false;
-  if (a.length == b.length) {
-    return a === b;
-  } else {
-    const len = Math.min(a.length, b.length) - 3;
-    return a.slice(-len) == b.slice(-len);
-  }
+  if (!a || !b) return false;
+
+  return sanitizeAddress(a) == sanitizeAddress(b);
 }
 
 export function sanitizeAddress(address: string): string {

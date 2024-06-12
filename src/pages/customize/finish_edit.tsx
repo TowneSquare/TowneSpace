@@ -81,7 +81,7 @@ const FinishEdit = () => {
       const addObjects = currentTraitFolders.reduce((acc: string[], folder: CustomFolderType) => {
         const token_id = folder?.trait?.token_data_id;
         if (
-          token_id &&
+          token_id && 
           (!composedTraits ||
             !composedTraits.find((trait) => compareAddress(trait.token_data_id, token_id)))
         )
@@ -127,9 +127,9 @@ const FinishEdit = () => {
 
   return (
     <div className={`${isOpen ? 'block' : 'hidden'}`}>
-      <div className="fixed inset-0 bg-gray-dark-4 bg-opacity-80 flex items-center justify-center">
-        <div className="rounded-lg w-2/6 bg-gray-dark-2 border-gray-light-3 border-2">
-          <div className="flex justify-between m-6 items-center">
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-dark-4 bg-opacity-80">
+        <div className="w-2/6 border-2 rounded-lg bg-gray-dark-2 border-gray-light-3">
+          <div className="flex items-center justify-between m-6">
             <h2 className="text-lg font-semibold">Finish editing cNFT</h2>
             <button
               className="text-gray-700"
@@ -138,7 +138,7 @@ const FinishEdit = () => {
               <img src="/customize/close.svg" alt="close" />
             </button>
           </div>
-          <div className="flex my-6 px-10 text-center flex-col justify-center items-center gap-6">
+          <div className="flex flex-col items-center justify-center gap-6 px-10 my-6 text-center">
             <canvas
               ref={canvasRef}
               width={252}
@@ -151,11 +151,11 @@ const FinishEdit = () => {
               {currentNft?.token_name}
             </p>
           </div>
-          <div className="item-center flex justify-center items-center flex-col gap-2">
+          <div className="flex flex-col items-center justify-center gap-2 item-center">
             <PrimaryButton
               type={ButtonStatus.active}
               onClick={() => onFinish()}
-              className="px-10 my-2 flex gap-2 items-center"
+              className="flex items-center gap-2 px-10 my-2"
             >
               Finish editing
               {isLoading && <img src="/generate/loader.svg" />}
@@ -165,7 +165,7 @@ const FinishEdit = () => {
               className="px-10 mb-8"
               onClick={() => dispatch(toggleFinishEdit(false))}
             >
-              <p className="text-sm md:text-base text-primary-light font-semibold">
+              <p className="text-sm font-semibold md:text-base text-primary-light">
                 Continue editing
               </p>
             </Link>
