@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { NftMetadataType } from '../type/nft_type';
-import { APTOS, COLLECTIONS, NFTS } from './constants';
+import { APTOS, APTOS_CONFIG, COLLECTIONS, NFTS } from './constants';
 import FilterType from '../type/filter_type';
 import {
   CollectionV1Fields,
   CollectionV2Fields,
+  Events,
   Queries,
   TokenFields,
 } from '../api';
@@ -69,6 +70,8 @@ export const fetchCollections = createAsyncThunk(
   'collection/fetch',
   async (address: string, thunkAPI) => {
     try {
+      console.log('fetching collections')
+
       const queries = new Queries(APTOS);
       const filter = (thunkAPI.getState() as RootState).tokensState.nftFilter;
       if (filter == FilterType.composable) {
@@ -129,7 +132,7 @@ export const fetchNfts = createAsyncThunk(
       const latestTriggerTime = (thunkAPI.getState() as RootState).tokensState
         .triggeredTime;
       if (triggeredTime < latestTriggerTime) {
-        console.log("rejected", args.collection_id)
+        console.log('rejected', args.collection_id);
         return thunkAPI.rejectWithValue('rejected');
       }
       thunkAPI.dispatch(setFetchState(false));
