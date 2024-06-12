@@ -13,14 +13,14 @@ const WalletButtons = () => {
 
   return (
     <div className="flex flex-col gap-4 pl-10 mt-4">
-      {wallets?.map((wallet: any, index) => <WalletView wallet={wallet} key={index} />
-      )}
+      {wallets?.map((wallet: any) => {
+        return WalletView(wallet);
+      })}
     </div>
   );
 };
 
-const WalletView = (wrapper: any) => {
-  const wallet = wrapper.wallet;
+const WalletView = (wallet: any) => {
   const { connect } = useWallet();
   const isWalletReady =
     wallet.readyState === WalletReadyState.Installed ||
@@ -83,8 +83,9 @@ const WalletView = (wrapper: any) => {
     // we are on desktop view
     return (
       <button
-        className={`flex justify-between items-center  text-white py-2 rounded ${isWalletReady ? 'hover:bg-gray-light-8' : 'cursor-not-allowed'
-          }`}
+        className={`flex justify-between items-center  text-white py-2 rounded ${
+          isWalletReady ? 'hover:bg-gray-light-8' : 'cursor-not-allowed'
+        }`}
         disabled={!isWalletReady}
         key={wallet.name}
         onClick={() => onWalletConnectRequest(wallet.name)}
