@@ -25,7 +25,7 @@ const Studio = () => {
   );
 
   const { connected, account } = useWallet();
-
+  
   useEffect(() => {
     if (!connected) navigate('/');
   }, [connected]);

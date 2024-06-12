@@ -120,7 +120,7 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
               className="w-[84px] h-[84px]"
             />
           </div>
-          <div className="w-[154px] flex flex-col leading-4 font-semibold text-[10px] md:text-[14px] text-start mr-8">
+          <div className="flex flex-col leading-4 font-semibold text-[10px] md:text-[14px] text-start mr-8">
             <p className="text-gray-light-1">{currentNft?.collection_name}</p>
             <p className="mt-2 font-normal text-gray-light-1">{data.name}</p>
             <p className="">{currentNft?.token_name}</p>

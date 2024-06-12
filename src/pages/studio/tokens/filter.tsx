@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import PrimaryButton from '../../../components/primary_button';
 import ButtonStatus from '../../../type/button_status';
 import FilterType from '../../../type/filter_type';
@@ -33,7 +32,7 @@ const Filter: React.FC<Props> = ({ }) => {
           }
           onClick={() => onComposable()}
         >
-          Tokens V1
+          Tokens V2
         </PrimaryButton>
         <PrimaryButton
           type={
@@ -44,7 +43,7 @@ const Filter: React.FC<Props> = ({ }) => {
           onClick={() => onNfts()}
           className="md:w-[120px]"
         >
-          Tokens V2
+          Tokens V1
         </PrimaryButton>
       </div>
     </div>

@@ -44,7 +44,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
       }
     };
     fetch();
-  }, []);
+  }, [data.token_data_id]);
 
   const makeFolders = () => {
     const temp = JSON.parse(JSON.stringify(data));
@@ -86,7 +86,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   };
 
   const onCardClick = (index: number) => {
-    console.log(index, data, composedNfts, nfts);
+    console.log(index, data, composedNfts, nfts, allNfts);
   };
 
   return (

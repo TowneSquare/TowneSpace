@@ -2,7 +2,12 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { NftMetadataType } from '../type/nft_type';
 import { APTOS, COLLECTIONS, NFTS } from './constants';
 import FilterType from '../type/filter_type';
-import { CollectionV1Fields, CollectionV2Fields, Queries, TokenFields } from '../api';
+import {
+  CollectionV1Fields,
+  CollectionV2Fields,
+  Queries,
+  TokenFields,
+} from '../api';
 import { RootState } from './store';
 import CustomFolderType from '../type/custom_folder_type';
 
@@ -10,13 +15,14 @@ interface tokensStates {
   nftFilter: FilterType;
   collections: CollectionV1Fields[] | CollectionV2Fields[];
   currentCollection: CollectionV1Fields | CollectionV2Fields | undefined;
-  allNfts: NftMetadataType[]; 
+  allNfts: NftMetadataType[];
   nfts: NftMetadataType[];
   currentNft: NftMetadataType | undefined;
   folders: string[];
   currentTraitFolders: CustomFolderType[];
   currentTraitFolder: CustomFolderType | undefined;
   isFetching: boolean;
+  triggeredTime: number;
 
   collectionFilter: FilterType;
   myCollections: CollectionV1Fields[] | CollectionV2Fields[];
@@ -33,9 +39,10 @@ const initialState: tokensStates = {
   currentTraitFolders: [],
   currentTraitFolder: undefined,
   isFetching: false,
+  triggeredTime: 0,
 
   collectionFilter: FilterType.composable,
-  myCollections: []
+  myCollections: [],
 };
 
 export const fetchMyCollections = createAsyncThunk(
@@ -43,7 +50,8 @@ export const fetchMyCollections = createAsyncThunk(
   async (address: string, thunkAPI) => {
     try {
       const queries = new Queries(APTOS);
-      const filter = (thunkAPI.getState() as RootState).tokensState.collectionFilter;
+      const filter = (thunkAPI.getState() as RootState).tokensState
+        .collectionFilter;
       if (filter == FilterType.composable) {
         const res = await queries.getOwnedV2Collections(0, 9999999, address);
         return res;
@@ -82,8 +90,11 @@ export const fetchNfts = createAsyncThunk(
     try {
       const queries = new Queries(APTOS);
       const filter = (thunkAPI.getState() as RootState).tokensState.nftFilter;
+      const triggeredTime = Date.now();
 
       thunkAPI.dispatch(setFetchState(true));
+      thunkAPI.dispatch(setTriggeredTime(triggeredTime));
+
       let res: { allNfts: Array<TokenFields>; ownedNfts: Array<TokenFields> };
 
       if (filter == FilterType.composable) {
@@ -102,8 +113,6 @@ export const fetchNfts = createAsyncThunk(
         );
       }
 
-      thunkAPI.dispatch(setFetchState(false));
-
       res.ownedNfts.sort((a, b) => {
         if (a.type === undefined) return 1;
         if (b.type === undefined) return -1;
@@ -116,6 +125,14 @@ export const fetchNfts = createAsyncThunk(
         if (a.description > b.description) return 1;
         return 0;
       });
+
+      const latestTriggerTime = (thunkAPI.getState() as RootState).tokensState
+        .triggeredTime;
+      if (triggeredTime < latestTriggerTime) {
+        console.log("rejected", args.collection_id)
+        return thunkAPI.rejectWithValue('rejected');
+      }
+      thunkAPI.dispatch(setFetchState(false));
       return res;
     } catch (error: any) {
       thunkAPI.dispatch(setFetchState(false));
@@ -162,18 +179,21 @@ export const tokensSlice = createSlice({
     setFetchState: (state, action: PayloadAction<boolean>) => {
       state.isFetching = action.payload;
     },
+    setTriggeredTime: (state, action: PayloadAction<number>) => {
+      state.triggeredTime = action.payload;
+    },
 
     setCollectionFilter: (state, action: PayloadAction<FilterType>) => {
       state.collectionFilter = action.payload;
     },
     emptyMyCollections: (state) => {
       state.myCollections = [];
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCollections.fulfilled, (state, action) => {
       state.collections = action.payload;
-      if (action.payload.length > 0) {
+      if (action.payload.length > 0 && !state.currentCollection) {
         state.currentCollection = action.payload[0];
       } else {
         state.currentNft = undefined;
@@ -183,7 +203,7 @@ export const tokensSlice = createSlice({
     builder.addCase(fetchNfts.fulfilled, (state, action) => {
       state.allNfts = action.payload.allNfts;
       state.nfts = action.payload.ownedNfts;
-      if (state.nfts.length > 0) state.currentNft =state.nfts[0];
+      if (state.nfts.length > 0) state.currentNft = state.nfts[0];
 
       const folders = state.nfts
         .filter((nft) => nft.type != 'composable')
@@ -214,8 +234,9 @@ export const {
   setCurrentTraitFolders,
   chooseCurrentTraitFolder,
   setFetchState,
+  setTriggeredTime,
 
   setCollectionFilter,
-  emptyMyCollections
+  emptyMyCollections,
 } = tokensSlice.actions;
 export default tokensSlice.reducer;
