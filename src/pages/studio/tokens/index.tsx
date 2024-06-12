@@ -11,7 +11,8 @@ import EmptyCard from '../../../components/empty_card';
 const Tokens = () => {
   const collections = useAppSelector((state) => state.tokensState.collections);
   const filter = useAppSelector((state) => state.tokensState.nftFilter);
-  const isEmpty = collections.length == 0;
+  const bFetched = useAppSelector(state => state.tokensState.bFetched);
+  const isEmpty = bFetched && collections.length == 0;
 
   return (
     <div className="px-2 md:px-8 pt-[40px] pb-4">

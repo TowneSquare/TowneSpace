@@ -22,6 +22,8 @@ interface tokensStates {
   folders: string[];
   currentTraitFolders: CustomFolderType[];
   currentTraitFolder: CustomFolderType | undefined;
+
+  bFetched: boolean;
   isFetching: boolean;
   triggeredTime: number;
 
@@ -39,6 +41,7 @@ const initialState: tokensStates = {
   folders: [],
   currentTraitFolders: [],
   currentTraitFolder: undefined,
+  bFetched: false,
   isFetching: false,
   triggeredTime: 0,
 
@@ -50,17 +53,23 @@ export const fetchMyCollections = createAsyncThunk(
   'myCollection/fetch',
   async (address: string, thunkAPI) => {
     try {
+      thunkAPI.dispatch(setFetchState(true));
+
       const queries = new Queries(APTOS);
       const filter = (thunkAPI.getState() as RootState).tokensState
         .collectionFilter;
+
+      let res;
       if (filter == FilterType.composable) {
-        const res = await queries.getOwnedV2Collections(0, 9999999, address);
-        return res;
+        res = await queries.getOwnedV2Collections(0, 9999999, address);
       } else {
-        const res = await queries.getOwnedV1Collections(0, 9999999, address);
-        return res;
+        res = await queries.getOwnedV1Collections(0, 9999999, address);
       }
+
+      thunkAPI.dispatch(setFetchState(false));
+      return res;
     } catch (error: any) {
+      thunkAPI.dispatch(setFetchState(false));
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -70,18 +79,22 @@ export const fetchCollections = createAsyncThunk(
   'collection/fetch',
   async (address: string, thunkAPI) => {
     try {
-      console.log('fetching collections')
+      thunkAPI.dispatch(setFetchState(true));
 
       const queries = new Queries(APTOS);
       const filter = (thunkAPI.getState() as RootState).tokensState.nftFilter;
+
+      let res;
       if (filter == FilterType.composable) {
-        const res = await queries.getOwnedV2Collections(0, 9999999, address);
-        return res;
+        res = await queries.getOwnedV2Collections(0, 9999999, address);
       } else {
-        const res = await queries.getOwnedV1Collections(0, 9999999, address);
-        return res;
+        res = await queries.getOwnedV1Collections(0, 9999999, address);
       }
+
+      thunkAPI.dispatch(setFetchState(false));
+      return res;
     } catch (error: any) {
+      thunkAPI.dispatch(setFetchState(false));
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -154,6 +167,7 @@ export const tokensSlice = createSlice({
     emptyCollections: (state) => {
       state.collections = [];
       state.nfts = [];
+      state.bFetched = false;
     },
     chooseCollection: (
       state,
@@ -191,16 +205,21 @@ export const tokensSlice = createSlice({
     },
     emptyMyCollections: (state) => {
       state.myCollections = [];
+      state.bFetched = false;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCollections.fulfilled, (state, action) => {
+
       state.collections = action.payload;
-      if (action.payload.length > 0 && !state.currentCollection) {
-        state.currentCollection = action.payload[0];
+      if (action.payload.length > 0) {
+        if (!state.currentCollection) {
+          state.currentCollection = action.payload[0];
+        }
       } else {
         state.currentNft = undefined;
         state.nfts = [];
+        state.bFetched = true;
       }
     });
     builder.addCase(fetchNfts.fulfilled, (state, action) => {
@@ -221,9 +240,11 @@ export const tokensSlice = createSlice({
         }, []);
 
       state.folders = folders;
+      state.bFetched = true;
     });
     builder.addCase(fetchMyCollections.fulfilled, (state, action) => {
       state.myCollections = action.payload;
+      state.bFetched = true;
     });
   },
 });

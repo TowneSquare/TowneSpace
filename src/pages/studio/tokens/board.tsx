@@ -4,10 +4,7 @@ import FilterType from '../../../type/filter_type';
 
 const Board = () => {
   const isFetching = useAppSelector(state => state.tokensState.isFetching);
-
-  const filter = useAppSelector((state) => state.tokensState.nftFilter);
   const nfts = useAppSelector((state) => state.tokensState.nfts);
-
   
   if(isFetching) {
     return (
@@ -17,7 +14,7 @@ const Board = () => {
     )
   }
   return (
-    <div className="flex h-full flex-wrap gap-4 items-baseline">
+    <div className="flex flex-wrap items-baseline h-full gap-4">
       {nfts.map((nft, index) => (
         <NftCard data={nft} index={index} key={index} />
       ))}
