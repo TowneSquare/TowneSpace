@@ -27,8 +27,10 @@ Alice is a creator.
 3. (via generate_cnfts.py) The tool generates the cNFTs;
    1. The tool copies all the images with the type body.
    2. The tool renames the copied images to the name of the images folder and type to cnft.
-4. Alice populates the csv table with the counts of each image.
-5. (via generate_uri.py) The tool uploads the images to IPFS and populates the csv table with the URIs.
+4. (via generate_uri.py) The tool uploads the images to IPFS and populates the csv table with the URIs.
+5. Alice populates the csv table with the rarity rates of each image.
+   1. The tool will calculate the token count for each image based on the follwoing formula:
+      - `token_count = total_supply * rarity_rate / 100`
 6. (via generate_payload.py) The tool generates the payloads that will create the tokens on-chain. NOTE: The tool skips all the images with the type cnft.
 
 
