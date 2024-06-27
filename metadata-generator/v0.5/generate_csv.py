@@ -1,12 +1,13 @@
 import os
 import csv
 
-# # Cool sloth
-# folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/inputs/Cool Sloth'
-# folder_uri = 'https://bafybeigmg5fj4adzyidh7a65qvcvxlr5jmp3vvo6jtaob3ylb2pcjv5fry.ipfs.w3s.link/'
-# Sloth ball
-folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/inputs/Sloth Ball'
-folder_uri = 'https://bafybeibyad23kwuhmiyke4vo35kkbd64xbm3sfcbyjawdypahynsjxzszq.ipfs.w3s.link/'
+# Cool sloth
+folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/inputs/Cool Sloth'
+folder_uri = 'https://bafybeidefvxv2rhzt26apifhthfapyrazgeselkomzpag2owkmnzu5r7ey.ipfs.w3s.link/'
+# # Sloth ball
+# folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/inputs/Sloth Ball'
+# folder_uri = 'https://bafybeibyad23kwuhmiyke4vo35kkbd64xbm3sfcbyjawdypahynsjxzszq.ipfs.w3s.link/'
+
 mirror_folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/v0.5/generated/images'
 output_csv = '/Users/maclay/Code/TowneSpace/metadata-generator/v0.5/generated/sheet.csv'
 
@@ -39,7 +40,7 @@ def generate_image_csv(folder_path, output_csv):
                     rows.append([new_name, "Wrapper", uri])  # Use body_supply for "cnft"
     
     # Sort rows by 'type' column (index 1) and then by 'name' column (index 0)
-    sorted_rows = sorted(rows, key=lambda x: (x[1], x[0]))
+    sorted_rows = sorted(rows, key=lambda x: (x[1], x[2]))
     
     # Open the CSV file for writing
     with open(output_csv, 'w', newline='') as csvfile:
