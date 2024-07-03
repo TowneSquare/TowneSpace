@@ -38,7 +38,7 @@ const ViewNFTModal = () => {
   return (
     <div>
       <div
-        className={`${isOpen ? 'block' : 'hidden'} fixed z-10 inset-0 flex justify-end items-center bg-[#00000050]`}
+        className={`${isOpen ? 'block' : 'hidden'} fixed z-10 inset-0 flex justify-end items-center bg-[#000000CC]`}
       >
         <div className="relative w-[875px] h-full  bg-gray-dark-2 border-gray-light-3 rounded-md">
           <div
@@ -46,15 +46,15 @@ const ViewNFTModal = () => {
           >
             <div className="flex items-center gap-2">
               <div
-                className="right-6 w-6 h-6 mr-1 cursor-pointer"
+                className="w-6 h-6 mr-1 cursor-pointer right-6"
                 onClick={() => dispatch(toggleViewNFTModal(false))}
               >
                 <img src="/customize/close.svg" />
               </div>
               <img src="/customize/V2Badges.svg" />
               <div className="">
-                <p>{currentNft?.token_name}</p>
-                <p>{currentNft?.collection_name}</p>
+                <p className='text-[23px] font-semibold leading-[29px]'>{currentNft?.token_name}</p>
+                <p className='font-medium leading-[21px] text-gray-light-1'>{currentNft?.collection_name}</p>
               </div>
             </div>
             <button
@@ -70,7 +70,7 @@ const ViewNFTModal = () => {
             <div className="ml-16 w-[206px] h-[206px] border-4 border-primary-default rounded-xl">
               <LazyImage src={currentNft?.token_uri} />
             </div>
-            <div className="ml-2 w-[255px] overflow-auto  h-[80vh] p-2 border-2 border-gray-dark-1 rounded-xl">
+            <div className="ml-3 w-[255px] overflow-auto  h-[80vh] p-2 border-2 border-gray-dark-1 rounded-xl">
               {currentTraitFolders
                 .filter((folder) => folder.trait != undefined)
                 .map((folder, index) => {
@@ -93,7 +93,7 @@ const ViewNFTModal = () => {
                         <p className="text-gray-light-1">
                           {folder?.trait?.collection_name}
                         </p>
-                        <p className="text-gray-light-1 mt-2 font-normal">
+                        <p className="mt-2 md:text-[13px] font-normal text-gray-light-1">
                           {folder?.trait?.description}
                         </p>
                         <p className="">{folder?.trait?.token_name}</p>
@@ -103,8 +103,8 @@ const ViewNFTModal = () => {
                 })}
             </div>
             {currentTraitFolder?.trait && (
-              <div className="bg-[#000000] rounded-[10px] w-[310px] h-[80vh] ml-[27px] p-4">
-                <div className="bg-gray-light-3">
+              <div className="bg-[#000000] rounded-[10px] w-[310px] h-[80vh] ml-[27px] flex flex-col gap-y-2 p-4">
+                <div className="rounded-md bg-gray-light-3">
                   <LazyImage
                     className="w-[278px] h-[278px]"
                     src={currentTraitFolder?.trait?.token_uri}
@@ -112,7 +112,7 @@ const ViewNFTModal = () => {
                   />
                 </div>
                 <div className="gap-1 mt-2">
-                  <p className="text-xl mb-2">
+                  <p className="mb-2 text-xl font-semibold">
                     {currentTraitFolder?.trait?.token_name}
                   </p>
                   <p className="text-sm text-gray-light-1">

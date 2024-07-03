@@ -130,7 +130,7 @@ const ChooseTrait = () => {
                 })
               ) : (
                 <div>
-                  <div className="w-[592px] h-[75vh] gap- rounded-2xl px-14 py-8 flex flex-col items-center justify-center">
+                  <div className="w-[592px] h-3_4_scr gap- rounded-2xl px-14 py-8 flex flex-col items-center justify-center">
                     <img src="/customize/non-trait.svg" />
                     <p className="w-[300px] px-4 my-10 text-center">
                       You don’t have any of these Traits. When you transfer them
