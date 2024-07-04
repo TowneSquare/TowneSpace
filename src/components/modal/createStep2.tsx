@@ -29,15 +29,18 @@ const CreateStep2 = () => {
   };
 
   const handleMaxSupplyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const re = /^[\d,]*$/;
+     const re = /^[\d,]*$/;
     if (e.target.value === '' || re.test(e.target.value)) {
       const formattedValue = e.target.value.replace(/,/g, '');
       const numberWithCommas = formattedValue
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         .replace(/(?<=\d)(?=(\d{3})+\b)/g, '.');
       setMaxSupply(numberWithCommas);
+      dispatch(updateTotalSupply(numberWithCommas));
     }
-    dispatch(updateTotalSupply(e.target.value));
+    //setMaxSupply(e.target.value)
+    console.log(e.target.value, "targetValue")
+    
   };
 
   const isButtonDisabled = !collectionName || !maxSupply;
