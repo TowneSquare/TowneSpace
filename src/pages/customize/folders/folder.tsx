@@ -123,7 +123,7 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
         <p className="text-gray-light-1">{currentNft?.collection_name}</p>
         <div className="flex flex-col gap-y-1">
           <p className="leading-tight uppercase text-gray-light-1">{data.name}</p>
-          <p className={`text-base leading-tight ${data.trait ? 'text-white' : 'text-gray-light-1 font-normal'}`}>{data.trait ? currentNft?.token_name : '-'}</p>
+          <p className={`text-base leading-tight ${data.trait ? 'text-white' : 'text-gray-light-1 font-normal'}`}>{data.trait?.token_name || '-'}</p>
         </div>
       </div>
       <div className="flex justify-end">
