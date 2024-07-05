@@ -43,12 +43,13 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
   };
 
   const isStared = data.name  === "Body";
-  const background = isStared ? 'bg-gray-dark-2' : 'bg-gray-dark-1';
+  const background = isStared ? 'border-2 border-white/0 bg-white/5' : 'border-2 border-white/0 bg-white/10';
 
-  const isActive = data.name == currentTraitFolder?.name;
-  const bgColor = isActive
-    ? 'border-2 border-primary-dark-1 bg-primary-dark-1/20'
-    : 'bg-gray-dark-1';
+  const isActive = data.name === currentTraitFolder?.name;
+  const bgColor = isActive && 'border-2 !border-primary-dark-1 !bg-primary-default/20';
+
+  const isEmpty = !data.trait;
+  const borderEmpty = isEmpty ? '!border !border-gray-light-3 border-dashed' : '';
 
   const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop<
@@ -107,42 +108,38 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
     <div
       ref={ref}
       data-handler-id={handlerId}
-      className={`h-[100px] mb-2 gap-2 rounded-[8px] w-full flex items-center ${background} ${bgColor} p-2 cursor-pointer hover:bg-gray-light-3/60`}
+      className={`h-[100px] mb-1 gap-2 rounded-lg w-full flex items-center ${background} ${bgColor} ${borderEmpty} p-2 cursor-pointer hover:bg-gray-light-3/60`}
       onClick={() => onChooseFolder(data)}
     >
-      {data.trait ? (
-        <>
-          <img src="/customize/equal.svg" />
-          <div className="w-[84px] bg-gray-light-3 rounded-lg">
-            <LazyImage
-              src={data.trait.token_uri}
-              alt="image"
-              className="w-[84px] h-[84px]"
+      <img src="/customize/equal.svg" />
+      <div className="w-[84px] h-[84px] bg-gray-light-3 rounded-lg">
+        {data.trait && <LazyImage
+          src={data.trait.token_uri}
+          alt="image"
+          className="w-[84px] h-[84px]"
+        />}
+      </div>
+      <div className="flex flex-col justify-between h-full py-1 ml-2 mr-8 font-semibold leading-4 grow text-2xs md:text-sm text-start">
+        <p className="text-gray-light-1">{currentNft?.collection_name}</p>
+        <div className="flex flex-col gap-y-1">
+          <p className="leading-tight uppercase text-gray-light-1">{data.name}</p>
+          <p className={`text-base leading-tight ${data.trait ? 'text-white' : 'text-gray-light-1 font-normal'}`}>{data.trait?.token_name || '-'}</p>
+        </div>
+      </div>
+      <div className="flex justify-end">
+        {isStared && (
+          <div>
+            <Tooltip id="my-tooltip" className="border border-white bg-gray-dark-3" />
+            <img
+              src="/customize/star.png"
+              className='w-8'
+              alt="star"
+              data-tooltip-id="my-tooltip"
+              data-tooltip-content="This is a base trait. It can’t be removed or replaced."
             />
           </div>
-          <div className="flex flex-col leading-4 font-semibold text-[10px] md:text-[14px] text-start mr-8">
-            <p className="text-gray-light-1">{currentNft?.collection_name}</p>
-            <p className="mt-2 font-normal text-gray-light-1">{data.name}</p>
-            <p className="">{currentNft?.token_name}</p>
-          </div>
-          <div className="flex justify-end">
-            {isStared && (
-              <div>
-                <Tooltip id="my-tooltip" className="border border-white bg-gray-dark-3" />
-                <img
-                  src="/customize/star.png"
-                  className='ml-2'
-                  alt="star"
-                  data-tooltip-id="my-tooltip"
-                  data-tooltip-content="This is a base trait. It can’t be removed or replaced."
-                />
-              </div>
-            )}
-          </div>
-        </>
-      ) : (
-        <></>
-      )}
+        )}
+      </div>
     </div>
   );
 };

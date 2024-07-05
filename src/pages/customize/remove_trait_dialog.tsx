@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import React from 'react';
 import PrimaryButton from '../../components/primary_button';
 import ButtonStatus from '../../type/button_status';
 import {
@@ -8,7 +7,7 @@ import {
 } from '../../state/dialog';
 import LazyImage from '../../components/lazyImage';
 import CustomFolderType from '../../type/custom_folder_type';
-import { chooseCurrentTraitFolder, setCurrentTraitFolders } from '../../state/tokens';
+import { setCurrentTraitFolders } from '../../state/tokens';
 
 const RemoveDialog = () => {
   const dispatch = useAppDispatch();
@@ -34,11 +33,7 @@ const RemoveDialog = () => {
     }
     dispatch(setCurrentTraitFolders(tempFolders));
 
-    const tempTrait: CustomFolderType = JSON.parse(
-      JSON.stringify(currentTraitFolder)
-    );
-    tempTrait.trait = undefined;
-    dispatch(chooseCurrentTraitFolder(tempTrait));
+
 
     dispatch(toggleRemoveTrait(false));
     dispatch(toggleRemoveTraitConfirm(true));
@@ -46,11 +41,14 @@ const RemoveDialog = () => {
 
   return (
     <div className={`${isOpen ? 'block' : 'hidden'}`}>
-      <div className="fixed inset-0 bg-gray-dark-2 bg-opacity-80 flex items-center justify-center">
-        <div className="rounded-lg w-1/4 bg-gray-dark-4">
-          <div className="flex justify-between m-6 items-center">
-            <h2 className="text-lg font-semibold">
-              Remove trait from Slothian #9898{' '}
+      {/* dialog bg */}
+      <div className="fixed inset-0 flex items-center justify-center bg-black/70">
+        {/* dialog */}
+        <div className="w-[512px] rounded-lg bg-gray-dark-2">
+          {/* dialog header */}
+          <div className="flex items-center justify-between m-6">
+            <h2 className="text-xl font-semibold">
+              Remove trait from {currentNft?.token_name}{' '}
             </h2>
             <button
               className="text-gray-700"
@@ -59,18 +57,19 @@ const RemoveDialog = () => {
               <img src="/customize/close.svg" alt="close" />
             </button>
           </div>
-          <div className="flex mt-4 p-2 mx-4 text-center flex-col justify-center items-center gap-6">
-            <LazyImage src={currentTraitFolder?.trait?.token_uri} alt="" />
-            <p>
-              Do you want to remove {currentTraitFolder?.trait?.token_name} from{' '}
-              {currentNft?.token_name}?<br />
-              {currentTraitFolder?.trait?.token_name}&nbsp; will be transferred
-              back to your wallet.
+          {/* dialog body */}
+          <div className="flex flex-col items-center justify-center pt-2 text-center gap-y-4">
+            <div className='w-[180px] h-[180px] bg-gray-dark-1 rounded'>
+              <LazyImage className='w-[180px] h-[180px]' src={currentTraitFolder?.trait?.token_uri} alt="" />
+            </div>
+            <p className='text-base font-normal'>
+              Do you want to remove <span className='font-bold'>{currentTraitFolder?.trait?.token_name}</span> from{' '} <span className='font-bold'>{currentNft?.token_name}?</span><br />
+              <span className='font-bold'>{currentTraitFolder?.trait?.token_name}</span> will be transferred back to your wallet.
             </p>
             <PrimaryButton
               type={ButtonStatus.active}
               onClick={onRemove}
-              className="px-10 my-6 w-1/2"
+              className="w-1/2 px-10 mt-6 mb-10"
             >
               Remove Trait
             </PrimaryButton>

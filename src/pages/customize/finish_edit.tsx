@@ -81,7 +81,7 @@ const FinishEdit = () => {
       const addObjects = currentTraitFolders.reduce((acc: string[], folder: CustomFolderType) => {
         const token_id = folder?.trait?.token_data_id;
         if (
-          token_id && 
+          token_id &&
           (!composedTraits ||
             !composedTraits.find((trait) => compareAddress(trait.token_data_id, token_id)))
         )
@@ -127,45 +127,48 @@ const FinishEdit = () => {
 
   return (
     <div className={`${isOpen ? 'block' : 'hidden'}`}>
-      <div className="fixed inset-0 flex items-center justify-center bg-gray-dark-4 bg-opacity-80">
-        <div className="w-2/6 border-2 rounded-lg bg-gray-dark-2 border-gray-light-3">
+      {/* dialog bg */}
+      <div className="fixed inset-0 flex items-center justify-center bg-black/70">
+        {/* dialog */}
+        <div className="border rounded-lg w-dialog bg-gray-dark-2 border-gray-light-3">
+          {/* dialog header */}
           <div className="flex items-center justify-between m-6">
-            <h2 className="text-lg font-semibold">Finish editing cNFT</h2>
+            <h2 className="text-xl font-semibold">Finish editing cNFT</h2>
             <button
-              className="text-gray-700"
+              className="w-6 h-6 text-gray-700"
               onClick={() => dispatch(toggleFinishEdit(false))}
             >
               <img src="/customize/close.svg" alt="close" />
             </button>
           </div>
-          <div className="flex flex-col items-center justify-center gap-6 px-10 my-6 text-center">
+          {/* dialog body */}
+          <div className="flex flex-col items-center justify-center py-2 text-center">
             <canvas
               ref={canvasRef}
               width={252}
               height={252}
-              className="w-[210px] md:w-[270px] h-[210px] md:h-[270px]"
+              className="w-[180px] h-[180px]"
             />
-
-            <p className="mx-10">
-              Click “Finish editing” to save all the changes made to{' '}
-              {currentNft?.token_name}
-            </p>
           </div>
-          <div className="flex flex-col items-center justify-center gap-2 item-center">
+          <div className='flex flex-col items-center px-10 pt-4 pb-14 gap-y-4'>
+            <p className='pb-2 leading-5 text-center'>
+              Click “Finish editing” to save all the changes made to<br />
+              <span className='font-bold'>{currentNft?.token_name}</span>
+            </p>
             <PrimaryButton
               type={ButtonStatus.active}
               onClick={() => onFinish()}
-              className="flex items-center gap-2 px-10 my-2"
+              className="flex items-center gap-2 px-10 text-sm font-medium md:text-lg"
             >
               Finish editing
               {isLoading && <img src="/generate/loader.svg" />}
             </PrimaryButton>
             <Link
               to=""
-              className="px-10 mb-8"
+              className=""
               onClick={() => dispatch(toggleFinishEdit(false))}
             >
-              <p className="text-sm font-semibold md:text-base text-primary-light">
+              <p className="text-sm font-medium md:text-lg text-primary-light">
                 Continue editing
               </p>
             </Link>

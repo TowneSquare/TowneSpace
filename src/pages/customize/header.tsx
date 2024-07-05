@@ -21,10 +21,10 @@ const Header: React.FC<Props> = ({}) => {
         <img src="/customize/close.svg" />
       </div>
       <div className="flex flex-col items-center">
-        <p className="text-base md:text-xl font-bold text-center">
+        <p className="text-base font-semibold text-center md:text-xl">
           Customize Slothian #9898
         </p>
-        <p className="w-1/2 md:w-full text-sm md:text-base text-center">
+        <p className="w-1/2 text-sm text-center md:w-full md:text-base">
           Select NFTs or crypto assets you want to put inside, replace or remove
         </p>
       </div>
