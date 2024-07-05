@@ -13,6 +13,8 @@ const Replace = () => {
   const trait = currentTraitFolder?.trait;
   const isActive = currentTraitFolder?.trait != undefined;
 
+  const width = currentTraitFolder?.name === 'Body' ? 'w-100' : 'w-replace';
+
   return (
     <div>
       {!isActive ? (
@@ -23,7 +25,7 @@ const Replace = () => {
           </p>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-8 w-100 bg-gray-dark-2 rounded-2xl px-14">
+        <div className={`flex flex-col items-center justify-center py-8 bg-gray-dark-2 rounded-2xl px-14 ${width}`}>
           <div className="w-[270px] flex flex-col gap-y-4">
             <div className="w-full rounded-lg bg-gray-dark-1">
               <img src={trait?.token_uri} className="w-full" />
@@ -36,42 +38,42 @@ const Replace = () => {
                 </p>
                 <p className="text-base text-white">{trait?.token_name}</p>
               </div>
-              <p className="">{trait?.description}</p>
+              <p className="font-normal">{trait?.description}</p>
             </div>
             {
               currentTraitFolder.name !== 'Body' &&
-              <>
+              <div className='flex flex-col mt-3'>
                 <SecondaryButton
                   type={ButtonStatus.active}
-                  className="w-full my-4"
+                  className="w-full"
                   onClick={() => {
                     dispatch(toggleChooseTrait(true));
                   }}
                 >
-                  <div className="flex items-center justify-center gap-4">
+                  <div className="flex items-center justify-center gap-x-2">
                     <img src="/customize/replace.svg" alt="upload" />
                     <p className="font-medium">Replace Traits</p>
                   </div>
                 </SecondaryButton>
                 <SecondaryButton
                   type={ButtonStatus.active}
-                  className="w-full"
+                  className="w-full mt-4 mb-2"
                   onClick={() => {
                     dispatch(toggleRemoveTrait(true));
                   }}
                 >
-                  <div className="flex items-center justify-center gap-4">
+                  <div className="flex items-center justify-center gap-x-2">
                     <img src="/customize/close.svg" alt="upload" />
                     <p className="font-medium">Remove Trait</p>
                   </div>
                 </SecondaryButton>
-                <div className="flex gap-2 my-2">
+                <div className="flex gap-2">
                   <img src="/customize/info.svg" alt="" />
-                  <p className="w-full text-sm text-left">
+                  <p className="w-full text-sm text-left text-gray-light-1">
                     Removed Crypto asset is transferred to your wallet
                   </p>
                 </div>
-              </>
+              </div>
             }
           </div>
         </div>

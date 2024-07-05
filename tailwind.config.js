@@ -10,7 +10,9 @@ module.exports = {
       },
       spacing: {
         '100': '25rem',
+        'replace': '29.375rem',
         '3_4_scr': '75vh',
+        'dialog': '32rem',
       },
       colors: {
         'primary-light': '#9C6EEB',
