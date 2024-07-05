@@ -51,7 +51,6 @@ const Screen3 = () => {
         elem.style.outline = '';
         elem.style.backgroundColor = '';
       });
-
       // Handle file drop event.
       elem.addEventListener('drop', async (e) => {
         e.preventDefault();
@@ -79,6 +78,7 @@ const Screen3 = () => {
         let containsUnsupportedFiles = false;
         let containsSubfolders = false;
         let fileCount = 0;
+        let invalidFolderFound = false;
 
         const supportedExtensions = [
           'jpg',
@@ -90,13 +90,20 @@ const Screen3 = () => {
         ];
 
         // Read files within the directory handle.
-        const readFiles = async (folderName: string, handle: any) => {
+        const readFiles = async (
+          folderName: string,
+          handle: any,
+          isSubfolder = false
+        ) => {
+          let folderContainsFiles = false;
+
           for await (const [key, value] of handle.entries()) {
             const fileNameParts = key.split('.');
             const fileExtension =
               fileNameParts[fileNameParts.length - 1].toLowerCase();
 
             if (value.kind === 'file') {
+              folderContainsFiles = true;
               fileCount++;
               if (!supportedExtensions.includes(fileExtension)) {
                 containsUnsupportedFiles = true;
@@ -125,10 +132,31 @@ const Screen3 = () => {
                 }
               }
             } else if (value.kind === 'directory') {
+              // If a folder is found within a subfolder, dispatch an error and stop processing.
+              if (isSubfolder) {
+                invalidFolderFound = true;
+                dispatch(
+                  toggleUploadAssetModal({
+                    visible: true,
+                    type: 'invalid_folder',
+                  })
+                );
+                return;
+              }
               containsSubfolders = true;
-              traits.push({ name: key, files: [] });
-              await readFiles(key, value);
+              const subfolderName = key;
+              traits.push({ name: subfolderName, files: [] });
+              await readFiles(subfolderName, value, true);
+
+              // If an invalid folder is found, stop processing.
+              if (invalidFolderFound) {
+                return;
+              }
             }
+          }
+
+          if (!folderContainsFiles) {
+            containsUnsupportedFiles = true;
           }
         };
 
@@ -137,12 +165,27 @@ const Screen3 = () => {
           if (handle.kind === 'directory') {
             await readFiles(handle.name, handle);
           }
+
+          // If an invalid folder is found, stop processing.
+          if (invalidFolderFound) {
+            return;
+          }
         }
+
+        // Ensure only folders with subfolders are accepted.
+        const validFolders = traits.filter((trait) => trait.files.length > 0);
+        const parentFolderContainsSubfolders =
+          validFolders.length > 0 && containsSubfolders;
 
         // Check if traits contain files and unsupported files.
         const containFiles =
-          traits.length > 0 && traits.some((trait) => trait.files.length > 0);
+          parentFolderContainsSubfolders &&
+          traits.length > 0 &&
+          traits.some((trait) => trait.files.length > 0);
 
+        if (invalidFolderFound) {
+          return;
+        }
         // Display upload asset error modal if the folder doesn't contain supported files.
         if (!containFiles && containsUnsupportedFiles) {
           dispatch(
@@ -151,11 +194,10 @@ const Screen3 = () => {
               type: 'invalid_file',
             })
           );
-
           return;
         }
 
-        // Display upload asset error modal  if the folder doesn't contain subfolders.
+        // Display upload asset error modal if the folder doesn't contain subfolders.
         if (fileCount === 0 || !containsSubfolders) {
           dispatch(
             toggleUploadAssetModal({
@@ -186,13 +228,20 @@ const Screen3 = () => {
     let containsUnsupportedFiles = false;
     let containsSubfolders = false;
     let fileCount = 0;
+    let invalidFolderFound = false;
 
     const supportedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'];
 
     files.forEach((file: File) => {
       const paths = file.webkitRelativePath.split('/');
 
-      if (paths.length === 3) {
+      if (paths.length === 2) {
+        // a folder at the top level
+        const folderName = paths[1];
+        traits.push({ name: folderName, files: [] });
+        containsSubfolders = true;
+      } else if (paths.length === 3) {
+        // a file inside a subfolder
         const fileName = paths[2].split('.');
         const fileExtension = fileName[fileName.length - 1].toLowerCase();
 
@@ -222,6 +271,9 @@ const Screen3 = () => {
             traits.push({ name: paths[1], files: [obj] });
           }
         }
+      } else if (paths.length > 3) {
+        // This is a folder inside a subfolder, which is invalid
+        invalidFolderFound = true;
       }
     });
 
@@ -232,7 +284,7 @@ const Screen3 = () => {
     const containFiles =
       traits.length > 0 && traits.some((trait) => trait.files.length > 0);
 
-    // Display error modal if the folder doesn't contain supported files
+    // Display error modal if the folder contains unsupported files
     if (!containFiles && containsUnsupportedFiles) {
       dispatch(
         toggleUploadAssetModal({
@@ -243,8 +295,8 @@ const Screen3 = () => {
       return;
     }
 
-    // Display error modal if the folder doesn't contain subfolders
-    if (fileCount === 0 || !containsSubfolders) {
+    // Display error modal if the folder doesn't contain subfolders or contains invalid subfolders
+    if (fileCount === 0 || !containsSubfolders || invalidFolderFound) {
       dispatch(
         toggleUploadAssetModal({
           visible: true,
