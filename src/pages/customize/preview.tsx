@@ -53,10 +53,10 @@ const Preview = () => {
           className="w-[210px] md:w-[270px] h-[210px] md:h-[270px]"
         />
       </div>
-      <div className="mt-6 flex items-center gap-2 text-[16px] font-semibold text-gray-light-1">
+      <div className="ml-2 mt-6 flex items-center gap-2 text-[16px] font-medium text-gray-light-1">
         {currentNft?.collection_name}
       </div>
-      <p className="text-lg font-semibold">{currentNft?.token_name}</p>
+      <p className="mt-1 ml-2 text-xl font-semibold">{currentNft?.token_name}</p>
     </div>
   );
 };

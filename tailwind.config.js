@@ -26,6 +26,15 @@ module.exports = {
         'linear-gradient(180deg, rgba(18, 18, 18, 0.00) 0%, #151515 80%)',
     },
     extend: {
+      fontSize: {
+        '2xs': '0.625rem',
+      },
+      spacing: {
+        100: '25rem',
+        replace: '29.375rem',
+        '3_4_scr': '75vh',
+        dialog: '32rem',
+      },
       colors: {
         'primary-light': '#9C6EEB',
         'primary-default': '#9264F8',

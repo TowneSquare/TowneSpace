@@ -16,6 +16,7 @@ import ButtonStatus from '../../../type/button_status';
 import StoreModal from '../../../components/modal/storeModal';
 import Header from '../header';
 import { toggleSettingModal } from '../../../state/dialog';
+import { Slide, toast } from 'react-toastify';
 
 const Settings = () => {
   const dispatch = useAppDispatch();
@@ -25,6 +26,12 @@ const Settings = () => {
 
   const [uploadImg, setUploadImg] = useState<File>();
   const [previewImg, setPreviewImg] = useState('');
+  const [collectionTotalSupply, setCollectionTotalSupply] = useState(
+    String(totalSupply)
+  );
+  const [isUnsavedChanges, setIsChangeSaved] = useState<boolean>(false);
+  const [shouldRegenerateCollection, setShouldRegenerateCollection] =
+    useState<boolean>(false);
 
   const onFolderSelector = async () => {
     const selector = document.getElementById('folder-selector');
@@ -38,9 +45,78 @@ const Settings = () => {
     setPreviewImg(URL.createObjectURL(selectedFiles?.[0]));
   };
 
+  const onChangeTotalSupply = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedValue = e.target.value.replace(/,/g, '');
+    const numberWithCommas = formattedValue
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      .replace(/(?<=\d)(?=(\d{3})+\b)/g, '.');
+    setCollectionTotalSupply(numberWithCommas);
+    setShouldRegenerateCollection(false)
+    setIsChangeSaved(true);
+  };
+
+  const discardChanges = () => {
+    setIsChangeSaved(false);
+    setCollectionTotalSupply(String(totalSupply));
+  };
+
+  const saveAndApplyChanges = () => {
+    dispatch(updateTotalSupply(collectionTotalSupply));
+    toast.success('Settings saved!', {
+      position: 'top-center',
+      transition: Slide,
+      closeButton: false,
+      progressStyle: {
+        backgroundColor: '#2AB576',
+      },
+      icon: ({ theme, type }) => <img src="/toast/icon.svg" alt="toast-icon" />,
+    });
+    setIsChangeSaved(false);
+    setShouldRegenerateCollection(true);
+  };
+
   return (
     <div>
-      <div className="flex justify-center w-full pl-32 mt-10">
+      <div className="flex justify-center w-full mt-10">
+        {isUnsavedChanges && (
+          <div className="absolute w-[404px] h-[133px] border-2 bg-gray-light-3/20 border-gray-light-3 rounded-lg px-4 py-6 flex flex-col justify-between right-10 top-[25%]">
+            <h1 className="text-base font-extrabold">
+              You have unsaved changes
+            </h1>
+            <div className="flex items-center justify-between">
+              <button
+                onClick={() => {
+                  discardChanges();
+                }}
+                className="px-4 py-2 text-base font-medium border-[1px] border-white rounded-full bg-gray-light-3/20"
+              >
+                {' '}
+                Discard changes
+              </button>
+              <button
+                onClick={() => {
+                  saveAndApplyChanges();
+                }}
+                className="px-4 py-2 text-base font-medium rounded-full bg-primary-default"
+              >
+                Save & apply changes
+              </button>
+            </div>
+          </div>
+        )}
+        {shouldRegenerateCollection && (
+          <div className="w-[340px] h-[177px] absolute right-10 top-[25%] border-[1px] bg-gray-light-3/20 border-gray-light-3 rounded-lg py-6 px-4 flex-col flex justify-evenly">
+            <h1 className="text-base font-semibold">Updates available!</h1>
+            <p className="text-sm font-normal">
+              Update collection preview to see the changes. The current preview
+              will be replaced.
+            </p>
+            <button className="flex items-center px-4 py-2 mt-6 text-base font-medium rounded-full justify-evenly bg-primary-default">
+              <img src="/reload.svg" />
+              Regenerate collection preview
+            </button>
+          </div>
+        )}
         <div className="mx-4">
           <div className="relative flex flex-col">
             <StoreModal />
@@ -60,7 +136,10 @@ const Settings = () => {
                   className="w-full placeholder-gray-light-3 focus-visible:outline-0"
                   placeholder={tokenName}
                   style={{ background: 'none' }}
-                  onChange={(e) => { dispatch(updateCollectionName(e.target.value)); dispatch(toggleSettingModal(true))}}
+                  onChange={(e) => {
+                    dispatch(updateCollectionName(e.target.value));
+                    dispatch(toggleSettingModal(true));
+                  }}
                 />
               </div>
               <ToolTip label="Collection Description" className="mt-8">
@@ -100,8 +179,9 @@ const Settings = () => {
                     <input
                       className="w-full placeholder-gray-light-3 focus-visible:outline-0"
                       placeholder="500"
-                      value={totalSupply}
+                      value={collectionTotalSupply}
                       style={{ background: 'none' }}
+                      onChange={onChangeTotalSupply}
                     />
                   </div>
                 </div>
@@ -128,7 +208,9 @@ const Settings = () => {
                   className="w-full placeholder-gray-light-3 focus-visible:outline-0"
                   placeholder="0x4414d542b040c822A44b63f4704b40aee870281F"
                   style={{ background: 'none' }}
-                  onChange={(e) => dispatch(updatePayoutAddress(e.target.value))}
+                  onChange={(e) =>
+                    dispatch(updatePayoutAddress(e.target.value))
+                  }
                 />
               </div>
               <ToolTip label="Royalties %" className="mt-8">
@@ -192,7 +274,6 @@ const Settings = () => {
         </div>
       </div>
     </div>
-
   );
 };
 
