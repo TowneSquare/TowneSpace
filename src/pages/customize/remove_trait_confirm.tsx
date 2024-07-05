@@ -1,7 +1,9 @@
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import PrimaryButton from '../../components/primary_button';
 import ButtonStatus from '../../type/button_status';
+import CustomFolderType from '../../type/custom_folder_type';
 import { toggleRemoveTraitConfirm } from '../../state/dialog';
+import { chooseCurrentTraitFolder } from '../../state/tokens';
 
 const RemoveConfirm = () => {
   const dispatch = useAppDispatch();
@@ -12,32 +14,44 @@ const RemoveConfirm = () => {
 
   const currentNft = useAppSelector(state => state.tokensState.currentNft);
   const currentTraitFolder = useAppSelector(state => state.tokensState.currentTraitFolder);
-  
+
+  const onConfirm = () => {
+    const tempTrait: CustomFolderType = JSON.parse(
+      JSON.stringify(currentTraitFolder)
+    );
+    tempTrait.trait = undefined;
+    dispatch(chooseCurrentTraitFolder(tempTrait));
+    dispatch(toggleRemoveTraitConfirm(false));
+  }
+
   return (
     <div className={`${isOpen ? 'block' : 'hidden'}`}>
-      <div className="fixed inset-0 bg-gray-dark-2 bg-opacity-80 flex items-center justify-center">
-        <div className="rounded-lg w-1/4 bg-gray-dark-4">
-          <div className="flex justify-between m-6 items-center">
-            <h2 className="text-lg font-semibold">
+      {/* dialog bg */}
+      <div className="fixed inset-0 flex items-center justify-center bg-black/70">
+        {/* dialog */}
+        <div className="w-[512px] rounded-lg bg-gray-dark-2">
+          {/* dialog header */}
+          <div className="flex items-center justify-between m-6">
+            <h2 className="text-xl font-semibold">
               Remove trait from {currentNft?.token_name}
             </h2>
             <button
               className="text-gray-700"
-              onClick={() => dispatch(toggleRemoveTraitConfirm(false))}
+              onClick={onConfirm}
             >
               <img src="/customize/close.svg" alt="close" />
             </button>
           </div>
-          <div className="flex mt-4 p-2 mx-4 text-center flex-col justify-center items-center gap-6">
+          {/* dialog body */}
+          <div className="flex flex-col items-center justify-center gap-6 p-2 mx-4 mt-4 text-center">
             <img src="/customize/checkcircle.svg" alt="" />
-            <p>
-              {currentTraitFolder?.trait?.token_name} has been removed from {currentNft?.token_name}. <br/>You can find it
-              in your wallet.
+            <p className='text-base font-normal'>
+              <span className='font-bold'>{currentTraitFolder?.trait?.token_name}</span> has been removed from <span className='font-bold'>{currentNft?.token_name}</span>. <br/>You can find it in your wallet.
             </p>
             <PrimaryButton
               type={ButtonStatus.active}
-              className="px-10 my-6 w-1/2"
-              onClick={() => dispatch(toggleRemoveTraitConfirm(false))}
+              className="w-1/2 px-10 my-6"
+              onClick={onConfirm}
             >
               Great
             </PrimaryButton>
