@@ -58,10 +58,21 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
+const contextClass = {
+  success: 'bg-gray-light-3/30 flex w-[330px] h-[66px] border-gray-light-3 rounded-lg border-[1px]',
+  error: 'bg-red-600',
+  info: 'bg-gray-600',
+  warning: 'bg-orange-400',
+  default: 'bg-indigo-600',
+  dark: 'bg-white-600 font-gray-300',
+};
+
 export const AppContext: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        toastClassName={(context) => contextClass[context?.type || 'default']}
+      />
       <AutoConnectProvider>
         <WalletContextProvider>{children}</WalletContextProvider>
       </AutoConnectProvider>
