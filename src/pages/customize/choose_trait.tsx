@@ -29,7 +29,7 @@ const ChooseTrait = () => {
 
   const [selectedTrait, setSelectedTrait] = useState<
     NftMetadataType | undefined
-  >(undefined);
+    >(undefined);
 
   useEffect(() => {
     let traits = nfts.filter(
@@ -90,15 +90,11 @@ const ChooseTrait = () => {
                 traits.map((trait, index) => {
                   const isActive =
                     selectedTrait?.token_data_id == trait.token_data_id;
-                  const borderColor = isActive
-                    ? 'border-primary-default'
-                    : 'border-gray-dark-1';
+                  const borderColor = isActive ?
+                    'border-4 border-primary-default' : '';
                   const isSelected =
                     currentTraitFolder?.trait?.token_data_id ==
                     trait.token_data_id;
-                  const bgColor = isSelected
-                    ? 'bg-primary-default border-primary-default'
-                    : '';
 
                   return (
                     <div
@@ -107,22 +103,24 @@ const ChooseTrait = () => {
                       onClick={() => setSelectedTrait(trait)}
                     >
                       <div
-                        className={`w-[120px] h-[120px] cursor-pointer border-4 relative ${borderColor} ${bgColor} rounded-xl`}
+                        className={`w-[120px] h-[120px] flex justify-center items-center cursor-pointer relative ${borderColor} rounded-xl overflow-hidden`}
                       >
-                        {isSelected && (
-                          <img
-                            className="absolute m-10"
-                            src="/customize/check.svg"
-                            alt=""
-                          />
-                        )}
                         <LazyImage
                           src={trait.token_uri}
                           className="w-full h-full"
                         />
+                        {isSelected && (
+                          <div className='absolute flex items-center justify-center w-full h-full bg-primary-default/70'>
+                            <img
+                              className="w-8 h-8"
+                              src="/customize/check.svg"
+                              alt=""
+                            />
+                          </div>
+                        )}
                       </div>
                       <div className="my-2">
-                        <p className="text-[13px]">{trait.collection_name}</p>
+                        <p className="text-gray-light-1 text-[13px]">{trait.collection_name}</p>
                         <p className="text-sm">{trait.token_name}</p>
                       </div>
                     </div>
@@ -130,9 +128,9 @@ const ChooseTrait = () => {
                 })
               ) : (
                 <div>
-                  <div className="w-[592px] h-[75vh] gap- rounded-2xl px-14 py-8 flex flex-col items-center justify-center">
+                  <div className="w-[592px] h-3_4_scr gap- rounded-2xl px-14 py-8 flex flex-col items-center justify-center">
                     <img src="/customize/non-trait.svg" />
-                    <p className="w-[300px] px-4 my-10 text-center">
+                    <p className="w-[300px] px-4 my-10 text-center text-gray-light-1">
                       You don’t have any of these Traits. When you transfer them
                       in your wallet, they will show up here.
                     </p>

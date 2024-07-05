@@ -55,7 +55,7 @@ const Folders = () => {
 
   return (
     <div>
-      <div className="ml-2 after: w-[385px] overflow-auto  h-[75vh] p-4 border-2 border-gray-dark-1 rounded-xl">
+      <div className="after: w-[417px] overflow-auto h-3_4_scr p-4 border border-gray-dark-1 rounded-xl">
         {folders.map((folder, i) => renderFolder(folder, i))}
       </div>
     </div>
