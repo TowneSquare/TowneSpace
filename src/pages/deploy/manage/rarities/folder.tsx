@@ -66,7 +66,7 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
                       />
                     )}
                     <div
-                      className={`${rarityIndexNumber.includes(`${iFolder}-${index}`) ? 'items-center px-4 py-2 border rounded-full border-gray-light-1 bg-gray-dark-3 w-[407px]' : 'items-center px-4 py-2 border rounded-full border-gray-light-1 bg-gray-dark-3'}`}
+                      className={`${rarityIndexNumber.includes(`${iFolder}-${index}`) ? 'items-center px-4 py-2 border rounded-full border-gray-light-1 bg-gray-dark-3 w-[385px]' : 'items-center px-4 py-2 border rounded-full border-gray-light-1 bg-gray-dark-3'}`}
                     >
                       <input
                         className=" h-6 md:w-14 md:h-8 placeholder-gray-light-3  focus-visible:outline-0"

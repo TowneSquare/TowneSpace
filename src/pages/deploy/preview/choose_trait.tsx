@@ -44,7 +44,7 @@ const ChooseTrait = () => {
                     onChange={(checked) => handleCheckboxChange(index, checked)}
                   />
                   <p className="text-sm md:text-base">{file.name}</p>
-                  <p className="text-sm md:text-base">{file.file.size}</p>
+                  <p className="text-sm md:text-base text-gray-light-2">({trait.files.length})</p>
                 </div>
               ))}
           </div>

@@ -14,7 +14,7 @@ const Tokens = () => {
   }, [traits]);
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex gap-4 flex-wrap ">
       {tokens.slice(0, 100).map((token, index) => {
         const Token = lazy(() => import('./token'));
         return (
