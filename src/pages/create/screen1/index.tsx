@@ -8,6 +8,8 @@ import Header from '../../../components/create/header';
 
 const Screen3 = () => {
   const dispatch = useAppDispatch();
+
+  
   const traits = useAppSelector((state) => state.createState.traits);
   const [fileCount, setFileCount] = useState(0);
 
