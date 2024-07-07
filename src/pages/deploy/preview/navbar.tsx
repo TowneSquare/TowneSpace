@@ -1,15 +1,23 @@
 import { updateFilter, updateTokenName } from '../../../state/deploy';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 
-const Navbar = () => {
+interface Props {
+  onSideBarToggle: () => void;
+  isSideBarActive: boolean;
+}
+
+const Navbar = ({ onSideBarToggle, isSideBarActive }: Props) => {
   const dispatch = useAppDispatch();
 
   const tokenName = useAppSelector((state) => state.deployState.collectionName);
   const totalSupply = useAppSelector((state) => state.deployState.totalSupply);
   return (
-    <div className="flex flex-col gap-4 px-4 mt-8 md:flex-row md:items-end">
-      <div className="flex items-end gap-4">
-        <div className="min-w-[64px] h-11 flex items-center justify-center border bg-[#FFFFFF] bg-opacity-10 border-gray-light-1 rounded-full cursor-pointer">
+    <div className="flex flex-col gap-2 px-2  mt-8 md:flex-row md:items-end">
+      <div className="flex gap-2 items-end ">
+        <div
+          onClick={onSideBarToggle}
+          className={`min-w-[64px] h-11 flex items-center justify-center border  ${isSideBarActive && ` bg-[#FFFFFF] bg-opacity-10`} border-gray-light-1 rounded-full cursor-pointer`}
+        >
           <img src="/deploy/order.svg" alt="order" />
         </div>
         <div className="">
@@ -37,7 +45,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-end w-full gap-4">
+      <div className="flex items-end w-full gap-2">
         <div className="min-w-[225px] bg-[#9264F81A] h-11 flex justify-center gap-2 items-center border border-primary-light rounded-full cursor-pointer">
           <img src="/deploy/refresh.svg" alt="refresh" />
           <p className="text-[16px] font-medium text-primary-light">

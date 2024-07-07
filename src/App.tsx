@@ -14,7 +14,7 @@ import CreateModal from './components/modal/createModal';
 import CreateStep2 from './components/modal/createStep2';
 import Customize from './pages/customize';
 import Archived from './pages/archived';
-
+import UploadAssetModal from './components/modal/uploadAssetModals';
 function App() {
   return (
     <div>
@@ -34,6 +34,7 @@ function App() {
       </Routes>
       <CreateModal />
       <CreateStep2 />
+      <UploadAssetModal />
     </div>
   );
 }

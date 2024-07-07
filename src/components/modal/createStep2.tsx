@@ -47,7 +47,7 @@ const CreateStep2 = () => {
 
   return (
     <div
-      className={`${isOpen ? 'block' : 'hidden'} fixed z-[100] inset-0 flex justify-center items-center bg-black/80`}
+      className={`${isOpen ? 'block' : 'hidden'} fixed z-[100] inset-0 flex justify-center items-center bg-black`}
       style={{
         backgroundImage: `url(/create/background-create.png)`,
         backgroundSize: 'cover',
