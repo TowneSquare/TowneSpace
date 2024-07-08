@@ -22,10 +22,15 @@ const PrimaryButton: React.FC<Props> = ({
         >
           {children}
         </button>
+      ) : type == ButtonStatus.disabled ? (
+        <button
+          className={`${className} px-6 py-2  rounded-full text-sm md:text-base font-semibold bg-transparent hover:bg-gray-dark- whitespace-nowrap`}
+        >
+          {children}
+        </button>
       ) : (
         <button
-          className={`${className} px-6 py-2 rounded-full text-sm md:text-base font-semibold bg-transparent hover:bg-gray-dark- whitespace-nowrap`}
-          onClick={onClick}
+          className={`${className} px-6 py-2 rounded-full text-sm md:text-base font-semibold bg-primary-light/40 hover:bg-gray-dark- whitespace-nowrap`}
         >
           {children}
         </button>

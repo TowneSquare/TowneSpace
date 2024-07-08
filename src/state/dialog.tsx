@@ -14,6 +14,10 @@ interface dialogStates {
   bExitEdit: boolean;
   bFinishEdit: boolean;
   bSetModal: boolean;
+  bUploadAssetModal: {
+    visible: boolean;
+    type: 'invalid_file' | 'invalid_folder' | undefined;
+  };
 }
 
 const initialState: dialogStates = {
@@ -30,6 +34,11 @@ const initialState: dialogStates = {
   bExitEdit: false,
   bFinishEdit: false,
   bSetModal: false,
+
+  bUploadAssetModal: {
+    visible: false,
+    type: undefined,
+  },
 };
 
 export const dialogSlice = createSlice({
@@ -75,8 +84,17 @@ export const dialogSlice = createSlice({
     toggleSettingModal: (state, action: PayloadAction<boolean>) => {
       state.bSetModal = action.payload;
     },
+    toggleUploadAssetModal: (
+      state,
+      action: PayloadAction<{
+        visible: boolean;
+        type: 'invalid_file' | 'invalid_folder' | undefined;
+      }>
+    ) => {
+      state.bUploadAssetModal = action.payload;
+    },
   },
-  extraReducers: (builder) => { },
+  extraReducers: (builder) => {},
 });
 
 export const {
@@ -93,5 +111,6 @@ export const {
   toggleExitEdit,
   toggleFinishEdit,
   toggleSettingModal,
+  toggleUploadAssetModal,
 } = dialogSlice.actions;
 export default dialogSlice.reducer;
