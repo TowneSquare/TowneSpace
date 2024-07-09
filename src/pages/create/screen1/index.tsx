@@ -51,6 +51,7 @@ const Screen3 = () => {
         elem.style.outline = '';
         elem.style.backgroundColor = '';
       });
+
       // Handle file drop event.
       elem.addEventListener('drop', async (e) => {
         e.preventDefault();
@@ -87,7 +88,7 @@ const Screen3 = () => {
           'svg',
         ];
 
-        const readFiles = async (
+        const readFilesFileSystemAPI = async (
           folderName: string,
           handle: any,
           isSubfolder = false
@@ -100,7 +101,7 @@ const Screen3 = () => {
             const fileExtension =
               fileNameParts[fileNameParts.length - 1].toLowerCase();
 
-            if (value.kind === 'file' && key.toLowerCase() == '.ds_store') {
+            if (value.kind === 'file' && key.toLowerCase() === '.ds_store') {
               console.log('====== ds seen =======');
               continue;
             }
@@ -152,16 +153,99 @@ const Screen3 = () => {
               containsSubfolders = true;
               const subfolderName = key;
               traits.push({ name: subfolderName, files: [] });
-              await readFiles(subfolderName, value, true);
+              await readFilesFileSystemAPI(subfolderName, value, true);
+            }
+          }
+        };
+
+        const readFilesWebkit = async (
+          folderName: string,
+          handle: any,
+          isSubfolder = false
+        ) => {
+          // set if dragged folder contains files rather than subfolder to false
+          let folderContainsFiles = false;
+
+          const reader = handle.createReader();
+          let entries = [];
+          let entry: any;
+          while (
+            (entry = (await new Promise((resolve) =>
+              reader.readEntries(resolve)
+            )) as any).length > 0
+          ) {
+            entries = entries.concat(entry) as any;
+          }
+
+          for (const entry of entries) {
+            const fileNameParts = entry.name.split('.');
+            const fileExtension =
+              fileNameParts[fileNameParts.length - 1].toLowerCase();
+
+            if (entry.isFile && entry.name.toLowerCase() === '.ds_store') {
+              console.log('====== ds seen =======');
+              continue;
+            }
+
+            if (entry.isFile) {
+              if (!isSubfolder) {
+                // Direct file in parent folder, mark as invalid
+                invalidFolderFound = true;
+                dispatch(
+                  toggleUploadAssetModal({
+                    visible: true,
+                    type: 'invalid_folder',
+                  })
+                );
+                return;
+              }
+
+              folderContainsFiles = true;
+              fileCount++;
+              if (!supportedExtensions.includes(fileExtension)) {
+                containsUnsupportedFiles = true;
+              } else {
+                const file = await new Promise((resolve) =>
+                  entry.file(resolve)
+                );
+                const imageUrl = URL.createObjectURL(file as any);
+                const obj = {
+                  name: fileNameParts.slice(0, -1).join('.'),
+                  folderName: folderName,
+                  file: file,
+                  imageUrl,
+                  rarities: 50,
+                  isIncluded: true,
+                };
+
+                let folderFound = false;
+                for (let i = 0; i < traits.length; i++) {
+                  if (traits[i].name === folderName) {
+                    traits[i].files.push(obj as any) 
+                    folderFound = true;
+                    break;
+                  }
+                }
+                if (!folderFound) {
+                  traits.push({ name: folderName, files: [obj as any] });
+                }
+              }
+            } else if (entry.isDirectory && !isSubfolder) {
+              containsSubfolders = true;
+              const subfolderName = entry.name;
+              traits.push({ name: subfolderName, files: [] });
+              await readFilesWebkit(subfolderName, entry, true);
             }
           }
         };
 
         for (const handle of fileHandles) {
-          //check the type of file being dragged (folder or file)
-          if (handle.kind === 'directory') {
-            // Read the files in the folder
-            await readFiles(handle.name, handle);
+          if (supportsFileSystemAccessAPI && handle.kind === 'directory') {
+            // Read the files in the folder using File System Access API
+            await readFilesFileSystemAPI(handle.name, handle);
+          } else if (supportsWebkitGetAsEntry && handle.isDirectory) {
+            // Read the files in the folder using webkitGetAsEntry
+            await readFilesWebkit(handle.name, handle);
           } else {
             // If a file is dragged, mark as invalid
             invalidFolderFound = true;
@@ -198,6 +282,7 @@ const Screen3 = () => {
     const selector = document.getElementById('folder-selector');
     selector?.click();
   };
+
   const onChangeFolder = async (e: any) => {
     toast.success('Uploading!');
 
