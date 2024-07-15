@@ -10,7 +10,7 @@ const Folder: React.FC<Props> = ({ data }) => {
         <p className="text-base md:text-xl font-semibold">{data.name}</p>
         <p className="text-sm md:text-base">{data.files.length} Traits</p>
       </div>
-      <div className="mt-8 flex flex-wrap gap-4">
+      <div className="mt-8 flex overflow-x-scroll gap-4">
         {data.files.map((file, index) => (
           <div key={index}>
             <div className="w-24 md:w-32 bg-gray-dark-2 rounded-md">

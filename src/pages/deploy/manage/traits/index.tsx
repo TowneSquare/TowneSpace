@@ -4,7 +4,6 @@ import ButtonStatus from '../../../../type/button_status';
 import Folder from './folder';
 import { useNavigate } from 'react-router-dom';
 
-
 const Traits = () => {
   const traits = useAppSelector((state) => state.createState.traits);
   const navigate = useNavigate();
@@ -18,7 +17,10 @@ const Traits = () => {
             Remove or update traits or upload new ones
           </p>
         </div>
-        <SecondaryButton type={ButtonStatus.active} onClick={() => navigate('/create/step1')}>
+        <SecondaryButton
+          type={ButtonStatus.active}
+          onClick={() => navigate('/create/step1')}
+        >
           <div className="flex gap-4">
             <img src="/deploy/upload-white.svg" alt="upload" />
             <p className="font-medium">Upload new assets</p>

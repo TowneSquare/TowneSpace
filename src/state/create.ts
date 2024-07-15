@@ -1,16 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import FolderType from '../type/folder_type';
+import FolderType, {
+  AssetImageData,
+  ImageMetadata,
+  TokenType,
+} from '../type/folder_type';
 
 interface createStates {
   traits: FolderType[];
   step: number;
   primaryTrait: FolderType | undefined;
+  assetsToDownloadMetaData: ImageMetadata[];
+  assetimages: AssetImageData[];
 }
 
 const initialState: createStates = {
   step: 0,
   traits: [],
   primaryTrait: undefined,
+  assetsToDownloadMetaData: [],
+  assetimages: [],
 };
 
 export const createflowSlice = createSlice({
@@ -42,6 +50,14 @@ export const createflowSlice = createSlice({
         action.payload.iFile
       ].isIncluded = action.payload.value;
     },
+    updateRarityNumber: (
+      state,
+      action: PayloadAction<{ iFolder: number; iFile: number; value: number }>
+    ) => {
+      state.traits[action.payload.iFolder].files[
+        action.payload.iFile
+      ].rarityNumber = action.payload.value;
+    },
   },
 });
 
@@ -51,5 +67,6 @@ export const {
   updateRarities,
   updateIsIncluded,
   updateStep,
+  updateRarityNumber,
 } = createflowSlice.actions;
 export default createflowSlice.reducer;
