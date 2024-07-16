@@ -35,7 +35,10 @@ const Screen5 = () => {
 
   return (
     <div className="pb-10">
-      <Header stepNumber={3} />
+      <Header
+        stepNumber={3}
+        onNextButtonPressed={() => dispatch(updateTraits(folders))}
+      />
       <p className="text-base md:text-xl text-center mt-8">
         Drag to set the Trait category order that will be applied <br />
         to every Dynamic PFP generated

@@ -221,7 +221,7 @@ const Screen3 = () => {
                 let folderFound = false;
                 for (let i = 0; i < traits.length; i++) {
                   if (traits[i].name === folderName) {
-                    traits[i].files.push(obj as any) 
+                    traits[i].files.push(obj as any);
                     folderFound = true;
                     break;
                   }

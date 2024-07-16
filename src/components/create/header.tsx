@@ -9,9 +9,10 @@ import { useState } from 'react';
 
 interface Props {
   stepNumber: number;
+  onNextButtonPressed?: () => void;
 }
 
-const Header: React.FC<Props> = ({ stepNumber }) => {
+const Header: React.FC<Props> = ({ stepNumber, onNextButtonPressed }) => {
   const navigate = useNavigate();
   const dispath = useDispatch();
   const onClose = () => {
@@ -24,6 +25,7 @@ const Header: React.FC<Props> = ({ stepNumber }) => {
   );
 
   const handleStep = () => {
+    onNextButtonPressed?.();
     if (stepNumber >= 4) {
       console.log('Ddd');
       navigate('/deploy');

@@ -9,8 +9,22 @@ export interface FileType {
   imageUrl: string;
   rarities: number;
   isIncluded: boolean;
+  rarityNumber?: number;
 }
 export default interface FolderType {
   name: string;
   files: FileType[];
+}
+
+
+
+export interface AssetImageData {
+  name: string;
+  image: Blob;
+}
+
+export interface ImageMetadata {
+  name: string;
+  percentage: number;
+  rarityNumber?: number;
 }
