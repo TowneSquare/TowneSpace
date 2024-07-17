@@ -140,6 +140,7 @@ const Settings = () => {
                     dispatch(updateCollectionName(e.target.value));
                     dispatch(toggleSettingModal(true));
                   }}
+                  value={tokenName}
                 />
               </div>
               <ToolTip label="Collection Description" className="mt-8">
@@ -249,8 +250,13 @@ const Settings = () => {
               </ToolTip>
               <div
                 id="folder"
-                className="w-[234px] h-[234px] flex gap-2 justify-center items-center border border-dashed border-primary-light rounded-lg mt-2 cursor-pointer"
+                className="w-[240px] h-[240px] cursor-pointe flex justify-center mt-2 items-center"
                 onClick={() => onFolderSelector()}
+                style={{
+                  backgroundImage : 'url(/upload-ele.svg)',
+                  backgroundSize: "contain",
+                  backgroundRepeat:"no-repeat"
+                }}
               >
                 {!previewImg && (
                   <img
