@@ -4,6 +4,7 @@ import {
   Wallet,
   isRedirectable,
   WalletName,
+  AptosStandardSupportedWallet,
 } from '@aptos-labs/wallet-adapter-react';
 import { useAppDispatch } from '../state/hooks';
 import { toggleConnectRequest, toggleWalletPanel } from '../state/dialog';
@@ -11,9 +12,18 @@ import { toggleConnectRequest, toggleWalletPanel } from '../state/dialog';
 const WalletButtons = () => {
   const { wallets } = useWallet();
 
+  // Filter out duplicate wallets
+  const uniqueWallets = wallets?.filter(
+    (
+      wallet: Wallet | AptosStandardSupportedWallet<string>,
+      index: number,
+      self: any
+    ) => index === self.findIndex((w: any) => w.name === wallet.name)
+  ) as any;
+
   return (
     <div className="flex flex-col gap-4 pl-10 mt-4">
-      {wallets?.map((wallet: any) => {
+      {uniqueWallets?.map((wallet: any) => {
         return WalletView(wallet);
       })}
     </div>

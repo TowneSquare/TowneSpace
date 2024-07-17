@@ -5,6 +5,8 @@ import { updateTraits } from '../../../state/create';
 import { toast } from 'react-toastify';
 import { isSupportFile } from '../../../util';
 import Header from '../../../components/create/header';
+import UploadAssetModal from '../../../components/modal/uploadAssetModals';
+import { toggleUploadAssetModal } from '../../../state/dialog';
 
 const Screen3 = () => {
   const dispatch = useAppDispatch();
@@ -12,36 +14,45 @@ const Screen3 = () => {
   const [fileCount, setFileCount] = useState(0);
 
   useEffect(() => {
+    // Calculate the total number of files and update the state.
     const totalFiles = traits.reduce(
       (acc, trait) => acc + trait.files.length,
       0
     );
     setFileCount(totalFiles);
   }, [traits]);
+
   useEffect(() => {
+    // Check if the browser supports File System Access API and WebkitGetAsEntry API.
     const supportsFileSystemAccessAPI =
       'getAsFileSystemHandle' in DataTransferItem.prototype;
     const supportsWebkitGetAsEntry =
       'webkitGetAsEntry' in DataTransferItem.prototype;
 
+    // Get the elements for folder and debug area.
     const elem = document.getElementById('folder');
     const debug = document.getElementById('preview');
     if (elem && debug) {
+      // Add event listeners to the folder element for drag and drop functionality.
+
+      // Prevent default behavior during drag over to allow drop.
       elem.addEventListener('dragover', (e) => {
-        // Prevent navigation.
         e.preventDefault();
       });
 
+      // Style the element when a file is dragged over it.
       elem.addEventListener('dragenter', (e) => {
         elem.style.outline = 'solid #9264F8 3px';
         elem.style.backgroundColor = 'rgba(184, 130, 255, 0.10)';
       });
 
+      // Remove styling when the dragged file leaves the element.
       elem.addEventListener('dragleave', (e) => {
         elem.style.outline = '';
         elem.style.backgroundColor = '';
       });
 
+      // Handle file drop event.
       elem.addEventListener('drop', async (e) => {
         e.preventDefault();
         elem.style.outline = '';
@@ -51,52 +62,215 @@ const Screen3 = () => {
 
         const fileHandlesPromises = [...(e.dataTransfer.items as any)]
           .filter((item) => item.kind === 'file')
-          .map((item) =>
-            supportsFileSystemAccessAPI
-              ? item.getAsFileSystemHandle()
-              : supportsWebkitGetAsEntry
-                ? item.webkitGetAsEntry()
-                : item.getAsFile()
-          );
+          .map(async (item) => {
+            if (supportsFileSystemAccessAPI) {
+              return item.getAsFileSystemHandle();
+            } else if (supportsWebkitGetAsEntry) {
+              return item.webkitGetAsEntry();
+            } else {
+              return item.getAsFile();
+            }
+          });
 
+        const fileHandles = await Promise.all(fileHandlesPromises);
         const traits: FolderType[] = [];
+        let containsUnsupportedFiles = false;
+        let containsSubfolders = false;
+        let fileCount = 0;
+        let invalidFolderFound = false;
 
-        const readFiles = async (folderName: string, handle: any) => {
+        const supportedExtensions = [
+          'jpg',
+          'jpeg',
+          'png',
+          'webp',
+          'gif',
+          'svg',
+        ];
+
+        const readFilesFileSystemAPI = async (
+          folderName: string,
+          handle: any,
+          isSubfolder = false
+        ) => {
+          // set if dragged folder contains files rather than subfolder to false
+          let folderContainsFiles = false;
+
           for await (const [key, value] of handle.entries()) {
-            const fileName = key.split('.');
-            if (
-              value.kind == 'file' &&
-              isSupportFile(fileName[fileName.length - 1])
-            ) {
-              const imageUrl = URL.createObjectURL(await value.getFile());
-              const obj: FileType = {
-                name: key.split('.')[0],
-                folderName: folderName,
-                file: handle,
-                imageUrl,
-                rarities: 50,
-                isIncluded: true,
-              };
+            const fileNameParts = key.split('.');
+            const fileExtension =
+              fileNameParts[fileNameParts.length - 1].toLowerCase();
 
-              for (let i = 0; i < traits.length; i++) {
-                if (traits[i].name == folderName) {
-                  traits[i].files.push(obj);
-                  break;
+            if (value.kind === 'file' && key.toLowerCase() === '.ds_store') {
+              console.log('====== ds seen =======');
+              continue;
+            }
+
+            // if dragged folder contains files rather than subfolder
+            if (value.kind === 'file') {
+              if (!isSubfolder) {
+                // Direct file in parent folder, mark as invalid
+                invalidFolderFound = true;
+                dispatch(
+                  toggleUploadAssetModal({
+                    visible: true,
+                    type: 'invalid_folder',
+                  })
+                );
+                return;
+              }
+
+              console.log(' ====== check here for files in subfolder ======');
+              console.log(fileExtension);
+              folderContainsFiles = true;
+              fileCount++;
+              if (!supportedExtensions.includes(fileExtension)) {
+                containsUnsupportedFiles = true;
+              } else {
+                const imageUrl = URL.createObjectURL(await value.getFile());
+                const obj = {
+                  name: fileNameParts.slice(0, -1).join('.'),
+                  folderName: folderName,
+                  file: value,
+                  imageUrl,
+                  rarities: 50,
+                  isIncluded: true,
+                };
+
+                let folderFound = false;
+                for (let i = 0; i < traits.length; i++) {
+                  if (traits[i].name === folderName) {
+                    traits[i].files.push(obj);
+                    folderFound = true;
+                    break;
+                  }
+                }
+                if (!folderFound) {
+                  traits.push({ name: folderName, files: [obj] });
                 }
               }
+            } else if (value.kind === 'directory' && !isSubfolder) {
+              containsSubfolders = true;
+              const subfolderName = key;
+              traits.push({ name: subfolderName, files: [] });
+              await readFilesFileSystemAPI(subfolderName, value, true);
             }
           }
         };
 
-        for await (const handle of fileHandlesPromises) {
-          for await (const [key, value] of handle.entries()) {
-            if (value.kind == 'directory') {
-              traits.push({ name: key, files: [] });
-              await readFiles(key, value);
+        const readFilesWebkit = async (
+          folderName: string,
+          handle: any,
+          isSubfolder = false
+        ) => {
+          // set if dragged folder contains files rather than subfolder to false
+          let folderContainsFiles = false;
+
+          const reader = handle.createReader();
+          let entries = [];
+          let entry: any;
+          while (
+            (entry = (await new Promise((resolve) =>
+              reader.readEntries(resolve)
+            )) as any).length > 0
+          ) {
+            entries = entries.concat(entry) as any;
+          }
+
+          for (const entry of entries) {
+            const fileNameParts = entry.name.split('.');
+            const fileExtension =
+              fileNameParts[fileNameParts.length - 1].toLowerCase();
+
+            if (entry.isFile && entry.name.toLowerCase() === '.ds_store') {
+              console.log('====== ds seen =======');
+              continue;
             }
+
+            if (entry.isFile) {
+              if (!isSubfolder) {
+                // Direct file in parent folder, mark as invalid
+                invalidFolderFound = true;
+                dispatch(
+                  toggleUploadAssetModal({
+                    visible: true,
+                    type: 'invalid_folder',
+                  })
+                );
+                return;
+              }
+
+              folderContainsFiles = true;
+              fileCount++;
+              if (!supportedExtensions.includes(fileExtension)) {
+                containsUnsupportedFiles = true;
+              } else {
+                const file = await new Promise((resolve) =>
+                  entry.file(resolve)
+                );
+                const imageUrl = URL.createObjectURL(file as any);
+                const obj = {
+                  name: fileNameParts.slice(0, -1).join('.'),
+                  folderName: folderName,
+                  file: file,
+                  imageUrl,
+                  rarities: 50,
+                  isIncluded: true,
+                };
+
+                let folderFound = false;
+                for (let i = 0; i < traits.length; i++) {
+                  if (traits[i].name === folderName) {
+                    traits[i].files.push(obj as any);
+                    folderFound = true;
+                    break;
+                  }
+                }
+                if (!folderFound) {
+                  traits.push({ name: folderName, files: [obj as any] });
+                }
+              }
+            } else if (entry.isDirectory && !isSubfolder) {
+              containsSubfolders = true;
+              const subfolderName = entry.name;
+              traits.push({ name: subfolderName, files: [] });
+              await readFilesWebkit(subfolderName, entry, true);
+            }
+          }
+        };
+
+        for (const handle of fileHandles) {
+          if (supportsFileSystemAccessAPI && handle.kind === 'directory') {
+            // Read the files in the folder using File System Access API
+            await readFilesFileSystemAPI(handle.name, handle);
+          } else if (supportsWebkitGetAsEntry && handle.isDirectory) {
+            // Read the files in the folder using webkitGetAsEntry
+            await readFilesWebkit(handle.name, handle);
+          } else {
+            // If a file is dragged, mark as invalid
+            invalidFolderFound = true;
+            break;
           }
         }
 
+        if (invalidFolderFound) {
+          dispatch(
+            toggleUploadAssetModal({
+              visible: true,
+              type: 'invalid_folder',
+            })
+          );
+          return;
+        }
+        if (containsUnsupportedFiles) {
+          dispatch(
+            toggleUploadAssetModal({
+              visible: true,
+              type: 'invalid_file',
+            })
+          );
+          return;
+        }
         dispatch(updateTraits(traits));
         toast.dismiss();
         toast.success('Upload done!');
@@ -108,44 +282,100 @@ const Screen3 = () => {
     const selector = document.getElementById('folder-selector');
     selector?.click();
   };
-  const onChangeFolder = (e: any) => {
+
+  const onChangeFolder = async (e: any) => {
     toast.success('Uploading!');
-    const files: File[] = [...e.target.files];
+
+    // Create an array from e.target.files and filter out .DS_Store files
+    const files: File[] = [...e.target.files].filter(
+      (file) => file.name !== '.DS_Store'
+    );
     const traits: FolderType[] = [];
+    let containsUnsupportedFiles = false;
+    let containsSubfolders = false;
+    let fileCount = 0;
+    let invalidFolderFound = false;
+
+    const supportedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'];
+
+    const processFile = (file: File, folderName: string) => {
+      const fileNameParts = file.name.split('.');
+      const fileExtension =
+        fileNameParts[fileNameParts.length - 1].toLowerCase();
+
+      if (!supportedExtensions.includes(fileExtension)) {
+        containsUnsupportedFiles = true;
+        return;
+      }
+
+      fileCount++;
+      const imageUrl = URL.createObjectURL(file);
+      const obj: FileType = {
+        name: fileNameParts.slice(0, -1).join('.'),
+        folderName,
+        file,
+        imageUrl,
+        rarities: 50,
+        isIncluded: true,
+      };
+
+      let folderFound = false;
+      for (let i = 0; i < traits.length; i++) {
+        if (traits[i].name === folderName) {
+          traits[i].files.push(obj);
+          folderFound = true;
+          break;
+        }
+      }
+      if (!folderFound) {
+        traits.push({ name: folderName, files: [obj] });
+      }
+    };
+
     files.forEach((file: File) => {
       const paths = file.webkitRelativePath.split('/');
 
-      if (paths.length == 3) {
-        const fileName = paths[2].split('.');
-
-        if (
-          fileName.length >= 2 &&
-          isSupportFile(fileName[fileName.length - 1])
-        ) {
-          const imageUrl = URL.createObjectURL(file);
-          const obj: FileType = {
-            name: paths[2].split('.')[0],
-            folderName: paths[1],
-            file,
-            imageUrl,
-            rarities: 50,
-            isIncluded: true,
-          };
-
-          let isNew = true;
-          for (let i = 0; i < traits.length; i++) {
-            if (traits[i].name == paths[1]) {
-              traits[i].files.push(obj);
-              isNew = false;
-              break;
-            }
-          }
-          if (isNew) {
-            traits.push({ name: paths[1], files: [obj] });
-          }
-        }
+      if (paths.length === 2) {
+        // a file at the top level, which is invalid
+        invalidFolderFound = true;
+      } else if (paths.length === 3) {
+        // a file inside a subfolder
+        const folderName = paths[1];
+        containsSubfolders = true;
+        processFile(file, folderName);
+      } else if (paths.length > 3) {
+        // This is a folder inside a subfolder, which is invalid
+        invalidFolderFound = true;
       }
     });
+
+    // Check if there are subfolders
+    const validFolders = traits.filter((trait) => trait.files.length > 0);
+    containsSubfolders = validFolders.length > 0;
+
+    // Check if traits contain files
+    const containFiles =
+      traits.length > 0 && traits.some((trait) => trait.files.length > 0);
+
+    if (invalidFolderFound) {
+      dispatch(
+        toggleUploadAssetModal({
+          visible: true,
+          type: 'invalid_folder',
+        })
+      );
+      return;
+    }
+
+    if (containsUnsupportedFiles) {
+      dispatch(
+        toggleUploadAssetModal({
+          visible: true,
+          type: 'invalid_file',
+        })
+      );
+      return;
+    }
 
     dispatch(updateTraits(traits));
     toast.dismiss();

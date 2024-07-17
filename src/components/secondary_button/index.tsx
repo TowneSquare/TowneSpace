@@ -17,7 +17,7 @@ const SecondaryButton: React.FC<Props> = ({
     <>
       {type == ButtonStatus.active ? (
         <button
-          className={`${className} px-6 py-2 rounded-full text-sm md:text-base font-semibold bg-gray-dark-1 hover:bg-gray-light-1 active:bg-gray-dark-1 whitespace-nowrap border border-white`}
+          className={`${className} px-6 py-2 rounded-full text-sm md:text-base font-semibold bg-gray-dark-1 hover:bg-white/30 active:bg-gray-dark-1 whitespace-nowrap border border-white`}
           onClick={onClick}
         >
           {children}

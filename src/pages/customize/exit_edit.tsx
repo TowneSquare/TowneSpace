@@ -12,19 +12,23 @@ const ExitEdit = () => {
 
   return (
     <div className={`${isOpen ? 'block' : 'hidden'}`}>
-      <div className="fixed inset-0 flex items-center justify-center bg-gray-dark-2 bg-opacity-80">
-        <div className="w-2/6 rounded-lg bg-gray-dark-4">
+      {/* dialog bg */}
+      <div className="fixed inset-0 flex items-center justify-center bg-black/70">
+        {/* dialog */}
+        <div className="w-[553px] border rounded-lg bg-gray-dark-4 border-gray-light-3">
+          {/* dialog header */}
           <div className="flex items-center justify-between m-6">
-            <h2 className="text-lg font-semibold">Exit & discard changes</h2>
+            <h2 className="text-xl font-semibold">Exit & discard changes</h2>
             <button
-              className="text-gray-700"
+              className="w-6 h-6 text-gray-700"
               onClick={() => dispatch(toggleExitEdit(false))}
             >
               <img src="/customize/close.svg" alt="close" />
             </button>
           </div>
-          <div className="flex flex-col items-center justify-center gap-6 px-10 my-10 text-center">
-            <p>
+          {/* dialog body */}
+          <div className="flex flex-col items-center justify-center mx-auto my-10 text-center w-100">
+            <p className='text-xl'>
               Note that all the changes you have made to the cNFT will be
               discarded
             </p>
@@ -32,10 +36,10 @@ const ExitEdit = () => {
           <div className="flex items-center justify-between px-12 mb-6">
             <Link
               to=""
-              className="px-10 my-2"
+              className="my-2"
               onClick={() => dispatch(toggleExitEdit(false))}
             >
-              <p className="text-sm font-semibold md:text-base text-primary-light">
+              <p className="text-sm font-medium md:text-lg text-primary-light">
                 Continue editing
               </p>
             </Link>
@@ -45,9 +49,9 @@ const ExitEdit = () => {
                 navigate('/studio/mytoken');
                 dispatch(toggleExitEdit(false));
               }}
-              className="px-10 my-2 "
+              className="px-10 my-2"
             >
-              Exit & discard changes
+              <p className='text-sm font-medium md:text-lg'>Exit & discard changes</p>
             </PrimaryButton>
           </div>
         </div>
