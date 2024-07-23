@@ -6,6 +6,7 @@ import {
 } from '../../../state/deploy';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import { generateTokens } from '../../../util/generateToken';
+import { useState } from 'react';
 
 interface Props {
   onSideBarToggle: () => void;
@@ -14,9 +15,11 @@ interface Props {
 
 const Navbar = ({ onSideBarToggle, isSideBarActive }: Props) => {
   const dispatch = useAppDispatch();
+
   const traits = useAppSelector((state) => state.createState.traits);
   const tokenName = useAppSelector((state) => state.deployState.collectionName);
   const totalSupply = useAppSelector((state) => state.deployState.totalSupply);
+  const [collectionSize, setCollectionSize] = useState(totalSupply);
   return (
     <div className="flex flex-col gap-2 px-2  mt-8 md:flex-row md:items-end">
       <div className="flex gap-2 items-end ">
@@ -47,7 +50,7 @@ const Navbar = ({ onSideBarToggle, isSideBarActive }: Props) => {
               className="w-full placeholder-gray-light-3 focus-visible:outline-0"
               placeholder="10,000"
               style={{ background: 'none' }}
-              value={totalSupply}
+              value={isNaN(collectionSize)?"":collectionSize}
               onChange={(e) => {
                 const re = /^[\d,]*$/;
                 if (e.target.value === '' || re.test(e.target.value)) {
@@ -56,7 +59,7 @@ const Navbar = ({ onSideBarToggle, isSideBarActive }: Props) => {
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                     .replace(/(?<=\d)(?=(\d{3})+\b)/g, '.');
 
-                  dispatch(updateTotalSupply(numberWithCommas));
+                  setCollectionSize(parseInt(numberWithCommas));
                 }
               }}
             />
@@ -66,11 +69,7 @@ const Navbar = ({ onSideBarToggle, isSideBarActive }: Props) => {
       <div className="flex items-end w-full gap-2">
         <div
           onClick={() => {
-            const generatedTokens = generateTokens(
-              traits,
-              Math.floor(Math.random() * traits.length)
-            );
-            dispatch(updateTokens(generatedTokens));
+            dispatch(updateTotalSupply(collectionSize));
           }}
           className="min-w-[225px] bg-[#9264F81A] h-11 flex justify-center gap-2 items-center border border-primary-light rounded-full cursor-pointer"
         >

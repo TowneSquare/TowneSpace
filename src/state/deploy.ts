@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import FolderType, { FileType, TokenType } from '../type/folder_type';
+import { Trait } from '../interface/deploy';
 
 interface deployStates {
   orderBy: boolean;
@@ -16,6 +17,7 @@ interface deployStates {
   payoutAddress: string;
   royalties: number;
   royaltiesPayoutAddress: string;
+  traitsWithPercentage: Array<Trait[]>;
 }
 
 const initialState: deployStates = {
@@ -33,6 +35,7 @@ const initialState: deployStates = {
   payoutAddress: '',
   royalties: 0,
   royaltiesPayoutAddress: '',
+  traitsWithPercentage: [[]],
 };
 
 export const deploySlice = createSlice({
@@ -84,6 +87,19 @@ export const deploySlice = createSlice({
     updateRoyaltiesPayoutAddress: (state, action: PayloadAction<string>) => {
       state.royaltiesPayoutAddress = action.payload;
     },
+    updateTraitswithPercentage: (
+      state,
+      action: PayloadAction<{ trait: Trait[]; indexNumber: number }>
+    ) => {
+      const { trait, indexNumber } = action.payload;
+      if (indexNumber >= 0 && indexNumber < state.traitsWithPercentage.length) {
+        // Update existing index
+        state.traitsWithPercentage[indexNumber] = trait;
+      } else if (indexNumber === state.traitsWithPercentage.length) {
+        // Append to the end if indexNumber is exactly the next index
+        state.traitsWithPercentage.push(trait);
+      }
+    },
   },
 });
 
@@ -102,5 +118,6 @@ export const {
   updatePayoutAddress,
   updateRoyalties,
   updateRoyaltiesPayoutAddress,
+  updateTraitswithPercentage,
 } = deploySlice.actions;
 export default deploySlice.reducer;

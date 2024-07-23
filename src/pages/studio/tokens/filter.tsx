@@ -1,5 +1,4 @@
-import PrimaryButton from '../../../components/primary_button';
-import ButtonStatus from '../../../type/button_status';
+
 import FilterType from '../../../type/filter_type';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import { emptyCollections, setNftFilter } from '../../../state/tokens';
@@ -24,27 +23,19 @@ const Filter: React.FC<Props> = ({}) => {
   return (
     <div className="flex justify-center">
       <div className="flex p-1 rounded-full bg-gray-dark-2">
-        <PrimaryButton
-          type={
-            filter == FilterType.composable
-              ? ButtonStatus.active
-              : ButtonStatus.disabled
-          }
+        <button
+          className={` px-6  py-2 rounded-full text-sm md:text-base font-semibold ${filter === FilterType.composable && 'bg-primary-default'} hover:bg-primary-light active:bg-primary-dark whitespace-nowrap`}
           onClick={() => onComposable()}
         >
           Tokens V2
-        </PrimaryButton>
-        <PrimaryButton
-          type={
-            filter == FilterType.nfts
-              ? ButtonStatus.active
-              : ButtonStatus.disabled
-          }
+        </button>
+
+        <button
+          className={` px-6  py-2 rounded-full text-sm md:text-base font-semibold  hover:bg-primary-light active:bg-primary-dark whitespace-nowrap ${filter == FilterType.nfts && 'bg-primary-default'}`}
           onClick={() => onNfts()}
-          className="md:w-[120px]"
         >
           Tokens V1
-        </PrimaryButton>
+        </button>
       </div>
     </div>
   );

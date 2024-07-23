@@ -21,7 +21,7 @@ import { FC, ReactNode } from 'react';
 import face from './lib/faceInitialization';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import './custom-toastify.css';
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const wallets = [
     new PetraWallet(),
@@ -60,9 +60,10 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
 const contextClass = {
   success:
-    'relative bg-gray-dark-2 flex w-[330px] h-[66px] border-gray-light-3 overflow-hidden rounded-lg border-[1px] items-center justify-between px-2 py-2',
-  error: 'bg-red-600',
-  info: 'bg-gray-600',
+    'relative bg-gray-dark-2 flex w-[330px]  border-gray-light-3 overflow-hidden rounded-lg border-[1px] items-start justify-between px-2 py-2',
+  error:
+    'relative bg-gray-dark-2 flex w-[330px]  border-gray-light-3 overflow-hidden rounded-lg border-[1px] items-center justify-between px-2 py-2', // Changed items-start to items-center
+  info: 'relative bg-gray-dark-2 flex w-[330px]  border-gray-light-3 overflow-hidden rounded-lg border-[1px] items-center justify-between px-2 py-2',
   warning: 'bg-orange-400',
   default: 'bg-indigo-600',
   dark: 'bg-white-600 font-gray-300',

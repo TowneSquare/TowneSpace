@@ -13,8 +13,10 @@ const Collections = () => {
   const { account } = useWallet();
   const dispatch = useAppDispatch();
   const filter = useAppSelector((state) => state.tokensState.collectionFilter);
-  const collections = useAppSelector((state) => state.tokensState.myCollections);
-  const bFetched = useAppSelector(state => state.tokensState.bFetched);
+  const collections = useAppSelector(
+    (state) => state.tokensState.myCollections
+  );
+  const bFetched = useAppSelector((state) => state.tokensState.bFetched);
   const isEmpty = bFetched && collections.length == 0;
 
   useEffect(() => {
@@ -34,7 +36,7 @@ const Collections = () => {
               ))}
             <div className="absolute flex flex-col items-center justify-end w-full h-full gap-14">
               <h1 className="text-2xl font-semibold">
-                You did't have any{' '}
+                You don't have any{' '}
                 {filter == FilterType.composable ? 'Composable NFT' : 'NFT'}{' '}
                 collections
               </h1>

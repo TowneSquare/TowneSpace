@@ -4,7 +4,7 @@ import { updateRarities, updateRarityNumber } from '../../../../state/create';
 import { useAppDispatch, useAppSelector } from '../../../../state/hooks';
 import FolderType from '../../../../type/folder_type';
 import { toast } from 'react-toastify';
-
+import { updateTraitswithPercentage } from '../../../../state/deploy';
 interface Trait {
   imageUrl: string;
   name: string;
@@ -24,18 +24,42 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
   const nftCollectionSize = useAppSelector(
     (state) => state.deployState.totalSupply
   );
-
+  const traitsWithPercentage = useAppSelector(
+    (state) => state.deployState.traitsWithPercentage
+  );
+  console.log('======== traits =======');
+  console.log(traitsWithPercentage);
+  // const [traitsWithPercentage, setTraitsWithPercentage] = useState<Trait[]>([]);
   const [rarityIndexNumber, setRarityIndexNumber] = useState<string[]>([]);
 
-  const [traitsWithPercentage, setTraitsWithPercentage] = useState<Trait[]>(
-    data.files.map((dat) => ({
-      imageUrl: dat.imageUrl,
-      name: dat.name,
-      percentage: 50, // Set default rarity value to 50%
-      rarityNumber: Math.floor((50 / 100) * nftCollectionSize), // Calculate default rarity number based on 50% and collection size
-      isUserSet: false,
-    }))
-  );
+  useEffect(() => {
+    if (
+      typeof traitsWithPercentage[iFolder]?.length === 'undefined' ||
+      traitsWithPercentage[iFolder].length === 0
+    ) {
+      const initialTraits = data.files.map((dat) => {
+        const evenPercentage = 100 / data.files.length;
+        const evenRarityNumber = Math.floor(
+          (evenPercentage / 100) * nftCollectionSize
+        );
+        return {
+          imageUrl: dat.imageUrl,
+          name: dat.name,
+          percentage: Number(evenPercentage.toFixed(1)),
+          rarityNumber: Number(evenRarityNumber.toFixed(1)),
+          isUserSet: false,
+        };
+      });
+
+      // update traits with percentage in the store using the index of the folder
+      dispatch(
+        updateTraitswithPercentage({
+          trait: initialTraits,
+          indexNumber: iFolder,
+        })
+      );
+    }
+  }, []);
 
   const redistributeValues = (
     changedIndex: number,
@@ -44,27 +68,28 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
   ) => {
     if (isPercentage) {
       let remainingPercentage = 100 - changedValue;
-      let numUnsetTraits = traitsWithPercentage.filter(
+      let numUnsetTraits = traitsWithPercentage[iFolder].filter(
         (trait, index) => !trait.isUserSet && index !== changedIndex
       ).length;
-      let newTraits = traitsWithPercentage.map((trait, index) => {
+      let newTraits = traitsWithPercentage[iFolder].map((trait, index) => {
         if (index === changedIndex) {
           return { ...trait, percentage: changedValue, isUserSet: true };
         }
         if (!trait.isUserSet) {
           return {
             ...trait,
-            percentage: Math.floor(remainingPercentage / numUnsetTraits),
+            percentage: remainingPercentage / numUnsetTraits,
           };
         }
         return trait;
       });
-      setTraitsWithPercentage(newTraits);
+      dispatch(
+        updateTraitswithPercentage({ trait: newTraits, indexNumber: iFolder })
+      );
       dispatch(
         updateRarities({ iFolder, iFile: changedIndex, value: changedValue })
       );
 
-      // Recalculate rarity numbers based on updated percentages
       const totalPercentage = newTraits.reduce(
         (acc, trait) => acc + trait.percentage,
         0
@@ -75,13 +100,18 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
           (trait.percentage / totalPercentage) * nftCollectionSize
         ),
       }));
-      setTraitsWithPercentage(newTraitsWithNumbers);
+      dispatch(
+        updateTraitswithPercentage({
+          trait: newTraitsWithNumbers,
+          indexNumber: iFolder,
+        })
+      );
     } else {
       let remainingNumber = nftCollectionSize - changedValue;
-      let numUnsetTraits = traitsWithPercentage.filter(
+      let numUnsetTraits = traitsWithPercentage[iFolder].filter(
         (trait, index) => !trait.isUserSet && index !== changedIndex
       ).length;
-      let newTraits = traitsWithPercentage.map((trait, index) => {
+      let newTraits = traitsWithPercentage[iFolder].map((trait, index) => {
         if (index === changedIndex) {
           return { ...trait, rarityNumber: changedValue, isUserSet: true };
         }
@@ -93,7 +123,9 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
         }
         return trait;
       });
-      setTraitsWithPercentage(newTraits);
+      dispatch(
+        updateTraitswithPercentage({ trait: newTraits, indexNumber: iFolder })
+      );
       dispatch(
         updateRarityNumber({
           iFolder,
@@ -102,16 +134,20 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
         })
       );
 
-      // Recalculate percentages based on updated rarity numbers
       const totalRarity = newTraits.reduce(
         (acc, trait) => acc + trait.rarityNumber,
         0
       );
       const newTraitsWithPercentages = newTraits.map((trait) => ({
         ...trait,
-        percentage: Math.floor((trait.rarityNumber / totalRarity) * 100),
+        percentage: (trait.rarityNumber / totalRarity) * 100,
       }));
-      setTraitsWithPercentage(newTraitsWithPercentages);
+      dispatch(
+        updateTraitswithPercentage({
+          trait: newTraitsWithPercentages,
+          indexNumber: iFolder,
+        })
+      );
     }
   };
 
@@ -121,38 +157,45 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
     isPercentage: boolean
   ) => {
     if (isPercentage) {
-      if (value <= 100) {
-        let totalSetPercentage = traitsWithPercentage.reduce(
-          (acc, trait, idx) =>
-            idx === index
-              ? acc
-              : acc + (trait.isUserSet ? trait.percentage : 0),
-          0
-        );
-        let maxAllowed = 100 - totalSetPercentage;
-        if (value <= maxAllowed) {
-          redistributeValues(index, value, true);
-        } else {
-          toast.error(`Cannot exceed ${maxAllowed}%`);
-        }
+      if (value < 0 || value > 100) {
+        toast.error('Percentage must be between 0 and 100');
+        return;
+      }
+      let totalSetPercentage = traitsWithPercentage[iFolder].reduce(
+        (acc, trait, idx) => {
+          if (idx !== index) {
+            return trait.isUserSet ? acc + trait.percentage : acc;
+          }
+          return acc;
+        },
+        0
+      );
+
+      if (totalSetPercentage + value > 100) {
+        toast.error('Total percentage cannot exceed 100%');
+        return;
       }
     } else {
-      if (value <= nftCollectionSize) {
-        let totalSetNumber = traitsWithPercentage.reduce(
-          (acc, trait, idx) =>
-            idx === index
-              ? acc
-              : acc + (trait.isUserSet ? trait.rarityNumber : 0),
-          0
-        );
-        let maxAllowed = nftCollectionSize - totalSetNumber;
-        if (value <= maxAllowed) {
-          redistributeValues(index, value, false);
-        } else {
-          toast.error(`Cannot exceed ${maxAllowed}`);
-        }
+      if (value < 0 || value > nftCollectionSize) {
+        toast.error(`Rarity number must be between 0 and ${nftCollectionSize}`);
+        return;
+      }
+      let totalSetNumber = traitsWithPercentage[iFolder].reduce(
+        (acc, trait, idx) => {
+          if (idx !== index) {
+            return trait.isUserSet ? acc + trait.rarityNumber : acc;
+          }
+          return acc;
+        },
+        0
+      );
+
+      if (totalSetNumber + value > nftCollectionSize) {
+        toast.error(`Total rarity number cannot exceed collection size`);
+        return;
       }
     }
+    redistributeValues(index, value, isPercentage);
   };
 
   return (
@@ -181,7 +224,7 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
           </div>
         </div>
 
-        {traitsWithPercentage.map((file, index) => (
+        {traitsWithPercentage[iFolder]?.map((file, index) => (
           <div className="grid grid-cols-12 items-center pr-8 " key={index}>
             <div className="rounded-md col-span-3 flex gap-3">
               <img
@@ -200,8 +243,18 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
                     {!rarityIndexNumber.includes(`${iFolder}-${index}`) && (
                       <Slider
                         className="md:w-[250px] ml-3"
-                        value={file.percentage}
-                        onChange={(value) => onChangeValue(value, index, true)}
+                        value={Number(file.percentage?.toFixed(1))}
+                        onChange={(value) => {
+                          const floatValue = parseFloat(value as any);
+                          if (!isNaN(floatValue)) {
+                            const isPercentage = !rarityIndexNumber.includes(
+                              `${iFolder}-${index}`
+                            );
+                            onChangeValue(floatValue, index, isPercentage);
+                          } else {
+                            console.error('Invalid slider value:', value);
+                          }
+                        }}
                       />
                     )}
                     <div
@@ -219,15 +272,14 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
                             ? isNaN(file.rarityNumber)
                               ? ''
                               : file.rarityNumber
-                            : isNaN(file.percentage)
+                            : isNaN(Number(file.percentage?.toFixed(1)))
                               ? ''
-                              : file.percentage
+                              : Number(file.percentage?.toFixed(1))
                         }
                         style={{ background: 'none' }}
                         onInput={(e) => {
                           const value = e.currentTarget.value;
                           if (value === '') {
-                            // Handle empty input case
                             if (
                               rarityIndexNumber.includes(`${iFolder}-${index}`)
                             ) {
@@ -236,16 +288,16 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
                               onChangeValue(0, index, true);
                             }
                           } else {
-                            const intValue = parseInt(value);
-                            if (!isNaN(intValue)) {
+                            const floatValue = parseFloat(value);
+                            if (!isNaN(floatValue)) {
                               if (
                                 rarityIndexNumber.includes(
                                   `${iFolder}-${index}`
                                 )
                               ) {
-                                onChangeValue(intValue, index, false);
+                                onChangeValue(floatValue, index, false);
                               } else {
-                                onChangeValue(intValue, index, true);
+                                onChangeValue(floatValue, index, true);
                               }
                             }
                           }
@@ -290,10 +342,13 @@ const Folder: React.FC<Props> = ({ data, iFolder }) => {
                   </div>
                   <div className="flex justify-between ">
                     <p className=" text-sm md:text-base">
-                      {isNaN(file.percentage) ? 0 : file.percentage}%
+                      {isNaN(file.percentage)
+                        ? '0.0'
+                        : file.percentage.toFixed(1)}
+                      %
                     </p>
                     <p className="w-14 text-right  text-sm md:text-base">
-                      {file.rarityNumber ? file.rarityNumber : 0}
+                      {Math.round(file.rarityNumber) || 0}
                     </p>
                   </div>
                 </div>

@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { TokenType } from '../../../../type/folder_type';
 import { useAppDispatch, useAppSelector } from '../../../../state/hooks';
 import { updateCurrentToken } from '../../../../state/deploy';
-import { sleep } from '../../../../util';
-import { saveAs } from 'file-saver';
+
 
 interface Props {
   token: TokenType;
