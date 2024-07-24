@@ -18,6 +18,9 @@ const Header: React.FC<Props> = ({ stepNumber, onNextButtonPressed }) => {
   const onClose = () => {
     navigate('/studio');
   };
+  const primaryTrait = useAppSelector(
+    (state) => state.createState.primaryTrait
+  );
   const currentStep = useAppSelector((state) => state.createState.step);
   const traits = useAppSelector((state) => state.createState.traits);
   const [buttonState, setButtonState] = useState<ButtonStatus>(
@@ -44,14 +47,18 @@ const Header: React.FC<Props> = ({ stepNumber, onNextButtonPressed }) => {
 
   useEffect(() => {
     dispath(updateStep(stepNumber));
-    if (stepNumber === 1 && traits.length > 0) {
-      setButtonState(ButtonStatus.active);
+    if (stepNumber === 1 && traits.length < 1) {
+      setButtonState(ButtonStatus.inactive);
     } else if (stepNumber === 2 && traits.length > 0) {
       setButtonState(ButtonStatus.active);
-    } else if (stepNumber > 2) {
+    } else if (stepNumber === 3) {
+      setButtonState(ButtonStatus.active);
+    } else if (stepNumber === 4 && !primaryTrait) {
+      setButtonState(ButtonStatus.inactive);
+    } else {
       setButtonState(ButtonStatus.active);
     }
-  }, [stepNumber, traits]);
+  }, [stepNumber, traits, primaryTrait]);
 
   return (
     <div className="relative h-[124px] mx-4 md:mx-8 flex justify-center items-center">
@@ -74,7 +81,7 @@ const Header: React.FC<Props> = ({ stepNumber, onNextButtonPressed }) => {
             <div className="flex flex-col items-center gap-1">
               <div
                 key={index}
-                className={`w-[34px] h-[34px] rounded-full flex items-center justify-center ${stepNumber === index + 1 ? 'bg-primary-light border-[3px] border-white text-white' : index < currentStep ? 'bg-primary-light text-white' : 'bg-gray-light-3 text-white'}`}
+                className={`w-[34px] h-[34px] rounded-full flex items-center justify-center ${stepNumber === index + 1 ? 'bg-primary-light border-[3px] border-white text-white' : index < currentStep ? 'bg-[#6646AE] text-white' : 'bg-gray-light-3 text-white'}`}
               >
                 {index + 1}
               </div>
@@ -96,7 +103,7 @@ const Header: React.FC<Props> = ({ stepNumber, onNextButtonPressed }) => {
           <p
             className={`${buttonState === ButtonStatus.inactive && 'opacity-40'}`}
           >
-            Next
+            {currentStep === steps.length ? 'Finish set up' : 'Next'}
           </p>
         </PrimaryButton>
       </div>

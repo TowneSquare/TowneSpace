@@ -16,15 +16,15 @@ const DeployModal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-dark-2 bg-opacity-50 flex items-center justify-center">
-      <div className="rounded-lg w-1/3 bg-gray-dark-4">
-        <div className="flex justify-between m-6 items-center border-b">
+    <div className="fixed inset-0 bg-[#000000] bg-opacity-80 flex items-center justify-center">
+      <div className="rounded-3xl w-1/3 bg-[#121212]">
+        <div className="flex justify-between bg-[#1C1C1C] p-4 rounded-t-3xl  items-center ">
           <h2 className="text-lg font-semibold">{title}</h2>
-          <button onClick={onClose} className="text-gray-700">
-            &times;
-          </button>
+          <p onClick={onClose} className="cursor-pointer text-4xl font-[200]">
+            ×
+          </p>
         </div>
-        <div className="mt-6 p-6 text-center">{children}</div>
+        <div className=" py-10 text-center">{children}</div>
       </div>
     </div>
   );

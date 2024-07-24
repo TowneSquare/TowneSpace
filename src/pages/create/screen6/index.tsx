@@ -26,7 +26,7 @@ const Screen6 = () => {
       <div className="flex flex-col justify-center gap-2 mt-16 md:flex-row md:gap-8">
         <div className="min-w-max p-4 md:w-[385px] flex flex-col gap-2 rounded-md">
           <div className="flex items-center h-20">
-            <span className="text-[20px]">Traits</span>
+            <span className="text-[20px]">PFP Traits</span>
           </div>
           {traits.map((trait, index) => {
             const isActive = trait.name == primaryTrait?.name;

@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../../state/hooks';
+import { updateGenerateStep } from '../../../state/deploy';
+import { useAppSelector, useAppDispatch } from '../../../state/hooks';
 import PrimaryButton from '../../../components/primary_button';
 import ButtonStatus from '../../../type/button_status';
 
 interface Props {}
 const Header: React.FC<Props> = ({}) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const onClose = () => {
     navigate('/studio');
   };
@@ -17,22 +19,31 @@ const Header: React.FC<Props> = ({}) => {
   ];
 
   const currentStep = 3;
+  const currentstep = useAppSelector((state) => state.deployState.generateStep);
 
   return (
     <div className="relative h-[124px] mx-4 md:mx-8 flex justify-center items-center">
-      <div
-        className="absolute left-0 w-4 h-4 cursor-pointer"
-        onClick={() => onClose()}
-      >
-        <p className="text-3xl font-[200]">×</p>
+      <div className=" left-0 absolute gap-9 flex items-center">
+        <div className=" left-0 cursor-pointer" onClick={() => onClose()}>
+          <p className="text-5xl font-[200]">×</p>
+        </div>
+        <div
+          onClick={() => {
+            dispatch(updateGenerateStep(2));
+            navigate(-1);
+          }}
+          className="w-36 h-10 cursor-pointer flex items-center justify-center  bg-gray-dark-1  border rounded-full"
+        >
+          <p className="text-lg font-medium center md:text-base">Back</p>
+        </div>
       </div>
       <div>
-        <div className="flex justify-center space-x-2 mt-2 gap-8">
+        <div className="flex justify-center  mt-2 gap-x-8">
           {steps.map((step, index) => (
             <div className="flex flex-col items-center gap-1">
               <div
                 key={index}
-                className={`w-[34px] h-[34px] rounded-full flex items-center justify-center ${currentStep === index + 1 ? 'bg-primary-light border-[3px] border-white text-white' : 'bg-gray-light-3 text-white'}`}
+                className={`w-[34px] h-[34px] rounded-full flex items-center justify-center ${currentStep === index + 1 ? 'bg-primary-light border-[3px] border-white text-white' : currentstep > index + 1 ? 'bg-primary-light' : 'bg-gray-light-3 text-white'}`}
               >
                 {index + 1}
               </div>

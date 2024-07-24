@@ -61,12 +61,6 @@ const TokenPreview = () => {
                   </p>
                 ))}
               </div>
-              <SecondaryButton
-                type={ButtonStatus.active}
-                className="mt-4 w-full"
-              >
-                Regenerate
-              </SecondaryButton>
             </div>
           </div>
         </div>

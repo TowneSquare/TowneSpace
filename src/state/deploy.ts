@@ -18,6 +18,7 @@ interface deployStates {
   royalties: number;
   royaltiesPayoutAddress: string;
   traitsWithPercentage: Array<Trait[]>;
+  generateStep: number;
 }
 
 const initialState: deployStates = {
@@ -36,6 +37,7 @@ const initialState: deployStates = {
   royalties: 0,
   royaltiesPayoutAddress: '',
   traitsWithPercentage: [[]],
+  generateStep: 1,
 };
 
 export const deploySlice = createSlice({
@@ -100,6 +102,9 @@ export const deploySlice = createSlice({
         state.traitsWithPercentage.push(trait);
       }
     },
+    updateGenerateStep: (state, action: PayloadAction<number>) => {
+      state.generateStep = action.payload;
+    },
   },
 });
 
@@ -119,5 +124,6 @@ export const {
   updateRoyalties,
   updateRoyaltiesPayoutAddress,
   updateTraitswithPercentage,
+  updateGenerateStep,
 } = deploySlice.actions;
 export default deploySlice.reducer;
