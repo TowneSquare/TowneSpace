@@ -76,7 +76,7 @@ const Step3 = () => {
         onClose={closeDeployModal}
         title="Connect Aptos wallet"
       >
-        <p>Please switch to Aptos Tesnet</p>
+        <p className='text-base font-regular'>Please switch to Aptos Tesnet</p>
       </DeployModal>
     </div>
   );

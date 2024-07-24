@@ -26,7 +26,7 @@ const Generate = () => {
   // }, [dispatch, traits]);
 
   const handlePreview = async () => {
-    toast.success('Downloading');
+   
 
     const canvas = canvasRef.current;
 
@@ -41,7 +41,7 @@ const Generate = () => {
 
     try {
       for (const token of tokens.slice(0, totalSupply)) {
-        ctx?.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas for each token
+        ctx?.clearRect(0, 0, canvas.width, canvas.height);
 
         for (let i = token.files.length - 1; i >= 0; i--) {
           const image = new Image();
@@ -84,6 +84,12 @@ const Generate = () => {
       imagesBlob.forEach((image) => {
         folder?.file(image.name, image.image);
       });
+      if (imagesBlob.length === 0) {
+        toast.error(
+          'Before downloading the preview images and metadata files, please review the Collection preview page.'
+        );
+        return;
+      }
 
       folder?.file('metadata.json', JSON.stringify(metadata, null, 2));
 
