@@ -1,8 +1,33 @@
 import { useAppSelector } from '../../../state/hooks';
-
+import CustomCheckbox from '../../../components/customcheckbox';
+import { useState, useEffect } from 'react';
 const ChooseTrait = () => {
   const traits = useAppSelector((state) => state.createState.traits);
 
+  const [checkedState, setCheckedState] = useState<Array<boolean[]>>([]);
+  const [hidePropertiesIndex, setPropertyIndex] = useState<number[]>([]);
+
+  // Initialize checkedState based on traits
+  useEffect(() => {
+    const initialState = traits.map((trait) =>
+      new Array(trait.files.length).fill(false)
+    );
+    setCheckedState(initialState);
+  }, [traits]);
+  const handleCheckboxChange = (
+    parentIndex: number,
+    index: number,
+    checked: boolean
+  ) => {
+    const updatedCheckedState = checkedState.map((item, idx) =>
+      idx === parentIndex ? [...item] : item
+    );
+    if (!updatedCheckedState[parentIndex]) {
+      updatedCheckedState[parentIndex] = [];
+    }
+    updatedCheckedState[parentIndex][index] = checked;
+    setCheckedState(updatedCheckedState);
+  };
   return (
     <div className="min-w-[230px] flex flex-col gap-2 md:gap-4">
       {traits.map((trait, index) => (

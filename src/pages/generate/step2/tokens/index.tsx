@@ -6,6 +6,7 @@ import { updateTokens } from '../../../../state/deploy';
 const Tokens = () => {
   const traits = useAppSelector((state) => state.createState.traits);
   const tokens = useAppSelector((state) => state.deployState.tokens);
+  const totalSupply = useAppSelector((state) => state.deployState.totalSupply);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -26,8 +27,8 @@ const Tokens = () => {
   }, [traits]);
 
   return (
-    <div className="flex flex-wrap gap-4">
-      {tokens.slice(0, 100).map((token, index) => {
+    <div className="flex h-20 flex-wrap gap-4">
+      {tokens.slice(0, totalSupply).map((token, index) => {
         const Token = lazy(() => import('./token'));
         return (
           <Suspense fallback={<div></div>} key={index}>

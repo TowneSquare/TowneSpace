@@ -1,4 +1,3 @@
-
 import FilterType from '../../../type/filter_type';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import { emptyMyCollections, setCollectionFilter } from '../../../state/tokens';
@@ -27,14 +26,14 @@ const Filter: React.FC<Props> = ({}) => {
     <div className="relative flex justify-center items-center w-full">
       <div className="flex bg-gray-dark-2 p-1 rounded-full">
         <button
-          className={` px-6  py-2 rounded-full text-sm md:text-base font-semibold ${filter === FilterType.composable && 'bg-primary-default'} hover:bg-primary-light active:bg-primary-dark whitespace-nowrap`}
+          className={` px-6  py-2 rounded-full text-sm md:text-base font-semibold ${filter === FilterType.composable && 'bg-primary-default hover:bg-primary-dark-1'} hover:bg-gray-dark-1 active:bg-primary-default whitespace-nowrap`}
           onClick={() => onComposable()}
         >
           cNFT Collections
         </button>
 
         <button
-          className={` px-6  py-2 rounded-full text-sm md:text-base font-semibold  hover:bg-primary-light active:bg-primary-dark whitespace-nowrap ${filter == FilterType.nfts && 'bg-primary-default'}`}
+          className={` px-6  py-2 rounded-full text-sm md:text-base font-semibold   ${filter == FilterType.nfts && 'bg-primary-default hover:bg-primary-dark-1'} hover:bg-gray-dark-1  active:bg-primary-default whitespace-nowrap`}
           onClick={() => onNfts()}
         >
           NFT Collections

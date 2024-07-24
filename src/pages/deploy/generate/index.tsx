@@ -25,13 +25,73 @@ const Generate = () => {
   //   dispatch(updateTokens(generatedTokens));
   // }, [dispatch, traits]);
 
-  const handlePreview = async () => {
-   
-
+  const handleDeploy = async () => {
     const canvas = canvasRef.current;
 
     if (!canvas) {
-      toast.error('Canvas not found');
+      toast.error('Please try again');
+      return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    let imagesBlob: AssetImageData[] = [];
+    let metadata: ImageMetadata[] = [];
+    try {
+      let hasValidBlobs = false; // Step 1: Introduce a boolean variable
+
+      for (const token of tokens.slice(0, totalSupply)) {
+        ctx?.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = token.files.length - 1; i >= 0; i--) {
+          const image = new Image();
+          image.src = token.files[i].imageUrl;
+
+          await new Promise<void>((resolve) => {
+            image.onload = () => {
+              ctx?.drawImage(image, 0, 0, 178, 178);
+              resolve();
+            };
+          });
+        }
+
+        const blob = await new Promise<Blob | null>((resolve) => {
+          canvas.toBlob((blob) => {
+            resolve(blob);
+          }, 'image/png');
+        });
+
+        if (blob) {
+          hasValidBlobs = true; // Step 2: Set hasValidBlobs to true when a valid blob is created
+          imagesBlob.push({
+            name: `${tokenName} ${token.name}.png`,
+            image: blob,
+          });
+        }
+
+        metadata.push(
+          ...token.files.map((file) => ({
+            name: file.name,
+            percentage: file.rarities,
+            rarityNumber: file.rarityNumber,
+          }))
+        );
+      }
+
+      if (!hasValidBlobs) {
+        toast.error(
+          'Before deploying the collection on Aptos Tesnet or Mainnet, please review the Collection preview page.'
+        );
+        return;
+      }
+
+      navigate('/generate/step1');
+    } catch (err) {}
+  };
+  const handlePreview = async () => {
+    const canvas = canvasRef.current;
+
+    if (!canvas) {
+      toast.error('Please try again');
       return;
     }
 
@@ -130,7 +190,7 @@ const Generate = () => {
             <PrimaryButton
               type={ButtonStatus.active}
               className="px-1 md:w-[200px]"
-              onClick={() => navigate('/generate/step1')}
+              onClick={handleDeploy}
             >
               Deploy Contract
             </PrimaryButton>

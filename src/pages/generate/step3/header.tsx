@@ -9,7 +9,9 @@ const Header: React.FC<Props> = ({}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const onClose = () => {
-    navigate('/studio');
+    dispatch(updateGenerateStep(1));
+
+    navigate('/deploy/generate');
   };
 
   const steps = [

@@ -41,7 +41,7 @@ const Token: React.FC<Props> = ({ token, index }) => {
 
   return (
     <div
-      className={`hover:bg-gray-light-3 rounded-md cursor-pointer  `}
+      className={`hover:bg-gray-light-3 rounded-md cursor-pointer   `}
       onClick={() => dispatch(updateCurrentToken(token))}
     >
       <div
