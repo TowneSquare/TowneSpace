@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import ChooseTrait from './choose_trait';
+import ChooseTrait from '../../deploy/preview/choose_trait';
 import Header from './header';
 import TokenPreview from './token_preview';
 import Tokens from './tokens';

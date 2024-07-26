@@ -13,7 +13,9 @@ const Token: React.FC<Props> = ({ token, index }) => {
   const dispatch = useAppDispatch();
   const canvasRef = useRef<any>(null);
   const tokenName = useAppSelector((state) => state.deployState.tokenName);
-
+  const selectedToken = useAppSelector(
+    (state) => state.deployState.currentToken
+  );
   useEffect(() => {
     const drawImage = async () => {
       const canvas = canvasRef.current;
@@ -38,7 +40,9 @@ const Token: React.FC<Props> = ({ token, index }) => {
       className="p-2 hover:bg-gray-light-3 rounded-md cursor-pointer"
       onClick={() => dispatch(updateCurrentToken(token))}
     >
-      <div className="bg-gray-dark-1 rounded-md overflow-hidden">
+      <div
+        className={`${selectedToken?.name === token.name && 'border-[3px] border-primary-dark-1 p-[3px] '}  rounded-[8px]  overflow-hidden`}
+      >
         <canvas
           ref={canvasRef}
           width={178}

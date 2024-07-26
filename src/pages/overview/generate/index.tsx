@@ -4,6 +4,7 @@ import ButtonStatus from '../../../type/button_status';
 import Header from '../header';
 
 const Generate = () => {
+
   const navigate = useNavigate();
   return (
     <div>
