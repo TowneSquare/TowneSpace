@@ -3,8 +3,10 @@ import ButtonStatus from '../../type/button_status';
 import PrimaryButton from '../primary_button';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { toggleSettingModal } from '../../state/dialog';
-
-const StoreModal = () => {
+interface Props {
+  onsave: () => void;
+}
+const StoreModal = ({ onsave }: Props) => {
   const isOpen = useAppSelector((state) => state.dialogState.bSetModal);
   const dispatch = useAppDispatch();
   return (
@@ -15,12 +17,15 @@ const StoreModal = () => {
           <PrimaryButton
             type={ButtonStatus.active}
             className="text-[16px] !px-4 bg-[#222223] border-[#FFFFFF] border hover:bg-[#222342]"
-            onClick={() => {dispatch(toggleSettingModal(false))}}
+            onClick={() => {
+              dispatch(toggleSettingModal(false));
+            }}
           >
             Discard changes
           </PrimaryButton>
           <PrimaryButton
             type={ButtonStatus.active}
+            onClick={onsave}
             className="text-[16px] !px-4 mr-2 "
           >
             Save & apply changes

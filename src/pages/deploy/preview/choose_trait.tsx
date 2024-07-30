@@ -20,7 +20,6 @@ const ChooseTrait = () => {
     index: number,
     checked: boolean
   ) => {
-   
     const updatedCheckedState = checkedState.map((item, idx) =>
       idx === parentIndex ? [...item] : item
     );
@@ -57,17 +56,21 @@ const ChooseTrait = () => {
           <div className="flex flex-col">
             {!hidePropertiesIndex.includes(parentindex) &&
               trait.files.map((file, index) => (
-                <div className="flex gap-2 items-center py-1" key={index}>
-                  <CustomCheckbox
-                    checked={checkedState[parentindex]?.[index] || false}
-                    onChange={(checked) =>
-                      handleCheckboxChange(parentindex, index, checked)
-                    }
-                  />
-                  <p className="text-sm md:text-base">{file.name}</p>
-                  <p className="text-sm md:text-base text-gray-light-2">
-                    ({trait.files.length})
-                  </p>
+                <div className="flex items-center gap-2  py-1 my-2" key={index}>
+                  <div className="flex-shrink-0 flex justify-center item-center">
+                    <CustomCheckbox
+                      checked={checkedState[parentindex]?.[index] || false}
+                      onChange={(checked) =>
+                        handleCheckboxChange(parentindex, index, checked)
+                      }
+                    />
+                  </div>
+                  <div className="flex-grow flex items-center gap-2">
+                    <p className="text-sm md:text-base">{file.name}</p>
+                    <p className="text-sm md:text-base text-gray-light-2">
+                      ({trait.files.length})
+                    </p>
+                  </div>
                 </div>
               ))}
           </div>

@@ -14,7 +14,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
       onClick={() => {
         onChange(!checked);
       }}
-      className="inline-block relative w-5 h-5"
+      className="inline-block relative w-[20px] h-[20px] "
     >
       <span
         className={`block w-full h-full rounded-md border-[1.5px] transition-colors duration-200 ${checked ? 'bg-primary-light' : 'bg-gray border-gray'} ${!checked ? 'hover:border-primary-light' : ''}`}
