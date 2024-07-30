@@ -2,6 +2,11 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    placeholder: {
+      'font-semibold': 'font-semibold',
+      'font-bold': 'font-bold',
+      'font-regular': 'font-regular',
+    },
     colors: {
       'primary-light': '#9C6EEB',
       'primary-default': '#9264F8',

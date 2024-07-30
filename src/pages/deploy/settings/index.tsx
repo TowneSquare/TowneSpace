@@ -29,6 +29,9 @@ const Settings = () => {
   const [collectionTotalSupply, setCollectionTotalSupply] = useState(
     String(totalSupply)
   );
+  const [collectiondesc, setCollectionDescription] = useState('');
+
+  const [collectionName, setCollectionName] = useState('');
   const [isUnsavedChanges, setIsChangeSaved] = useState<boolean>(false);
   const [shouldRegenerateCollection, setShouldRegenerateCollection] =
     useState<boolean>(false);
@@ -51,7 +54,7 @@ const Settings = () => {
       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       .replace(/(?<=\d)(?=(\d{3})+\b)/g, '.');
     setCollectionTotalSupply(numberWithCommas);
-    setShouldRegenerateCollection(false)
+    setShouldRegenerateCollection(false);
     setIsChangeSaved(true);
   };
 
@@ -61,17 +64,10 @@ const Settings = () => {
   };
 
   const saveAndApplyChanges = () => {
-    dispatch(updateTotalSupply(collectionTotalSupply));
-    toast.success('Settings saved!', {
-      position: 'top-center',
-      transition: Slide,
-      closeButton: false,
-      progressStyle: {
-        backgroundColor: '#2AB576',
-      },
-      icon: ({ theme, type }) => <img src="/toast/icon.svg" alt="toast-icon" />,
-    });
     setIsChangeSaved(false);
+    dispatch(updateTotalSupply(collectionTotalSupply));
+    toast.success('Settings saved!');
+
     setShouldRegenerateCollection(true);
   };
 
@@ -119,7 +115,13 @@ const Settings = () => {
         )}
         <div className="mx-4">
           <div className="relative flex flex-col">
-            <StoreModal />
+            <StoreModal
+              onsave={() => {
+                dispatch(updateCollectionName(collectionName));
+                dispatch(updateCollectionDescription(collectiondesc))
+                dispatch(toggleSettingModal(false));
+              }}
+            />
             <p className="text-2xl md:text-3xl">Settings</p>
             <p className="mt-1 text-base md:text-xl text-gray-light-1">
               Set how often or rarely each trait will appear in the collection
@@ -137,7 +139,7 @@ const Settings = () => {
                   placeholder={tokenName}
                   style={{ background: 'none' }}
                   onChange={(e) => {
-                    dispatch(updateCollectionName(e.target.value));
+                    setCollectionName(e.target.value);
                     dispatch(toggleSettingModal(true));
                   }}
                 />
@@ -150,9 +152,7 @@ const Settings = () => {
                   className="w-full h-full placeholder-gray-light-3 focus-visible:outline-0"
                   placeholder="We're a collection of 10,000 crazy buddies ready to rule the metaverse."
                   style={{ background: 'none' }}
-                  onChange={(e) =>
-                    dispatch(updateCollectionDescription(e.target.value))
-                  }
+                  onChange={(e) => setCollectionDescription(e.target.value)}
                 />
               </div>
               <div className="flex gap-4 mt-8">

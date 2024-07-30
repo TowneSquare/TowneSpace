@@ -94,7 +94,7 @@ const CreateStep2 = () => {
           </div>
           <PrimaryInput
             onChange={handleCollectionNameChange}
-            className="mt-2 font-normal bg-gray-dark-3 placeholder:text-gray-light-3"
+            className="mt-2 font-normal bg-gray-dark-3 placeholder:font-normal placeholder:text-gray-light-3"
             placeholder="Insert collection name"
           />
           <div className="flex items-center gap-1 mt-8">
@@ -114,7 +114,7 @@ const CreateStep2 = () => {
           </div>
           <PrimaryInput
             onChange={handleMaxSupplyChange}
-            className="mt-2 font-normal bg-gray-dark-3 placeholder:text-gray-light-3"
+            className="mt-2 font-normal bg-gray-dark-3 placeholder:font-normal placeholder:text-gray-light-3"
             placeholder="10,000"
             value={maxSupply}
           />
