@@ -18,7 +18,7 @@ const WalletButtons = () => {
       wallet: Wallet | AptosStandardSupportedWallet<string>,
       index: number,
       self: any
-    ) => index === self.findIndex((w: any) => w.name === wallet.name)
+    ) => index === self.findIndex((w: any) => w.name.includes(wallet.name))
   ) as any;
 
   return (
@@ -93,10 +93,8 @@ const WalletView = (wallet: any) => {
     // we are on desktop view
     return (
       <button
-        className={`flex justify-between items-center  text-white py-2 rounded ${
-          isWalletReady ? 'hover:bg-gray-light-8' : 'cursor-not-allowed'
-        }`}
-        disabled={!isWalletReady}
+        className={`flex justify-between items-center  text-white py-2 rounded`}
+        // disabled={!isWalletReady}
         key={wallet.name}
         onClick={() => onWalletConnectRequest(wallet.name)}
       >
