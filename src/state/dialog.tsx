@@ -18,6 +18,7 @@ interface dialogStates {
     visible: boolean;
     type: 'invalid_file' | 'invalid_folder' | undefined;
   };
+  hasReviewedSettings: boolean;
 }
 
 const initialState: dialogStates = {
@@ -39,6 +40,7 @@ const initialState: dialogStates = {
     visible: false,
     type: undefined,
   },
+  hasReviewedSettings: false,
 };
 
 export const dialogSlice = createSlice({
@@ -93,6 +95,12 @@ export const dialogSlice = createSlice({
     ) => {
       state.bUploadAssetModal = action.payload;
     },
+    toggleHasReviewedCollectionSettings: (
+      state,
+      action: PayloadAction<boolean>
+    ) => {
+      state.hasReviewedSettings = action.payload;
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -112,5 +120,6 @@ export const {
   toggleFinishEdit,
   toggleSettingModal,
   toggleUploadAssetModal,
+  toggleHasReviewedCollectionSettings,
 } = dialogSlice.actions;
 export default dialogSlice.reducer;

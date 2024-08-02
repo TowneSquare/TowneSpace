@@ -66,6 +66,7 @@ module.exports = {
     fontFamily: {
       Inter: ['Inter', 'sans-serif'],
       Permanent: ['Permanent Marker'],
+      outfit: ['Outfit', 'sans-serif'],
     },
   },
   plugins: [],

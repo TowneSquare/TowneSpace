@@ -34,20 +34,22 @@ const Trait = ({ data }: { data: FolderType }) => {
   return (
     <div className="px-6 py-8 mx-4 rounded-md md:mx-20 lg:mx-32 bg-gray-dark-2">
       <div className="flex justify-between w-full">
-        <p className="text-base font-semibold md:text-xl">{data.name}</p>
+        <p className="text-base  font-semibold md:text-xl">{data.name}</p>
         <p className="text-sm md:text-base">{data.files.length} Traits</p>
       </div>
       <div className="flex overflow-x-scroll gap-4 mt-6">
         {data.files.map((file, index) => (
           <div className="w-36 rounded-md" key={index}>
-            <div className="h-36 w-36 rounded-md bg-gray-light-3">
+            <div className="h-36 w-36 rounded-md bg-gray-dark-1">
               <img
                 src={file.imageUrl}
                 alt="image"
                 className="w-36 h-36 rounded-md"
               />
             </div>
-            <p className="mt-2 text-sm text-center md:text-base">{file.name}</p>
+            <p className="mt-2 text-sm text-center md:text-base font-outfit line-clamp-2">
+              {file.name}
+            </p>
           </div>
         ))}
       </div>

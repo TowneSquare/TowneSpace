@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ToolTip from '../../../components/tooltip';
 import { updateCollectionName } from '../../../state/deploy';
 import {
@@ -15,7 +15,10 @@ import PrimaryButton from '../../../components/primary_button';
 import ButtonStatus from '../../../type/button_status';
 import StoreModal from '../../../components/modal/storeModal';
 import Header from '../header';
-import { toggleSettingModal } from '../../../state/dialog';
+import {
+  toggleHasReviewedCollectionSettings,
+  toggleSettingModal,
+} from '../../../state/dialog';
 import { Slide, toast } from 'react-toastify';
 
 const Settings = () => {
@@ -41,11 +44,16 @@ const Settings = () => {
     selector?.click();
   };
 
+  useEffect(() => {
+    dispatch(toggleHasReviewedCollectionSettings(true));
+  }, []);
+
   const onClickImgUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = e.target.files as FileList;
     setUploadImg(selectedFiles?.[0]);
     console.log(URL.createObjectURL(selectedFiles?.[0]));
     setPreviewImg(URL.createObjectURL(selectedFiles?.[0]));
+    dispatch(toggleSettingModal(true));
   };
 
   const onChangeTotalSupply = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +63,9 @@ const Settings = () => {
       .replace(/(?<=\d)(?=(\d{3})+\b)/g, '.');
     setCollectionTotalSupply(numberWithCommas);
     setShouldRegenerateCollection(false);
-    setIsChangeSaved(true);
+    // setIsChangeSaved(true);
+
+    dispatch(toggleSettingModal(true));
   };
 
   const discardChanges = () => {
@@ -118,7 +128,7 @@ const Settings = () => {
             <StoreModal
               onsave={() => {
                 dispatch(updateCollectionName(collectionName));
-                dispatch(updateCollectionDescription(collectiondesc))
+                dispatch(updateCollectionDescription(collectiondesc));
                 dispatch(toggleSettingModal(false));
               }}
             />
@@ -145,14 +155,17 @@ const Settings = () => {
                 />
               </div>
               <ToolTip label="Collection Description" className="mt-8">
-                <p className="text-sm md:text-base">Collection Description</p>
+                <p className="text-sm md:text-base">Collection Descriptions</p>
               </ToolTip>
               <div className="min-w-[48px] h-[172px] px-4 py-2 border border-white rounded-lg mt-2">
                 <textarea
                   className="w-full h-full placeholder-gray-light-3 focus-visible:outline-0"
                   placeholder="We're a collection of 10,000 crazy buddies ready to rule the metaverse."
                   style={{ background: 'none' }}
-                  onChange={(e) => setCollectionDescription(e.target.value)}
+                  onChange={(e) => {
+                    setCollectionDescription(e.target.value);
+                    dispatch(toggleSettingModal(true));
+                  }}
                 />
               </div>
               <div className="flex gap-4 mt-8">
@@ -165,9 +178,10 @@ const Settings = () => {
                       className="w-full placeholder-gray-light-3 focus-visible:outline-0"
                       placeholder="BDS"
                       style={{ background: 'none' }}
-                      onChange={(e) =>
-                        dispatch(updateCollectionSymbol(e.target.value))
-                      }
+                      onChange={(e) => {
+                        dispatch(updateCollectionSymbol(e.target.value));
+                        dispatch(toggleSettingModal(true));
+                      }}
                     />
                   </div>
                 </div>
@@ -195,7 +209,10 @@ const Settings = () => {
                   className="w-full placeholder-gray-light-3 focus-visible:outline-0"
                   placeholder="www.website.com"
                   style={{ background: 'none' }}
-                  onChange={(e) => dispatch(updateExternalLink(e.target.value))}
+                  onChange={(e) => {
+                    dispatch(updateExternalLink(e.target.value));
+                    dispatch(toggleSettingModal(true));
+                  }}
                 />
               </div>
               <div className="h-px bg-gray-dark-1 -mr-[300px] my-10" />
@@ -208,9 +225,10 @@ const Settings = () => {
                   className="w-full placeholder-gray-light-3 focus-visible:outline-0"
                   placeholder="0x4414d542b040c822A44b63f4704b40aee870281F"
                   style={{ background: 'none' }}
-                  onChange={(e) =>
-                    dispatch(updatePayoutAddress(e.target.value))
-                  }
+                  onChange={(e) => {
+                    dispatch(updatePayoutAddress(e.target.value));
+                    dispatch(toggleSettingModal(true));
+                  }}
                 />
               </div>
               <ToolTip label="Royalties %" className="mt-8">
@@ -222,9 +240,10 @@ const Settings = () => {
                     className="w-full placeholder-gray-light-3 focus-visible:outline-0"
                     placeholder="0"
                     style={{ background: 'none' }}
-                    onChange={(e) =>
-                      dispatch(updateRoyalties(parseInt(e.target.value)))
-                    }
+                    onChange={(e) => {
+                      dispatch(updateRoyalties(parseInt(e.target.value)));
+                      dispatch(toggleSettingModal(true));
+                    }}
                   />
                 </div>
                 <p>%</p>
@@ -237,9 +256,10 @@ const Settings = () => {
                   className="w-full placeholder-gray-light-3 focus-visible:outline-0"
                   placeholder="0x4414d542b040c822A44b63f4704b40aee870281F"
                   style={{ background: 'none' }}
-                  onChange={(e) =>
-                    dispatch(updateRoyaltiesPayoutAddress(e.target.value))
-                  }
+                  onChange={(e) => {
+                    dispatch(updateRoyaltiesPayoutAddress(e.target.value));
+                    dispatch(toggleSettingModal(true));
+                  }}
                 />
               </div>
             </div>
