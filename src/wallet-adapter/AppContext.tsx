@@ -19,9 +19,11 @@ import {
 import { AutoConnectProvider, useAutoConnect } from './AutoConnectProvider';
 import { FC, ReactNode } from 'react';
 import face from './lib/faceInitialization';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './custom-toastify.css';
+
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const wallets = [
     new PetraWallet(),

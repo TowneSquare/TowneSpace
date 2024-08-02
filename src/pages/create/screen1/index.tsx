@@ -7,6 +7,7 @@ import { isSupportFile } from '../../../util';
 import Header from '../../../components/create/header';
 import UploadAssetModal from '../../../components/modal/uploadAssetModals';
 import { toggleUploadAssetModal } from '../../../state/dialog';
+import { toggleHasReviewedCollectionSettings } from '../../../state/dialog';
 
 const Screen3 = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +24,7 @@ const Screen3 = () => {
   }, [traits]);
 
   useEffect(() => {
+    dispatch(toggleHasReviewedCollectionSettings(false));
     // Check if the browser supports File System Access API and WebkitGetAsEntry API.
     const supportsFileSystemAccessAPI =
       'getAsFileSystemHandle' in DataTransferItem.prototype;

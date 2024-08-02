@@ -19,6 +19,9 @@ const Generate = () => {
   const tokens = useAppSelector((state) => state.deployState.tokens);
   const tokenName = useAppSelector((state) => state.deployState.tokenName);
   const totalSupply = useAppSelector((state) => state.deployState.totalSupply);
+  const hasReviewedCollectionSettings = useAppSelector(
+    (state) => state.dialogState.hasReviewedSettings
+  );
   // Dispatch generated tokens only once on component mount
   // useEffect(() => {
   //   const generatedTokens = generateTokens(traits, totalSupply);
@@ -26,6 +29,12 @@ const Generate = () => {
   // }, [dispatch, traits]);
 
   const handleDeploy = async () => {
+    if (!hasReviewedCollectionSettings) {
+      toast.error(
+        'Before deploying the collection on Aptos Tesnet or Mainnet, please review the Settings page.'
+      );
+      return;
+    }
     const canvas = canvasRef.current;
 
     if (!canvas) {
@@ -88,6 +97,12 @@ const Generate = () => {
     } catch (err) {}
   };
   const handlePreview = async () => {
+    if (!hasReviewedCollectionSettings) {
+      toast.error(
+        'Before deploying the collection on Aptos Tesnet or Mainnet, please review the Settings page.'
+      );
+      return;
+    }
     const canvas = canvasRef.current;
 
     if (!canvas) {
