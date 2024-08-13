@@ -1,15 +1,17 @@
 import os
 import csv
 
-# Cool sloth
-folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/inputs/Cool Sloth'
-folder_uri = 'https://bafybeidefvxv2rhzt26apifhthfapyrazgeselkomzpag2owkmnzu5r7ey.ipfs.w3s.link/'
-# # Sloth ball
-# folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/inputs/Sloth Ball'
-# folder_uri = 'https://bafybeibyad23kwuhmiyke4vo35kkbd64xbm3sfcbyjawdypahynsjxzszq.ipfs.w3s.link/'
+# # Cool sloth
+# folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/inputs/Cool Sloth'
+# folder_uri = 'https://bafybeidefvxv2rhzt26apifhthfapyrazgeselkomzpag2owkmnzu5r7ey.ipfs.w3s.link/'
+# output_csv = '/Users/maclay/Code/TowneSpace/metadata-generator/v0.5/generated/cool_sloth.csv'
+
+# Sloth ball
+folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/inputs/Sloth Ball'
+folder_uri = 'https://bafybeiehrdzrbr4oi7n7pmnpatvu2ewy5htrrj6v6u2p7bgdpgnu4cpqee.ipfs.w3s.link/'
+output_csv = '/Users/maclay/Code/TowneSpace/metadata-generator/v0.5/generated/sloth_ball.csv'
 
 mirror_folder_path = '/Users/maclay/Code/TowneSpace/metadata-generator/v0.5/generated/images'
-output_csv = '/Users/maclay/Code/TowneSpace/metadata-generator/v0.5/generated/sheet.csv'
 
 def generate_image_csv(folder_path, output_csv):
     # List to store rows for sorting
