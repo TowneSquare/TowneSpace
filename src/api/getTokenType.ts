@@ -15,7 +15,7 @@ export const useTraitType = async (
   if (!tokenObject) return;
   try {
     const payload: InputViewFunctionData = {
-      function: `0x4::token::description`,
+      function: `0xd85adb3c424c398d5017ad1d20b63ce8b3373a651a484ff2b473aa93d3357296::studio::token_type`,
       typeArguments: [TRAIT_TOKEN_TYPE],
       functionArguments: [tokenObject],
     };
@@ -42,7 +42,7 @@ export const useComposableType = async (
   if (!tokenObject) return;
   try {
     const payload: InputViewFunctionData = {
-      function: `0x4::token::description`,
+      function: `0xd85adb3c424c398d5017ad1d20b63ce8b3373a651a484ff2b473aa93d3357296::studio::token_type`,
       typeArguments: [COMPOSABLE_TOKEN_TYPE],
       functionArguments: [tokenObject],
     };
@@ -66,7 +66,7 @@ export const useTraitTypes = async (aptos: Aptos, tokenObjects: string[]) => {
   let results = [];
   for (const tokenObject of tokenObjects) {
     const payload: InputViewFunctionData = {
-      function: `0x4::token::description`,
+      function: `0xd85adb3c424c398d5017ad1d20b63ce8b3373a651a484ff2b473aa93d3357296::studio::token_type`,
       typeArguments: [TRAIT_TOKEN_TYPE],
       functionArguments: [tokenObject],
     };
@@ -92,7 +92,7 @@ export const useComposableTypes = async (
   let results = [];
   for (const tokenObject of tokenObjects) {
     const payload: InputViewFunctionData = {
-      function: `0x4::token::description`,
+      function: `0xd85adb3c424c398d5017ad1d20b63ce8b3373a651a484ff2b473aa93d3357296::studio::token_type`,
       typeArguments: [COMPOSABLE_TOKEN_TYPE],
       functionArguments: [tokenObject],
     };
