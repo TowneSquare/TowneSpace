@@ -3,6 +3,57 @@ import { COMPOSABLE_TOKEN_TYPE, TRAIT_TOKEN_TYPE } from '../constants';
 
 /**
  *
+ * Get the token type
+ * @param aptos
+ * @param tokenObject
+ *
+ */
+export const getTokenType = async (
+  aptos: Aptos,
+  tokenObject: string | undefined
+) => {
+  if (!tokenObject) return;
+  try {
+    const payload: InputViewFunctionData = {
+      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
+      functionArguments: [tokenObject],
+    };
+    const response = await aptos.view({
+      payload,
+    });
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+/**
+ *
+ * Get the token types for multiple token objects
+ * @param aptos
+ * @param tokenObjects
+ * 
+ */
+export const getTokenTypes = async (aptos: Aptos, tokenObjects: string[]) => {
+  if (!tokenObjects) return;
+  try {
+    const payload: InputViewFunctionData = {
+      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_types`,
+      functionArguments: tokenObjects,
+    };
+    const response = await aptos.view({
+      payload,
+    });
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+// DEPRECATED
+// REMOVE BEFORE MERGING
+/**
+ *
  * Get the trait type
  * @param aptos
  * @param tokenObject
@@ -28,6 +79,8 @@ export const getTraitType = async (
   }
 };
 
+// DEPRECATED
+// REMOVE BEFORE MERGING
 /**
  *
  * Get the composable type
@@ -55,6 +108,8 @@ export const getComposableType = async (
   }
 };
 
+// DEPRECATED
+// REMOVE BEFORE MERGING
 /**
  *
  * Get the trait types; Useful for getting multiple trait types
@@ -80,6 +135,8 @@ export const getTraitTypes = async (aptos: Aptos, tokenObjects: string[]) => {
   return results;
 };
 
+// DEPRECATED
+// REMOVE BEFORE MERGING
 /**
  *
  * Get the composable types; Useful for getting multiple composable types
