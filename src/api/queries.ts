@@ -6,7 +6,10 @@ import { compareAddress, sanitizeAddress } from '../util';
 
 import { APTOS, APTOS_CONFIG } from '../state/constants';
 import { Events } from './events';
-import { getComposableTypes, getTraitTypes } from './getTokenType';
+import { 
+  getTokenType as getType,
+  getTokenTypes as getTypes
+} from './getTokenType';
 
 export type ComposedNft = {
   token_data_id: string;
@@ -301,7 +304,7 @@ export class Queries {
 
     let identifyObject: any = await getIdentifyObjects(APTOS, ownedTokens[0]);
     const types = identifyObject[0].data;
-    const traitObjects = [];
+    const traitObjects: string[] = [];
 
     if (types && tokens_filtered.length == types.length) {
       for (let i = 0; i < tokens_filtered.length; i++) {
@@ -327,7 +330,7 @@ export class Queries {
       }
     }
 console.log("traibOjects", traitObjects)
-    const descriptionResult: any = await getComposableTypes(APTOS, traitObjects);
+    const descriptionResult: any = await getTypes(APTOS, traitObjects);
     console.log("description Result", descriptionResult);
 
     return { allNfts: all, ownedNfts: tokens_filtered };
