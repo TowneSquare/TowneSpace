@@ -6,6 +6,7 @@ import { compareAddress, sanitizeAddress } from '../util';
 
 import { APTOS, APTOS_CONFIG } from '../state/constants';
 import { Events } from './events';
+import { getComposableTypes, getTraitTypes } from './getTokenType';
 
 export type ComposedNft = {
   token_data_id: string;
@@ -325,6 +326,9 @@ export class Queries {
         }
       }
     }
+console.log("traibOjects", traitObjects)
+    const descriptionResult: any = await getComposableTypes(APTOS, traitObjects);
+    console.log("description Result", descriptionResult);
 
     return { allNfts: all, ownedNfts: tokens_filtered };
   }

@@ -14,6 +14,7 @@ import { getTraitListinComposable } from '../../api/getTraitListinComposable';
 import { APTOS } from '../../state/constants';
 import { useEffect, useState } from 'react';
 import { ComposedNft } from '../../api';
+import { getComposableType } from '../../api/getTokenType';
 
 interface Props {
   index: number;
@@ -30,9 +31,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   useEffect(() => {
     const fetch = async () => {
       if (data.type != 'composable') return;
-
       const res = await getTraitListinComposable(APTOS, data?.token_data_id);
-
       if (res.length > 0) {
         const composedNfts: ComposedNft[] = [];
         for (const nft of res[0]) {
@@ -46,7 +45,10 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
     fetch();
   }, [data.token_data_id]);
 
-  const makeFolders = () => {
+  const makeFolders = async () => {
+    // const result = await getComposableType(APTOS, data);
+    // console.log("ComposedTraitType", result)
+
     const temp = JSON.parse(JSON.stringify(data));
     temp.composed_nfts = composedNfts;
     dispatch(chooseNft(temp));
@@ -101,9 +103,9 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
           alt="Primary image"
         />
         {data.type === 'composable' && (
-          <div className="absolute z-10 flex-col items-center justify-center hidden w-6 h-6 rounded-full group/3dots group-hover:flex top-2 right-2 hover:bg-black">
+          <div className="absolute z-10 flex-col items-center justify-center hidden w-6 h-6 rounded-full top-2 right-2 group/3dots group-hover:flex hover:bg-black">
             <img src="/nft-card/3dots.svg" alt="3dots" />
-            <div className="absolute right-0 hidden group-hover/3dots:block top-6 ">
+            <div className="absolute right-0 hidden top-6 group-hover/3dots:block">
               <div className="w-full h-4 -mt-2" />
               <div className="py-2 bg-white rounded-lg">
                 <p
@@ -123,9 +125,9 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
             </div>
           </div>
         )}
-        <div className="absolute flex left-1 bottom-1">
+        <div className="absolute flex bottom-1 left-1">
           {data.type == 'composable' && (
-            <img src="/nft-card/v2-badge.svg" alt="v2-badge"  />
+            <img src="/nft-card/v2-badge.svg" alt="v2-badge" />
           )}
           {data.type == 'composable' && composedNfts.length > 0 && (
             <img src="/nft-card/composed.svg" alt="composed" />

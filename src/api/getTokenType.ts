@@ -8,14 +8,14 @@ import { COMPOSABLE_TOKEN_TYPE, TRAIT_TOKEN_TYPE } from '../constants';
  * @param tokenObject
  *
  */
-export const useTraitType = async (
+export const getTraitType = async (
   aptos: Aptos,
   tokenObject: string | undefined
 ) => {
   if (!tokenObject) return;
   try {
     const payload: InputViewFunctionData = {
-      function: `0xd85adb3c424c398d5017ad1d20b63ce8b3373a651a484ff2b473aa93d3357296::studio::token_type`,
+      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
       typeArguments: [TRAIT_TOKEN_TYPE],
       functionArguments: [tokenObject],
     };
@@ -35,14 +35,14 @@ export const useTraitType = async (
  * @param tokenObject
  *
  */
-export const useComposableType = async (
+export const getComposableType = async (
   aptos: Aptos,
   tokenObject: string | undefined
 ) => {
   if (!tokenObject) return;
   try {
     const payload: InputViewFunctionData = {
-      function: `0xd85adb3c424c398d5017ad1d20b63ce8b3373a651a484ff2b473aa93d3357296::studio::token_type`,
+      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
       typeArguments: [COMPOSABLE_TOKEN_TYPE],
       functionArguments: [tokenObject],
     };
@@ -62,20 +62,22 @@ export const useComposableType = async (
  * @param tokenObjects
  *
  */
-export const useTraitTypes = async (aptos: Aptos, tokenObjects: string[]) => {
+export const getTraitTypes = async (aptos: Aptos, tokenObjects: string[]) => {
   let results = [];
   for (const tokenObject of tokenObjects) {
+    console.log("tokenObject", tokenObject)
     const payload: InputViewFunctionData = {
-      function: `0xd85adb3c424c398d5017ad1d20b63ce8b3373a651a484ff2b473aa93d3357296::studio::token_type`,
+      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
       typeArguments: [TRAIT_TOKEN_TYPE],
       functionArguments: [tokenObject],
     };
     const response = await aptos.view({
       payload,
     });
+    console.log("response", response)
     results.push(response);
   }
-  console.log(results);
+  return results;
 };
 
 /**
@@ -85,21 +87,22 @@ export const useTraitTypes = async (aptos: Aptos, tokenObjects: string[]) => {
  * @param tokenObjects
  *
  */
-export const useComposableTypes = async (
+export const getComposableTypes = async (
   aptos: Aptos,
   tokenObjects: string[]
 ) => {
   let results = [];
   for (const tokenObject of tokenObjects) {
     const payload: InputViewFunctionData = {
-      function: `0xd85adb3c424c398d5017ad1d20b63ce8b3373a651a484ff2b473aa93d3357296::studio::token_type`,
+      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
       typeArguments: [COMPOSABLE_TOKEN_TYPE],
       functionArguments: [tokenObject],
     };
     const response = await aptos.view({
       payload,
     });
+    console.log(response)
     results.push(response);
   }
-  console.log(results);
+  return results;
 };
