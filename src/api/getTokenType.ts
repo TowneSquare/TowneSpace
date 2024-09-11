@@ -1,4 +1,4 @@
-import { Aptos, InputViewFunctionData } from '@aptos-labs/ts-sdk';
+import { Aptos, InputViewFunctionData, MoveValue } from '@aptos-labs/ts-sdk';
 import { COMPOSABLE_TOKEN_TYPE, TRAIT_TOKEN_TYPE } from '../constants';
 
 /**
@@ -39,7 +39,7 @@ export const getTokenTypes = async (aptos: Aptos, tokenObjects: string[]) => {
   try {
     const payload: InputViewFunctionData = {
       function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_types`,
-      functionArguments: tokenObjects,
+      functionArguments: [tokenObjects],
     };
     const response = await aptos.view({
       payload,

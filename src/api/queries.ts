@@ -1,4 +1,4 @@
-import { Aptos } from '@aptos-labs/ts-sdk';
+import { Aptos, MoveValue } from '@aptos-labs/ts-sdk';
 import { getIdentifyObjects } from './getIdentifyObject';
 import { getOwnedTokens } from './getOwnedTokens';
 import { getParentTokens } from './getParentToken';
@@ -331,6 +331,7 @@ export class Queries {
     }
 console.log("traibOjects", traitObjects)
     const descriptionResult: any = await getTypes(APTOS, traitObjects);
+    // console.log("object: ", traitObjects);
     console.log("description Result", descriptionResult);
 
     return { allNfts: all, ownedNfts: tokens_filtered };
