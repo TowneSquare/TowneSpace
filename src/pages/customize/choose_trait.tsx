@@ -18,6 +18,7 @@ const ChooseTrait = () => {
   const [traits, setTraits] = useState<TokenFields[]>([]);
 
   const currentNft = useAppSelector((state) => state.tokensState.currentNft);
+
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
@@ -29,12 +30,12 @@ const ChooseTrait = () => {
 
   const [selectedTrait, setSelectedTrait] = useState<
     NftMetadataType | undefined
-    >(undefined);
+  >(undefined);
 
   useEffect(() => {
     let traits = nfts.filter(
       (nft) =>
-        nft.description == currentTraitFolder?.name && nft.composed_to == false
+        nft.description == currentTraitFolder?.name
     );
     if (currentNft?.composed_nfts) {
       for (const composed of currentNft?.composed_nfts) {

@@ -15,6 +15,7 @@ import { APTOS } from '../../state/constants';
 import { useEffect, useState } from 'react';
 import { ComposedNft } from '../../api';
 import { getComposableType } from '../../api/getTokenType';
+import { current } from '@reduxjs/toolkit';
 
 interface Props {
   index: number;
@@ -46,15 +47,11 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   }, [data.token_data_id]);
 
   const makeFolders = async () => {
-    // const result = await getComposableType(APTOS, data);
-    // console.log("ComposedTraitType", result)
 
     const temp = JSON.parse(JSON.stringify(data));
     temp.composed_nfts = composedNfts;
     dispatch(chooseNft(temp));
-
     const currentTraitFolders: CustomFolderType[] = [];
-
     for (const composed of composedNfts) {
       const trait = allNfts.find(
         (nft) => compareAddress(nft.token_data_id, composed.token_data_id)
@@ -72,7 +69,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
         currentTraitFolders.push({ name: folder, trait: undefined });
       }
     }
-
+    console.log(currentTraitFolders);
     dispatch(setCurrentTraitFolders(currentTraitFolders));
     dispatch(chooseCurrentTraitFolder(undefined));
   };

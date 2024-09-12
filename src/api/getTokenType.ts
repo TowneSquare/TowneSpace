@@ -120,7 +120,6 @@ export const getComposableType = async (
 export const getTraitTypes = async (aptos: Aptos, tokenObjects: string[]) => {
   let results = [];
   for (const tokenObject of tokenObjects) {
-    console.log("tokenObject", tokenObject)
     const payload: InputViewFunctionData = {
       function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
       typeArguments: [TRAIT_TOKEN_TYPE],
@@ -129,7 +128,6 @@ export const getTraitTypes = async (aptos: Aptos, tokenObjects: string[]) => {
     const response = await aptos.view({
       payload,
     });
-    console.log("response", response)
     results.push(response);
   }
   return results;

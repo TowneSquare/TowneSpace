@@ -6,7 +6,7 @@ import { compareAddress, sanitizeAddress } from '../util';
 
 import { APTOS, APTOS_CONFIG } from '../state/constants';
 import { Events } from './events';
-import { 
+import {
   getTokenType as getType,
   getTokenTypes as getTypes
 } from './getTokenType';
@@ -159,7 +159,7 @@ export const OWNED_V2_COLLECTIONS_QUERY = `
   }`;
 
 export const ALL_TOKENS_IN_A_COLLECTION_QUERY = `
-  query MyQuery($offset: Int!, $limit: Int, $collection_id: String) {
+  query MyQuery($offset: Int, $limit: Int, $collection_id: String) {
     current_token_ownerships_v2(
       limit: $limit
       where: {current_token_data: {current_collection: {collection_id: {_eq: $collection_id}}}}
@@ -318,6 +318,13 @@ export class Queries {
     const parentObject: any = await getParentTokens(APTOS, traitObjects);
     const parents = parentObject[0].data;
 
+    const descriptionResult: any = await getTypes(APTOS, traitObjects);
+
+    parents.map((item: any, index: number) => {
+      item.value.vec = descriptionResult[0][index].vec;
+    })
+
+
     if (parents) {
       for (let i = 0; i < parents.length; i++) {
         const parentVec = parents[i].value.vec;
@@ -326,14 +333,12 @@ export class Queries {
             compareAddress(token.token_data_id, parents[i].key)
           );
           if (index >= 0) tokens_filtered[index].composed_to = true;
+          if (parents[i].key == tokens_filtered[index].token_data_id) {
+            tokens_filtered[index].description = parents[i].value.vec[0];
+          }
         }
       }
     }
-console.log("traibOjects", traitObjects)
-    const descriptionResult: any = await getTypes(APTOS, traitObjects);
-    // console.log("object: ", traitObjects);
-    console.log("description Result", descriptionResult);
-
     return { allNfts: all, ownedNfts: tokens_filtered };
   }
 
@@ -353,12 +358,12 @@ console.log("traibOjects", traitObjects)
       variables
     );
 
-    const collections:CollectionV1Fields[]  = [];
+    const collections: CollectionV1Fields[] = [];
 
     // for (const collection of response.collection_datas) {
     //   collections.push(collection);
     // }
-    
+
     return collections;
   }
 
@@ -415,29 +420,29 @@ console.log("traibOjects", traitObjects)
       limit,
       collection_id,
     };
-
-    const response: any = await this.queryIndexer(
-      ALL_TOKENS_IN_A_COLLECTION_QUERY,
-      variables
-    );
-
     const tokens = [];
-
-    for (const token of response.current_token_ownerships_v2) {
-      tokens.push({
-        collection_id:
-          token.current_token_data.current_collection.collection_id,
-        collection_name:
-          token.current_token_data.current_collection.collection_name,
-        token_name: token.current_token_data.token_name,
-        token_data_id: sanitizeAddress(token.current_token_data.token_data_id),
-        description: token.current_token_data.description,
-        token_uri: token.current_token_data.token_uri,
-        composed_nfts: token.composed_nfts,
-        composed_to: false,
-      });
-    }
-
+    let response: any;
+    do {
+      response = await this.queryIndexer(
+        ALL_TOKENS_IN_A_COLLECTION_QUERY,
+        variables
+      );
+      for (const token of response.current_token_ownerships_v2) {
+        tokens.push({
+          collection_id:
+            token.current_token_data.current_collection.collection_id,
+          collection_name:
+            token.current_token_data.current_collection.collection_name,
+          token_name: token.current_token_data.token_name,
+          token_data_id: sanitizeAddress(token.current_token_data.token_data_id),
+          description: token.current_token_data.description,
+          token_uri: token.current_token_data.token_uri,
+          composed_nfts: token.composed_nfts,
+          composed_to: false,
+        });
+      }
+      variables.offset += 100;
+    } while (response.current_token_ownerships_v2.length > 0);
     return tokens;
   }
 }
