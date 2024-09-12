@@ -93,13 +93,13 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
       className="group w-[140px] md:w-[200px] bg-gray-dark-2 rounded-lg cursor-pointer"
       onClick={() => onCardClick(index)}
     >
-      <div className="relative h-[132px] md:h-[200px] bg-gray-light-2 rounded-t-lg">
+      <div onClick={() => onSeeTowneSpace()} className="relative h-[132px] md:h-[200px] bg-gray-light-2 rounded-t-lg">
         <LazyImage
           src={data.token_uri}
           className="w-full h-full rounded-t-[8px]"
           alt="Primary image"
         />
-        {data.type === 'composable' && (
+        {/* {data.type === 'composable' && (
           <div className="absolute z-10 flex-col items-center justify-center hidden w-6 h-6 rounded-full top-2 right-2 group/3dots group-hover:flex hover:bg-black">
             <img src="/nft-card/3dots.svg" alt="3dots" />
             <div className="absolute right-0 hidden top-6 group-hover/3dots:block">
@@ -107,7 +107,6 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
               <div className="py-2 bg-white rounded-lg">
                 <p
                   className="px-2 text-[10px] md:text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap "
-                  onClick={() => onSeeTowneSpace()}
                 >
                   See on TowneSpace
                 </p>
@@ -121,7 +120,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
         <div className="absolute flex bottom-1 left-1">
           {data.type == 'composable' && (
             <img src="/nft-card/v2-badge.svg" alt="v2-badge" />

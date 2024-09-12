@@ -41,7 +41,7 @@ const Replace = () => {
               <p className="font-normal">{trait?.description}</p>
             </div>
             {
-              currentTraitFolder.name !== 'Body' &&
+              currentTraitFolder.trait?.composed_to &&
               <div className='flex flex-col mt-3'>
                 <SecondaryButton
                   type={ButtonStatus.active}

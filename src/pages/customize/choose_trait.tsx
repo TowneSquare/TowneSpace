@@ -16,6 +16,7 @@ const ChooseTrait = () => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.dialogState.bChooseTrait);
   const [traits, setTraits] = useState<TokenFields[]>([]);
+  const [isEnableSaveBtn, setIsEnableSaveBtn] = useState(false);
 
   const currentNft = useAppSelector((state) => state.tokensState.currentNft);
 
@@ -31,7 +32,7 @@ const ChooseTrait = () => {
   const [selectedTrait, setSelectedTrait] = useState<
     NftMetadataType | undefined
   >(undefined);
-
+  console.log("selectedTrait", selectedTrait);
   useEffect(() => {
     let traits = nfts.filter(
       (nft) =>
@@ -101,7 +102,7 @@ const ChooseTrait = () => {
                     <div
                       className=""
                       key={index}
-                      onClick={() => setSelectedTrait(trait)}
+                      onClick={() => { setSelectedTrait(trait); setIsEnableSaveBtn(true) }}
                     >
                       <div
                         className={`w-[120px] h-[120px] flex justify-center items-center cursor-pointer relative ${borderColor} rounded-xl overflow-hidden`}
@@ -149,13 +150,13 @@ const ChooseTrait = () => {
                     dispatch(toggleChooseTrait(false));
                   }}
                 >
-                  <p className="text-sm font-semibold md:text-base text-primary-light">
+                  <p className="text-sm font-semibold md:text-base text-primary-light" onClick={() => setIsEnableSaveBtn(false)}>
                     Cancel
                   </p>
                 </Link>
               </div>
               <button
-                className="md:flex flex-col hidden bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center"
+                className={`md:flex flex-col hidden ${isEnableSaveBtn ? 'bg-primary-light' : 'bg-primary-footer'} rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center `}
                 onClick={() => onSave()}
               >
                 <p className="font-[500] text-[16px]">Save</p>

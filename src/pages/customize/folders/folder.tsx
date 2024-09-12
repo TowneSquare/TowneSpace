@@ -42,12 +42,12 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
     }
   };
 
-  const isStared = data.name  === "Body";
+  const isStared = !data.trait?.composed_to;
   const background = isStared ? 'border-2 border-white/0 bg-white/5' : 'border-2 border-white/0 bg-white/10';
 
   const isActive = data.name === currentTraitFolder?.name;
   const bgColor = isActive && 'border-2 !border-primary-dark-1 !bg-primary-default/20';
-
+  const str = "@#$@#$@#$@#$@#$@#$@#$@#$@#$@#"
   const isEmpty = !data.trait;
   const borderEmpty = isEmpty ? '!border !border-gray-light-3 border-dashed' : '';
 
@@ -108,7 +108,7 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
     <div
       ref={ref}
       data-handler-id={handlerId}
-      className={`h-[100px] mb-1 gap-2 rounded-lg w-full flex items-center ${background} ${bgColor} ${borderEmpty} p-2 cursor-pointer hover:bg-gray-light-3/60`}
+      className={`flex gap-2 items-center p-2 mb-1 w-full rounded-lg cursor-pointer h-[100px] ${background} ${bgColor} ${borderEmpty} hover:bg-gray-light-3/60`}
       onClick={() => onChooseFolder(data)}
     >
       <img src="/customize/equal.svg" />
@@ -121,8 +121,10 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
       </div>
       <div className="flex flex-col justify-between h-full py-1 ml-2 mr-8 font-semibold leading-4 grow text-2xs md:text-sm text-start">
         <p className="text-gray-light-1">{currentNft?.collection_name}</p>
-        <div className="flex flex-col gap-y-1">
-          <p className="leading-tight uppercase text-gray-light-1">{data.name}</p>
+        <div className="flex flex-col w-full gap-y-1">
+          <p className="leading-tight uppercase whitespace-nowrap text-gray-light-1">
+            {data.name.length < 15 ? data.name : data.name.slice(10)+"..."}
+          </p>
           <p className={`text-base leading-tight ${data.trait ? 'text-white' : 'text-gray-light-1 font-normal'}`}>{data.trait?.token_name || '-'}</p>
         </div>
       </div>
