@@ -14,6 +14,8 @@ import { getTraitListinComposable } from '../../api/getTraitListinComposable';
 import { APTOS } from '../../state/constants';
 import { useEffect, useState } from 'react';
 import { ComposedNft } from '../../api';
+import { getComposableType } from '../../api/getTokenType';
+import { current } from '@reduxjs/toolkit';
 
 interface Props {
   index: number;
@@ -30,9 +32,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   useEffect(() => {
     const fetch = async () => {
       if (data.type != 'composable') return;
-
       const res = await getTraitListinComposable(APTOS, data?.token_data_id);
-
       if (res.length > 0) {
         const composedNfts: ComposedNft[] = [];
         for (const nft of res[0]) {
@@ -46,13 +46,12 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
     fetch();
   }, [data.token_data_id]);
 
-  const makeFolders = () => {
+  const makeFolders = async () => {
+
     const temp = JSON.parse(JSON.stringify(data));
     temp.composed_nfts = composedNfts;
     dispatch(chooseNft(temp));
-
     const currentTraitFolders: CustomFolderType[] = [];
-
     for (const composed of composedNfts) {
       const trait = allNfts.find(
         (nft) => compareAddress(nft.token_data_id, composed.token_data_id)
@@ -70,7 +69,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
         currentTraitFolders.push({ name: folder, trait: undefined });
       }
     }
-
+    console.log(currentTraitFolders);
     dispatch(setCurrentTraitFolders(currentTraitFolders));
     dispatch(chooseCurrentTraitFolder(undefined));
   };
@@ -94,21 +93,20 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
       className="group w-[140px] md:w-[200px] bg-gray-dark-2 rounded-lg cursor-pointer"
       onClick={() => onCardClick(index)}
     >
-      <div className="relative h-[132px] md:h-[200px] bg-gray-light-2 rounded-t-lg">
+      <div onClick={() => onSeeTowneSpace()} className="relative h-[132px] md:h-[200px] bg-gray-light-2 rounded-t-lg">
         <LazyImage
           src={data.token_uri}
           className="w-full h-full rounded-t-[8px]"
           alt="Primary image"
         />
-        {data.type === 'composable' && (
-          <div className="absolute z-10 flex-col items-center justify-center hidden w-6 h-6 rounded-full group/3dots group-hover:flex top-2 right-2 hover:bg-black">
+        {/* {data.type === 'composable' && (
+          <div className="absolute z-10 flex-col items-center justify-center hidden w-6 h-6 rounded-full top-2 right-2 group/3dots group-hover:flex hover:bg-black">
             <img src="/nft-card/3dots.svg" alt="3dots" />
-            <div className="absolute right-0 hidden group-hover/3dots:block top-6 ">
+            <div className="absolute right-0 hidden top-6 group-hover/3dots:block">
               <div className="w-full h-4 -mt-2" />
               <div className="py-2 bg-white rounded-lg">
                 <p
                   className="px-2 text-[10px] md:text-[13px] text-gray-dark-2 hover:bg-gray-light-2 whitespace-nowrap "
-                  onClick={() => onSeeTowneSpace()}
                 >
                   See on TowneSpace
                 </p>
@@ -122,10 +120,10 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
               </div>
             </div>
           </div>
-        )}
-        <div className="absolute flex left-1 bottom-1">
+        )} */}
+        <div className="absolute flex bottom-1 left-1">
           {data.type == 'composable' && (
-            <img src="/nft-card/v2-badge.svg" alt="v2-badge"  />
+            <img src="/nft-card/v2-badge.svg" alt="v2-badge" />
           )}
           {data.type == 'composable' && composedNfts.length > 0 && (
             <img src="/nft-card/composed.svg" alt="composed" />
