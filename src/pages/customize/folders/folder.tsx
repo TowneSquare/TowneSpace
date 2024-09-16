@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import type { Identifier, XYCoord } from 'dnd-core';
 
@@ -28,6 +28,7 @@ interface DragItem {
 const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
   const dispatch = useAppDispatch();
   const currentNft = useAppSelector((state) => state.tokensState.currentNft);
+  const [isStared, setIsStared] = useState(false);
   const currentTraitfolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
@@ -42,12 +43,16 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
     }
   };
 
-  const isStared = !data.trait?.composed_to;
+  useEffect(() => {
+    if (!data.trait?.composed_to && data.trait?.token_uri) {
+      setIsStared(true);
+    }
+  }, [data.trait]);
+
   const background = isStared ? 'border-2 border-white/0 bg-white/5' : 'border-2 border-white/0 bg-white/10';
 
   const isActive = data.name === currentTraitFolder?.name;
   const bgColor = isActive && 'border-2 !border-primary-dark-1 !bg-primary-default/20';
-  const str = "@#$@#$@#$@#$@#$@#$@#$@#$@#$@#"
   const isEmpty = !data.trait;
   const borderEmpty = isEmpty ? '!border !border-gray-light-3 border-dashed' : '';
 
@@ -123,7 +128,7 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
         <p className="text-gray-light-1">{currentNft?.collection_name}</p>
         <div className="flex flex-col w-full gap-y-1">
           <p className="leading-tight uppercase whitespace-nowrap text-gray-light-1">
-            {data.name.length < 15 ? data.name : data.name.slice(10)+"..."}
+            {data.name.length < 15 ? data.name : data.name.slice(10) + "..."}
           </p>
           <p className={`text-base leading-tight ${data.trait ? 'text-white' : 'text-gray-light-1 font-normal'}`}>{data.trait?.token_name || '-'}</p>
         </div>
