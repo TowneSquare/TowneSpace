@@ -127,16 +127,16 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
           className="w-[84px] h-[84px] rounded-lg"
         />}
       </div>
-      <div className="flex flex-col justify-between py-1 mr-8 ml-2 h-full font-semibold leading-4 grow text-2xs md:text-sm text-start">
-        <p className="text-gray-light-1">{currentNft?.collection_name?.length ? (currentNft.collection_name.length < 15 ? currentNft.collection_name : currentNft.collection_name.slice(10) + "...") : '-'}</p>
-        <div className="flex flex-col gap-y-1 w-full">
+      <div className="flex flex-col justify-between h-full py-1 ml-2 mr-8 font-semibold leading-4 grow text-2xs md:text-sm text-start">
+        <p className="text-gray-light-1">{currentNft?.collection_name?.length ? (currentNft.collection_name.length > 15 ? currentNft.collection_name : currentNft.collection_name.slice(10) + "...") : '-'}</p>
+        <div className="flex flex-col w-full gap-y-1">
           <p className="leading-tight uppercase whitespace-nowrap text-gray-light-1">
             {data.name.length < 15 ? data.name : data.name.slice(10) + "..."}
           </p>
           <p className={`text-base leading-tight ${data.trait ? 'text-white' : 'text-gray-light-1 font-normal'}`}>
-            {data.trait?.token_name && data.trait.token_name.length < 15
+            {data.trait?.token_name ? (data.trait.token_name.length < 15
               ? data.trait.token_name
-              : data.trait?.token_name?.slice(10) + "..." || '-'}
+              : data.trait?.token_name?.slice(10) + "...") : '-'}
           </p>
         </div>
       </div>
