@@ -134,9 +134,9 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
             {data.name.length < 15 ? data.name : data.name.slice(10) + "..."}
           </p>
           <p className={`text-base leading-tight ${data.trait ? 'text-white' : 'text-gray-light-1 font-normal'}`}>
-            {data.trait?.token_name ? (data.trait.token_name.length < 15
+            {data.trait?.token_name ? (data.trait.token_name.length < 25
               ? data.trait.token_name
-              : data.trait?.token_name?.slice(10) + "...") : '-'}
+              : data.trait?.token_name?.slice(25) + "...") : '-'}
           </p>
         </div>
       </div>
