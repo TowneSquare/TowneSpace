@@ -11,9 +11,15 @@ import { toggleConnectRequest, toggleWalletPanel } from '../state/dialog';
 
 const WalletButtons = () => {
   const { wallets } = useWallet();
-
   // Filter out duplicate wallets
-  const uniqueWallets = wallets?.filter(
+  const WhiteListWallets = ["OKX Wallet", "Rise", "Fewcha", "Petra", "Pontem", "Martian", "Bybit Wallet", "T wallet", "Nightly", "Razor Wallet"];
+
+  const cleanedWallets = wallets?.filter(
+    (item, index, self) =>
+      index === self.findIndex((t) => t.name.toLowerCase().slice(0, 5) === item.name.toLowerCase().slice(0, 5)) &&
+      WhiteListWallets.find((walletItem) => walletItem.toLowerCase().slice(0, 5) == item.name.toLowerCase().slice(0, 5))
+  );
+  const uniqueWallets = cleanedWallets?.filter(
     (
       wallet: Wallet | AptosStandardSupportedWallet<string>,
       index: number,

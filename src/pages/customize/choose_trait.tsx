@@ -32,7 +32,6 @@ const ChooseTrait = () => {
   const [selectedTrait, setSelectedTrait] = useState<
     NftMetadataType | undefined
   >(undefined);
-  console.log("selectedTrait", selectedTrait);
   useEffect(() => {
     let traits = nfts.filter(
       (nft) =>
