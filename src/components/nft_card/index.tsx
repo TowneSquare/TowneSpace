@@ -57,7 +57,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
         (nft) => compareAddress(nft.token_data_id, composed.token_data_id)
       );
       if (trait && trait.description) {
-        currentTraitFolders.push({ name: trait.description, trait });
+        currentTraitFolders.push({ name: "Body", trait });
       }
     }
 

@@ -20,7 +20,6 @@ const ViewNFTModal = () => {
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
-
   useEffect(() => {
     if (currentTraitFolder == undefined && currentTraitFolders.length > 0) {
       dispatch(chooseCurrentTraitFolder(currentTraitFolders[0]));
@@ -94,7 +93,7 @@ const ViewNFTModal = () => {
                           {folder?.trait?.collection_name}
                         </p>
                         <p className="mt-2 md:text-[13px] font-normal text-gray-light-1">
-                          {folder?.trait?.description}
+                          {currentTraitFolder?.name}
                         </p>
                         <p className="">{folder?.trait?.token_name}</p>
                       </div>
