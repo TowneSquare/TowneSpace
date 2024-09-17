@@ -8,13 +8,15 @@ import { setCurrentTraitFolders } from '../../../state/tokens';
 
 const Folders = () => {
   const dispatch = useAppDispatch();
-
+  // const folderArray = ["Badges", "Mouth", "Eyes", "Hat", "Clothing", "Body", "Background"];
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
 
+  const bodyAndBackground = currentTraitFolders.filter(item => item.name === "Body" || item.name === "Background");
+  const updatedcurrentFolder = currentTraitFolders.filter(item => item.name !== "Body" && item.name !== "Background").concat(bodyAndBackground);
   const [folders, setFolders] =
-    useState<CustomFolderType[]>(currentTraitFolders);
+    useState<CustomFolderType[]>(updatedcurrentFolder);
 
   useEffect(() => {
     dispatch(setCurrentTraitFolders(folders));

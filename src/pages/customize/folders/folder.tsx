@@ -35,7 +35,6 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
   const currentTraitFolder = useAppSelector(
     (state) => state.tokensState.currentTraitFolder
   );
-
   const onChooseFolder = (folder: CustomFolderType) => {
     dispatch(chooseCurrentTraitFolder(folder));
     if (!folder.trait) {
@@ -44,7 +43,6 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
   };
 
   useEffect(() => {
-    console.log("TraitsData", data.trait);
     if (data.trait?.composed_to === false && data.trait?.token_uri) {
       setIsStared(true);
     } else {
