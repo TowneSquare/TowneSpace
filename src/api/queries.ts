@@ -98,7 +98,7 @@ export const OWNED_V1_TOKENS_QUERY = `
   }
   `;
 export const OWNED_V2_TOKENS_QUERY = `
-  query Query($offset: Int!, $limit: Int, $account_address: String, $collection_id: String) {
+  query Query($offset: Int, $limit: Int, $account_address: String, $collection_id: String) {
     current_token_ownerships_v2(
       limit: $limit
       where: {owner_address: {_eq: $account_address}, current_token_data: {current_collection: {collection_id: {_eq: $collection_id}}, token_standard: {_eq: "v2"}}}
@@ -114,7 +114,7 @@ export const OWNED_V2_TOKENS_QUERY = `
         token_data_id
         description
         token_uri
-        current_token_ownerships(limit: 1) {
+        current_token_ownerships {
           owner_address
         }
       }
@@ -262,12 +262,7 @@ export class Queries {
     const tokenObjects = [];
 
     for (const token of res.current_token_ownerships_v2) {
-      if (
-        compareAddress(
-          token.current_token_data.current_token_ownerships[0].owner_address,
-          account_address
-        )
-      ) {
+      if (token.current_token_data.current_token_ownerships.find((obj: any) => obj.owner_address === account_address)) {
         tokens.push({
           collection_id:
             token.current_token_data.current_collection.collection_id,
