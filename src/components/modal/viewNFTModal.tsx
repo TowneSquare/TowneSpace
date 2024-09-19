@@ -85,7 +85,7 @@ const ViewNFTModal = () => {
                         <LazyImage
                           src={folder?.trait?.token_uri}
                           alt="image"
-                          className="w-[60px] h-[60px]"
+                          className="w-[60px] h-[60px] rounded-lg"
                         />
                       </div>
                       <div className="flex flex-col leading-4 font-semibold text-[10px] md:text-[14px] text-start">
@@ -93,7 +93,7 @@ const ViewNFTModal = () => {
                           {folder?.trait?.collection_name}
                         </p>
                         <p className="mt-2 md:text-[13px] font-normal text-gray-light-1">
-                          {currentTraitFolder?.name}
+                          {folder?.trait?.description}
                         </p>
                         <p className="">{folder?.trait?.token_name}</p>
                       </div>
