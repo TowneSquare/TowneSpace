@@ -14,6 +14,7 @@ const ViewNFTModal = () => {
   const dispatch = useAppDispatch();
 
   const isOpen = useAppSelector((state) => state.dialogState.bViewNFTModal);
+  const folderType = ["Badge", "Mouth", "Eyes", "Hat", "Clothing", "Body", "Background"];
   const [isStared, setIsStared] = useState(false);
   const currentNft = useAppSelector((state) => state.tokensState.currentNft);
   const currentTraitFolder = useAppSelector(
@@ -23,7 +24,14 @@ const ViewNFTModal = () => {
     (state) => state.tokensState.currentTraitFolders
   );
 
-
+  const sortedTraitFolders = currentTraitFolders
+    .filter((folder) => folder.trait != undefined)
+    .sort((a, b) => {
+      const indexA = folderType.indexOf(a?.trait?.description || "");
+      const indexB = folderType.indexOf(b?.trait?.description || "");
+      return indexA - indexB;
+    });
+    
   useEffect(() => {
     if (currentTraitFolder == undefined && currentTraitFolders.length > 0) {
       dispatch(chooseCurrentTraitFolder(currentTraitFolders[0]));
@@ -74,7 +82,7 @@ const ViewNFTModal = () => {
               <LazyImage src={currentNft?.token_uri} />
             </div>
             <div className="ml-3 w-[255px] overflow-auto  h-[80vh] p-2 border-2 border-gray-dark-1 rounded-xl">
-              {currentTraitFolders
+              {sortedTraitFolders
                 .filter((folder) => folder.trait != undefined)
                 .map((folder, index) => {
                   const isActive = currentTraitFolder?.trait?.token_data_id == folder.trait?.token_data_id;
