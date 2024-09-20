@@ -6,13 +6,15 @@ import { useEffect, useState } from 'react';
 import { NftMetadataType } from '../../type/nft_type';
 import CustomFolderType from '../../type/custom_folder_type';
 import { chooseCurrentTraitFolder } from '../../state/tokens';
+import { Tooltip } from 'react-tooltip';
+
 
 const ViewNFTModal = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const isOpen = useAppSelector((state) => state.dialogState.bViewNFTModal);
-
+  const [isStared, setIsStared] = useState(false);
   const currentNft = useAppSelector((state) => state.tokensState.currentNft);
   const currentTraitFolder = useAppSelector(
     (state) => state.tokensState.currentTraitFolder
@@ -20,6 +22,8 @@ const ViewNFTModal = () => {
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
+
+
   useEffect(() => {
     if (currentTraitFolder == undefined && currentTraitFolders.length > 0) {
       dispatch(chooseCurrentTraitFolder(currentTraitFolders[0]));
@@ -97,6 +101,18 @@ const ViewNFTModal = () => {
                         </p>
                         <p className="">{folder?.trait?.token_name}</p>
                       </div>
+                      {folder?.trait?.description == "Body" && (
+                        <div className='ml-2'>
+                          <Tooltip id="my-tooltip" className="border border-white -2 bg-gray-dark-3" />
+                          <img
+                            src="/customize/star.png"
+                            className='w-8'
+                            alt="star"
+                            data-tooltip-id="my-tooltip"
+                            data-tooltip-content="This is a base trait. It can’t be removed or replaced."
+                          />
+                        </div>
+                      )}
                     </div>
                   );
                 })}
