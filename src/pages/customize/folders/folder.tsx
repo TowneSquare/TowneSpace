@@ -43,7 +43,6 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
   };
 
   useEffect(() => {
-    console.log("data.trait", data.trait);
     if (data.trait?.composed_to === false && data.trait?.token_uri && data.trait?.description == "Body") {
       setIsStared(true);
     } else {

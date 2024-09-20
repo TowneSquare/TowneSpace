@@ -14,11 +14,10 @@ const Folders = () => {
   );
 
 
-  const sortedTraitFolders = currentTraitFolders
-    .filter((folder) => folder.trait != undefined)
+  const sortedTraitFolders = [...currentTraitFolders]
     .sort((a, b) => {
-      const indexA = folderType.indexOf(a?.trait?.description || "");
-      const indexB = folderType.indexOf(b?.trait?.description || "");
+      const indexA = folderType.indexOf(a.name);
+      const indexB = folderType.indexOf(b.name);
       return indexA - indexB;
     });
   // const bodyAndBackground = currentTraitFolders.filter(item => item.name === "Body" || item.name === "Background");
