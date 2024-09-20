@@ -8,15 +8,23 @@ import { setCurrentTraitFolders } from '../../../state/tokens';
 
 const Folders = () => {
   const dispatch = useAppDispatch();
-  // const folderArray = ["Badges", "Mouth", "Eyes", "Hat", "Clothing", "Body", "Background"];
+  const folderType = ["Badge", "Mouth", "Eyes", "Hat", "Clothing", "Body", "Background"];
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
 
-  const bodyAndBackground = currentTraitFolders.filter(item => item.name === "Body" || item.name === "Background");
-  const updatedcurrentFolder = currentTraitFolders.filter(item => item.name !== "Body" && item.name !== "Background").concat(bodyAndBackground);
+
+  const sortedTraitFolders = currentTraitFolders
+    .filter((folder) => folder.trait != undefined)
+    .sort((a, b) => {
+      const indexA = folderType.indexOf(a?.trait?.description || "");
+      const indexB = folderType.indexOf(b?.trait?.description || "");
+      return indexA - indexB;
+    });
+  // const bodyAndBackground = currentTraitFolders.filter(item => item.name === "Body" || item.name === "Background");
+  // const updatedcurrentFolder = currentTraitFolders.filter(item => item.name !== "Body" && item.name !== "Background").concat(bodyAndBackground);
   const [folders, setFolders] =
-    useState<CustomFolderType[]>(updatedcurrentFolder);
+    useState<CustomFolderType[]>(sortedTraitFolders);
 
   useEffect(() => {
     dispatch(setCurrentTraitFolders(folders));
