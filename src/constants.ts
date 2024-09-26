@@ -1,4 +1,10 @@
-/** 
+import { Aptos, AptosConfig } from '@aptos-labs/ts-sdk';
+import { Network } from 'aptos';
+import { PinataSDK } from "pinata-web3";
+import dotenv from 'dotenv';
+//dotenv.config();
+
+/**
  * ========
  * PACKAGES
  * ========
@@ -6,9 +12,15 @@
 
 /** TESTNET */
 
-export const COMPOSABLE_TOKEN_TESTNET = '0x5fe4421182921f3f4c847bb30127e25138ef463455c5981e7726fa08ce42855e'
-export const TOKEN_MINTER_TESTNET = '0xa89295004505a2394a3ed756dec801f7579c3484c499973a4b28eb071419abd6'
-export const TOWNESPACE_TESTNET = '0xefb8cb1a3a6a05f065d05fedd857e3683837de3949581d362ce3b59471cebb63'
+export const PINATA_JWT = process.env.NEXT_PUBLIC_PINATA_JWT;
+export const PINATA_GATEWAY = process.env.NEXT_PUBLIC_PINATA_GATEWAY;
+
+export const COMPOSABLE_TOKEN_TESTNET =
+  '0x5fe4421182921f3f4c847bb30127e25138ef463455c5981e7726fa08ce42855e';
+export const TOKEN_MINTER_TESTNET =
+  '0xa89295004505a2394a3ed756dec801f7579c3484c499973a4b28eb071419abd6';
+export const TOWNESPACE_TESTNET =
+  '0xefb8cb1a3a6a05f065d05fedd857e3683837de3949581d362ce3b59471cebb63';
 
 /** MAINNET */
 
@@ -16,12 +28,11 @@ export const COMPOSABLE_TOKEN_MAINNET = '';
 export const TOKEN_MINTER_MAINNET = '';
 export const TOWNESPACE_MAINNET = '';
 
-
-/** 
+/**
  * =======
  * MODULES
  * =======
-*/
+ */
 
 /** Composable Token */
 export const COMPOSABLE_TOKEN = `composable_token`;
@@ -29,61 +40,65 @@ export const COMPOSABLE_TOKEN_ENTRY = `composable_token_entry`;
 
 /** Townespace */
 
-export const TOWNESPACE_STUDIO = `studio`
-export const RANDOM_MINT = `random_mint`
+export const TOWNESPACE_STUDIO = `studio`;
+export const RANDOM_MINT = `random_mint`;
 // TODO: delete
-export const BATCH_MINT = `batch_mint`
+export const BATCH_MINT = `batch_mint`;
 
 /** Token Minter */
 
-/** 
+/**
  * =========
  * ENDPOINTS
  * =========
-*/
+ */
 
 /** TESTNET */
-export const COMPOSABLE_TOKEN_ENDPOINT_TESTNET = COMPOSABLE_TOKEN_TESTNET + `::` + COMPOSABLE_TOKEN
+export const COMPOSABLE_TOKEN_ENDPOINT_TESTNET =
+  COMPOSABLE_TOKEN_TESTNET + `::` + COMPOSABLE_TOKEN;
 
 /** MAINNET */
-export const COMPOSABLE_TOKEN_ENDPOINT_MAINNET = COMPOSABLE_TOKEN_MAINNET + `::` + COMPOSABLE_TOKEN
+export const COMPOSABLE_TOKEN_ENDPOINT_MAINNET =
+  COMPOSABLE_TOKEN_MAINNET + `::` + COMPOSABLE_TOKEN;
 
-/** 
+/**
  * =====
  * TYPES
  * =====
-*/
+ */
 
 //
 // TODO: update when on mainnet!
-// 
-export const CNFT_COLLECTION =  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Collection`
-export const COMPOSABLE_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Composable`
-export const TRAIT_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Trait`
-export const DIGITAL_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::DA`
-export const FUNGIBLE_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::FA`
+//
+export const CNFT_COLLECTION =
+  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Collection`;
+export const COMPOSABLE_TOKEN_TYPE =
+  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Composable`;
+export const TRAIT_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Trait`;
+export const DIGITAL_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::DA`;
+export const FUNGIBLE_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::FA`;
 
-/** 
+/**
  * =========
  * READ APIs
  * =========
  */
 
 /** Composable Token */
-export const COLLECTION_NAME = `collection_name`
-export const COLLECTION_SYMBOL = `collection_symbol`
-export const COLLECTION_SUPPLY_TYPE = `collection_supply_type`
+export const COLLECTION_NAME = `collection_name`;
+export const COLLECTION_SYMBOL = `collection_symbol`;
+export const COLLECTION_SUPPLY_TYPE = `collection_supply_type`;
 
-export const PARENT_TOKEN_OBJECT = `parent_token`
-export const PARENTS_OBJECTS = `parents_by_address`
-export const TOKEN_INDEX = `index`
-export const TRAITS_FROM_COMPOSABLE = `traits_from_composable`
+export const PARENT_TOKEN_OBJECT = `parent_token`;
+export const PARENTS_OBJECTS = `parents_by_address`;
+export const TOKEN_INDEX = `index`;
+export const TRAITS_FROM_COMPOSABLE = `traits_from_composable`;
 
-export const IDENTIFY_OBJECT = `object_type`
-export const IDENTIFY_OBJECTS = `object_types`
+export const IDENTIFY_OBJECT = `object_type`;
+export const IDENTIFY_OBJECTS = `object_types`;
 
 /** Townespace */
-export const OWNED_TOKENS = `owned_tokens`
+export const OWNED_TOKENS = `owned_tokens`;
 
 /** Token Minter */
 
@@ -94,21 +109,21 @@ export const OWNED_TOKENS = `owned_tokens`
  */
 
 /** Composable Token */
-export const CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_ROYALTY = `create_collection_with_fixed_supply_and_royalty`
-export const CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_fixed_supply_and_no_royalty`
-export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_ROYALTY = `create_collection_with_unlimited_supply_and_royalty`
-export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_unlimited_supply_and_no_royalty`
+export const CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_ROYALTY = `create_collection_with_fixed_supply_and_royalty`;
+export const CREATE_COLLECTION_WITH_FIXED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_fixed_supply_and_no_royalty`;
+export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_ROYALTY = `create_collection_with_unlimited_supply_and_royalty`;
+export const CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_NO_ROYALTY = `create_collection_with_unlimited_supply_and_no_royalty`;
 
-export const EQUIP_TRAIT = `equip_trait`
-export const EQUIP_TRAITS = `equip_traits`
-export const UNEQUIP_TRAIT = `unequip_trait`
-export const UNEQUIP_TRAITS = `unequip_traits`
-export const REPLACE_TRAITS = `replace_traits_of_composable`
+export const EQUIP_TRAIT = `equip_trait`;
+export const EQUIP_TRAITS = `equip_traits`;
+export const UNEQUIP_TRAIT = `unequip_trait`;
+export const UNEQUIP_TRAITS = `unequip_traits`;
+export const REPLACE_TRAITS = `replace_traits_of_composable`;
 
-export const DECOMPOSE_ENTIRE_COMPOSABLE_TOKEN = `decompose_entire_composable_token`
+export const DECOMPOSE_ENTIRE_COMPOSABLE_TOKEN = `decompose_entire_composable_token`;
 
 /** Townespace */
-export const MINT_TOKENS = `mint_tokens`
+export const MINT_TOKENS = `mint_tokens`;
 
 /** Token Minter */
 
@@ -147,3 +162,14 @@ export const PROPERTY_UPDATED = `PropertyUpdatedEvent`;
 /** Townespace */
 
 /** Token Minter */
+
+
+
+export const PINATA = new PinataSDK({
+  pinataJwt:
+   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIzNDgzNmUyYi04OWFlLTQ0ZTUtYTVlOC1lZDcyMjJmMmRhYzIiLCJlbWFpbCI6InAuZmF0b2x1QHRvd25lc3F1YXJlLnh5eiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI0MGNjZGY1MGYzYzQ1Y2QzZTgwOSIsInNjb3BlZEtleVNlY3JldCI6ImU2OGUzMjFjOWVlMzFkNDc3OTAxNGNmYzMyODhlYmI2NGU2M2YyOTM2OTdjZTQwYjY2ZTEzNGMzYTQ2MzQ2NTgiLCJleHAiOjE3NTg4OTk4ODV9.7ZLFO1ZnhvmS9LM9UIfCHiU8QwRT1UOENapuYwP4JRs',
+  pinataGateway: 'rose-gentle-halibut-945.mypinata.cloud',
+});
+
+const aptosConfig = new AptosConfig({ network: Network.MAINNET });
+export const APTOS = new Aptos(aptosConfig);

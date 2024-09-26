@@ -30,7 +30,7 @@ export const useReplaceTraits = () => {
                 functionArguments: [composableObject, traitObjectsToRemove, traitObjectsToAdd, new_uri],
             },
         });
-        console.log(response);
+        console.log(response, "EDITING");
         return response;
     };
     return replaceTraits;
