@@ -1,6 +1,7 @@
 import { Aptos, InputViewFunctionData } from '@aptos-labs/ts-sdk';
 import {
   OWNED_TOKENS,
+  TOWNESPACE_MAINNET,
   TOWNESPACE_STUDIO,
   TOWNESPACE_TESTNET
 } from '../constants';
@@ -13,7 +14,7 @@ export const getOwnedTokens = async (
   if (!tokenObjects) return;
   try {
     const payload: InputViewFunctionData = {
-      function: `${TOWNESPACE_TESTNET}::${TOWNESPACE_STUDIO}::${OWNED_TOKENS}`,
+      function: `${TOWNESPACE_MAINNET}::${TOWNESPACE_STUDIO}::${OWNED_TOKENS}`,
       typeArguments: [],
       functionArguments: [account_address, tokenObjects],
     };

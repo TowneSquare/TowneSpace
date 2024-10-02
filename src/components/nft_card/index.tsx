@@ -74,7 +74,6 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
         currentTraitFolders.push({ name: folder, trait: undefined });
       }
     }
-    console.log(currentTraitFolders);
     dispatch(setCurrentTraitFolders(currentTraitFolders));
     dispatch(chooseCurrentTraitFolder(undefined));
   };
@@ -85,12 +84,11 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   };
   const onSeeTowneSpace = () => {
     makeFolders();
-
     dispatch(toggleViewNFTModal(true));
   };
 
   const onCardClick = (index: number) => {
-    console.log(index, data, composedNfts, nfts, allNfts);
+    console.log(index, data, composedNfts, nfts);
   };
 
   return (

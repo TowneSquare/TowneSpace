@@ -10,6 +10,7 @@ import {
   getTokenType as getType,
   getTokenTypes as getTypes
 } from './getTokenType';
+import { TRAIT_NAME } from '../type/nft_type';
 
 export type ComposedNft = {
   token_data_id: string;
@@ -30,7 +31,7 @@ export type TokenFields = {
   collection_name: string;
   token_name: string;
   token_data_id: string;
-  description: string;
+  description: TRAIT_NAME;
   token_uri?: string;
   composed_nfts?: ComposedNft[];
   type?: string;
@@ -422,6 +423,8 @@ export class Queries {
         ALL_TOKENS_IN_A_COLLECTION_QUERY,
         variables
       );
+
+      console.log(response, "getAllTokensInACollection")
       for (const token of response.current_token_ownerships_v2) {
         tokens.push({
           collection_id:

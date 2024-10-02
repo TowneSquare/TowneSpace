@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { NftMetadataType } from '../type/nft_type';
+import { NftMetadataType, TRAIT_NAME } from '../type/nft_type';
 import { APTOS, APTOS_CONFIG, COLLECTIONS, NFTS } from './constants';
 import FilterType from '../type/filter_type';
 import {
@@ -19,7 +19,7 @@ interface tokensStates {
   allNfts: NftMetadataType[];
   nfts: NftMetadataType[];
   currentNft: NftMetadataType | undefined;
-  folders: string[];
+  folders: TRAIT_NAME[];
   currentTraitFolders: CustomFolderType[];
   currentTraitFolder: CustomFolderType | undefined;
 
@@ -129,6 +129,8 @@ export const fetchNfts = createAsyncThunk(
         );
       }
 
+      console.log(res, "result")
+
       res.ownedNfts.sort((a, b) => {
         if (a.type === undefined) return 1;
         if (b.type === undefined) return -1;
@@ -178,7 +180,7 @@ export const tokensSlice = createSlice({
     chooseNft: (state, action: PayloadAction<NftMetadataType>) => {
       state.currentNft = action.payload;
     },
-    setFolders: (state, action: PayloadAction<string[]>) => {
+    setFolders: (state, action: PayloadAction<TRAIT_NAME[]>) => {
       state.folders = action.payload;
     },
     setCurrentTraitFolders: (
@@ -229,7 +231,7 @@ export const tokensSlice = createSlice({
 
       const folders = state.nfts
         .filter((nft) => nft.type != 'composable')
-        .reduce((acc: string[], nft: NftMetadataType) => {
+        .reduce((acc: TRAIT_NAME[], nft: NftMetadataType) => {
           const { description } = nft;
 
           if (description && acc.indexOf(description) == -1) {

@@ -5,10 +5,11 @@ import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import Folder from './folder';
 import CustomFolderType from '../../../type/custom_folder_type';
 import { setCurrentTraitFolders } from '../../../state/tokens';
+import { TRAIT_NAME } from '../../../type/nft_type';
 
 const Folders = () => {
   const dispatch = useAppDispatch();
-  const folderType = ["Badge", "Mouth", "Eyes", "Hat", "Clothing", "Body", "Background"];
+  const folderType = [TRAIT_NAME.BADGES, TRAIT_NAME.MOUTH, TRAIT_NAME.EYES, TRAIT_NAME.HATS, TRAIT_NAME.CLOTHING, TRAIT_NAME.BODY, TRAIT_NAME.BACKGROUND];
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );

@@ -5,12 +5,18 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import PrimaryButton from '../../components/primary_button';
 import ButtonStatus from '../../type/button_status';
 import { toggleFinishEdit } from '../../state/dialog';
-import { compareAddress, pinJSONToIPFS, sleep } from '../../util';
+import {
+  compareAddress,
+  pinJSONToIPFS,
+  removeWordFromString,
+  sleep,
+} from '../../util';
 import { useReplaceTraits } from '../../hooks/useReplaceTrait';
 import { ComposedNft } from '../../api';
 import CustomFolderType from '../../type/custom_folder_type';
 import { PINATA } from '../../constants';
 import { useEquipTraits } from '../../hooks/useEquipTrait';
+import { TRAIT_NAME } from '../../type/nft_type';
 
 const FinishEdit = () => {
   const isOpen = useAppSelector((state) => state.dialogState.bFinishEdit);
@@ -78,15 +84,10 @@ const FinishEdit = () => {
     const blob = await fetch(imageData).then((res) => res.blob());
 
     try {
-      // const imageLink =
-      //   // 'https://ipfs.io/ipfs/QmPXkpBsgNR1XcWUvCb9xaqXADCCCcuwC2jVpJauurHDJe';
-      //   await pinJSONToIPFS(blob);
-      // console.log(imageLink);
       const file = new File([new Blob([blob])], currentNft?.token_name ?? '');
       const upload = await PINATA.upload.file(file);
-         console.log(upload, "cid")
+      console.log(upload, 'cid');
       const uri = `https://rose-gentle-halibut-945.mypinata.cloud/ipfs/${upload.IpfsHash}`;
-   
 
       const addObjects = currentTraitFolders.reduce(
         (acc: string[], folder: CustomFolderType) => {
@@ -120,39 +121,45 @@ const FinishEdit = () => {
         );
       }
 
-      // if (currentNft?.token_data_id) {
-      //   console.log('replacing', addObjects, removeObjects);
-
-      //   const res = await replaceTraits(
-      //     currentNft?.token_data_id,
-      //     removeObjects,
-      //     addObjects,
-      //     uri
-      //   );
-      //   console.log(res);
-
-      //   toggleLoading(false);
-      //   navigate('/studio/mytoken');
-      //   dispatch(toggleFinishEdit(false));
-      // }
-
-      const traitObject = currentTraitFolders.map(
-        (currentTrait) => currentTrait.trait?.token_data_id
-      ) as string[];
       if (currentNft?.composed_nfts?.length == 1) {
-        console.log(currentNft.composed_nfts, currentNft.token_data_id, traitObject, uri, "payload")
+        const traitObject = currentTraitFolders
+          .filter((filteredCurrent) => filteredCurrent.name != TRAIT_NAME.BODY)
+          .map((currentTrait) => currentTrait.trait?.token_data_id) as string[];
         const res = await equipTraits(
           currentNft.token_data_id,
           traitObject,
           uri
         );
-        toggleLoading(false);
-        navigate('/studio/mytoken');
-        dispatch(toggleFinishEdit(false));
+        if (res?.success) {
+          toggleLoading(false);
+          navigate('/studio/mytoken');
+          dispatch(toggleFinishEdit(false));
+        }
+      }
+
+      if (
+        currentNft?.composed_nfts?.length &&
+        currentNft?.composed_nfts?.length > 1
+      ) {
+        console.log('replacing', addObjects, removeObjects);
+
+        const res = await replaceTraits(
+          currentNft?.token_data_id,
+          removeObjects,
+          addObjects,
+          uri
+        );
+        if (res?.success) {
+          const oldUri = removeWordFromString(currentNft?.token_uri);
+          await PINATA.unpin([oldUri]);
+          toggleLoading(false);
+          navigate('/studio/mytoken');
+          dispatch(toggleFinishEdit(false));
+        }
       }
     } catch (e) {
       toggleLoading(false);
-      console.log(e)
+      console.log(e);
     }
   };
 

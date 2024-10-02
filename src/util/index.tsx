@@ -26,6 +26,20 @@ export function sanitizeAddress(address: string): string {
   return sanitizedAddress;
 }
 
+export function removeWordFromString(str?: string) {
+  // Create a regular expression that matches the word, with word boundaries
+  if (str) {
+    let regex = new RegExp(
+      `\\b${`https://rose-gentle-halibut-945.mypinata.cloud/ipfs/`}\\b`,
+      'gi'
+    );
+    return str.replace(regex, '').trim();
+  } else {
+    return ""
+  }
+ 
+}
+
 export const NFT_COLLECTION_OWNED_QUERY = gql`
   query getCollectionsWithOwnedTokens($wallet: String!, $offset: Int!) {
     current_collection_ownership_v2_view(

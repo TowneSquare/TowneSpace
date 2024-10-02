@@ -2,6 +2,7 @@ import {
   COMPOSABLE_TOKEN_TESTNET,
   CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_ROYALTY,
   COMPOSABLE_TOKEN_ENTRY,
+  COMPOSABLE_TOKEN_MAINNET,
 } from '../constants';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 
@@ -28,7 +29,7 @@ const useCreateCollectionWithUnlimitedSupplyAndRoyalty = (
     const response = await signAndSubmitTransaction({
       sender: accountAddress,
       data: {
-        function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN_ENTRY}::${CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_ROYALTY}`,
+        function: `${COMPOSABLE_TOKEN_MAINNET}::${COMPOSABLE_TOKEN_ENTRY}::${CREATE_COLLECTION_WITH_UNLIMITED_SUPPLY_AND_ROYALTY}`,
         typeArguments: [],
         functionArguments: [
           description,

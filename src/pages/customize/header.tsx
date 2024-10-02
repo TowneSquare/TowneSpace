@@ -22,7 +22,7 @@ const Header: React.FC<Props> = ({}) => {
       </div>
       <div className="flex flex-col items-center">
         <p className="text-base font-semibold text-center md:text-xl">
-          Customize Slothian #9898
+          Customize {currentNft?.token_name}
         </p>
         <p className="w-1/2 text-sm text-center md:w-full md:text-base">
           Select NFTs or crypto assets you want to put inside, replace or remove

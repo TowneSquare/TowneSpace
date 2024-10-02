@@ -1,6 +1,6 @@
 import { Aptos, AptosConfig } from '@aptos-labs/ts-sdk';
 import { Network } from 'aptos';
-import { PinataSDK } from "pinata-web3";
+import { PinataSDK } from 'pinata-web3';
 import dotenv from 'dotenv';
 //dotenv.config();
 
@@ -24,9 +24,12 @@ export const TOWNESPACE_TESTNET =
 
 /** MAINNET */
 
-export const COMPOSABLE_TOKEN_MAINNET = '';
-export const TOKEN_MINTER_MAINNET = '';
-export const TOWNESPACE_MAINNET = '';
+export const COMPOSABLE_TOKEN_MAINNET =
+  '0xd758b832d4d8fcad58ac7363a6b87af342a6e0dfd25897aa65233c606526e8f4';
+export const TOKEN_MINTER_MAINNET =
+  '0x5ca749c835f44a9a9ff3fb0bec1f8e4f25ee09b424f62058c561ca41ec6bb146';
+export const TOWNESPACE_MAINNET =
+  '0xd85adb3c424c398d5017ad1d20b63ce8b3373a651a484ff2b473aa93d3357296';
 
 /**
  * =======
@@ -70,13 +73,27 @@ export const COMPOSABLE_TOKEN_ENDPOINT_MAINNET =
 //
 // TODO: update when on mainnet!
 //
-export const CNFT_COLLECTION =
+export const CNFT_COLLECTION_TESTNET =
   COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Collection`;
-export const COMPOSABLE_TOKEN_TYPE =
+export const COMPOSABLE_TOKEN_TYPE_TESTNET =
   COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Composable`;
-export const TRAIT_TOKEN_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Trait`;
-export const DIGITAL_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::DA`;
-export const FUNGIBLE_ASSET_TYPE = COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::FA`;
+export const TRAIT_TOKEN_TYPE_TESTNET =
+  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::Trait`;
+export const DIGITAL_ASSET_TYPE_TESTNET =
+  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::DA`;
+export const FUNGIBLE_ASSET_TYPE_TESTNET =
+  COMPOSABLE_TOKEN_ENDPOINT_TESTNET + `::FA`;
+
+export const CNFT_COLLECTION_MAINNET =
+  COMPOSABLE_TOKEN_ENDPOINT_MAINNET + `::Collection`;
+export const COMPOSABLE_TOKEN_TYPE_MAINNET =
+  COMPOSABLE_TOKEN_ENDPOINT_MAINNET + `::Composable`;
+export const TRAIT_TOKEN_TYPE_MAINNET =
+  COMPOSABLE_TOKEN_ENDPOINT_MAINNET + `::Trait`;
+export const DIGITAL_ASSET_TYPE_MAINNET =
+  COMPOSABLE_TOKEN_ENDPOINT_MAINNET + `::DA`;
+export const FUNGIBLE_ASSET_TYPE_MAINNET =
+  COMPOSABLE_TOKEN_ENDPOINT_MAINNET + `::FA`;
 
 /**
  * =========
@@ -163,13 +180,11 @@ export const PROPERTY_UPDATED = `PropertyUpdatedEvent`;
 
 /** Token Minter */
 
-
-
 export const PINATA = new PinataSDK({
   pinataJwt:
-   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIzNDgzNmUyYi04OWFlLTQ0ZTUtYTVlOC1lZDcyMjJmMmRhYzIiLCJlbWFpbCI6InAuZmF0b2x1QHRvd25lc3F1YXJlLnh5eiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI0MGNjZGY1MGYzYzQ1Y2QzZTgwOSIsInNjb3BlZEtleVNlY3JldCI6ImU2OGUzMjFjOWVlMzFkNDc3OTAxNGNmYzMyODhlYmI2NGU2M2YyOTM2OTdjZTQwYjY2ZTEzNGMzYTQ2MzQ2NTgiLCJleHAiOjE3NTg4OTk4ODV9.7ZLFO1ZnhvmS9LM9UIfCHiU8QwRT1UOENapuYwP4JRs',
-  pinataGateway: 'rose-gentle-halibut-945.mypinata.cloud',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI2OTBkZjc0ZS0wZjhkLTQ5Y2UtOWQ5My1lZjczMmQzZjZmNTkiLCJlbWFpbCI6InRvd25lc3F1YXJldWkyMDI0QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwaW5fcG9saWN5Ijp7InJlZ2lvbnMiOlt7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6IkZSQTEifSx7ImRlc2lyZWRSZXBsaWNhdGlvbkNvdW50IjoxLCJpZCI6Ik5ZQzEifV0sInZlcnNpb24iOjF9LCJtZmFfZW5hYmxlZCI6ZmFsc2UsInN0YXR1cyI6IkFDVElWRSJ9LCJhdXRoZW50aWNhdGlvblR5cGUiOiJzY29wZWRLZXkiLCJzY29wZWRLZXlLZXkiOiI1MzEwYzZiZjE3OTQxYTA4OGNkOSIsInNjb3BlZEtleVNlY3JldCI6ImEyODZiYTJlNzk5ODFjZDMwZjc5MTgyOTY5MzBkMDBiYzkyM2I5MTg4NDIyZjNhN2JiOWRiNzY5NDJjOTg5YWYiLCJleHAiOjE3NTg1NjYzMjN9.iNvmGHdZX2YseEk9iZvN_8itTMtcU_ZzGbUAj4njkMw',
+  pinataGateway: 'https://aquamarine-electoral-hyena-268.mypinata.cloud/ipfs',
 });
 
-const aptosConfig = new AptosConfig({ network: Network.MAINNET });
+const aptosConfig = new AptosConfig({ network: Network.TESTNET });
 export const APTOS = new Aptos(aptosConfig);

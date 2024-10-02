@@ -18,6 +18,7 @@ const CollectionPanel = () => {
   };
 
   const isEmpty = collections.length == 0;
+  console.log(collections, "collections")
   return (
     <div className="flex flex-col w-auto gap-4">
       {!isEmpty && <Search />}

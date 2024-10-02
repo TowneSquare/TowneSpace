@@ -33,7 +33,7 @@ const Customize = () => {
   return (
     <div className="relative">
       <Header />
-      <div className="md:mx-20 lg:mx-32 flex flex-col md:flex-row justify-center items-center md:items-start gap-6">
+      <div className="flex flex-col items-center justify-center gap-6 md:mx-20 lg:mx-32 md:flex-row md:items-start">
         <Preview />
         <Folders />
         <Replace />

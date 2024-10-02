@@ -3,7 +3,7 @@ import { Network } from 'aptos';
 
 import { NftMetadataType } from '../type/nft_type';
 
-export const APTOS_CONFIG = new AptosConfig({ network: Network.TESTNET });
+export const APTOS_CONFIG = new AptosConfig({ network: Network.MAINNET });
 export const APTOS = new Aptos(APTOS_CONFIG);
 
 export const NFTS: NftMetadataType[] = [];

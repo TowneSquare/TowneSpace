@@ -3,6 +3,7 @@ import {
   UNEQUIP_TRAIT,
   COMPOSABLE_TOKEN_ENTRY,
   UNEQUIP_TRAITS,
+  COMPOSABLE_TOKEN_MAINNET,
 } from '../constants';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
 
@@ -28,7 +29,7 @@ export const useUnequipTrait = () => {
       const response = await signAndSubmitTransaction({
         sender: accountAddress,
         data: {
-          function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN_ENTRY}::${UNEQUIP_TRAIT}`,
+          function: `${COMPOSABLE_TOKEN_MAINNET}::${COMPOSABLE_TOKEN_ENTRY}::${UNEQUIP_TRAIT}`,
           typeArguments: [],
           functionArguments: [composableObject, traitObject, new_uri],
         },
@@ -62,7 +63,7 @@ export const useUnequipTraits = () => {
       const response = await signAndSubmitTransaction({
         sender: accountAddress,
         data: {
-          function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN_ENTRY}::${UNEQUIP_TRAITS}`,
+          function: `${COMPOSABLE_TOKEN_MAINNET}::${COMPOSABLE_TOKEN_ENTRY}::${UNEQUIP_TRAITS}`,
           typeArguments: [],
           functionArguments: [composableObject, traitObjects, new_uri],
         },

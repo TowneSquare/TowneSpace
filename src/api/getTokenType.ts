@@ -1,5 +1,5 @@
 import { Aptos, InputViewFunctionData, MoveValue } from '@aptos-labs/ts-sdk';
-import { COMPOSABLE_TOKEN_TYPE, TRAIT_TOKEN_TYPE } from '../constants';
+import { COMPOSABLE_TOKEN_TYPE_MAINNET, COMPOSABLE_TOKEN_TYPE_TESTNET, TOWNESPACE_MAINNET, TRAIT_TOKEN_TYPE_MAINNET, TRAIT_TOKEN_TYPE_TESTNET } from '../constants';
 
 /**
  *
@@ -15,7 +15,7 @@ export const getTokenType = async (
   if (!tokenObject) return;
   try {
     const payload: InputViewFunctionData = {
-      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
+      function: `${TOWNESPACE_MAINNET}::studio::token_type`,
       functionArguments: [tokenObject],
     };
     const response = await aptos.view({
@@ -38,7 +38,7 @@ export const getTokenTypes = async (aptos: Aptos, tokenObjects: string[]) => {
   if (!tokenObjects) return;
   try {
     const payload: InputViewFunctionData = {
-      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_types`,
+      function: `${TOWNESPACE_MAINNET}::studio::token_types`,
       functionArguments: [tokenObjects],
     };
     const response = await aptos.view({
@@ -66,8 +66,8 @@ export const getTraitType = async (
   if (!tokenObject) return;
   try {
     const payload: InputViewFunctionData = {
-      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
-      typeArguments: [TRAIT_TOKEN_TYPE],
+      function: `${TOWNESPACE_MAINNET}::studio::token_type`,
+      typeArguments: [TRAIT_TOKEN_TYPE_MAINNET],
       functionArguments: [tokenObject],
     };
     const response = await aptos.view({
@@ -95,8 +95,8 @@ export const getComposableType = async (
   if (!tokenObject) return;
   try {
     const payload: InputViewFunctionData = {
-      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
-      typeArguments: [COMPOSABLE_TOKEN_TYPE],
+      function: `${TOWNESPACE_MAINNET}::studio::token_type`,
+      typeArguments: [COMPOSABLE_TOKEN_TYPE_MAINNET],
       functionArguments: [tokenObject],
     };
     const response = await aptos.view({
@@ -121,8 +121,8 @@ export const getTraitTypes = async (aptos: Aptos, tokenObjects: string[]) => {
   let results = [];
   for (const tokenObject of tokenObjects) {
     const payload: InputViewFunctionData = {
-      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
-      typeArguments: [TRAIT_TOKEN_TYPE],
+      function: `${TOWNESPACE_MAINNET}::studio::token_type`,
+      typeArguments: [TRAIT_TOKEN_TYPE_MAINNET],
       functionArguments: [tokenObject],
     };
     const response = await aptos.view({
@@ -149,8 +149,8 @@ export const getComposableTypes = async (
   let results = [];
   for (const tokenObject of tokenObjects) {
     const payload: InputViewFunctionData = {
-      function: `0x7e0b68ab33fe8446cd0036f7aab93cb469e2d5405c812f5e18326529052dd3c0::studio::token_type`,
-      typeArguments: [COMPOSABLE_TOKEN_TYPE],
+      function: `${TOWNESPACE_MAINNET}::studio::token_type`,
+      typeArguments: [COMPOSABLE_TOKEN_TYPE_MAINNET],
       functionArguments: [tokenObject],
     };
     const response = await aptos.view({

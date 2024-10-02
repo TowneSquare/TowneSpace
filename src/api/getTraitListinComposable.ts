@@ -1,6 +1,7 @@
 import { Aptos, InputViewFunctionData } from '@aptos-labs/ts-sdk';
 import {
   COMPOSABLE_TOKEN,
+  COMPOSABLE_TOKEN_MAINNET,
   COMPOSABLE_TOKEN_TESTNET,
   TRAITS_FROM_COMPOSABLE,
 } from '../constants';
@@ -11,7 +12,7 @@ export const getTraitListinComposable = async (
 ) => {
   if (!composableTokenAddress) return [];
   const payload: InputViewFunctionData = {
-    function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${TRAITS_FROM_COMPOSABLE}`,
+    function: `${COMPOSABLE_TOKEN_MAINNET}::${COMPOSABLE_TOKEN}::${TRAITS_FROM_COMPOSABLE}`,
     typeArguments: [],
     functionArguments: [composableTokenAddress],
   };

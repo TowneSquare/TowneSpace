@@ -1,6 +1,7 @@
 import { Aptos, InputViewFunctionData} from '@aptos-labs/ts-sdk';
 import {
   COMPOSABLE_TOKEN,
+  COMPOSABLE_TOKEN_MAINNET,
   COMPOSABLE_TOKEN_TESTNET,
   IDENTIFY_OBJECT,
   IDENTIFY_OBJECTS,
@@ -13,7 +14,7 @@ export const getIdentifyObject = async (
   if (!tokenObject) return;
   try {
     const payload: InputViewFunctionData = {
-      function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${IDENTIFY_OBJECT}`,
+      function: `${COMPOSABLE_TOKEN_MAINNET}::${COMPOSABLE_TOKEN}::${IDENTIFY_OBJECT}`,
       typeArguments: [],
       functionArguments: [tokenObject],
     };
@@ -32,7 +33,7 @@ export const getIdentifyObjects = async (
 ) => {
   try {
     const payload: InputViewFunctionData = {
-      function: `${COMPOSABLE_TOKEN_TESTNET}::${COMPOSABLE_TOKEN}::${IDENTIFY_OBJECTS}`,
+      function: `${COMPOSABLE_TOKEN_MAINNET}::${COMPOSABLE_TOKEN}::${IDENTIFY_OBJECTS}`,
       typeArguments: [],
       functionArguments: [tokenObjects],
     };
