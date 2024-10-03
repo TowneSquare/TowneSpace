@@ -126,7 +126,7 @@ const Folder: React.FC<Props> = ({ id, data, index, moveToken }) => {
         />}
       </div>
       <div className="flex flex-col justify-between h-full py-1 ml-2 mr-8 font-semibold leading-4 grow text-2xs md:text-sm text-start">
-        <p className="text-gray-light-1">{currentNft?.collection_name?.length ? (currentNft.collection_name.length > 15 ? currentNft.collection_name : currentNft.collection_name.slice(10) + "...") : '-'}</p>
+        <p className="text-gray-light-1">{currentNft?.collection_name}</p>
         <div className="flex flex-col w-full gap-y-1">
           <p className="leading-tight uppercase whitespace-nowrap text-gray-light-1">
             {data.name.length < 15 ? data.name : data.name.slice(10) + "..."}

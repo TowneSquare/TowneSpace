@@ -1,10 +1,10 @@
 const HelpCenter = () => (
-  <div className="flex flex-col md:flex-row gap-3 md:gap-12 items-center">
-    {Links.map((link, index) => (
+  <div className="flex flex-col items-center gap-3 md:flex-row md:gap-12">
+    {/* {Links.map((link, index) => (
       <a href={link.href} target="blank" key={index}>
         <span className="font-semibold text-primary-default">{link.label}</span>
       </a>
-    ))}
+    ))} */}
   </div>
 );
 

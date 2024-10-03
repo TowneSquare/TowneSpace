@@ -65,12 +65,12 @@ const Header = () => {
             />
           </div>
           <div className="flex gap-14">
-            <Menu
+            {/* <Menu
               data={{
                 href: '/migrate',
                 label: 'Migrate',
               }}
-            />
+            /> */}
             <ConnectButton />
           </div>
         </div>
