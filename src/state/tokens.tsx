@@ -201,7 +201,9 @@ export const tokensSlice = createSlice({
     setTriggeredTime: (state, action: PayloadAction<number>) => {
       state.triggeredTime = action.payload;
     },
-
+    updateNFT: (state, action: PayloadAction<TokenFields[]>) => {
+      state.nfts = action.payload;
+    },
     setCollectionFilter: (state, action: PayloadAction<FilterType>) => {
       state.collectionFilter = action.payload;
     },
@@ -230,7 +232,7 @@ export const tokensSlice = createSlice({
       if (state.nfts.length > 0) state.currentNft = state.nfts[0];
 
       const folders = state.nfts
-        .filter((nft) => nft.type != 'composable')
+        .filter((nft) => nft?.type != 'composable')
         .reduce((acc: TRAIT_NAME[], nft: NftMetadataType) => {
           const { description } = nft;
 
@@ -264,5 +266,6 @@ export const {
 
   setCollectionFilter,
   emptyMyCollections,
+  updateNFT
 } = tokensSlice.actions;
 export default tokensSlice.reducer;

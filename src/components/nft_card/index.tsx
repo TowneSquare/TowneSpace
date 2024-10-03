@@ -88,14 +88,14 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
     //   }
     // }
 
-    // for (const folder of folders) {
-    //   const traitFolder = currentTraitFolders.find(
-    //     (traitFolder) => traitFolder.name == folder
-    //   );
-    //   if (!traitFolder) {
-    //     currentTraitFolders.push({ name: folder, trait: undefined });
-    //   }
-    // }
+    for (const folder of folders) {
+      const traitFolder = currentTraitFolders.find(
+        (traitFolder) => traitFolder.name == folder
+      );
+      if (!traitFolder) {
+        currentTraitFolders.push({ name: folder, trait: undefined });
+      }
+    }
     dispatch(setCurrentTraitFolders(currentTraitFolders));
     dispatch(chooseCurrentTraitFolder(undefined));
   };

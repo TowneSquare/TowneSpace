@@ -1,5 +1,9 @@
 import SecondaryButton from '../../components/secondary_button';
-import { toggleRemoveTrait, toggleChooseTrait } from '../../state/dialog';
+import {
+  toggleRemoveTrait,
+  toggleChooseTrait,
+  toggleViewNFTModal,
+} from '../../state/dialog';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import ButtonStatus from '../../type/button_status';
 import RemoveDialog from './remove_trait_dialog';
@@ -14,7 +18,7 @@ const Replace = () => {
   const isActive = currentTraitFolder?.trait != undefined;
 
   const width = currentTraitFolder?.name === 'Body' ? 'w-100' : 'w-replace';
-
+  
   return (
     <div>
       {!isActive ? (
@@ -25,7 +29,9 @@ const Replace = () => {
           </p>
         </div>
       ) : (
-        <div className={`flex flex-col items-center justify-center py-8 bg-gray-dark-2 rounded-2xl px-14 ${width}`}>
+        <div
+          className={`flex flex-col items-center justify-center py-8 bg-gray-dark-2 rounded-2xl px-14 ${width}`}
+        >
           <div className="w-[270px] flex flex-col gap-y-4">
             <div className="w-full rounded-lg bg-gray-dark-1">
               <img src={trait?.token_uri} className="w-full" />
@@ -33,16 +39,15 @@ const Replace = () => {
             <div className="flex flex-col w-full font-semibold leading-4 gap-y-4 text-2xs md:text-sm text-start text-gray-light-1">
               <p>{trait?.collection_name}</p>
               <div className="flex flex-col gap-y-1">
-                <p className="uppercase">
-                  {currentTraitFolder.name}
-                </p>
+                <p className="uppercase">{currentTraitFolder.name}</p>
                 <p className="text-base text-white">{trait?.token_name}</p>
               </div>
               <p className="font-normal">{trait?.description}</p>
             </div>
-            {
-              (currentTraitFolder.trait?.composed_to || (currentTraitFolder.trait?.description !== "Body" && !currentTraitFolder.trait?.composed_to)) &&
-              <div className='flex flex-col mt-3'>
+            {(currentTraitFolder.trait?.composed_to ||
+              (currentTraitFolder.trait?.description !== 'Body' &&
+                !currentTraitFolder.trait?.composed_to)) && (
+              <div className="flex flex-col mt-3">
                 <SecondaryButton
                   type={ButtonStatus.active}
                   className="w-full"
@@ -74,7 +79,7 @@ const Replace = () => {
                   </p>
                 </div>
               </div>
-            }
+            )}
           </div>
         </div>
       )}

@@ -7,7 +7,7 @@ import {
 } from '../../state/dialog';
 import LazyImage from '../../components/lazyImage';
 import CustomFolderType from '../../type/custom_folder_type';
-import { setCurrentTraitFolders } from '../../state/tokens';
+import { setCurrentTraitFolders, updateNFT } from '../../state/tokens';
 
 const RemoveDialog = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +20,7 @@ const RemoveDialog = () => {
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
+  const nfts = useAppSelector((state) => state.tokensState.nfts);
 
   const onRemove = () => {
     const tempFolders: CustomFolderType[] = JSON.parse(
@@ -32,9 +33,9 @@ const RemoveDialog = () => {
       }
     }
     dispatch(setCurrentTraitFolders(tempFolders));
-
-
-
+    if (currentTraitFolder?.trait) {
+      dispatch(updateNFT([...nfts, currentTraitFolder?.trait]));
+    }
     dispatch(toggleRemoveTrait(false));
     dispatch(toggleRemoveTraitConfirm(true));
   };
@@ -59,12 +60,24 @@ const RemoveDialog = () => {
           </div>
           {/* dialog body */}
           <div className="flex flex-col items-center justify-center pt-2 text-center gap-y-4">
-            <div className='w-[180px] h-[180px] bg-gray-dark-1 rounded'>
-              <LazyImage className='w-[180px] h-[180px]' src={currentTraitFolder?.trait?.token_uri} alt="" />
+            <div className="w-[180px] h-[180px] bg-gray-dark-1 rounded">
+              <LazyImage
+                className="w-[180px] h-[180px]"
+                src={currentTraitFolder?.trait?.token_uri}
+                alt=""
+              />
             </div>
-            <p className='text-base font-normal'>
-              Do you want to remove <span className='font-bold'>{currentTraitFolder?.trait?.token_name}</span> from{' '} <span className='font-bold'>{currentNft?.token_name}?</span><br />
-              <span className='font-bold'>{currentTraitFolder?.trait?.token_name}</span> will be transferred back to your wallet.
+            <p className="text-base font-normal">
+              Do you want to remove{' '}
+              <span className="font-bold">
+                {currentTraitFolder?.trait?.token_name}
+              </span>{' '}
+              from <span className="font-bold">{currentNft?.token_name}?</span>
+              <br />
+              <span className="font-bold">
+                {currentTraitFolder?.trait?.token_name}
+              </span>{' '}
+              will be transferred back to your wallet.
             </p>
             <PrimaryButton
               type={ButtonStatus.active}

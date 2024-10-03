@@ -27,9 +27,9 @@ export type TokenResponse = {
 };
 
 export type TokenFields = {
-  collection_id: string;
+  collection_id?: string;
   collection_name?: string;
-  token_name: string;
+  token_name?: string;
   token_data_id: string;
   description: TRAIT_NAME;
   token_uri?: string;

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAppSelector } from '../../state/hooks';
 
-
 const Preview = () => {
   const canvasRef = useRef<any>(null);
 
@@ -9,7 +8,7 @@ const Preview = () => {
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
-  const [image, setImage] = useState<any>();
+  const [showImage, setShowImage] = useState<boolean>(true);
 
   useEffect(() => {
     function loadImage(src: string): Promise<HTMLImageElement> {
@@ -37,6 +36,7 @@ const Preview = () => {
         // Load all images
         const imageUrls = [...currentTraitFolders]
           .reverse()
+          .filter((trait) => trait.trait != undefined)
           .map((trait) => trait.trait?.token_uri as string);
         const images = await Promise.all(imageUrls?.map(loadImage));
 
@@ -50,6 +50,7 @@ const Preview = () => {
     }
     setTimeout(() => {
       overlayImagesOnCanvas();
+     
     }, 1000);
     // const drawImage = async () => {
     //   //   const downloadPromises = traitsUri.map(async (traitUrl: string) => {
@@ -97,13 +98,15 @@ const Preview = () => {
 
   return (
     <div className="w-[200px] md:md-[230px] lg:w-[264px]">
-      <div className="bg-gray-light-2 w-[200px] md:w-[230px] lg:w-[264px] h-[200px] md:h-[230px] lg:h-[264px] rounded-lg overflow-hidden">
+      <div className="bg-gray-dark-2 flex justify-center w-[200px] md:w-[230px] lg:w-[264px] h-[200px] md:h-[230px] lg:h-[264px] rounded-lg overflow-hidden">
         <canvas
           ref={canvasRef}
           width={252}
           height={252}
           className="w-[210px] md:w-[270px] h-[210px] md:h-[270px]"
         />
+
+     {/* {!showImage &&  <img src="/generate/loader.svg" className="w-24" />} */}
       </div>
       <div className="ml-2 mt-6 flex items-center gap-2 text-[16px] font-medium text-gray-light-1">
         {currentNft?.collection_name}

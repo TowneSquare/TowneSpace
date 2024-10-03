@@ -30,7 +30,7 @@ export function removeWordFromString(str?: string) {
   // Create a regular expression that matches the word, with word boundaries
   if (str) {
     let regex = new RegExp(
-      `\\b${`https://rose-gentle-halibut-945.mypinata.cloud/ipfs/`}\\b`,
+      `\\b${`https://aquamarine-electoral-hyena-268.mypinata.cloud/ipfs/`}\\b`,
       'gi'
     );
     return str.replace(regex, '').trim();

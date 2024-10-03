@@ -38,39 +38,81 @@ const FinishEdit = () => {
   const [isLoading, toggleLoading] = useState(false);
 
   useEffect(() => {
-    const drawImage = async () => {
+    // const drawImage = async () => {
+    //   const canvas = canvasRef.current;
+    //   if (!canvas) return;
+
+    //   const ctx = canvas.getContext('2d');
+    //   ctx.clearRect(0, 0, 500, 500);
+
+    //   const hasTraits =
+    //     currentTraitFolders.filter((folder) => folder.trait != undefined)
+    //       .length > 0;
+    //   if (hasTraits) {
+    //     for (let i = currentTraitFolders.length - 1; i >= 0; i--) {
+    //       const image = new Image();
+    //       image.crossOrigin = 'anonymous';
+    //       image.src = currentTraitFolders[i].trait?.token_uri ?? '';
+
+    //       while (!image.complete) {
+    //         await sleep(10);
+    //       }
+    //       ctx.drawImage(image, 0, 0, 700, 700);
+    //     }
+    //   } else {
+    //     const image = new Image();
+    //     image.crossOrigin = 'anonymous';
+    //     image.src = currentNft?.token_uri ?? '';
+    //     while (!image.complete) {
+    //       await sleep(10);
+    //     }
+    //     ctx.drawImage(image, 0, 0, 700, 700);
+    //   }
+
+    // };
+    // drawImage();
+    function loadImage(src: string): Promise<HTMLImageElement> {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = src;
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(`Failed to load image: ${src}`);
+      });
+    }
+    console.log(currentTraitFolders, 'finish_edit');
+    async function overlayImagesOnCanvas(): Promise<void> {
       const canvas = canvasRef.current;
-      if (!canvas) return;
-
       const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, 500, 500);
 
-      const hasTraits =
-        currentTraitFolders.filter((folder) => folder.trait != undefined)
-          .length > 0;
-      if (hasTraits) {
-        for (let i = currentTraitFolders.length - 1; i >= 0; i--) {
-          const image = new Image();
-          image.crossOrigin = 'anonymous';
-          image.src = currentTraitFolders[i].trait?.token_uri ?? '';
-
-          while (!image.complete) {
-            await sleep(10);
-          }
-          ctx.drawImage(image, 0, 0, 700, 700);
-        }
-      } else {
-        const image = new Image();
-        image.crossOrigin = 'anonymous';
-        image.src = currentNft?.token_uri ?? '';
-        while (!image.complete) {
-          await sleep(10);
-        }
-        ctx.drawImage(image, 0, 0, 700, 700);
+      if (!ctx) {
+        console.error('Failed to get canvas context.');
+        return;
       }
-      console.log(currentNft, 'currentNFT');
-    };
-    drawImage();
+
+      // Clear the canvas
+      ctx.clearRect(0, 0, 1000, 1000);
+
+      try {
+        // Load all images
+        const imageUrls = [...currentTraitFolders]
+          .reverse()
+          .filter((trait) => trait.trait != undefined)
+          .map((trait) => trait.trait?.token_uri as string);
+        console.log(imageUrls, 'imageeUrls');
+        const images = await Promise.all(imageUrls?.map(loadImage));
+
+        // Draw each image on the canvas, one on top of the other
+        images.forEach((img) => {
+          ctx.drawImage(img, 0, 0, 700, 700);
+        });
+      } catch (error) {
+        console.error('Error loading images:', error);
+      }
+    }
+    setTimeout(() => {
+      overlayImagesOnCanvas();
+    }, 1000);
   }, [currentTraitFolders]);
 
   console.log(currentTraitFolders, 'currentTraitFolders');
@@ -87,7 +129,7 @@ const FinishEdit = () => {
       const file = new File([new Blob([blob])], currentNft?.token_name ?? '');
       const upload = await PINATA.upload.file(file);
       console.log(upload, 'cid');
-      const uri = `https://rose-gentle-halibut-945.mypinata.cloud/ipfs/${upload.IpfsHash}`;
+      const uri = `https://aquamarine-electoral-hyena-268.mypinata.cloud/ipfs/${upload.IpfsHash}`;
 
       const addObjects = currentTraitFolders.reduce(
         (acc: string[], folder: CustomFolderType) => {
@@ -125,6 +167,10 @@ const FinishEdit = () => {
         const traitObject = currentTraitFolders
           .filter((filteredCurrent) => filteredCurrent.name != TRAIT_NAME.BODY)
           .map((currentTrait) => currentTrait.trait?.token_data_id) as string[];
+
+        console.log(traitObject.filter((trait) => trait != undefined), "traitObjcts")
+
+        
         const res = await equipTraits(
           currentNft.token_data_id,
           traitObject,
@@ -133,6 +179,9 @@ const FinishEdit = () => {
         if (res?.success) {
           toggleLoading(false);
           navigate('/studio/mytoken');
+          const oldUri = removeWordFromString(currentNft?.token_uri);
+          console.log(oldUri, "oldUri")
+          await PINATA.unpin([oldUri]);
           dispatch(toggleFinishEdit(false));
         }
       }
@@ -151,6 +200,7 @@ const FinishEdit = () => {
         );
         if (res?.success) {
           const oldUri = removeWordFromString(currentNft?.token_uri);
+          console.log(oldUri, "oldUri")
           await PINATA.unpin([oldUri]);
           toggleLoading(false);
           navigate('/studio/mytoken');
