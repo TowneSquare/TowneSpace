@@ -19,6 +19,7 @@
     "@pontem/wallet-adapter-plugin": "^0.2.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@rise-wallet/wallet-adapter": "^0.1.2",
+    "@tanstack/react-query": "^5.59.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -95,5 +96,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.58.1"
   }
 }

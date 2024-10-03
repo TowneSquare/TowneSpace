@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { NftMetadataType } from '../../type/nft_type';
+import { NftMetadataType, TRAIT_NAME } from '../../type/nft_type';
 import { compareAddress, isUriEmpty } from '../../util';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import {
@@ -18,7 +18,7 @@ import { getComposableType } from '../../api/getTokenType';
 import { current } from '@reduxjs/toolkit';
 import {
   getTokenType as getType,
-  getTokenTypes as getTypes
+  getTokenTypes as getTypes,
 } from '../../api/getTokenType';
 
 interface Props {
@@ -29,7 +29,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const folders = useAppSelector((state) => state.tokensState.folders);
-  const allNfts = useAppSelector(state => state.tokensState.allNfts);
+  const allNfts = useAppSelector((state) => state.tokensState.allNfts);
   const nfts = useAppSelector((state) => state.tokensState.nfts);
   const [composedNfts, setComposedNfts] = useState<ComposedNft[]>([]);
 
@@ -54,26 +54,48 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
     const temp = JSON.parse(JSON.stringify(data));
     temp.composed_nfts = composedNfts;
     dispatch(chooseNft(temp));
-    const currentTraitFolders: CustomFolderType[] = [];
-    for (const composed of composedNfts) {
-      const trait = allNfts.find(
-        (nft) => compareAddress(nft.token_data_id, composed.token_data_id)
-      );
-      if (trait && trait.description) {
-        const descriptionResult: any = await getType(APTOS, trait.token_data_id);
-        const updatedTrait = { ...trait, description: descriptionResult[0].vec[0] };
-        currentTraitFolders.push({ name: descriptionResult[0].vec[0], trait: updatedTrait });
-      }
-    }
+    //const currentTraitFolders: CustomFolderType[] = [];
+    const currentTraitFolders = await Promise.all(
+      composedNfts.map(async (composedNFT): Promise<CustomFolderType> => {
+        const traitType = await getType(APTOS, composedNFT.token_data_id);
+        const traitDetails = await APTOS.getDigitalAssetData({
+          digitalAssetAddress: composedNFT.token_data_id,
+        });
+        return {
+          name: traitType,
+          trait: {
+            collection_id: traitDetails.collection_id,
+            collection_name: traitDetails.current_collection?.collection_name,
+            token_name: traitDetails.token_name,
+            token_data_id: traitDetails.token_data_id,
+            token_uri: traitDetails.token_uri,
+            description: traitType,
+          },
+        };
+      })
+    );
 
-    for (const folder of folders) {
-      const traitFolder = currentTraitFolders.find(
-        (traitFolder) => traitFolder.name == folder
-      );
-      if (!traitFolder) {
-        currentTraitFolders.push({ name: folder, trait: undefined });
-      }
-    }
+    // for (const composed of composedNfts) {
+    //   const trait = allNfts.find(
+    //     (nft) => compareAddress(nft.token_data_id, composed.token_data_id)
+    //   );
+
+    //   if (trait && trait.description) {
+    //     const descriptionResult: any = await getType(APTOS, trait.token_data_id);
+    //     console.log(descriptionResult, "descriptionResult")
+    //     const updatedTrait = { ...trait, description: descriptionResult[0].vec[0] };
+    //     currentTraitFolders.push({ name: descriptionResult[0].vec[0], trait: updatedTrait });
+    //   }
+    // }
+
+    // for (const folder of folders) {
+    //   const traitFolder = currentTraitFolders.find(
+    //     (traitFolder) => traitFolder.name == folder
+    //   );
+    //   if (!traitFolder) {
+    //     currentTraitFolders.push({ name: folder, trait: undefined });
+    //   }
+    // }
     dispatch(setCurrentTraitFolders(currentTraitFolders));
     dispatch(chooseCurrentTraitFolder(undefined));
   };
@@ -96,7 +118,10 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
       className="group w-[140px] md:w-[200px] bg-gray-dark-2 rounded-lg cursor-pointer"
       onClick={() => onCardClick(index)}
     >
-      <div onClick={() => onSeeTowneSpace()} className="relative h-[132px] md:h-[200px] bg-gray-light-2 rounded-t-lg">
+      <div
+        onClick={() => onSeeTowneSpace()}
+        className="relative h-[132px] md:h-[200px] bg-gray-light-2 rounded-t-lg"
+      >
         <LazyImage
           src={data.token_uri}
           className="w-full h-full rounded-t-[8px]"

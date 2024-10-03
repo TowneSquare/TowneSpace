@@ -186,5 +186,5 @@ export const PINATA = new PinataSDK({
   pinataGateway: 'https://aquamarine-electoral-hyena-268.mypinata.cloud/ipfs',
 });
 
-const aptosConfig = new AptosConfig({ network: Network.TESTNET });
+const aptosConfig = new AptosConfig({ network: Network.MAINNET });
 export const APTOS = new Aptos(aptosConfig);

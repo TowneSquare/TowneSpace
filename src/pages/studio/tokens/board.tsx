@@ -1,10 +1,24 @@
 import NftCard from '../../../components/nft_card';
+import { useCollectionTokenData } from '../../../hooks';
 import { useAppSelector } from '../../../state/hooks';
 import FilterType from '../../../type/filter_type';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
 
 const Board = () => {
   const isFetching = useAppSelector(state => state.tokensState.isFetching);
   const nfts = useAppSelector((state) => state.tokensState.nfts);
+   const currentCollection = useAppSelector(
+    (state) => state.tokensState.currentCollection
+  );
+  const {account} = useWallet()
+
+
+  const collectionToken = useCollectionTokenData({
+    accountAddress: account?.address.toString(),
+    collectionAddress: currentCollection?.collection_id
+  })
+
+  console.log(collectionToken.data, "collectionToken")
   
   if(isFetching) {
     return (

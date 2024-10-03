@@ -1,5 +1,12 @@
 import { Aptos, InputViewFunctionData, MoveValue } from '@aptos-labs/ts-sdk';
-import { COMPOSABLE_TOKEN_TYPE_MAINNET, COMPOSABLE_TOKEN_TYPE_TESTNET, TOWNESPACE_MAINNET, TRAIT_TOKEN_TYPE_MAINNET, TRAIT_TOKEN_TYPE_TESTNET } from '../constants';
+import {
+  COMPOSABLE_TOKEN_TYPE_MAINNET,
+  COMPOSABLE_TOKEN_TYPE_TESTNET,
+  TOWNESPACE_MAINNET,
+  TRAIT_TOKEN_TYPE_MAINNET,
+  TRAIT_TOKEN_TYPE_TESTNET,
+} from '../constants';
+import { TRAIT_NAME } from '../type/nft_type';
 
 /**
  *
@@ -11,28 +18,31 @@ import { COMPOSABLE_TOKEN_TYPE_MAINNET, COMPOSABLE_TOKEN_TYPE_TESTNET, TOWNESPAC
 export const getTokenType = async (
   aptos: Aptos,
   tokenObject: string | undefined
-) => {
-  if (!tokenObject) return;
+): Promise<TRAIT_NAME> => {
+  if (!tokenObject) return TRAIT_NAME.NO_TRAIT;
   try {
     const payload: InputViewFunctionData = {
       function: `${TOWNESPACE_MAINNET}::studio::token_type`,
       functionArguments: [tokenObject],
     };
-    const response = await aptos.view({
+    const response = (await aptos.view({
       payload,
-    });
-    return response;
+    })) as Array<{
+      vec: Array<TRAIT_NAME>;
+    }>;
+    return response[0].vec[0];
   } catch (e) {
     console.log(e);
+    return TRAIT_NAME.NO_TRAIT;
   }
-}
+};
 
 /**
  *
  * Get the token types for multiple token objects
  * @param aptos
  * @param tokenObjects
- * 
+ *
  */
 export const getTokenTypes = async (aptos: Aptos, tokenObjects: string[]) => {
   if (!tokenObjects) return;
@@ -48,7 +58,7 @@ export const getTokenTypes = async (aptos: Aptos, tokenObjects: string[]) => {
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 // DEPRECATED
 // REMOVE BEFORE MERGING
@@ -156,7 +166,7 @@ export const getComposableTypes = async (
     const response = await aptos.view({
       payload,
     });
-    console.log(response)
+    console.log(response);
     results.push(response);
   }
   return results;

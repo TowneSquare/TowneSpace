@@ -28,7 +28,7 @@ export type TokenResponse = {
 
 export type TokenFields = {
   collection_id: string;
-  collection_name: string;
+  collection_name?: string;
   token_name: string;
   token_data_id: string;
   description: TRAIT_NAME;
@@ -245,11 +245,11 @@ export class Queries {
     account_address: string,
     collection_id: string
   ): Promise<{ allNfts: Array<TokenFields>; ownedNfts: Array<TokenFields> }> {
-    const all = await this.getAllTokensInACollection(
-      offset,
-      limit,
-      collection_id
-    );
+    // const all = await this.getAllTokensInACollection(
+    //   offset,
+    //   limit,
+    //   collection_id
+    // );
 
     const variables = {
       offset,
@@ -258,6 +258,7 @@ export class Queries {
       collection_id,
     };
     const res: any = await this.queryIndexer(OWNED_V2_TOKENS_QUERY, variables);
+    console.log(res, "OWNED_V2_TOKENS_QUERY")
     const tokens: TokenFields[] = [];
 
     const tokenObjects = [];
@@ -335,7 +336,7 @@ export class Queries {
         }
       }
     }
-    return { allNfts: all, ownedNfts: tokens_filtered };
+    return { allNfts: [], ownedNfts: tokens_filtered };
   }
 
   async getOwnedV1Collections(
