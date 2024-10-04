@@ -12,3 +12,8 @@ export enum TRAIT_NAME {
   BADGES = "Badge",
   NO_TRAIT = ""
 }
+
+export enum NFT_TYPE {
+  TRAIT = "trait",
+  COMPOSABLE = "composable"
+}

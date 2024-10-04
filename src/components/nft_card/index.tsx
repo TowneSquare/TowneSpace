@@ -75,19 +75,6 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
       })
     );
 
-    // for (const composed of composedNfts) {
-    //   const trait = allNfts.find(
-    //     (nft) => compareAddress(nft.token_data_id, composed.token_data_id)
-    //   );
-
-    //   if (trait && trait.description) {
-    //     const descriptionResult: any = await getType(APTOS, trait.token_data_id);
-    //     console.log(descriptionResult, "descriptionResult")
-    //     const updatedTrait = { ...trait, description: descriptionResult[0].vec[0] };
-    //     currentTraitFolders.push({ name: descriptionResult[0].vec[0], trait: updatedTrait });
-    //   }
-    // }
-
     for (const folder of folders) {
       const traitFolder = currentTraitFolders.find(
         (traitFolder) => traitFolder.name == folder
@@ -97,7 +84,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
       }
     }
     dispatch(setCurrentTraitFolders(currentTraitFolders));
-    dispatch(chooseCurrentTraitFolder(undefined));
+    dispatch(chooseCurrentTraitFolder(currentTraitFolders[0]));
   };
   const onCustomize = async () => {
     makeFolders();
