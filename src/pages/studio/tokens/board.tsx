@@ -3,6 +3,8 @@ import { useCollectionTokenData } from '../../../hooks';
 import { useAppSelector } from '../../../state/hooks';
 import FilterType from '../../../type/filter_type';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useAppDispatch } from '../../../state/hooks';
+import { toggleViewNFTModal } from '../../../state/dialog';
 
 const Board = () => {
   const isFetching = useAppSelector((state) => state.tokensState.isFetching);
@@ -14,6 +16,7 @@ const Board = () => {
     (state) => state.tokensState.showOnlyCNFT
   );
   const { account } = useWallet();
+    const dispatch = useAppDispatch();
 
   const collectionToken = useCollectionTokenData({
     accountAddress: account?.address.toString(),
@@ -28,7 +31,7 @@ const Board = () => {
     );
   }
   return (
-    <div className="flex flex-wrap items-baseline h-full gap-4">
+    <div  className="flex flex-wrap items-baseline h-full gap-4">
       {showOnlyCNFT ? (
         <div className='flex flex-wrap items-baseline h-full gap-4'>
           {nfts
