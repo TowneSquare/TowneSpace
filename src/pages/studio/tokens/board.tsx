@@ -29,9 +29,21 @@ const Board = () => {
   }
   return (
     <div className="flex flex-wrap items-baseline h-full gap-4">
-      {nfts.map((nft, index) => (
-        <NftCard data={nft} index={index} key={index} />
-      ))}
+      {showOnlyCNFT ? (
+        <div className='flex flex-wrap items-baseline h-full gap-4'>
+          {nfts
+            .filter((nft) => nft.type != 'trait')
+            .map((nft, index) => (
+              <NftCard data={nft} index={index} key={index} />
+            ))}
+        </div>
+      ) : (
+        <div className='flex flex-wrap items-baseline h-full gap-4'>
+          {nfts.map((nft, index) => (
+            <NftCard data={nft} index={index} key={index} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
