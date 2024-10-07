@@ -171,10 +171,12 @@ const ViewNFTModal = () => {
     );
   };
   return (
-    <div  className="">
+    <div  className="flex">
+      
       <div
         className={`${isOpen ? 'block' : 'hidden'} fixed z-10 inset-0 flex animate-fade animate-duratiom-[3000ms] justify-end items-center bg-[#000000CC]`}
       >
+        <div className='w-full h-full'  onClick={() => dispatch(toggleViewNFTModal(false))} ></div>
         {currentNft?.type == NFT_TYPE.COMPOSABLE ? (
           <div className="relative w-[875px] px-5 h-full  bg-gray-dark-2 border-gray-light-3 rounded-md">
             <div
