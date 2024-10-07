@@ -203,7 +203,7 @@ const ViewNFTModal = () => {
                   Refresh metadata
                 </button>
                 <button
-                  className="md:flex flex-col hidden hover:animate-jump animate-once bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center"
+                  className="md:flex flex-col hidden bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center"
                   onClick={() => {
                     onClickToCustomize();
                   }}
