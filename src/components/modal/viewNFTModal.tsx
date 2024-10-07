@@ -174,7 +174,7 @@ const ViewNFTModal = () => {
     <div  className="flex">
       
       <div
-        className={`${isOpen ? 'block' : 'hidden'} fixed z-10 inset-0 flex animate-fade animate-duratiom-[3000ms] justify-end items-center bg-[#000000CC]`}
+        className={`${isOpen ? 'block' : 'hidden'} fixed z-10 inset-0 flex animate-fade-right animate-duratiom-[3000ms] justify-end items-center bg-[#000000CC]`}
       >
         <div className='w-full h-full'  onClick={() => dispatch(toggleViewNFTModal(false))} ></div>
         {currentNft?.type == NFT_TYPE.COMPOSABLE ? (
@@ -295,7 +295,7 @@ const ViewNFTModal = () => {
                 })}
               </div>
               {currentTraitFolder && (
-                <div className="bg-[#000000] animate-fade-left rounded-[10px] w-[310px] h-[80vh] ml-[27px] flex flex-col gap-y-2 p-4">
+                <div className="bg-[#000000] animate-fade animate-duration-[3000ms] rounded-[10px] w-[310px] h-[80vh] ml-[27px] flex flex-col gap-y-2 p-4">
                   {currentTraitFolder?.trait ? (
                     <div className="self-start rounded-md bg-gray-light-3">
                       <LazyImage
