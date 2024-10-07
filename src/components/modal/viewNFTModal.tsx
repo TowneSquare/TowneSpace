@@ -346,7 +346,7 @@ const ViewNFTModal = () => {
                 >
                   <img src="/customize/close.svg" />
                 </div>
-                {/* <img src="/customize/V2Badges.svg" /> */}
+
                 <div className="">
                   <p className="text-[23px] font-semibold leading-[29px]">
                     {currentNft?.token_name}
