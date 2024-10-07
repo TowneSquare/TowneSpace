@@ -8,7 +8,16 @@ const Preview = () => {
   const currentTraitFolders = useAppSelector(
     (state) => state.tokensState.currentTraitFolders
   );
-  const [showImage, setShowImage] = useState<boolean>(true);
+  const folderType = [
+    'Badge',
+    'Mouth',
+    'Eyes',
+    'Hat',
+    'Clothing',
+    'Body',
+    'Background',
+  ];
+
 
   useEffect(() => {
     function loadImage(src: string): Promise<HTMLImageElement> {
@@ -21,6 +30,11 @@ const Preview = () => {
       });
     }
     async function overlayImagesOnCanvas(): Promise<void> {
+      const sortedTraitFolders = [...currentTraitFolders].sort((a, b) => {
+        const indexA = folderType.indexOf(a.name);
+        const indexB = folderType.indexOf(b.name);
+        return indexA - indexB;
+      });
       const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
 
@@ -34,7 +48,7 @@ const Preview = () => {
 
       try {
         // Load all images
-        const imageUrls = [...currentTraitFolders]
+        const imageUrls = sortedTraitFolders
           .reverse()
           .filter((trait) => trait.trait != undefined)
           .map((trait) => trait.trait?.token_uri as string);
@@ -50,7 +64,6 @@ const Preview = () => {
     }
     setTimeout(() => {
       overlayImagesOnCanvas();
-     
     }, 1000);
     // const drawImage = async () => {
     //   //   const downloadPromises = traitsUri.map(async (traitUrl: string) => {
@@ -90,12 +103,6 @@ const Preview = () => {
     // drawImage();
   }, [currentTraitFolders]);
 
-  console.log(
-    [...currentTraitFolders].reverse(),
-    currentTraitFolders,
-    'preview'
-  );
-
   return (
     <div className="w-[200px] md:md-[230px] lg:w-[264px]">
       <div className="bg-gray-dark-2 flex justify-center w-[200px] md:w-[230px] lg:w-[264px] h-[200px] md:h-[230px] lg:h-[264px] rounded-lg overflow-hidden">
@@ -106,7 +113,7 @@ const Preview = () => {
           className="w-[210px] md:w-[270px] h-[210px] md:h-[270px]"
         />
 
-     {/* {!showImage &&  <img src="/generate/loader.svg" className="w-24" />} */}
+        {/* {!showImage &&  <img src="/generate/loader.svg" className="w-24" />} */}
       </div>
       <div className="ml-2 mt-6 flex items-center gap-2 text-[16px] font-medium text-gray-light-1">
         {currentNft?.collection_name}

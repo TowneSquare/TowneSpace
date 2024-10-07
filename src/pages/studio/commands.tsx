@@ -7,15 +7,15 @@ import { toggleCreateModal } from '../../state/dialog';
 const Commands = () => {
   const dispatch = useDispatch();
   return (
-    <div className="flex flex-col md:flex-row gap-2 md:gap-12 items-center">
+    <div className="flex flex-col items-center gap-2 md:flex-row md:gap-12">
       <div className="flex gap-2 md:gap-12">
-        <PrimaryButton
+        {/* <PrimaryButton
           type={ButtonStatus.active}
           className="!px-12 py-3"
           onClick={() => dispatch(toggleCreateModal(true))}
         >
           Create
-        </PrimaryButton>
+        </PrimaryButton> */}
       </div>
     </div>
   );

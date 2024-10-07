@@ -69,5 +69,7 @@ module.exports = {
       outfit: ['Outfit', 'sans-serif'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-animated')
+  ],
 };

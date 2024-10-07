@@ -51,14 +51,14 @@ const MainSection = () => {
         <div className="flex flex-col gap-4 mt-12 md:flex-row md:items-center">
           <button
             className="md:flex flex-col hidden bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center"
-            //onClick={() => openStudio()}
+            onClick={() => openStudio()}
           >
             <p className="font-[500] text-[16px]">Creator studio</p>
           </button>
 
           <button
             className="md:hidden flex flex-col bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center"
-            //onClick={() => openStudio()}
+            onClick={() => openStudio()}
           >
             <p className="font-[500] text-[16px]">Creator studio</p>
           </button>

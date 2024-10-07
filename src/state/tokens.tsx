@@ -26,6 +26,7 @@ interface tokensStates {
   bFetched: boolean;
   isFetching: boolean;
   triggeredTime: number;
+  showOnlyCNFT: boolean
 
   collectionFilter: FilterType;
   myCollections: CollectionV1Fields[] | CollectionV2Fields[];
@@ -43,8 +44,8 @@ const initialState: tokensStates = {
   currentTraitFolder: undefined,
   bFetched: false,
   isFetching: false,
+  showOnlyCNFT:false,
   triggeredTime: 0,
-
   collectionFilter: FilterType.composable,
   myCollections: [],
 };
@@ -129,7 +130,6 @@ export const fetchNfts = createAsyncThunk(
         );
       }
 
-      console.log(res, "result")
 
       res.ownedNfts.sort((a, b) => {
         if (a.type === undefined) return 1;
@@ -211,6 +211,9 @@ export const tokensSlice = createSlice({
       state.myCollections = [];
       state.bFetched = false;
     },
+    updateShowOnlyCNFT: (state, action: PayloadAction<boolean>) => {
+      state.showOnlyCNFT = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCollections.fulfilled, (state, action) => {
@@ -266,6 +269,7 @@ export const {
 
   setCollectionFilter,
   emptyMyCollections,
-  updateNFT
+  updateNFT,
+  updateShowOnlyCNFT
 } = tokensSlice.actions;
 export default tokensSlice.reducer;

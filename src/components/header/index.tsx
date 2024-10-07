@@ -48,7 +48,7 @@ const Header = () => {
           </div>
           <button
             className="md:flex flex-col hidden bg-primary-default rounded-[40px] w-[242px] md:w-[196px] h-[48px] items-center justify-center"
-            //onClick={() => openStudio()}
+            onClick={() => openStudio()}
           >
             <p className="font-[500] text-[16px]">Creator studio</p>
           </button>
@@ -64,13 +64,13 @@ const Header = () => {
               onClick={() => navigate('/')}
             />
           </div>
-          <div className="flex  gap-14">
-            <Menu
+          <div className="flex gap-14">
+            {/* <Menu
               data={{
                 href: '/migrate',
                 label: 'Migrate',
               }}
-            />
+            /> */}
             <ConnectButton />
           </div>
         </div>

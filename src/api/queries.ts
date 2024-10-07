@@ -301,6 +301,7 @@ export class Queries {
 
     let identifyObject: any = await getIdentifyObjects(APTOS, ownedTokens[0]);
     const types = identifyObject[0].data;
+    console.log(types, "types")
     const traitObjects: string[] = [];
 
     if (types && tokens_filtered.length == types.length) {
@@ -314,6 +315,7 @@ export class Queries {
 
     const parentObject: any = await getParentTokens(APTOS, traitObjects);
     const parents = parentObject[0].data;
+    console.log(parentObject, parents, "parents")
 
     const descriptionResult: any = await getTypes(APTOS, traitObjects);
 
