@@ -48,7 +48,7 @@ const Preview = () => {
 
       try {
         // Load all images
-        const imageUrls = sortedTraitFolders
+        const imageUrls =  [...currentTraitFolders]
           .reverse()
           .filter((trait) => trait.trait != undefined)
           .map((trait) => trait.trait?.token_uri as string);
