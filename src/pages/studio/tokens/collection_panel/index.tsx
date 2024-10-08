@@ -18,11 +18,11 @@ const CollectionPanel = () => {
   };
 
   const isEmpty = collections.length == 0;
-  console.log(collections, "collections")
+  
   return (
     <div className="flex flex-col w-auto gap-4">
       {!isEmpty && <Search />}
-      {collections.map((collection, index) => (
+      {collections.filter((collection) => collection.collection_name != "Sloth balls").map((collection, index) => (
         <div
           className={`px-2 py-2 flex items-center gap-2 rounded-lg hover:bg-gray-dark-1 cursor-pointer ${collection.collection_id == currentCollection?.collection_id ? 'bg-gray-dark-1' : ''}`}
           key={index}

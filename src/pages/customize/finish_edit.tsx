@@ -17,6 +17,7 @@ import CustomFolderType from '../../type/custom_folder_type';
 import { PINATA } from '../../constants';
 import { useEquipTraits } from '../../hooks/useEquipTrait';
 import { TRAIT_NAME } from '../../type/nft_type';
+import { useUnequipTraits } from '../../hooks/useUnequipTrait';
 
 const FinishEdit = () => {
   const isOpen = useAppSelector((state) => state.dialogState.bFinishEdit);
@@ -26,6 +27,7 @@ const FinishEdit = () => {
 
   const replaceTraits = useReplaceTraits();
   const equipTraits = useEquipTraits();
+  const unEquipTraits = useUnequipTraits();
 
   const currentNft = useAppSelector((state) => state.tokensState.currentNft);
   const composedTraits = currentNft?.composed_nfts;
@@ -75,11 +77,10 @@ const FinishEdit = () => {
 
       try {
         // Load all images
-        const imageUrls = sortedTraitFolders
+        const imageUrls = [...currentTraitFolders]
           .reverse()
           .filter((trait) => trait.trait != undefined)
           .map((trait) => trait.trait?.token_uri as string);
-        console.log(imageUrls, 'imageeUrls');
         const images = await Promise.all(imageUrls?.map(loadImage));
 
         // Draw each image on the canvas, one on top of the other
@@ -140,35 +141,42 @@ const FinishEdit = () => {
         );
       }
 
-      if (currentNft?.composed_nfts?.length == 1) {
+      if (currentNft?.token_data_id && !addObjects.length) {
+        const res = await unEquipTraits(
+          currentNft.token_data_id,
+          removeObjects,
+          uri
+        );
+
+        if (res?.success) {
+          toggleLoading(false);
+          navigate('/studio/mytoken');
+          const oldUri = removeWordFromString(currentNft?.token_uri);
+          await PINATA.unpin([oldUri]);
+          dispatch(toggleFinishEdit(false));
+        }
+      }
+
+      if (currentNft?.token_data_id && !removeObjects.length) {
         const traitObject = currentTraitFolders
           .filter((filteredCurrent) => filteredCurrent.name != TRAIT_NAME.BODY)
           .map((currentTrait) => currentTrait.trait?.token_data_id) as string[];
 
-        console.log(
-          traitObject.filter((trait) => trait != undefined),
-          'traitObjcts'
-        );
-
         const res = await equipTraits(
           currentNft.token_data_id,
-          traitObject,
+          addObjects,
           uri
         );
         if (res?.success) {
           toggleLoading(false);
           navigate('/studio/mytoken');
           const oldUri = removeWordFromString(currentNft?.token_uri);
-          console.log(oldUri, 'oldUri');
           await PINATA.unpin([oldUri]);
           dispatch(toggleFinishEdit(false));
         }
       }
 
-      if (
-        currentNft?.composed_nfts?.length &&
-        currentNft?.composed_nfts?.length > 1
-      ) {
+      if (currentNft?.token_data_id && removeObjects.length > 0 && addObjects.length > 0) {
         const res = await replaceTraits(
           currentNft?.token_data_id,
           removeObjects,
@@ -177,7 +185,6 @@ const FinishEdit = () => {
         );
         if (res?.success) {
           const oldUri = removeWordFromString(currentNft?.token_uri);
-          console.log(oldUri, 'oldUri');
           await PINATA.unpin([oldUri]);
           toggleLoading(false);
           navigate('/studio/mytoken');

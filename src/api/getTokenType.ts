@@ -32,7 +32,7 @@ export const getTokenType = async (
     }>;
     return response[0].vec[0];
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return TRAIT_NAME.NO_TRAIT;
   }
 };
@@ -56,7 +56,7 @@ export const getTokenTypes = async (aptos: Aptos, tokenObjects: string[]) => {
     });
     return response;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -85,7 +85,7 @@ export const getTraitType = async (
     });
     return response;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -114,7 +114,7 @@ export const getComposableType = async (
     });
     return response;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -166,7 +166,6 @@ export const getComposableTypes = async (
     const response = await aptos.view({
       payload,
     });
-    console.log(response);
     results.push(response);
   }
   return results;

@@ -4,73 +4,56 @@ import {
   COMPOSABLE_TOKEN_ENTRY,
   UNEQUIP_TRAITS,
   COMPOSABLE_TOKEN_MAINNET,
+  APTOS,
 } from '../constants';
 import { useWallet } from '@aptos-labs/wallet-adapter-react';
-
-/**
- *
- * Unequip a trait from a composable nft
- * @param accountAddress
- * @param composableObject
- * @param traitObject
- * @param new_uri
- * @returns payload
- *
- */
-export const useUnequipTrait = () => {
-  const unequipTrait = async (
-    accountAddress: string,
-    composableObject: string,
-    traitObject: string,
-    new_uri: string
-  ) => {
-    const { signAndSubmitTransaction } = useWallet();
-    const payload = async () => {
-      const response = await signAndSubmitTransaction({
-        sender: accountAddress,
-        data: {
-          function: `${COMPOSABLE_TOKEN_MAINNET}::${COMPOSABLE_TOKEN_ENTRY}::${UNEQUIP_TRAIT}`,
-          typeArguments: [],
-          functionArguments: [composableObject, traitObject, new_uri],
-        },
-      });
-      console.log(response);
-    };
-    return payload;
-  };
-  return unequipTrait;
-};
+import { CommittedTransactionResponse } from '@aptos-labs/ts-sdk';
 
 /**
  *
  * Unequip a list of traits from a composable nft
- * @param accountAddress
  * @param composableObject
  * @param traitObjects
  * @param new_uri
- * @returns payload
+ * @returns transactionResponse
  *
  */
 export const useUnequipTraits = () => {
+  const { signAndSubmitTransaction, account } = useWallet();
+
   const unequipTraits = async (
-    accountAddress: string,
     composableObject: string,
     traitObjects: string[],
     new_uri: string
-  ) => {
-    const { signAndSubmitTransaction } = useWallet();
-    const payload = async () => {
-      const response = await signAndSubmitTransaction({
-        sender: accountAddress,
+  ): Promise<CommittedTransactionResponse | undefined> => {
+    if (!account) return;
+    if (traitObjects.length < 1) return;
+    let response;
+    const traitObject = traitObjects.filter((trait) => trait != undefined);
+    if (traitObject.length > 1) {
+      response = await signAndSubmitTransaction({
+        sender: account.address,
         data: {
           function: `${COMPOSABLE_TOKEN_MAINNET}::${COMPOSABLE_TOKEN_ENTRY}::${UNEQUIP_TRAITS}`,
           typeArguments: [],
-          functionArguments: [composableObject, traitObjects, new_uri],
+          functionArguments: [composableObject, traitObject, new_uri],
         },
       });
-      console.log(response);
-    };
-    return payload;
+    } else {
+      response = await signAndSubmitTransaction({
+        sender: account.address,
+        data: {
+          function: `${COMPOSABLE_TOKEN_MAINNET}::${COMPOSABLE_TOKEN_ENTRY}::${UNEQUIP_TRAIT}`,
+          typeArguments: [],
+          functionArguments: [composableObject, traitObject[0], new_uri],
+        },
+      });
+    }
+
+    const txnResponse = await APTOS.waitForTransaction({
+      transactionHash: response?.hash,
+    });
+    return txnResponse;
   };
   return unequipTraits;
 };

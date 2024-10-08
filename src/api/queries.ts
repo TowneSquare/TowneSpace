@@ -1,5 +1,5 @@
 import { Aptos, MoveValue } from '@aptos-labs/ts-sdk';
-import { getIdentifyObjects } from './getIdentifyObject';
+import { getIdentifyObject, getIdentifyObjects } from './getIdentifyObject';
 import { getOwnedTokens } from './getOwnedTokens';
 import { getParentTokens } from './getParentToken';
 import { compareAddress, sanitizeAddress } from '../util';
@@ -8,7 +8,7 @@ import { APTOS, APTOS_CONFIG } from '../state/constants';
 import { Events } from './events';
 import {
   getTokenType as getType,
-  getTokenTypes as getTypes
+  getTokenTypes as getTypes,
 } from './getTokenType';
 import { TRAIT_NAME } from '../type/nft_type';
 
@@ -251,94 +251,143 @@ export class Queries {
     //   collection_id
     // );
 
-    const variables = {
-      offset,
-      limit,
-      account_address,
-      collection_id,
-    };
-    const res: any = await this.queryIndexer(OWNED_V2_TOKENS_QUERY, variables);
-    console.log(res, "OWNED_V2_TOKENS_QUERY")
-    const tokens: TokenFields[] = [];
+    try {
+      const variables = {
+        offset,
+        limit,
+        account_address,
+        collection_id,
+      };
+      // const res: any = await this.queryIndexer(
+      //   OWNED_V2_TOKENS_QUERY,
+      //   variables
+      // );
+     
+      const tokens: TokenFields[] = [];
 
-    const tokenObjects = [];
-
-    for (const token of res.current_token_ownerships_v2) {
-      if (token.current_token_data.current_token_ownerships.find((obj: any) => obj.owner_address === account_address)) {
-        tokens.push({
-          collection_id:
-            token.current_token_data.current_collection.collection_id,
-          collection_name:
-            token.current_token_data.current_collection.collection_name,
-          token_name: token.current_token_data.token_name,
-          token_data_id: sanitizeAddress(
-            token.current_token_data.token_data_id
-          ),
-          description: token.current_token_data.description,
-          token_uri: token.current_token_data.token_uri,
-          composed_nfts: token.composed_nfts,
-          composed_to: false,
-        });
-        tokenObjects.push(
-          sanitizeAddress(token.current_token_data.token_data_id)
-        );
-      }
-    }
-
-    const ownedTokens: any = await getOwnedTokens(
-      APTOS,
-      account_address,
-      tokenObjects
-    );
-
-    const tokens_filtered: TokenFields[] = [];
-    for (const token of tokens) {
-      if (ownedTokens[0].includes(token.token_data_id)) {
-        tokens_filtered.push(token);
-      } else {
-      }
-    }
-
-    let identifyObject: any = await getIdentifyObjects(APTOS, ownedTokens[0]);
-    const types = identifyObject[0].data;
-    console.log(types, "types")
-    const traitObjects: string[] = [];
-
-    if (types && tokens_filtered.length == types.length) {
-      for (let i = 0; i < tokens_filtered.length; i++) {
-        tokens_filtered[i].type = types[i].value.toLowerCase();
-
-        if (tokens_filtered[i].type === 'trait')
-          traitObjects.push(tokens_filtered[i].token_data_id);
-      }
-    }
-
-    const parentObject: any = await getParentTokens(APTOS, traitObjects);
-    const parents = parentObject[0].data;
-    console.log(parentObject, parents, "parents")
-
-    const descriptionResult: any = await getTypes(APTOS, traitObjects);
-
-    parents.map((item: any, index: number) => {
-      item.value.vec = descriptionResult[0][index].vec;
-    })
-
-
-    if (parents) {
-      for (let i = 0; i < parents.length; i++) {
-        const parentVec = parents[i].value.vec;
-        if (parentVec && parentVec.length > 0) {
-          const index = tokens_filtered.findIndex((token) =>
-            compareAddress(token.token_data_id, parents[i].key)
-          );
-          if (index >= 0) tokens_filtered[index].composed_to = true;
-          if (parents[i].key == tokens_filtered[index].token_data_id) {
-            tokens_filtered[index].description = parents[i].value.vec[0];
-          }
+      const ownedToken = await APTOS.getAccountOwnedTokensFromCollectionAddress(
+        {
+          accountAddress: account_address,
+          collectionAddress: collection_id,
         }
-      }
+      );
+
+      const userTokens: TokenFields[] = await Promise.all(
+        ownedToken.map(async (tokens) => {
+          const type = (await getIdentifyObject(
+            APTOS,
+            tokens.current_token_data?.token_data_id
+          )) as Array<string>;
+
+          const traitDescription = await getType(
+            APTOS,
+            tokens.current_token_data?.token_data_id
+          );
+          return {
+            collection_id: tokens.current_token_data?.collection_id,
+            collection_name:
+              tokens.current_token_data?.current_collection?.collection_name,
+            token_name: tokens.current_token_data?.token_name,
+            token_data_id: tokens.current_token_data?.token_data_id as string,
+            token_uri: tokens.current_token_data?.token_uri,
+            description: traitDescription as TRAIT_NAME,
+            composed_to: false,
+            type: type[0].toLowerCase(),
+          };
+        })
+      );
+
+      console.log(userTokens, "userTokens")
+     
+      // const tokenObjects = [];
+
+      // for (const token of res.current_token_ownerships_v2) {
+      //   if (
+      //     token.current_token_data.current_token_ownerships.find(
+      //       (obj: any) => obj.owner_address === account_address
+      //     )
+      //   ) {
+      //     tokens.push({
+      //       collection_id:
+      //         token.current_token_data.current_collection.collection_id,
+      //       collection_name:
+      //         token.current_token_data.current_collection.collection_name,
+      //       token_name: token.current_token_data.token_name,
+      //       token_data_id: sanitizeAddress(
+      //         token.current_token_data.token_data_id
+      //       ),
+      //       description: token.current_token_data.description,
+      //       token_uri: token.current_token_data.token_uri,
+      //       composed_nfts: token.composed_nfts,
+      //       composed_to: false,
+      //     });
+      //     tokenObjects.push(
+      //       sanitizeAddress(token.current_token_data.token_data_id)
+      //     );
+      //   }
+      // }
+
+      // const ownedTokens: any = await getOwnedTokens(
+      //   APTOS,
+      //   account_address,
+      //   tokenObjects
+      // );
+
+      // console.log(ownedTokens, 'ownedTokens');
+
+      // const tokens_filtered: TokenFields[] = [];
+      // for (const token of tokens) {
+      //   if (ownedTokens[0].includes(token.token_data_id)) {
+      //     tokens_filtered.push(token);
+      //   } else {
+      //   }
+      // }
+
+      // let identifyObject: any = await getIdentifyObjects(APTOS, ownedTokens[0]);
+      // const types = identifyObject[0].data;
+      // console.log(types, 'types');
+      // const traitObjects: string[] = [];
+
+      // if (types && tokens_filtered.length == types.length) {
+      //   for (let i = 0; i < tokens_filtered.length; i++) {
+      //     tokens_filtered[i].type = types[i].value.toLowerCase();
+
+      //     if (tokens_filtered[i].type === 'trait')
+      //       traitObjects.push(tokens_filtered[i].token_data_id);
+      //   }
+      // }
+
+      //const parentObject: any = await getParentTokens(APTOS, traitObjects);
+      // const parents = parentObject[0].data;
+      // console.log(parentObject, parents, 'parents');
+
+      // const descriptionResult: any = await getTypes(APTOS, traitObjects);
+
+      // parents.map((item: any, index: number) => {
+      //   item.value.vec = descriptionResult[0][index].vec;
+      // });
+
+      // if (parents) {
+      //   for (let i = 0; i < parents.length; i++) {
+      //     const parentVec = parents[i].value.vec;
+      //     if (parentVec && parentVec.length > 0) {
+      //       const index = tokens_filtered.findIndex((token) =>
+      //         compareAddress(token.token_data_id, parents[i].key)
+      //       );
+      //       if (index >= 0) tokens_filtered[index].composed_to = true;
+      //       if (parents[i].key == tokens_filtered[index].token_data_id) {
+      //         tokens_filtered[index].description = parents[i].value.vec[0];
+      //       }
+      //     }
+      //   }
+      // }
+
+      // console.log(tokens_filtered, "ggg")
+      return { allNfts: [], ownedNfts: userTokens };
+    } catch (error) {
+      console.error(error, 'getOwnedV2Tokens');
+      return { allNfts: [], ownedNfts: [] };
     }
-    return { allNfts: [], ownedNfts: tokens_filtered };
   }
 
   async getOwnedV1Collections(
@@ -405,7 +454,7 @@ export class Queries {
           current_supply: collection.current_collection.current_supply,
         });
     }
-    console.log(collections);
+   
     return collections;
   }
 
@@ -427,7 +476,6 @@ export class Queries {
         variables
       );
 
-      console.log(response, "getAllTokensInACollection")
       for (const token of response.current_token_ownerships_v2) {
         tokens.push({
           collection_id:
@@ -435,7 +483,9 @@ export class Queries {
           collection_name:
             token.current_token_data.current_collection.collection_name,
           token_name: token.current_token_data.token_name,
-          token_data_id: sanitizeAddress(token.current_token_data.token_data_id),
+          token_data_id: sanitizeAddress(
+            token.current_token_data.token_data_id
+          ),
           description: token.current_token_data.description,
           token_uri: token.current_token_data.token_uri,
           composed_nfts: token.composed_nfts,

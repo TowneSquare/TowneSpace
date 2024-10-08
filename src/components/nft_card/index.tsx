@@ -46,6 +46,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
         }
         setComposedNfts(composedNfts);
       }
+      
     };
     fetch();
   }, [data.token_data_id]);
@@ -61,6 +62,7 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
         const traitDetails = await APTOS.getDigitalAssetData({
           digitalAssetAddress: composedNFT.token_data_id,
         });
+      
         return {
           name: traitType,
           trait: {
@@ -75,6 +77,8 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
       })
     );
 
+    
+
     for (const folder of folders) {
       const traitFolder = currentTraitFolders.find(
         (traitFolder) => traitFolder.name == folder
@@ -83,6 +87,8 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
         currentTraitFolders.push({ name: folder, trait: undefined });
       }
     }
+
+   
     dispatch(setCurrentTraitFolders(currentTraitFolders));
     dispatch(chooseCurrentTraitFolder(currentTraitFolders[0]));
   };
@@ -99,6 +105,8 @@ const NftCard: React.FC<Props> = ({ data, index }) => {
   const onCardClick = (index: number) => {
     console.log(index, data, composedNfts, nfts);
   };
+
+
 
   return (
     <div

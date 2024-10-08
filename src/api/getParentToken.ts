@@ -21,6 +21,6 @@ export const getParentTokens = async (
     const response = await aptos.view({ payload });
     return response;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
