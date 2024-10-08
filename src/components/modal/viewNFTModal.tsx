@@ -61,7 +61,7 @@ const ViewNFTModal = () => {
   };
 
 
-  console.log(currentNft, "currentNFT")
+ 
 
 
   const sortedTraitFolders = [...currentTraitFolders]
@@ -149,7 +149,7 @@ const ViewNFTModal = () => {
   const onClickFolder = (folder: CustomFolderType) => {
     dispatch(chooseCurrentTraitFolder(folder));
   };
-
+  
   const SignTransactionModal = ({ openModal }: { openModal: boolean }) => {
     return (
       <>

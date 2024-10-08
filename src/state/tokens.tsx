@@ -130,6 +130,8 @@ export const fetchNfts = createAsyncThunk(
         );
       }
 
+      console.log(res, "res")
+
 
       res.ownedNfts.sort((a, b) => {
         if (a.type === undefined) return 1;

@@ -23,7 +23,7 @@ export const getIdentifyObject = async (
     });
     return response;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -42,7 +42,7 @@ export const getIdentifyObjects = async (
     });
     return response;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
   return [];
 };
